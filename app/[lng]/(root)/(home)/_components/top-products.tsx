@@ -15,6 +15,7 @@ interface Props {
 }
 
 function PopProducts({ topProducts }: Props) {
+  console.log("Hammasi", topProducts.length);
   return (
     <section className="mx-auto max-w-7xl py-3">
       <div className="flex items-end justify-between">
@@ -43,7 +44,7 @@ function PopProducts({ topProducts }: Props) {
           <CarouselContent className="-ml-3 py-4">
             {topProducts?.map((product) => (
               <CarouselItem key={product._id} className="basis-[22%] pl-3">
-                <ProductCard {...product} />
+                <ProductCard product={product} />
               </CarouselItem>
             ))}
           </CarouselContent>

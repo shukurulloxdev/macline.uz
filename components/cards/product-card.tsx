@@ -7,8 +7,12 @@ import { Heart, ShoppingBag } from "lucide-react";
 import { Badge } from "../ui/badge";
 import { ProductType } from "@/types";
 
-export default function ProductCard(product: ProductType) {
-  console.log(product);
+interface Props {
+  product: ProductType;
+}
+
+export default function ProductCard({ product }: Props) {
+  if (!product) return null;
   return (
     <Card className="group relative w-full cursor-pointer overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-md transition-all duration-500 hover:-translate-y-1 hover:shadow-lg">
       <button className="absolute right-2 top-2 z-10 rounded-full bg-white p-2 shadow hover:bg-rose-50">
@@ -20,7 +24,7 @@ export default function ProductCard(product: ProductType) {
       <CardContent className="p-5">
         <div className="relative mb-5 aspect-square w-full overflow-hidden rounded-2xl bg-slate-50">
           <Image
-            src="/categories/gaz.jpg"
+            src={product.images[0]}
             alt="iPhone"
             fill
             className="object-contain transition-transform duration-700 group-hover:scale-105"
@@ -34,7 +38,7 @@ export default function ProductCard(product: ProductType) {
         </h3>
 
         <p className="mb-4 text-xs text-slate-400">
-          Brand: <span className="underline">Iphone</span>
+          Brand: <span className="underline">{product.brand}</span>
         </p>
 
         <div className="flex w-full items-center gap-2">

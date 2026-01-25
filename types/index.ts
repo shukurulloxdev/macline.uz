@@ -33,7 +33,7 @@ export interface ProductType {
   name: string;
   category: string;
   description: string;
-  brend: string;
+  brand: string;
   price: number;
   discount: boolean;
   percent: number;
