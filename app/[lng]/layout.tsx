@@ -4,6 +4,7 @@ import { languages } from '@/i18n/settings'
 import { ChildProps } from '@/types'
 import { Toaster } from '@/components/ui/sonner'
 import { Sora, Poppins, Manrope } from 'next/font/google'
+import { CookieProvider } from '@/components/providers/cooke-provider'
 
 const sora = Sora({
 	subsets: ['latin'],
@@ -43,7 +44,7 @@ function RootLayout({ children, params: { lng } }: Props) {
 			<body
 				className={`${sora.variable} ${manrope.variable} ${poppins.variable}  overflow-x-hidden antialiased`}
 			>
-				{children}
+				<CookieProvider>{children}</CookieProvider>
 				<Toaster position='top-center' />
 			</body>
 		</html>
