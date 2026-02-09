@@ -15,8 +15,8 @@ function Navbar() {
 	const { t } = useTranslation(lng as string, 'home')
 	const pathname = usePathname()
 	return (
-		<div className='sticky inset-0 bg-slate-50 shadow-lg'>
-			<div className='sticky top-0 z-40 border-b bg-slate-100  backdrop-blur-md'>
+		<div className='sticky inset-0 z-50 bg-slate-50 shadow-lg'>
+			<div className='sticky top-0  border-b bg-slate-100  backdrop-blur-md'>
 				<div className='mx-auto max-w-7xl '>
 					<div className='flex h-10 items-center justify-between text-[15px] text-gray-600'>
 						<nav className='flex items-center gap-6 font-medium'>
