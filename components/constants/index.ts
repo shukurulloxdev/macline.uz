@@ -43,11 +43,6 @@ export const categories = [
 		url: '/categories/vitoch.jpg',
 	},
 	{
-		route: 'pishirishpaneli',
-		title: 'Pishirish panellari',
-		url: '/categories/pishirishpanellari.webp',
-	},
-	{
 		route: 'konditsoner',
 		title: 'Konditsonerlar',
 		url: '/categories/konditsoner.png',
