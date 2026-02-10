@@ -3,20 +3,18 @@
 import Image from 'next/image'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Heart, Scale, ShoppingBag } from 'lucide-react'
+import { Heart, ShoppingBag } from 'lucide-react'
+import { Badge } from '../ui/badge'
 
 export default function ProductCard() {
 	return (
-		<Card className='group relative w-full max-w-[320px] overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl'>
-			<div className='absolute right-4 top-4 z-10 flex gap-2 opacity-0 transition-all duration-300 group-hover:opacity-100'>
-				<button className='rounded-full bg-white p-2 shadow hover:bg-slate-100'>
-					<Scale size={18} className='text-slate-600' />
-				</button>
-				<button className='rounded-full bg-white p-2 shadow hover:bg-rose-50'>
-					<Heart size={18} className='text-rose-500' />
-				</button>
-			</div>
-
+		<Card className='group relative w-full cursor-pointer overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-md transition-all duration-500 hover:-translate-y-1 hover:shadow-lg'>
+			<button className='absolute right-2 top-2 z-10 rounded-full bg-white p-2 shadow hover:bg-rose-50'>
+				<Heart size={22} className='text-rose-500' />
+			</button>
+			<Badge className='absolute left-3 top-3 z-10  bg-blue-600 text-sm shadow'>
+				Top
+			</Badge>
 			<CardContent className='p-5'>
 				<div className='relative mb-5 aspect-square w-full overflow-hidden rounded-2xl bg-slate-50'>
 					<Image
@@ -37,17 +35,17 @@ export default function ProductCard() {
 					Brand: <span className='underline'>Iphone</span>
 				</p>
 
-				<div className='flex items-center gap-3'>
+				<div className='flex items-center gap-2'>
 					<Button
 						variant='secondary'
-						className='h-11 flex-1 rounded-2xl bg-slate-100 text-slate-900 hover:bg-slate-200'
+						className='h-10 flex-1 rounded-xl bg-slate-100 text-slate-900 hover:bg-pink-600 hover:text-white'
 					>
 						Hozir xarid qilish
 					</Button>
 
 					<Button
 						size='icon'
-						className='size-11 rounded-2xl bg-pink-600 hover:bg-pink-700'
+						className='size-10 rounded-xl bg-pink-600 hover:bg-pink-700'
 					>
 						<ShoppingBag size={18} />
 					</Button>

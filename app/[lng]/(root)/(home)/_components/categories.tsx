@@ -9,17 +9,31 @@ import { Separator } from '@/components/ui/separator'
 import Image from 'next/image'
 import React from 'react'
 import Autoplay from 'embla-carousel-autoplay'
+import { MoveRight } from 'lucide-react'
 
 function Categories() {
 	return (
-		<section className='mx-auto max-w-7xl py-8'>
+		<section className='mx-auto max-w-7xl py-4'>
 			<div className='flex items-end justify-between'>
 				<h1 className='font-sora text-3xl font-semibold tracking-tight text-slate-900'>
 					Mahsulot toifalari
 				</h1>
-				<span className='cursor-pointer text-xl text-blue-700 underline'>
-					Barchasi
-				</span>
+				<div className='group flex cursor-pointer items-center gap-1'>
+					<span className='text-[18px] text-pink-600 transition-colors duration-300'>
+						Hammasini ko&apos;rish
+					</span>
+
+					<MoveRight
+						size={20}
+						className='
+			text-pink-600
+			transition-transform
+			duration-300
+			ease-out
+			group-hover:translate-x-1
+		'
+					/>
+				</div>
 			</div>
 			<Carousel
 				opts={{ align: 'start', loop: true }}
@@ -29,10 +43,10 @@ function Categories() {
 					}),
 				]}
 			>
-				<CarouselContent className='py-8'>
+				<CarouselContent className='py-6'>
 					{categories.map(item => (
 						<CarouselItem className='basis-1/6 select-none' key={item.route}>
-							<div className='group relative cursor-pointer overflow-hidden rounded-2xl border bg-white shadow-md transition-all duration-500 hover:-translate-y-1 hover:shadow-xl'>
+							<div className='group relative cursor-pointer overflow-hidden rounded-2xl border bg-white shadow-md transition-all duration-500 hover:-translate-y-1 hover:shadow-lg'>
 								<div className='relative aspect-square w-full overflow-hidden'>
 									<Image
 										src={item.url}
