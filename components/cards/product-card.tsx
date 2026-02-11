@@ -12,7 +12,7 @@ export default function ProductCard() {
 			<button className='absolute right-2 top-2 z-10 rounded-full bg-white p-2 shadow hover:bg-rose-50'>
 				<Heart size={22} className='text-rose-500' />
 			</button>
-			<Badge className='absolute left-3 top-3 z-10  bg-blue-600 text-sm shadow'>
+			<Badge className='absolute left-3 top-3 z-10   bg-blue-600 text-sm shadow hover:bg-blue-700'>
 				Top
 			</Badge>
 			<CardContent className='p-5'>
@@ -35,19 +35,19 @@ export default function ProductCard() {
 					Brand: <span className='underline'>Iphone</span>
 				</p>
 
-				<div className='flex items-center gap-2'>
+				<div className='flex w-full items-center gap-2'>
 					<Button
 						variant='secondary'
-						className='h-10 flex-1 rounded-xl bg-slate-100 text-slate-900 hover:bg-pink-600 hover:text-white'
+						className='h-10 w-[70%] rounded-xl bg-slate-100 text-slate-900 hover:bg-pink-600 hover:text-white'
 					>
 						Hozir xarid qilish
 					</Button>
 
 					<Button
 						size='icon'
-						className='size-10 rounded-xl bg-pink-600 hover:bg-pink-700'
+						className='size-10 w-[30%] rounded-xl bg-pink-600 hover:bg-pink-700'
 					>
-						<ShoppingBag size={18} />
+						<ShoppingBag size={20} />
 					</Button>
 				</div>
 			</CardContent>

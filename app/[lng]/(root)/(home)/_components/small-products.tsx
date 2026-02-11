@@ -9,12 +9,12 @@ import {
 	CarouselPrevious,
 } from '@/components/ui/carousel'
 
-function PopProducts() {
+function SmallProducts() {
 	return (
 		<section className='mx-auto max-w-7xl py-3'>
 			<div className=' flex items-end justify-between'>
 				<h1 className='font-sora text-3xl font-semibold tracking-tight text-gray-800'>
-					Top texnikalar
+					Uy uchun kichik texnika
 				</h1>
 				<div className='group flex cursor-pointer items-center gap-1'>
 					<span className='text-[18px] text-pink-600 transition-colors duration-300'>
@@ -93,4 +93,4 @@ function PopProducts() {
 	)
 }
 
-export default PopProducts
+export default SmallProducts
