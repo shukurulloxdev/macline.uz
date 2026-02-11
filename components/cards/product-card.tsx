@@ -47,7 +47,7 @@ export default function ProductCard() {
 						size='icon'
 						className='size-10 w-[30%] rounded-xl bg-pink-600 hover:bg-pink-700'
 					>
-						<ShoppingBag size={20} />
+						<ShoppingBag size={22} />
 					</Button>
 				</div>
 			</CardContent>

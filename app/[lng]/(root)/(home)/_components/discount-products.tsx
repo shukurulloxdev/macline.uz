@@ -13,8 +13,9 @@ function DiscountProducts() {
 	return (
 		<section className='mx-auto max-w-7xl py-8'>
 			{/* OUTER PREMIUM CONTAINER */}
-			<div className='relative overflow-hidden rounded-3xl bg-gradient-to-br from-pink-50 via-white to-rose-50 p-6  shadow-xl'>
+			<div className='relative overflow-hidden rounded-2xl bg-gradient-to-br from-pink-50 via-white to-rose-50 p-6 shadow-xl'>
 				{/* Decorative glow */}
+
 				<div className='absolute -right-20 -top-20 size-72 rounded-full bg-pink-400/20 blur-3xl' />
 				<div className='absolute -bottom-20 -left-20 size-72 rounded-full bg-rose-400/20 blur-3xl' />
 
