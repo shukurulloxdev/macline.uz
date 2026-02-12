@@ -11,14 +11,13 @@ function Location() {
 			>
 				<div className='mb-4 flex items-center justify-between gap-10'>
 					<div className='flex flex-col gap-1'>
-						<h1 className='font-sora text-3xl font-semibold tracking-tight text-gray-800'>
-							Bizning barcha Filiallarimiz
+						<h1 className='font-inter text-4xl font-semibold tracking-tight text-gray-800'>
+							Bizning barcha filiallarimiz
 						</h1>
-						<p>
-							Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-							Architecto itaque provident quia beatae pariatur excepturi
-							similique atque exercitationem facilis rerum placeat, a
-							repellendus.
+						<p className='font-inter  text-muted-foreground'>
+							Filiallarimiz bilan tanishing va o‘zingizga eng qulay manzilni
+							tanlab, keng assortimentimizdan mahsulotlarni maxsus chegirmalar
+							asosida xarid qiling. Yoki shu sayt orqali buyurtma bering.
 						</p>
 					</div>
 					<TabsList className='mx-auto flex justify-center gap-3 rounded-2xl bg-white p-9 shadow-xl backdrop-blur-md'>

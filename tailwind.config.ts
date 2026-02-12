@@ -53,6 +53,7 @@ const config: Config = {
 				},
 			},
 			fontFamily: {
+				inter: ['var(--font-inter)'],
 				sora: ['var(--font-sora)'],
 				manrope: ['var(--font-manrope)'],
 				poppins: ['var(--font-poppins)'],
