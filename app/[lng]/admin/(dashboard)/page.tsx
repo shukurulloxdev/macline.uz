@@ -1,13 +1,14 @@
-import StatisticsCard from '@/components/cards/statistics-card'
+'use client'
+import StatisticsCard from '@/app/[lng]/admin/(dashboard)/_components/cards/statistics-card'
 import { bestSeller, statistics } from '@/components/constants'
-import Image from 'next/image'
 import React from 'react'
-import BestSellerCard from './_components/cards/testseller-card'
+import BestSellerCard from './_components/cards/bestseller-card'
+import StatisticsRadio from './_components/statistics-radio'
 
 function Page() {
 	return (
 		<div className='overflow-hidden'>
-			<div className='space-y-10'>
+			<div className='space-y-8'>
 				<div>
 					<h1 className='text-4xl font-bold tracking-tight text-white'>
 						Sayt statistikasi
@@ -24,23 +25,17 @@ function Page() {
 
 				<div className='grid grid-cols-3 gap-5'>
 					<div
-						className='p-6 flex flex-col gap-4 border border-white/20 rounded-3xl
-	bg-white/10 col-span-2'
+						className='col-span-2 flex flex-col gap-4 rounded-3xl border
+	border-white/20 bg-white/10 p-6'
 					>
 						{bestSeller.map(item => (
 							<BestSellerCard key={item.image} product={item} />
 						))}
 					</div>
-
-					{/*  */}
-					{/* <div
-						className='p-6 border border-white/20 rounded-3xl
-	bg-white/10'
-					>
-						<div className='flex flex-col gap-4'>
-							<div className='p-4 bg-white/10 rounded-xl'>lorem</div>
-						</div>
-					</div> */}
+					{/**/}
+					<div className='rounded-3xl border border-white/20 bg-white/10'>
+						<StatisticsRadio />
+					</div>
 				</div>
 			</div>
 		</div>

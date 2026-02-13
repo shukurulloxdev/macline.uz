@@ -19,3 +19,13 @@ export interface bestSellerTip {
 	title: string
 	image: string
 }
+
+export interface AdminProductCardTip {
+	brend: string
+	category: string
+	price: number
+	oldPrice: number
+	title: string
+	status: string
+	image: string
+}

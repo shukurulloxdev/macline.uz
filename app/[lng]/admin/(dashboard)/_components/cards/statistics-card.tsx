@@ -1,5 +1,5 @@
 import React from 'react'
-import { Separator } from '../ui/separator'
+import { Separator } from '../../../../../../components/ui/separator'
 import { StatisticsTip } from '@/types'
 
 interface Props {
@@ -17,7 +17,7 @@ function StatisticsCard({ card }: Props) {
 	transition-all duration-500
 	hover:-translate-y-2 hover:border-white/20'
 		>
-			<div className=' space-y-5'>
+			<div className='space-y-3'>
 				<div className='flex items-center justify-between'>
 					<span className='text-xl font-medium tracking-wide text-slate-300 group-hover:text-white'>
 						{card.title}

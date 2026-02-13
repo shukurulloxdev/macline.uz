@@ -157,3 +157,72 @@ export const bestSeller = [
 		image: '/categories/kirmashina.png',
 	},
 ]
+export const allAdminProducts = [
+	{
+		brend: 'Samsung',
+		title: 'Samsung SC 5251 RED',
+		category: 'Chang yutgich',
+		price: 899000,
+		oldPrice: 1000000,
+		status: 'Faol',
+		image: '/categories/changyutgich.jpg',
+	},
+	{
+		brend: 'Ferre',
+		category: 'Pech',
+		price: 999000,
+		oldPrice: 1100000,
+		status: 'Faol',
+		title: 'Mini pech Ferre MO 3700 B',
+		image: '/categories/mikropech.webp',
+	},
+	{
+		brend: 'Artel',
+		category: 'Kir yuvish mashinasi',
+		price: 2999000,
+		oldPrice: 3100000,
+		status: 'Faol',
+		title: 'Avtomat kir yuvish mashinasi Artel 9kg ',
+		image: '/categories/kirmashina.png',
+	},
+	{
+		brend: 'Shivaki',
+		category: 'Televizor',
+		price: 1999000,
+		oldPrice: 2100000,
+		status: 'Faol',
+		title: 'Televizor Smart TV Li 32ASM01',
+		image: '/categories/televizor.jpg',
+	},
+	{
+		brend: 'Ferre',
+		category: 'Gaz plita',
+		price: 1299000,
+		oldPrice: 1800000,
+		status: 'Faol',
+		title: 'Gaz plita Ferre LP 60G-40DB-ECO (F) 21',
+		image: '/categories/gaz.jpg',
+	},
+]
+export const categoryStatistics = [
+	{
+		category: 'Gainer',
+		sold: 83,
+		color: '#3B82F6',
+	},
+	{
+		category: 'BCAA',
+		sold: 54,
+		color: '#EF4444',
+	},
+	{
+		category: 'Protaine',
+		sold: 22,
+		color: '#10B981',
+	},
+	{
+		category: 'Creatine',
+		sold: 87,
+		color: '#F59E0B',
+	},
+]
