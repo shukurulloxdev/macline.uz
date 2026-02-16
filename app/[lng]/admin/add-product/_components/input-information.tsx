@@ -353,7 +353,6 @@ function InputInformation() {
 								<span>Rasim yuklash</span>
 								<ImagePlus size={20} />
 							</h1>
-							<Button>Hammasini ochirish</Button>
 						</div>
 					</div>
 				</div>
