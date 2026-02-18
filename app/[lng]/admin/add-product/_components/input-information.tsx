@@ -39,6 +39,10 @@ function InputInformation() {
 	function onSubmit(values: z.infer<typeof addProductSchema>) {
 		console.log(values)
 	}
+	const price = Number(form.watch('price') || 0)
+	const percent = Number(form.watch('percent') || 0)
+
+	const chegirmadagiSumma = price - (price * percent) / 100
 
 	return (
 		<Form {...form}>
@@ -309,7 +313,9 @@ function InputInformation() {
 												<FormItem>
 													<FormLabel className='font-inter text-lg font-bold text-white'>
 														{form.watch('percent')
-															? `	Chegirma foizi: ${form.watch('percent')}`
+															? `	Chegirma bilan: ${formatPrice(
+																	chegirmadagiSumma
+															  )}`
 															: '	Chegirma foizi'}
 													</FormLabel>
 													<FormControl>
@@ -327,7 +333,7 @@ function InputInformation() {
     focus:ring-pink-500
   '
 															{...field}
-															placeholder='Mahsulot narxi'
+															placeholder='Chegirma foizini kiriting %'
 														/>
 													</FormControl>
 													<FormMessage />
