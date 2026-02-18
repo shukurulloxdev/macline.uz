@@ -17,8 +17,11 @@ import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import { formatPrice } from '@/lib/utils'
 import { Checkbox } from '@/components/ui/checkbox'
+import { useState } from 'react'
 
 function InputInformation() {
+	const [isDiscount, setIsDiscount] = useState<boolean>(false)
+
 	const form = useForm<z.infer<typeof addProductSchema>>({
 		resolver: zodResolver(addProductSchema),
 		defaultValues: {
@@ -223,16 +226,17 @@ function InputInformation() {
 								/>
 							</div>
 							<div className='col-span-2 grid grid-cols-2 gap-4 rounded-2xl bg-white/5 p-4'>
-								<FormField
-									control={form.control}
-									name='top'
-									render={({ field }) => (
-										<FormItem>
-											<div className='flex items-center gap-2'>
-												<FormControl>
-													<Checkbox
-														onCheckedChange={field.onChange}
-														className='
+								<div className='space-y-4'>
+									<FormField
+										control={form.control}
+										name='top'
+										render={({ field }) => (
+											<FormItem>
+												<div className='flex items-center gap-2'>
+													<FormControl>
+														<Checkbox
+															onCheckedChange={field.onChange}
+															className='
     size-6
     !rounded-sm
     border-2
@@ -246,27 +250,31 @@ function InputInformation() {
     data-[state=checked]:bg-blue-600
     data-[state=checked]:text-white
   '
-													/>
-												</FormControl>
-												<FormLabel className='font-inter text-lg font-bold text-white'>
-													Texnika top ga kiritilsinmi ?
-												</FormLabel>
-											</div>
+														/>
+													</FormControl>
+													<FormLabel className='font-inter text-lg font-bold text-white'>
+														Top ga kiritilsinmi ?
+													</FormLabel>
+												</div>
 
-											<FormMessage />
-										</FormItem>
-									)}
-								/>
-								<FormField
-									control={form.control}
-									name='discount'
-									render={({ field }) => (
-										<FormItem>
-											<div className='flex items-center gap-2'>
-												<FormControl>
-													<Checkbox
-														onCheckedChange={field.onChange}
-														className='
+												<FormMessage />
+											</FormItem>
+										)}
+									/>
+									<FormField
+										control={form.control}
+										name='discount'
+										render={({ field }) => (
+											<FormItem>
+												<div className='flex items-center gap-2'>
+													<FormControl>
+														<Checkbox
+															checked={field.value}
+															onCheckedChange={checked => {
+																setIsDiscount(!!checked)
+																field.onChange(checked)
+															}}
+															className='
     size-6
     !rounded-sm
     border-2
@@ -280,17 +288,54 @@ function InputInformation() {
     data-[state=checked]:bg-blue-600
     data-[state=checked]:text-white
   '
-													/>
-												</FormControl>
-												<FormLabel className='font-inter text-lg font-bold text-white'>
-													Texnikaga chegirma berilsinmi ?
-												</FormLabel>
-											</div>
+														/>
+													</FormControl>
+													<FormLabel className='font-inter text-lg font-bold text-white'>
+														Chegirma berilsinmi ?
+													</FormLabel>
+												</div>
 
-											<FormMessage />
-										</FormItem>
-									)}
-								/>
+												<FormMessage />
+											</FormItem>
+										)}
+									/>
+								</div>
+								{isDiscount === true && (
+									<div className=''>
+										<FormField
+											control={form.control}
+											name='percent'
+											render={({ field }) => (
+												<FormItem>
+													<FormLabel className='font-inter text-lg font-bold text-white'>
+														{form.watch('percent')
+															? `	Chegirma foizi: ${form.watch('percent')}`
+															: '	Chegirma foizi'}
+													</FormLabel>
+													<FormControl>
+														<Input
+															type='number'
+															className='
+    border-white/20
+    bg-white/10
+    text-white
+    transition-all
+    duration-200
+    placeholder:text-gray-200
+    focus:border-indigo-500
+    focus:ring-1
+    focus:ring-pink-500
+  '
+															{...field}
+															placeholder='Mahsulot narxi'
+														/>
+													</FormControl>
+													<FormMessage />
+												</FormItem>
+											)}
+										/>
+									</div>
+								)}
 							</div>
 						</div>
 					</div>
