@@ -226,3 +226,16 @@ export const categoryStatistics = [
 		color: '#F59E0B',
 	},
 ]
+
+export const selectCategories = [
+	{ label: 'all', name: 'All' },
+	{ label: 'discount', name: 'Discounts' },
+	{ label: 'protaine', name: 'Proteins' },
+	{ label: 'gainer', name: 'Gainers' },
+	{ label: 'creatine', name: 'Creatines' },
+	{ label: 'bcaa', name: 'Bcaas' },
+	{ label: 'vitamin', name: 'Vitamins' },
+	{ label: 'omega-3', name: 'Omega 3' },
+	{ label: 'for-babys', name: 'For Babys' },
+	{ label: 'for-womens', name: 'For Womens' },
+]

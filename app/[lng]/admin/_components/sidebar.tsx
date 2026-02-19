@@ -31,7 +31,7 @@ const navItems = [
 	},
 	{
 		title: 'Adminlar nazorati',
-		href: '/admin/add-product',
+		href: '/admin/add-control',
 		icon: UserStar,
 	},
 ]

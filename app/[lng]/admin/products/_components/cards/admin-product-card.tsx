@@ -12,7 +12,7 @@ function AdminProductCard({ product }: Props) {
 			key={product.image}
 			className='grid  grid-cols-[1.5fr_1fr_auto] items-center  rounded-xl bg-white/10 p-4'
 		>
-			<div className='flex items-center gap-4'>
+			<div className='flex items-center gap-3'>
 				<div className='relative size-14'>
 					<Image
 						src={product.image}
@@ -49,13 +49,18 @@ function AdminProductCard({ product }: Props) {
 					Sozlash
 				</Button>
 				<Button
-					className='cursor-pointer bg-red-600 text-white'
+					className='cursor-pointer bg-red-600 text-white hover:bg-red-500 hover:text-white'
 					variant={'outline'}
 				>
 					Draf
 				</Button>
 
-				<Button className='cursor-pointer bg-red-600'>O&apos;chirish</Button>
+				<Button
+					className='cursor-pointer bg-red-600 text-white hover:bg-red-700 hover:text-white'
+					variant={'outline'}
+				>
+					O&apos;chirish
+				</Button>
 			</div>
 		</div>
 	)

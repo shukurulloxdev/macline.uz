@@ -8,8 +8,8 @@ function Layout({ children }: ChildProps) {
 				<Sidebar />
 
 				<main className='relative overflow-y-auto bg-gradient-to-b from-[#091334] via-[#0A1F44] to-[#091334]'>
-					<div className='absolute size-full bg-blue-600/40 blur-[400px]' />
-					<div className='min-h-full p-8'>{children}</div>
+					<div className='pointer-events-none absolute inset-0  bg-blue-600/40 blur-[400px]' />
+					<div className='relative z-10 min-h-full p-8'>{children}</div>
 				</main>
 			</div>
 		</div>
