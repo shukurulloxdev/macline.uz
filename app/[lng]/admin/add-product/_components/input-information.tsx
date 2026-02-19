@@ -16,6 +16,7 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import { formatPrice } from '@/lib/utils'
+import { Checkbox } from '@/components/ui/checkbox'
 
 function InputInformation() {
 	const form = useForm<z.infer<typeof addProductSchema>>({
@@ -168,6 +169,7 @@ function InputInformation() {
 													className='
     border-white/20
     bg-white/10
+    text-white
     transition-all
     duration-200
     placeholder:text-gray-200
@@ -229,22 +231,9 @@ function InputInformation() {
 											<FormLabel className='font-inter text-lg font-bold text-white '>
 												top
 											</FormLabel>
+
 											<FormControl>
-												{/* <Input
-													className='
-    border-white/20
-    bg-white/10
-    text-white
-    transition-all
-    duration-200
-    placeholder:text-gray-200
-    focus:border-indigo-500
-    focus:ring-1
-    focus:ring-pink-500
-  '
-													{...field}
-													placeholder='Mahsulot narxi'
-												/> */}
+												<Checkbox onCheckedChange={field.onChange} />
 											</FormControl>
 											<FormMessage />
 										</FormItem>
