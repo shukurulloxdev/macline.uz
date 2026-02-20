@@ -8,29 +8,33 @@ function UploadImg() {
 			config={{ appendOnPaste: true, mode: 'auto' }}
 			appearance={{
 				container: {
-					border: '1px dotted pink',
-					color: 'white', // 🔹 barcha text oq bo‘ladi
-					backgroundColor: 'rgba(255,255,255,0.05)',
-				},
-				uploadIcon: {
-					color: 'white',
-					fontSize: '10px',
-					width: '80px',
-					height: '80px',
+					border: '1px dotted blue',
+					borderRadius: '1rem',
+					padding: '1rem',
 				},
 				button: {
-					backgroundColor: 'blue', // optional
+					backgroundColor: 'blue',
 					color: 'white',
-					padding: '10px',
+					padding: '12px 24px',
+					borderRadius: '0.5rem',
+					fontWeight: 'bold',
+					position: 'relative',
+					overflow: 'hidden', // nuqtani yashirish uchun
+				},
+				uploadIcon: {
+					color: 'blue',
+					fontSize: '50px',
+					width: '50px',
+					height: '50px',
 				},
 			}}
 			endpoint='imageUploader'
 			onClientUploadComplete={res => {
-				console.log(res)
+				console.log('Uploaded:', res)
 			}}
 			onUploadError={error => {
 				console.error('Upload error:', error)
-				alert('❌ Yuklash muvaffaqiyatsiz')
+				alert('❌ Upload failed')
 			}}
 		/>
 	)
