@@ -6,6 +6,8 @@ import { Toaster } from "@/components/ui/sonner";
 import { Sora, Poppins, Inter, Manrope } from "next/font/google";
 import { CookieProvider } from "@/components/providers/cooke-provider";
 import NextTopLoader from "nextjs-toploader";
+import { Provider } from "react-redux";
+import { store } from "@/redux/store";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -66,3 +68,7 @@ export default RootLayout;
 // 3- Rasim yuklash uchun Uploadthing api/uploadthing ni ichida configlar lib/uploadthing.ts ni ichida configlarni Buttonlarga beryapmiz va lib/uploadthing.ts ni ichidan import qilib ishlatyapmiz
 
 // 4- State menejment Redux toolkit orqali | npm install @reduxjs/toolkit react-redux
+
+// git add .
+// git commit -m "Updated"
+// git push
