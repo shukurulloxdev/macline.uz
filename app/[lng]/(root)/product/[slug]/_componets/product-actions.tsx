@@ -1,78 +1,96 @@
-import { Heart, Share2, ShoppingBag, ShieldCheck, Truck } from "lucide-react";
+"use client";
 
-export default function ProductActions({ product }: { product: any }) {
+import { Heart, ShoppingBag, Zap, ShieldCheck, Truck } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { IProduct } from "@/types";
+
+interface Props {
+  product: IProduct;
+}
+
+function ProductActions({ product }: Props) {
+  const discountedPrice = product.discount
+    ? product.price * (1 - product.percent / 100)
+    : product.price;
+
   return (
-    <div className="flex flex-col gap-8">
-      {/* Sarlavha va Narx */}
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <span className="text-xs font-bold uppercase tracking-[0.3em] text-blue-600">
-            Premium Collection
-          </span>
-          <div className="flex gap-2">
-            <button className="rounded-full p-2 transition-colors hover:bg-gray-100">
-              <Share2 size={20} />
-            </button>
-            <button className="rounded-full p-2 text-red-500 transition-colors hover:bg-red-50">
-              <Heart size={20} />
-            </button>
-          </div>
-        </div>
-        <h1 className="text-4xl font-semibold leading-tight tracking-tight text-neutral-900">
+    <div className="flex flex-col gap-8 rounded-3xl border border-neutral-100 bg-white/50 p-6 shadow-sm backdrop-blur-md">
+      {/* Brand & Title for Mobile (Optional) */}
+      <div className="space-y-2">
+        <span className="text-xs font-bold uppercase tracking-widest text-pink-600">
+          {product.brand}
+        </span>
+        <h2 className="text-2xl font-bold leading-tight text-neutral-900">
           {product.name}
-        </h1>
-        <div className="flex items-baseline gap-4">
-          <span className="text-3xl font-medium">${product.price}</span>
-          {product.oldPrice && (
-            <span className="text-lg text-gray-400 line-through">
-              ${product.oldPrice}
+        </h2>
+      </div>
+
+      {/* Pricing Section */}
+      <div className="flex items-end gap-4">
+        <div className="flex flex-col">
+          {product.discount && (
+            <span className="text-sm text-neutral-400 line-through decoration-red-400/50">
+              ${product.price.toLocaleString()}
             </span>
           )}
+          <span className="text-4xl font-black tracking-tighter text-neutral-900">
+            ${discountedPrice.toLocaleString()}
+          </span>
         </div>
+        {product.discount && (
+          <div className="mb-1 rounded-full bg-red-50 px-3 py-1 text-xs font-bold text-red-600 ring-1 ring-inset ring-red-600/10">
+            Saqlab qoling {product.percent}%
+          </div>
+        )}
       </div>
 
-      {/* Variant Tanlash (Masalan: Ranglar) */}
-      <div className="space-y-4">
-        <p className="text-sm font-semibold italic text-gray-500">
-          Color: Midnight Black
-        </p>
-        <div className="flex gap-3">
-          {["#000", "#555", "#eee"].map((color) => (
-            <button
-              key={color}
-              className="h-8 w-8 rounded-full border border-gray-200 p-1 transition-all hover:border-black"
-            >
-              <div
-                className="h-full w-full rounded-full shadow-inner"
-                style={{ backgroundColor: color }}
-              />
-            </button>
-          ))}
-        </div>
-      </div>
+      <p className="line-clamp-3 text-sm leading-relaxed text-neutral-600">
+        {product.description}
+      </p>
 
-      {/* Action Tugmalari */}
+      {/* Action Buttons */}
       <div className="flex flex-col gap-3">
-        <button className="flex h-16 w-full items-center justify-center gap-3 rounded-full bg-black text-lg font-medium text-white transition-all hover:bg-neutral-800 active:scale-[0.98]">
-          <ShoppingBag size={22} />
-          Savatga qo&apos;shish
-        </button>
-        <button className="flex h-16 w-full items-center justify-center rounded-full border-2 border-black text-lg font-medium transition-all hover:bg-black hover:text-white">
-          Hozir sotib olish
-        </button>
+        <div className="flex gap-3">
+          <Button className="group relative h-14 flex-1 overflow-hidden rounded-2xl bg-neutral-900 text-white transition-all hover:bg-neutral-800 active:scale-95">
+            <div className="flex items-center justify-center gap-2">
+              <ShoppingBag className="h-5 w-5 transition-transform group-hover:-translate-y-1" />
+              <span className="font-bold">Savatga qo'shish</span>
+            </div>
+          </Button>
+          <Button
+            variant="outline"
+            className="h-14 w-14 rounded-2xl border-neutral-200 transition-all hover:bg-red-50 hover:text-red-500 active:scale-90"
+          >
+            <Heart className="h-6 w-6" />
+          </Button>
+        </div>
+
+        <Button
+          variant="secondary"
+          className="flex h-14 w-full gap-2 rounded-2xl border-none bg-pink-50 text-pink-700 transition-all hover:bg-pink-100 active:scale-95"
+        >
+          <Zap className="h-5 w-5 fill-current" />
+          <span className="font-bold">Hozir sotib olish</span>
+        </Button>
       </div>
 
       {/* Trust Badges */}
-      <div className="grid grid-cols-1 gap-4 border-t border-gray-100 pt-8">
-        <div className="flex items-center gap-4 text-sm text-gray-600">
-          <Truck size={20} className="text-blue-500" />
-          <span>O&apos;zbekiston bo&apos;ylab 24 soatda yetkazish</span>
+      <div className="grid grid-cols-1 gap-4 border-t border-neutral-100 pt-6">
+        <div className="flex items-center gap-3 text-sm text-neutral-600">
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-green-50 text-green-600">
+            <Truck className="h-4 w-4" />
+          </div>
+          <span>O'zbekiston bo'ylab bepul yetkazish</span>
         </div>
-        <div className="flex items-center gap-4 text-sm text-gray-600">
-          <ShieldCheck size={20} className="text-green-500" />
-          <span>2 yillik rasmiy kafolat va xizmat ko&apos;rsatish</span>
+        <div className="flex items-center gap-3 text-sm text-neutral-600">
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+            <ShieldCheck className="h-4 w-4" />
+          </div>
+          <span>2 yil rasmiy kafolat</span>
         </div>
       </div>
     </div>
   );
 }
+
+export default ProductActions;

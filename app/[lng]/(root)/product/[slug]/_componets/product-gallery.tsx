@@ -1,38 +1,56 @@
 "use client";
-import Image from "next/image";
-import { useState } from "react";
-import { cn } from "@/lib/utils";
 
-export default function ProductGallery({ product }: { product: any }) {
-  const [activeImg, setActiveImg] = useState(product.images[0]);
+import { useState } from "react";
+import Image from "next/image";
+import { cn } from "@/lib/utils";
+import { IProduct } from "@/types";
+import { Maximize2, ChevronUp, ChevronDown } from "lucide-react";
+
+export default function ProductGallery({ product }: { product: IProduct }) {
+  const [active, setActive] = useState(0);
 
   return (
-    <div className="flex flex-col gap-6">
-      {/* Asosiy Rasm ekrani */}
-      <div className="relative aspect-[4/5] max-h-[700px] w-full overflow-hidden rounded-[2.5rem] bg-[#F9F9FB]">
+    <div className="flex flex-col gap-4 lg:flex-row">
+      {/* 1. Miniatyuralar - Endi yanada ingichka va tartibli */}
+      <div className="order-2 flex flex-row gap-3 lg:order-1 lg:flex-col">
+        {product.images.map((img, i) => (
+          <button
+            key={i}
+            onMouseEnter={() => setActive(i)} // User tajribasi uchun tezroq
+            className={cn(
+              "relative aspect-square w-16 overflow-hidden rounded-xl border transition-all duration-300 lg:w-20",
+              active === i
+                ? "border-black shadow-sm ring-1 ring-black"
+                : "border-neutral-200 bg-white opacity-70 hover:border-neutral-400 hover:opacity-100",
+            )}
+          >
+            <Image src={img} alt="thumb" fill className="object-cover p-1" />
+          </button>
+        ))}
+      </div>
+
+      {/* 2. Asosiy Rasm - Balandligi qisqartirilgan va ixcham (Compact Canvas) */}
+      <div className="relative order-1 h-[400px] w-full flex-1 overflow-hidden rounded-3xl border border-neutral-100 bg-[#ffffff] lg:order-2 lg:h-[600px]">
+        {/* Badge - Premium ko'rinish uchun */}
+        <div className="absolute left-6 top-6 z-10">
+          <span className="rounded-full bg-white/80 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-black backdrop-blur-md">
+            New Arrival
+          </span>
+        </div>
+
         <Image
-          src={activeImg}
+          src={product.images[active]}
           alt={product.name}
           fill
-          className="object-contain p-12 mix-blend-multiply transition-transform duration-700 hover:scale-105"
           priority
+          className="object-cover p-10 transition-all duration-700 ease-in-out group-hover:scale-105"
         />
-        {/* Miniatyrlar Rasm ustida (float) */}
-        <div className="absolute bottom-6 left-1/2 flex -translate-x-1/2 gap-3 rounded-3xl border border-white/20 bg-white/40 p-2 backdrop-blur-xl">
-          {product.images.map((img: string, i: number) => (
-            <button
-              key={i}
-              onClick={() => setActiveImg(img)}
-              className={cn(
-                "relative h-14 w-14 overflow-hidden rounded-2xl transition-all duration-300",
-                activeImg === img
-                  ? "scale-110 shadow-lg ring-2 ring-black"
-                  : "opacity-60 hover:opacity-100",
-              )}
-            >
-              <Image src={img} alt="thumb" fill className="object-cover" />
-            </button>
-          ))}
+
+        {/* Floating Actions */}
+        <div className="absolute bottom-6 right-6">
+          <button className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-neutral-800 shadow-md transition-all hover:bg-black hover:text-white active:scale-90">
+            <Maximize2 size={18} />
+          </button>
         </div>
       </div>
     </div>
