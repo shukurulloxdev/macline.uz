@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { MessageCircle, Phone, Plus, Minus } from 'lucide-react'
+import { Plus, Minus } from 'lucide-react'
 import { faqs } from '@/components/constants'
 import { cn } from '@/lib/utils'
 export default function Questions() {
@@ -49,7 +49,7 @@ export default function Questions() {
                   ${
 										isOpen
 											? 'border-pink-400/40 bg-gradient-to-br from-pink-50 to-white shadow-[0_5px_15px_rgba(236,72,153,0.25)]'
-											: 'border-gray-200 bg-white hover:border-pink-300 hover:shadow-lg shadow-md'
+											: 'border-gray-200 bg-white shadow-md hover:border-pink-300 hover:shadow-lg'
 									}`}
 								>
 									{isOpen && (
@@ -122,12 +122,12 @@ to-blue-50 p-6 shadow-xl'
 						</ul>
 					</div>
 					<div
-						className='bg-gradient-to-b
-from-white
-via-pink-50
-to-blue-50
+						className='w-full
+rounded-2xl
+border
+bg-gradient-to-b
 
- w-full rounded-2xl border p-6 shadow-xl'
+ from-white via-pink-50 to-blue-50 p-6 shadow-xl'
 					>
 						<h2 className='mb-6 text-xl font-semibold text-gray-800'>
 							Odamlar ko‘pincha qidirishadi
