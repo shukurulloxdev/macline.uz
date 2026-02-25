@@ -4,6 +4,7 @@ import { addProductSchema } from "@/lib/validation";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { removeAllImages } from "@/redux/reducers/imageState";
 import {
   Form,
   FormControl,
@@ -19,35 +20,38 @@ import { formatPrice } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ImagePlus } from "lucide-react";
 import UploadImg from "./upload-img";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { toast } from "sonner";
 
 function InputInformation() {
+  const dispatch = useDispatch();
+  const images = useSelector((state: RootState) => state.pictures.images);
+
+  const defaultValues: z.infer<typeof addProductSchema> = {
+    name: "",
+    category: "",
+    description: "",
+    brand: "",
+    price: "",
+    top: false,
+    discount: false,
+    percent: "",
+  };
   const form = useForm<z.infer<typeof addProductSchema>>({
     resolver: zodResolver(addProductSchema),
-    defaultValues: {
-      name: "",
-      category: "",
-      description: "",
-      brand: "",
-      price: "",
-      top: false,
-      discount: false,
-      percent: "",
-    },
+    defaultValues: defaultValues,
   });
+
   const isDiscount = form.watch("discount");
 
   function onSubmit(values: z.infer<typeof addProductSchema>) {
-    console.log(values);
-    form.reset({
-      name: "",
-      category: "",
-      description: "",
-      brand: "",
-      price: "",
-      top: false,
-      discount: false,
-      percent: "",
-    });
+    if (images.length === 0) {
+      return toast.error("Iltimos mahsulot rasmini yuklang!");
+    }
+    console.log({ ...values, images });
+    form.reset(defaultValues);
+    dispatch(removeAllImages());
   }
   const price = Number(form.watch("price") || 0);
   const percent = Number(form.watch("percent") || 0);
@@ -79,8 +83,8 @@ function InputInformation() {
             </Button>
           </div>
         </div>
-        <div className="grid grid-cols-3 items-start gap-4">
-          <div className="col-span-2 rounded-2xl border border-white/20 bg-white/5 p-6">
+        <div className="grid grid-cols-3 items-start gap-4 max-md:grid-cols-1">
+          <div className="rounded-2xl border border-white/20 bg-white/5 p-6 md:col-span-2">
             <div className="grid grid-cols-2 gap-4">
               <div className="rounded-2xl bg-white/5 p-4">
                 <FormField
@@ -275,7 +279,7 @@ function InputInformation() {
           <div className="space-y-4 rounded-2xl border border-white/20 bg-white/5 p-6">
             <div className="flex items-center justify-between">
               <h1 className="flex items-center gap-2 font-inter text-lg font-bold text-white">
-                <span>Rasim yuklashh</span>
+                <span>Rasim yuklash</span>
                 <ImagePlus size={20} />
               </h1>
             </div>

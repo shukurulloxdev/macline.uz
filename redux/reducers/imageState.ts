@@ -24,5 +24,5 @@ const imageState = createSlice({
   },
 });
 
-export const { addImage } = imageState.actions;
+export const { addImage, removeImage, removeAllImages } = imageState.actions;
 export default imageState.reducer;
