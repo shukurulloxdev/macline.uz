@@ -7,7 +7,7 @@ import { addImage, removeImage } from "@/redux/reducers/imageState";
 import { RootState } from "@/redux/store";
 import Image from "next/image";
 import { X } from "lucide-react";
-//git ga push
+
 function UploadImg() {
   const dispatch = useDispatch();
   const images = useSelector((state: RootState) => state.pictures.images);
