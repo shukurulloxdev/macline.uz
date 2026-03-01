@@ -73,7 +73,6 @@ function Navbar() {
       {/*  */}
       <div className="mx-auto max-w-7xl py-3">
         <div className="flex items-center justify-between gap-10">
-          {/* Logo & Catalog */}
           <div className="flex items-center gap-8">
             <Logo />
             <button className="group hidden items-center gap-3 rounded-2xl bg-pink-600 px-6 py-3 text-white shadow-[0_10px_25px_-5px_rgba(219,39,119,0.4)] transition-all hover:bg-pink-700 active:scale-95 xl:flex">
@@ -87,34 +86,25 @@ function Navbar() {
             </button>
           </div>
 
-          {/* Smart Search Architecture */}
-          {/* <div
-            className={cn(
-              "relative max-w-2xl flex-1 transition-all duration-500",
-              isSearchFocused ? "scale-[1.02]" : "",
-            )}
-          > */}
           <div
             className={cn(
               "relative max-w-2xl flex-1 transition-all duration-500",
-              // FOZUS bo'lganda butun qidiruv blokini hamma narsadan balandga chiqaramiz
               isSearchFocused ? "z-[120] scale-[1.02]" : "z-[50]",
             )}
           >
-            <div className="relative z-[110] flex items-center">
+            <div className="group relative flex items-center">
               <input
                 onFocus={() => setIsSearchFocused(true)}
                 onBlur={() => setIsSearchFocused(false)}
                 type="text"
                 placeholder="Smart qidiruv: iPhone 15 Pro..."
-                className="h-12 w-full rounded-[1.25rem] border-2 border-transparent bg-neutral-100 pl-14 pr-32 text-sm font-bold outline-none transition-all focus:border-pink-400 focus:bg-white"
+                className="h-12 w-full rounded-[1.25rem] border-2 border-transparent bg-neutral-100 pl-5 pr-16 text-sm font-bold outline-none transition-all placeholder:font-medium placeholder:text-neutral-400 focus:border-pink-400 focus:bg-white focus:ring-4 focus:ring-pink-100/50"
               />
-              <Search className="absolute left-5 text-neutral-400" size={22} />
 
-              {/* Search Quick Actions */}
-              <div className="absolute right-3 flex items-center gap-2">
-                <button className="rounded-xl bg-neutral-900 px-5 py-2.5 text-[11px] font-black uppercase tracking-widest text-white shadow-lg transition-colors hover:bg-pink-600">
-                  Qidirish
+              {/* Search Button - Inputning o'ng tomonida, ichkarida */}
+              <div className="absolute right-1.5 top-1/2 -translate-y-1/2">
+                <button className="flex h-9 w-9 items-center justify-center rounded-xl bg-pink-600 text-white shadow-md transition-all hover:scale-105 active:scale-95">
+                  <Search size={18} strokeWidth={2.5} />
                 </button>
               </div>
             </div>
