@@ -9,15 +9,10 @@ function Page() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-4xl font-bold tracking-tight text-white">
-            Barcha yangi buyurtmalar
+            Barcha tugatilgan buyurtmalar
           </h1>
           <p className="mt-2 text-sm text-slate-400">
-            Bu yerda siz mijozlardan kelgan yangi buyurtmalarni qabul
-            qilishingiz mumku
-          </p>
-          <p className="mt-2 text-sm text-slate-400">
-            Bu yerda siz mijozlardan kelgan yangi buyurtmalarni qabul
-            qilishingiz mumku
+            Bu yerda siz tugatilgan buyurtmalarni kuzatishingiz mumkun
           </p>
         </div>
         <Link href={"/admin/orders"}>
