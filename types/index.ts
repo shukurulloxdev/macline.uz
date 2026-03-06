@@ -44,6 +44,15 @@ export interface IProduct {
   top: boolean;
   images: string[];
 }
+export interface ICategory {
+  _id: string;
+  title: string;
+  slug: string;
+  image: string;
+  seoTitle: string;
+  seoDescription: string;
+  active: boolean;
+}
 
 export interface ReturnActionType {
   status: number;
@@ -52,4 +61,5 @@ export interface ReturnActionType {
   product: IProduct;
   products: IProduct[];
   totalProduct: number;
+  categories: ICategory[];
 }

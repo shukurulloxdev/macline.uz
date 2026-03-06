@@ -21,6 +21,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import Image from "next/image";
 import { createCategory } from "@/actions/admin-actions";
+import { generateSlug } from "@/lib/utils";
 
 function SendCategory() {
   const [image, setImage] = useState<string>();
@@ -28,7 +29,6 @@ function SendCategory() {
     resolver: zodResolver(addCategorySchema),
     defaultValues: {
       title: "",
-      slug: "",
       seoTitle: "",
       seoDescription: "",
     },
@@ -38,8 +38,15 @@ function SendCategory() {
     if (!image) {
       return toast.error("Iltimos rasim kiriting 🖼️");
     }
+    const slug = generateSlug(values.title);
 
-    const res = createCategory({ ...values, image });
+    const newData = {
+      ...values,
+      slug,
+      image,
+    };
+
+    const res = createCategory(newData);
 
     const data = await res;
     console.log(data);
@@ -88,7 +95,7 @@ function SendCategory() {
         <div className="grid grid-cols-3 items-start gap-4 max-md:grid-cols-1">
           <div className="rounded-2xl border border-white/20 bg-white/5 p-6 md:col-span-2">
             <div className="grid grid-cols-2 gap-4">
-              <div className="rounded-2xl bg-white/5 p-4">
+              <div className="col-span-2 rounded-2xl bg-white/5 p-4">
                 <FormField
                   control={form.control}
                   name="title"
@@ -109,27 +116,7 @@ function SendCategory() {
                   )}
                 />
               </div>
-              <div className="rounded-2xl bg-white/5 p-4">
-                <FormField
-                  control={form.control}
-                  name="slug"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="font-inter text-lg font-bold text-white">
-                        Kategoriya path yo&apos;nalishi
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          className="border-white/20 bg-white/10 text-white transition-all duration-200 placeholder:text-slate-400 focus:border-indigo-500 focus:ring-1 focus:ring-pink-500"
-                          {...field}
-                          placeholder="kir-yuvish-mashinalar"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
+
               <div className="col-span-2 rounded-2xl bg-white/5 p-4">
                 <FormField
                   control={form.control}

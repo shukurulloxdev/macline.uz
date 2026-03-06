@@ -72,7 +72,7 @@ export default RootLayout;
 // git push
 
 // git add .
-// GIT_AUTHOR_DATE="2026-03-4T12:00:00" \
-// GIT_COMMITTER_DATE="2026-03-4T12:00:00" \
+// GIT_AUTHOR_DATE="2026-03-6T12:00:00" \
+// GIT_COMMITTER_DATE="2026-03-6T12:00:00" \
 // git commit -m "Updated"
 // git push
