@@ -38,7 +38,7 @@ function BigProducts() {
           <CarouselContent className="-ml-3 py-4">
             {Array.from({ length: 8 }).map((_, i) => (
               <CarouselItem key={i} className="basis-[22%] pl-3">
-                <ProductCard />
+                {/* <ProductCard /> */}
               </CarouselItem>
             ))}
           </CarouselContent>
