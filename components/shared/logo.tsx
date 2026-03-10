@@ -51,12 +51,15 @@
 // }
 
 // export default Logo;
+import Link from "next/link";
 import React from "react";
 
 const Logo = () => {
   return (
-    <div className="group flex cursor-pointer select-none items-center gap-3">
-      {/* Savatcha va Chip simvolining birlashmasi (SVG) */}
+    <Link
+      href={"/"}
+      className="group flex cursor-pointer select-none items-center gap-3"
+    >
       <rect
         width="40"
         height="40"
@@ -80,7 +83,7 @@ const Logo = () => {
           </span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

@@ -233,7 +233,7 @@ function Location() {
             value={branch.id}
             className="mt-0 outline-none"
           >
-            <div className="grid grid-cols-1 overflow-hidden rounded-[2.5rem] border border-pink-300 bg-pink-50 shadow-[0_40px_100px_rgba(219,39,119,0.03)] lg:grid-cols-12">
+            <div className="grid grid-cols-1 overflow-hidden rounded-[2rem] border border-pink-300 bg-pink-50 shadow-[0_40px_100px_rgba(219,39,119,0.03)] lg:grid-cols-12">
               {/* Left: Info Panel */}
               <div className="flex flex-col justify-between bg-gradient-to-b from-pink-50/50 to-transparent p-12 lg:col-span-4">
                 <div className="space-y-12">

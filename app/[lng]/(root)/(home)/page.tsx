@@ -4,6 +4,7 @@ import Categories from "./_components/categories";
 import PopProducts from "./_components/top-products";
 import Location from "./_components/location";
 import { getTopProducts } from "@/actions/user-actions";
+import DiscountProducts from "./_components/discount-products";
 // actionClient ham javobni to'gridan to'gri qaytaramaydi o'zini obyectini qaytaradi
 
 async function Page() {
@@ -14,8 +15,8 @@ async function Page() {
       <Hero />
       <Categories />
       <PopProducts topProducts={data?.products || []} />
-      {/* <DiscountProducts />
-      <BigProducts />
+      <DiscountProducts discountProducts={data?.products || []} />
+      {/* <BigProducts />
       <SmallProducts /> */}
       <Location />
       {/* <SearchTabel /> */}
