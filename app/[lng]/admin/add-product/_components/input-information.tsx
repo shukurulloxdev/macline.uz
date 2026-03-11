@@ -18,7 +18,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { formatPrice } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
-import { ImagePlus } from "lucide-react";
+import { ImagePlus, Rocket, Save, Sparkles } from "lucide-react";
 import UploadImg from "./upload-img";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
@@ -72,23 +72,35 @@ function InputInformation() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-4xl font-bold tracking-tight text-white">
-              Yangi Texnika kiritish
+          <div className="space-y-2">
+            <div className="flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1">
+              <Sparkles size={12} className="text-pink-500" />
+              <span className="text-[10px] font-black uppercase tracking-widest text-white/70">
+                Inventarizatsiya
+              </span>
+            </div>
+            <h1 className="font-sora text-4xl font-black uppercase italic tracking-tighter text-white">
+              Yangi <span className="not-italic text-pink-600">Texnika</span>{" "}
+              Qoshish
             </h1>
-            <p className="mt-2 text-sm text-slate-400">
-              Quydagi bo&apos;sh joylarni to&apos;ldirib saytga yangi texnika
-              qo&apos;shing
+            <p className="text-sm font-medium text-slate-400">
+              Tizimga yangi mahsulot malumotlarini kiriting.
             </p>
           </div>
-          <div className="flex items-center gap-3">
-            <Button className="h-11" variant={"outline"}>
-              Qoralama saqlash
+
+          <div className="flex items-center gap-4">
+            <Button
+              type="button"
+              variant="ghost"
+              className="h-14 rounded-2xl border border-white/5 bg-white/5 px-6 font-bold text-white hover:bg-white/10 hover:text-pink-400"
+            >
+              <Save className="mr-2 size-4" /> Bekor qilish
             </Button>
             <Button
               type="submit"
-              className="h-11 bg-blue-600 hover:bg-blue-700"
+              className="group h-14 rounded-2xl bg-blue-600 px-10 font-black uppercase tracking-widest text-white transition-all hover:bg-blue-700 hover:shadow-[0_20px_40px_-10px_rgba(37,99,235,0.4)] active:scale-95"
             >
+              <Rocket className="mr-2 size-4 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
               Saytga yuklash
             </Button>
           </div>

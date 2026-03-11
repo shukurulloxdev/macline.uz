@@ -39,5 +39,25 @@ export const searchParamsSchema = z.object({
   filter: z.string().optional(),
   category: z.string().optional(),
   page: z.string().default("1"),
-  pageSize: z.string().default("2"),
+  pageSize: z.string().default("10"),
 });
+
+export const addCategorySchema = z.object({
+  title: z
+    .string()
+    .trim()
+    .min(4, "Kategoriya nomi kamida 4 ta harf bo‘lishi kerak"),
+
+  slug: z
+    .string()
+    .trim()
+    .min(4, "Slug kamida 4 ta belgi bo‘lishi kerak")
+    .regex(
+      /^[a-z0-9-]+$/,
+      "Slug faqat kichik harflar va '-' belgidan iborat bo‘lishi kerak",
+    ),
+
+  active: z.boolean().default(true),
+});
+
+export type AddCategoryType = z.infer<typeof addCategorySchema>;

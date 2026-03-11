@@ -51,10 +51,13 @@
 // }
 
 // export default Logo;
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
-
-const Logo = () => {
+interface Props {
+  admin?: boolean;
+}
+const Logo = ({ admin }: Props) => {
   return (
     <Link
       href={"/"}
@@ -70,7 +73,12 @@ const Logo = () => {
 
       {/* 2. Matn qismi: OpenShop ierarxiyasida */}
       <div className="flex flex-col leading-none">
-        <h1 className="text-[30px] font-black uppercase tracking-tighter text-neutral-900">
+        <h1
+          className={cn(
+            "text-[30px] font-black uppercase tracking-tighter text-neutral-900",
+            admin && "text-white",
+          )}
+        >
           Texno
           <span className="text-pink-600 transition-colors group-hover:text-pink-500">
             tech

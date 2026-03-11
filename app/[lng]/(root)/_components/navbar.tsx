@@ -61,12 +61,15 @@ function Navbar() {
       <div className="border-b border-neutral-100 py-2">
         <div className="mx-auto flex max-w-7xl items-center justify-between">
           <div className="flex items-center gap-6">
-            <div className="group flex cursor-pointer items-center gap-2 rounded-full border border-pink-100 bg-pink-50 px-3 py-1 transition-all hover:bg-pink-100">
+            <Link
+              href={"/products?category=discounts"}
+              className="group flex cursor-pointer items-center gap-2 rounded-full border border-pink-100 bg-pink-50 px-3 py-1 transition-all hover:bg-pink-100"
+            >
               <Flame size={12} className="animate-pulse text-pink-600" />
               <span className="text-[10px] font-black uppercase tracking-[0.12em] text-pink-600">
                 Hafta chegirmalari -30% gacha
               </span>
-            </div>
+            </Link>
 
             <div className="hidden items-center gap-5 md:flex">
               <a
@@ -193,7 +196,10 @@ function Navbar() {
               </div>
             </button>
 
-            <div className="ml-2 border-l border-neutral-100 pl-6">
+            <Link
+              href={"/admin"}
+              className="ml-2 border-l border-neutral-100 pl-6"
+            >
               <button className="group flex items-center gap-3">
                 <div className="relative h-12 w-12 overflow-hidden rounded-2xl ring-2 ring-transparent transition-all group-hover:ring-pink-600">
                   <div className="absolute inset-0 flex items-center justify-center bg-pink-100 text-pink-600">
@@ -216,7 +222,7 @@ function Navbar() {
                   </div>
                 </div>
               </button>
-            </div>
+            </Link>
           </div>
         </div>
       </div>

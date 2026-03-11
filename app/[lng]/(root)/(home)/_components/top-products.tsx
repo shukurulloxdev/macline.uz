@@ -24,7 +24,7 @@ function PopProducts({ topProducts }: Props) {
           Top texnikalar
         </h1>
         <Link
-          href={"/products?category=top"}
+          href={"/products?category=tops"}
           className="group flex cursor-pointer items-center gap-1"
         >
           <span className="text-[18px] text-pink-600 transition-colors duration-300">

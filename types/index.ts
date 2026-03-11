@@ -51,4 +51,5 @@ export interface ReturnActionType {
   isNext: boolean;
   product: IProduct;
   products: IProduct[];
+  totalProduct: number;
 }
