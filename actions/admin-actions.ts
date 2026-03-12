@@ -7,6 +7,7 @@ import {
   idSchema,
 } from "@/lib/validation";
 import { ReturnActionType } from "@/types";
+import { assert } from "console";
 import { revalidatePath } from "next/cache";
 
 export const createProduct = actionClient

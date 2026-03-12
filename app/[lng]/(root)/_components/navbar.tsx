@@ -32,7 +32,7 @@ function Navbar() {
       const scrollY = window.scrollY;
 
       // 20px dan oshsa yashirsin
-      if (scrollY > 20 && isCategoryVisible) {
+      if (scrollY > 10 && isCategoryVisible) {
         setIsCategoryVisible(false);
       }
 
@@ -57,12 +57,12 @@ function Navbar() {
   ];
 
   return (
-    <div className="sticky top-0 z-[100] border-b border-neutral-100 bg-white shadow-xl backdrop-blur-2xl">
+    <div className="sticky top-0 z-[100] border-b border-neutral-100 bg-white shadow-md backdrop-blur-2xl">
       <div className="border-b border-neutral-100 py-2">
         <div className="mx-auto flex max-w-7xl items-center justify-between">
           <div className="flex items-center gap-6">
             <Link
-              href={"/products?category=discounts"}
+              href={"/category/discounts"}
               className="group flex cursor-pointer items-center gap-2 rounded-full border border-pink-100 bg-pink-50 px-3 py-1 transition-all hover:bg-pink-100"
             >
               <Flame size={12} className="animate-pulse text-pink-600" />

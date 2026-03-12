@@ -1,11 +1,13 @@
-import InputInformation from './_components/input-information'
+import { getCategories } from "@/actions/user-actions";
+import InputInformation from "./_components/input-information";
 
-function Page() {
-	return (
-		<div>
-			<InputInformation />
-		</div>
-	)
+async function Page() {
+  const res = await getCategories();
+  return (
+    <div>
+      <InputInformation activeCategories={res.data?.categories || []} />
+    </div>
+  );
 }
 
-export default Page
+export default Page;

@@ -13,6 +13,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -24,8 +31,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { toast } from "sonner";
 import { createProduct } from "@/actions/admin-actions";
+import { ICategory } from "@/types";
 
-function InputInformation() {
+interface Props {
+  activeCategories: ICategory[];
+}
+
+function InputInformation({ activeCategories }: Props) {
   const dispatch = useDispatch();
   const images = useSelector((state: RootState) => state.pictures.images);
 
@@ -73,14 +85,14 @@ function InputInformation() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <div className="flex items-center justify-between">
           <div className="space-y-2">
-            <div className="flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1">
+            {/* <div className="flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1">
               <Sparkles size={12} className="text-pink-500" />
               <span className="text-[10px] font-black uppercase tracking-widest text-white/70">
                 Inventarizatsiya
               </span>
-            </div>
+            </div> */}
             <h1 className="font-sora text-4xl font-black uppercase italic tracking-tighter text-white">
-              Yangi <span className="not-italic text-pink-600">Texnika</span>{" "}
+              Yangi <span className="not-italic text-pink-600"> Mahsulot</span>{" "}
               Qoshish
             </h1>
             <p className="text-sm font-medium text-slate-400">
@@ -119,7 +131,7 @@ function InputInformation() {
                       </FormLabel>
                       <FormControl>
                         <Input
-                          className="border-white/20 bg-white/10 text-white transition-all duration-200 placeholder:text-gray-200 focus:border-indigo-500 focus:ring-1 focus:ring-pink-500"
+                          className="border-white/20 bg-white/10 text-white transition-all duration-200 placeholder:text-slate-400 focus:border-indigo-500 focus:ring-1 focus:ring-pink-500"
                           {...field}
                           placeholder="Mahsuloting toliq nomi"
                         />
@@ -136,15 +148,32 @@ function InputInformation() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="font-inter text-lg font-bold text-white">
-                        Mahsulot toifasi
+                        Mahsulot kategoriyasi
                       </FormLabel>
-                      <FormControl>
-                        <Input
-                          className="border-white/20 bg-white/10 text-white transition-all duration-200 placeholder:text-gray-200 focus:border-indigo-500 focus:ring-1 focus:ring-pink-500"
-                          {...field}
-                          placeholder="Mahsulot toifasi"
-                        />
-                      </FormControl>
+
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger className="border-white/20 bg-white/10 font-manrope font-semibold text-pink-300 focus:border-indigo-500 data-[placeholder]:font-inter data-[placeholder]:font-normal data-[placeholder]:text-slate-400">
+                            <SelectValue placeholder="Kategoriyalardan birini tanlang" />
+                          </SelectTrigger>
+                        </FormControl>
+
+                        <SelectContent className="border border-white/50 bg-black/20 text-white backdrop-blur-3xl">
+                          {activeCategories.map((category) => (
+                            <SelectItem
+                              key={category._id}
+                              value={category.slug}
+                              className="cursor-pointer focus:bg-blue-600/30 focus:text-white data-[state=checked]:bg-blue-600 data-[state=checked]:text-white"
+                            >
+                              {category.title}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+
                       <FormMessage />
                     </FormItem>
                   )}
@@ -161,7 +190,7 @@ function InputInformation() {
                       </FormLabel>
                       <FormControl>
                         <Textarea
-                          className="border-white/20 bg-white/10 text-white transition-all duration-200 placeholder:text-gray-200 focus:border-indigo-500 focus:ring-1 focus:ring-white/20"
+                          className="border-white/20 bg-white/10 text-white transition-all duration-200 placeholder:text-slate-400 focus:border-indigo-500 focus:ring-1 focus:ring-white/20"
                           {...field}
                           placeholder="Mahsulotning barcha malumoti"
                         />
@@ -182,7 +211,7 @@ function InputInformation() {
                       </FormLabel>
                       <FormControl>
                         <Input
-                          className="border-white/20 bg-white/10 text-white transition-all duration-200 placeholder:text-gray-200 focus:border-indigo-500 focus:ring-1 focus:ring-pink-500"
+                          className="border-white/20 bg-white/10 text-white transition-all duration-200 placeholder:text-slate-400 focus:border-indigo-500 focus:ring-1 focus:ring-pink-500"
                           {...field}
                           placeholder="Brend nomi"
                         />
@@ -208,7 +237,7 @@ function InputInformation() {
                       <FormControl>
                         <Input
                           type="number"
-                          className="border-white/20 bg-white/10 text-white transition-all duration-200 placeholder:text-gray-200 focus:border-indigo-500 focus:ring-1 focus:ring-pink-500"
+                          className="border-white/20 bg-white/10 text-white transition-all duration-200 placeholder:text-slate-400 focus:border-indigo-500 focus:ring-1 focus:ring-pink-500"
                           {...field}
                           placeholder="Mahsulot narxi"
                         />
@@ -284,7 +313,7 @@ function InputInformation() {
                           <FormControl>
                             <Input
                               type="number"
-                              className="border-white/20 bg-white/10 text-white transition-all duration-200 placeholder:text-gray-200 focus:border-indigo-500 focus:ring-1 focus:ring-pink-500"
+                              className="border-white/20 bg-white/10 text-white transition-all duration-200 placeholder:text-slate-400 focus:border-indigo-500 focus:ring-1 focus:ring-pink-500"
                               {...field}
                               placeholder="Chegirma foizini kiriting %"
                             />

@@ -27,7 +27,7 @@ function DiscountProducts({ discountProducts }: Props) {
           </h2>
 
           <Link
-            href={"/products?category=discounts"}
+            href={"/category/discounts"}
             className="group/btn flex items-center gap-3 rounded-2xl bg-pink-600 px-6 py-2 text-xs font-black uppercase tracking-widest text-white transition-all hover:bg-pink-500 hover:shadow-xl active:scale-95"
           >
             <span>Barchasini ko'rish</span>

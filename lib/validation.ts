@@ -47,6 +47,7 @@ export const addCategorySchema = z.object({
     .string()
     .trim()
     .min(4, "Kategoriya nomi kamida 4 ta harf bo‘lishi kerak"),
+  slug: z.string().optional(),
 
   seoTitle: z
     .string()
