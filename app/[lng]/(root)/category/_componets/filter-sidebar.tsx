@@ -54,7 +54,7 @@ export default function SidebarFilter() {
             Saralash
           </h3>
           <div className="flex flex-col gap-2">
-            <button className="flex h-12 items-center gap-3 rounded-2xl bg-neutral-900 px-4 text-[10px] font-black uppercase tracking-widest text-white transition-all hover:bg-pink-600">
+            <button className="flex h-12 items-center gap-3 rounded-2xl bg-pink-600 px-4 text-[10px] font-black uppercase tracking-widest text-white transition-all hover:bg-pink-700">
               <Sparkles size={14} /> Yangilari
             </button>
             <button className="flex h-12 items-center gap-3 rounded-2xl border border-neutral-100 px-4 text-[10px] font-black uppercase tracking-widest text-neutral-600 transition-all hover:border-pink-500 hover:text-pink-600">
@@ -70,7 +70,7 @@ export default function SidebarFilter() {
         <div className="rounded-3xl bg-pink-50 p-5">
           <div className="mb-2 flex items-center gap-2 text-pink-600">
             <ShieldCheck size={16} />
-            <span className="text-[10px] font-black uppercase">
+            <span className="text-[14px] font-black uppercase">
               Rasmiy kafolat
             </span>
           </div>

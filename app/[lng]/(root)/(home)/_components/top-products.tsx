@@ -48,7 +48,7 @@ function PopProducts({ topProducts }: Props) {
           <CarouselContent className="-ml-3 py-4">
             {topProducts?.map((product) => (
               <CarouselItem key={product._id} className="basis-[22%] pl-3">
-                <ProductCard product={product} />
+                <ProductCard product={product} view={"grid"} />
               </CarouselItem>
             ))}
           </CarouselContent>
