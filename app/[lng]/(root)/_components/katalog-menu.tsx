@@ -178,7 +178,7 @@
 //   );
 // }
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import {
   LayoutGrid,
@@ -193,6 +193,7 @@ import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
+  NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
@@ -206,15 +207,19 @@ interface Props {
 
 export default function KatalogMenu({ categories }: Props) {
   // const [isOpen, setIsOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState<ICategory | null>(
-    categories[0] || null,
-  );
+  const [activeTab, setActiveTab] = useState<ICategory | null>();
+
+  useEffect(() => {
+    if (categories && categories.length > 0) {
+      setActiveTab(categories[0]);
+    }
+  }, [categories]);
   return (
-    <NavigationMenu delayDuration={0}>
+    <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
           {/* KATALOG TUGMASI */}
-          <NavigationMenuTrigger className="group h-12 gap-3 rounded-2xl bg-pink-600 px-6 text-white shadow-[0_10px_25px_-5px_rgba(219,39,119,0.3)] transition-all hover:bg-pink-700 hover:text-white focus:bg-pink-700 active:scale-95">
+          <NavigationMenuTrigger className="group h-12 gap-3 rounded-2xl bg-pink-600 px-6 text-white shadow-[0_10px_25px_-5px_rgba(219,39,119,0.3)] transition-all hover:bg-pink-600 hover:text-white focus:bg-pink-600 focus:text-white active:scale-95">
             <LayoutGrid
               size={20}
               className="transition-transform duration-500 group-data-[state=open]:rotate-90"
@@ -226,7 +231,7 @@ export default function KatalogMenu({ categories }: Props) {
 
           {/* MEGA MENU CONTENT */}
           <NavigationMenuContent className="z-[150]">
-            <div className="flex w-[850px] overflow-hidden bg-[#FCFCFD]">
+            <div className="flex w-[850px] overflow-hidden rounded-2xl bg-[#ffffff]">
               <div className="w-[300px] border-r border-neutral-200/70 bg-white p-4">
                 <div className="space-y-1">
                   {categories.map((cat) => (
@@ -234,7 +239,7 @@ export default function KatalogMenu({ categories }: Props) {
                       key={cat._id}
                       onMouseEnter={() => setActiveTab(cat)}
                       className={cn(
-                        "group flex cursor-pointer items-center justify-between rounded-2xl px-3 py-2.5 transition-all duration-300",
+                        "group flex cursor-pointer items-center justify-between rounded-xl px-3 py-2.5 transition-all duration-300",
                         activeTab?._id === cat._id
                           ? "bg-pink-50/80 shadow-[0_10px_20px_-5px_rgba(219,39,119,0.1)] ring-1 ring-pink-100"
                           : "hover:bg-neutral-50",
@@ -301,11 +306,10 @@ export default function KatalogMenu({ categories }: Props) {
                 </div>
               </div>
 
-              <div className="flex-1 bg-white p-8">
+              <div className="flex-1 bg-white p-6">
                 {activeTab && (
-                  <div className="flex h-full flex-col">
-                    {/* 1. HEADER - IXCHAM */}
-                    <div className="mb-8 flex items-center justify-between border-b border-neutral-50 pb-5">
+                  <div className="flex flex-col gap-8">
+                    <div className="flex items-center justify-between border-b border-neutral-200/70 pb-5">
                       <div className="space-y-1.5">
                         <div className="flex items-center gap-2">
                           <span className="h-1.5 w-1.5 rounded-full bg-pink-600 shadow-[0_0_8px_rgba(219,39,119,0.5)]" />
@@ -352,7 +356,6 @@ export default function KatalogMenu({ categories }: Props) {
                           </div>
                         </div>
 
-                        {/* ISHONCH BELGILARI - IXCHAM */}
                         <div className="flex items-center gap-6 border-t border-neutral-50 pt-6">
                           <div className="flex items-center gap-2 text-neutral-400">
                             <ShieldCheck size={14} />
@@ -377,24 +380,39 @@ export default function KatalogMenu({ categories }: Props) {
                               src={activeTab.image}
                               alt={activeTab.title}
                               fill
-                              className="object-contain"
+                              className="cursor-pointer rounded-xl object-contain"
                             />
                           )}
                         </div>
-
-                        <Link
-                          href={`/category/${activeTab.slug}`}
-                          className="group flex w-full items-center justify-between rounded-xl bg-neutral-900 p-1.5 pl-5 text-white shadow-lg shadow-neutral-100 transition-all hover:bg-pink-600 active:scale-95"
-                        >
-                          <span className="text-[10px] font-black uppercase tracking-widest">
-                            O'tish
-                          </span>
-                          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10 transition-all group-hover:bg-white group-hover:text-pink-600">
-                            <ArrowRight size={16} />
-                          </div>
-                        </Link>
                       </div>
                     </div>
+                    <NavigationMenuLink asChild>
+                      <Link
+                        href={`/category/${activeTab.slug}`}
+                        className="group flex h-11 w-full items-center justify-between rounded-xl bg-pink-600 px-5 transition-all duration-300 hover:bg-pink-700 active:scale-[0.98]"
+                      >
+                        {/* MATN - SODDA VA ANIQ */}
+                        <div className="flex items-center gap-3">
+                          <span className="text-[11px] font-black uppercase tracking-[0.15em] text-white">
+                            {activeTab.title} bo'limiga o'tish
+                          </span>
+                          <div className="h-1 w-1 rounded-full bg-white/40 transition-colors group-hover:bg-white" />
+                          <span className="text-[9px] font-bold uppercase tracking-widest text-white/50">
+                            Barchasi
+                          </span>
+                        </div>
+
+                        {/* IKONKA - SKROMNIY */}
+                        <div className="flex items-center gap-2">
+                          <div className="h-[1px] w-0 bg-white/30 transition-all duration-500 group-hover:w-6" />
+                          <ArrowRight
+                            size={16}
+                            strokeWidth={3}
+                            className="text-white transition-transform group-hover:translate-x-1"
+                          />
+                        </div>
+                      </Link>
+                    </NavigationMenuLink>
                   </div>
                 )}
               </div>
