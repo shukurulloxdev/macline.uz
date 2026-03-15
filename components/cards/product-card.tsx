@@ -14,7 +14,7 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { toggelFavorite } from "@/redux/reducers/favoriteState";
-import { addBasket, deleteBasket } from "@/redux/reducers/basketState";
+import { toggleBasket } from "@/redux/reducers/basketState";
 
 interface Props {
   product: IProduct;
@@ -253,12 +253,7 @@ export default function ProductCard({ product, view }: Props) {
                   {isBasket ? <Check size={20} /> : <ShoppingBag size={20} />}
                 </button> */}
                 <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    isBasket
-                      ? dispatch(deleteBasket(product._id))
-                      : dispatch(addBasket(product._id));
-                  }}
+                  onClick={() => dispatch(toggleBasket(product._id))}
                   className={cn(
                     "group/btn relative flex h-11 w-12 items-center justify-center overflow-hidden rounded-xl transition-all duration-500 active:scale-90", // group/btn qo'shildi
                     isBasket

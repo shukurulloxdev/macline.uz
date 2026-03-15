@@ -17,7 +17,7 @@ const basketState = createSlice({
   name: "basketIds",
   initialState,
   reducers: {
-    addBasket: (state, action: PayloadAction<string>) => {
+    toggleBasket: (state, action: PayloadAction<string>) => {
       const isBasket = state.basketIds.includes(action.payload);
       if (isBasket) {
         state.basketIds = state.basketIds.filter(
@@ -34,6 +34,6 @@ const basketState = createSlice({
     },
   },
 });
-export const { addBasket, removeBasketIds } = basketState.actions;
+export const { toggleBasket, removeBasketIds } = basketState.actions;
 
 export default basketState.reducer;

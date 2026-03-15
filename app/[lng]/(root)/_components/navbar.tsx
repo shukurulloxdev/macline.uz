@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import {
   Heart,
   ShoppingBag,
@@ -19,6 +19,11 @@ import { cn } from "@/lib/utils";
 import Logo from "@/components/shared/logo";
 import { useTranslation } from "@/i18n/client";
 import LngMenu from "@/components/shared/lng-menu";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import KatalogMenu from "./katalog-menu";
+import { getCategories } from "@/actions/user-actions";
+import { ICategory } from "@/types";
 
 function Navbar() {
   const { lng } = useParams();
@@ -26,8 +31,23 @@ function Navbar() {
 
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [isCategoryVisible, setIsCategoryVisible] = useState(true);
+  const [katalog, setKatalog] = useState<ICategory[]>([]);
+  const pathname = usePathname();
 
+  const isFavoritesPage = pathname.endsWith("/favorites");
+  const isCartPage = pathname.endsWith("/shopping/cart");
+
+  const favorites = useSelector(
+    (state: RootState) => state.favorites.favoriteIds,
+  );
+  const basketIds = useSelector((state: RootState) => state.baskets.basketIds);
+
+  async function getKatalog() {
+    const allCategories = await getCategories();
+    setKatalog(allCategories.data?.categories || []);
+  }
   useEffect(() => {
+    getKatalog();
     const handleScroll = () => {
       const scrollY = window.scrollY;
 
@@ -105,16 +125,7 @@ function Navbar() {
         <div className="flex items-center justify-between gap-10">
           <div className="flex items-center gap-8">
             <Logo />
-
-            <button className="group hidden items-center gap-3 rounded-2xl bg-pink-600 px-6 py-3 text-white shadow-[0_10px_25px_-5px_rgba(219,39,119,0.4)] transition-all hover:bg-pink-700 active:scale-95 xl:flex">
-              <LayoutGrid
-                size={20}
-                className="transition-transform duration-500 group-hover:rotate-90"
-              />
-              <span className="text-sm font-black uppercase tracking-wider">
-                Katalog
-              </span>
-            </button>
+            <KatalogMenu categories={katalog} />
           </div>
 
           <div
@@ -173,31 +184,59 @@ function Navbar() {
 
             <Link
               href={"/favorites"}
-              className="group relative rounded-2xl bg-neutral-50 p-3.5 text-neutral-700 transition-all hover:bg-pink-50 hover:text-pink-600"
+              className={cn(
+                "group relative rounded-2xl p-3.5 text-neutral-700 transition-all",
+                isFavoritesPage
+                  ? "bg-pink-50 text-pink-600"
+                  : "bg-neutral-50 hover:bg-pink-50 hover:text-pink-600",
+              )}
             >
               <Heart
                 size={24}
                 strokeWidth={2.3}
-                className="group-hover:fill-pink-600"
+                className={cn(
+                  "transition-all",
+                  isFavoritesPage
+                    ? "fill-pink-600"
+                    : "group-hover:fill-pink-600",
+                )}
               />
               <div className="absolute -right-2 -top-2 rounded-full bg-neutral-900 px-2 py-0.5 text-[10px] font-black text-white ring-4 ring-white">
-                12
+                {favorites.length || 0}
               </div>
             </Link>
 
             <Link
               href={"/shopping/cart"}
-              className="group flex items-center gap-4 rounded-2xl border border-transparent bg-neutral-50 p-1.5 pr-6 transition-all hover:border-pink-100 hover:bg-pink-50"
+              className={cn(
+                "group flex items-center gap-4 rounded-2xl border p-1.5 pr-6 transition-all",
+                isCartPage
+                  ? "border-pink-100 bg-pink-50"
+                  : "border-transparent bg-neutral-50 hover:border-pink-100 hover:bg-pink-50",
+              )}
             >
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white shadow-sm transition-all duration-300 group-hover:bg-pink-600 group-hover:text-white">
+              <div
+                className={cn(
+                  "flex h-11 w-11 items-center justify-center rounded-xl shadow-sm transition-all duration-300",
+                  isCartPage
+                    ? "bg-pink-600 text-white"
+                    : "bg-white group-hover:bg-pink-600 group-hover:text-white",
+                )}
+              >
                 <ShoppingBag size={22} />
               </div>
+
               <div className="flex flex-col items-start">
-                <span className="text-[10px] font-black uppercase tracking-tighter text-neutral-400">
+                <span
+                  className={cn(
+                    "text-[12px] font-black uppercase tracking-tighter",
+                    isCartPage ? "text-pink-600" : "text-pink-600",
+                  )}
+                >
                   Savatda
                 </span>
-                <span className="text-sm font-black text-neutral-900">
-                  12.500.000 UZS
+                <span className="text-[10px] font-black uppercase tracking-tighter text-neutral-400">
+                  {basketIds.length || 0} ta mahsulot
                 </span>
               </div>
             </Link>

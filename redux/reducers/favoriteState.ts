@@ -2,7 +2,7 @@ import {
   clearFavoritesFromStorage,
   getFavoritesFromStorage,
   saveFavoritesToStorage,
-} from "@/lib/favorites-storage";
+} from "@/local-storage/favorites-storage";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface favoriteIdsType {

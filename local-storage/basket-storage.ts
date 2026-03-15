@@ -7,7 +7,7 @@ export function setBasketIdsStorage(ids: string[]) {
 }
 
 export function getBasketIdsStorage() {
-  if (typeof window === "undefined") return;
+  if (typeof window === "undefined") return [];
   const res = localStorage.getItem(BASKET_KEY);
   if (!res) return [];
   try {
