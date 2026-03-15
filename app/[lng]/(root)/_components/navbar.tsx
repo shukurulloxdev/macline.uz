@@ -209,7 +209,7 @@ function Navbar() {
             <Link
               href={"/shopping/cart"}
               className={cn(
-                "group flex items-center gap-4 rounded-2xl border p-1.5 pr-6 transition-all",
+                "group flex items-center gap-4 rounded-2xl border p-1.5 pr-4 transition-all",
                 isCartPage
                   ? "border-pink-100 bg-pink-50"
                   : "border-transparent bg-neutral-50 hover:border-pink-100 hover:bg-pink-50",
@@ -242,31 +242,25 @@ function Navbar() {
             </Link>
 
             <Link
-              href={"/admin"}
-              className="ml-2 border-l border-neutral-100 pl-6"
+              href={"/auth"}
+              className="ml-2 border-l border-neutral-100 pl-4"
             >
-              <button className="group flex items-center gap-3">
-                <div className="relative h-12 w-12 overflow-hidden rounded-2xl ring-2 ring-transparent transition-all group-hover:ring-pink-600">
-                  <div className="absolute inset-0 flex items-center justify-center bg-pink-100 text-pink-600">
-                    <User size={24} />
+              <div className="group flex cursor-pointer items-center gap-3 rounded-2xl border border-transparent bg-pink-50 p-1.5 pr-4 shadow-sm transition-all hover:border-pink-100 active:scale-95">
+                <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xl bg-pink-600 text-white transition-colors">
+                  <div className="flex h-full w-full items-center justify-center">
+                    <User size={20} strokeWidth={2.5} />
                   </div>
                 </div>
 
-                <div className="hidden flex-col items-start xl:flex">
-                  <span className="text-[11px] font-black uppercase text-pink-600">
-                    Xush kelibsiz
+                <div className="hidden flex-col leading-none xl:flex">
+                  <span className="text-[10px] font-black uppercase tracking-tight text-pink-600 transition-colors">
+                    Kabinet
                   </span>
-                  <div className="flex items-center gap-1">
-                    <span className="text-[13px] font-black uppercase text-neutral-900">
-                      Profilim
-                    </span>
-                    <ChevronDown
-                      size={14}
-                      className="text-neutral-400 transition-transform group-hover:rotate-180"
-                    />
-                  </div>
+                  <span className="mt-0.5 text-[12px] font-bold text-neutral-900">
+                    Kirish
+                  </span>
                 </div>
-              </button>
+              </div>
             </Link>
           </div>
         </div>
