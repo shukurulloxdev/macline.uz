@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
+import { IProduct } from "@/types";
 
-export default function ProductAbout({ product }: { product: any }) {
+export default function ProductAbout({ product }: { product: IProduct }) {
   // Matnni nuqtalar bo'yicha bo'lish va bo'sh joylarni tozalash
   const descriptionPoints = product.description
     ? product.description.split(".").filter((p: string) => p.trim().length > 0)
@@ -9,10 +10,6 @@ export default function ProductAbout({ product }: { product: any }) {
   return (
     <div className="flex flex-col gap-10 lg:col-span-8">
       <div className="space-y-4">
-        {/* <h3 className="inline-block bg-neutral-900 px-4 py-1 text-[11px] font-black uppercase tracking-[0.3em] text-white">
-            Details & Experience
-          </h3> */}
-
         <h2 className="text-3xl font-semibold uppercase tracking-tight text-pink-600">
           Mahsulot haqida
         </h2>

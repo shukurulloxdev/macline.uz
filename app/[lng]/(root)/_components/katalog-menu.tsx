@@ -51,7 +51,7 @@ export default function KatalogMenu({ categories }: Props) {
           </NavigationMenuTrigger>
 
           {/* MEGA MENU CONTENT */}
-          <NavigationMenuContent className="z-[150]">
+          <NavigationMenuContent>
             <div className="flex w-[850px] overflow-hidden rounded-2xl bg-[#ffffff]">
               <div className="w-[300px] border-r border-neutral-200/70 bg-white p-4">
                 <div className="space-y-1">

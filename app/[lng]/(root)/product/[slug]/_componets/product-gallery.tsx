@@ -50,7 +50,7 @@ export default function ProductGallery({ product }: { product: IProduct }) {
 
           {/* Floating Actions */}
           <div className="absolute bottom-6 right-6">
-            <button className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-neutral-800 shadow-md transition-all hover:bg-black hover:text-white active:scale-90">
+            <button className="flex size-11 items-center justify-center rounded-full bg-white text-neutral-800 shadow-md transition-all hover:bg-black hover:text-white active:scale-90">
               <Maximize2 size={18} />
             </button>
           </div>
