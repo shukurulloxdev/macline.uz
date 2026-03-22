@@ -2,7 +2,7 @@
 
 import { clientAxios } from "@/http/axios";
 import { actionClient } from "@/lib/safe-action";
-import { idSchema, searchParamsSchema } from "@/lib/validation";
+import { idSchema, idsSchema, searchParamsSchema } from "@/lib/validation";
 import { ReturnActionType } from "@/types";
 
 export const getTopProducts = actionClient.action<ReturnActionType>(
@@ -50,4 +50,31 @@ export const getProducts = actionClient
     });
 
     return JSON.parse(JSON.stringify(data));
+  });
+
+export const getFavorites = actionClient
+  .schema(idsSchema)
+  .action<ReturnActionType>(async ({ parsedInput }) => {
+    const res = await fetch("http://localhost:8080/api/user/favorites", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ids: parsedInput.ids }),
+    });
+
+    const data = await res.json();
+
+    return data;
+  });
+
+export const getBasketProducts = actionClient
+  .schema(idsSchema)
+  .action<ReturnActionType>(async ({ parsedInput }) => {
+    const res = await fetch("http://localhost:8080/api/user/basket-products", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ids: parsedInput.ids }),
+    });
+    const data = await res.json();
+
+    return data;
   });

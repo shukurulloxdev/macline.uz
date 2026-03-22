@@ -127,7 +127,7 @@ export default function ProductListCard({ product }: { product: IProduct }) {
         )}
         <Link
           href={`/product/${product._id}`}
-          className="flex h-full w-full items-center justify-center"
+          className="flex size-full items-center justify-center"
         >
           <Image
             src={product.images[0]}

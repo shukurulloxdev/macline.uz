@@ -7,7 +7,7 @@ import { formatCurrentPrice } from "@/lib/utils";
 export default function BasketItem({ product }: { product: IProduct }) {
   return (
     <div className="group relative flex flex-col gap-6 rounded-2xl border border-neutral-100 bg-white p-6 transition-all hover:border-pink-100 hover:shadow-[0_20px_40px_rgba(0,0,0,0.03)] sm:flex-row">
-      <div className="relative h-32 w-32 shrink-0 overflow-hidden rounded-2xl bg-neutral-50 p-4">
+      <div className="relative size-32 shrink-0 overflow-hidden rounded-2xl bg-neutral-50 p-4">
         <Image
           src={product.images[0]}
           alt={product.name}
@@ -42,13 +42,13 @@ export default function BasketItem({ product }: { product: IProduct }) {
 
         <div className="mt-6 flex items-center justify-between">
           <div className="flex items-center rounded-xl bg-neutral-50 p-1 ring-1 ring-neutral-100">
-            <button className="flex h-8 w-8 items-center justify-center rounded-lg text-neutral-400 transition-all hover:bg-white hover:text-neutral-900">
+            <button className="flex size-8 items-center justify-center rounded-lg text-neutral-400 transition-all hover:bg-white hover:text-neutral-900">
               <Minus size={14} />
             </button>
             <span className="w-10 text-center text-sm font-black text-neutral-900">
               1
             </span>
-            <button className="flex h-8 w-8 items-center justify-center rounded-lg text-neutral-400 transition-all hover:bg-white hover:text-neutral-900">
+            <button className="flex size-8 items-center justify-center rounded-lg text-neutral-400 transition-all hover:bg-white hover:text-neutral-900">
               <Plus size={14} />
             </button>
           </div>

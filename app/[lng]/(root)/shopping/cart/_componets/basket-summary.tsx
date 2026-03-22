@@ -30,7 +30,7 @@ function BasketSummary({ products }: Props) {
     <div className="flex flex-col gap-4">
       <div className="rounded-2xl border border-neutral-100 bg-white p-5 shadow-sm">
         <div className="mb-3 flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-pink-50 text-pink-600">
+          <div className="flex size-10 items-center justify-center rounded-xl bg-pink-50 text-pink-600">
             <Truck size={20} />
           </div>
           <div>
@@ -45,7 +45,7 @@ function BasketSummary({ products }: Props) {
 
         <div className="space-y-2">
           <div className="h-1.5 w-full overflow-hidden rounded-full bg-neutral-100">
-            <div className="h-full w-[100%] rounded-full bg-pink-500" />
+            <div className="size-full rounded-full bg-pink-500" />
           </div>
           <p className="flex justify-between text-center text-[9px] font-bold uppercase tracking-widest text-black">
             <span>50.000 so&apos;m</span>
@@ -70,7 +70,7 @@ function BasketSummary({ products }: Props) {
                 Xulosa
               </h2>
             </div>
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-neutral-50 text-pink-600 shadow-sm ring-1 ring-neutral-100">
+            <div className="flex size-12 items-center justify-center rounded-2xl bg-neutral-50 text-pink-600 shadow-sm ring-1 ring-neutral-100">
               <ShoppingBag size={22} strokeWidth={2.5} />
             </div>
           </div>

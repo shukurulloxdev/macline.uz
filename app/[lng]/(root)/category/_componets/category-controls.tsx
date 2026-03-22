@@ -87,7 +87,7 @@ export default function CategoryControls({
               className="h-12 w-full bg-transparent text-xs font-bold outline-none"
             />
           </div>
-          <button className="flex h-12 w-12 items-center justify-center rounded-xl bg-pink-600 text-white shadow-lg shadow-pink-200 transition-all hover:bg-pink-700 active:scale-90">
+          <button className="flex size-12 items-center justify-center rounded-xl bg-pink-600 text-white shadow-lg shadow-pink-200 transition-all hover:bg-pink-700 active:scale-90">
             <SlidersHorizontal size={18} />
           </button>
         </div>

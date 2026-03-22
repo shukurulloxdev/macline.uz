@@ -1,14 +1,6 @@
 import React from "react";
-import {
-  Heart,
-  Trash2,
-  ShoppingBag,
-  CreditCard,
-  Sparkles,
-  HandCoins,
-} from "lucide-react";
+import { Heart, Trash2, ShoppingBag, Sparkles, HandCoins } from "lucide-react";
 import { IProduct } from "@/types";
-import { cn } from "@/lib/utils";
 
 interface Props {
   products: IProduct[];
@@ -34,7 +26,7 @@ function FavoriteSidebar({ products }: Props) {
               Xulosa
             </h2>
           </div>
-          <div className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-2xl bg-neutral-50 text-pink-600 ring-1 ring-neutral-100">
+          <div className="flex size-12 cursor-pointer items-center justify-center rounded-2xl bg-neutral-50 text-pink-600 ring-1 ring-neutral-100">
             <Heart size={24} fill="currentColor" />
           </div>
         </div>

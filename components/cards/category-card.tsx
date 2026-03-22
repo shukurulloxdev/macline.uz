@@ -31,7 +31,7 @@ function CategoryCard({ category, index }: Props) {
 
           <div className="absolute inset-0 flex items-center justify-center bg-black/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
             <div className="translate-y-4 scale-50 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:scale-100 group-hover:opacity-100">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-pink-600 shadow-xl">
+              <div className="flex size-12 items-center justify-center rounded-full bg-white text-pink-600 shadow-xl">
                 <ArrowUpRight size={20} />
               </div>
             </div>

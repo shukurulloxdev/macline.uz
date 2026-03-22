@@ -23,7 +23,7 @@ export default function LngMenu() {
       <DropdownMenuTrigger asChild>
         {/* Trigger: Nafis, shaffof va hoverda pushti ohang beruvchi tugma */}
         <button className="group flex items-center gap-2.5 rounded-full bg-white/50 px-3 py-1.5 transition-all hover:bg-pink-50 hover:ring-1 hover:ring-pink-100 active:scale-95">
-          <div className="relative h-5 w-5 overflow-hidden rounded-full shadow-sm ring-1 ring-neutral-200">
+          <div className="relative size-5 overflow-hidden rounded-full shadow-sm ring-1 ring-neutral-200">
             <Image
               src={`/locales/${currentLng}.png`}
               alt={currentLng}
@@ -45,7 +45,7 @@ export default function LngMenu() {
         align="center"
         sideOffset={10}
         // z-[110] qo'shildi, bu navbardagi z-[100] dan balandroq bo'lishini ta'minlaydi
-        className="z-[110] min-w-[160px] overflow-hidden rounded-[1.5rem] border border-pink-300 bg-white/80 p-1.5 shadow-[0_20px_50px_rgba(0,0,0,0.1)] backdrop-blur-xl animate-in fade-in zoom-in-95"
+        className="z-[110] min-w-[160px] overflow-hidden rounded-3xl border border-pink-300 bg-white/80 p-1.5 shadow-[0_20px_50px_rgba(0,0,0,0.1)] backdrop-blur-xl animate-in fade-in zoom-in-95"
       >
         {lngs.map((item) => {
           const isActive = item.route === currentLng;
@@ -64,7 +64,7 @@ export default function LngMenu() {
                 )}
               >
                 <div className="flex items-center gap-3">
-                  <div className="relative h-6 w-6 overflow-hidden rounded-full shadow-sm ring-1 ring-neutral-100">
+                  <div className="relative size-6 overflow-hidden rounded-full shadow-sm ring-1 ring-neutral-100">
                     <Image
                       src={`/locales/${item.route}.png`}
                       alt={item.label}
@@ -79,7 +79,7 @@ export default function LngMenu() {
 
                 {/* Aktiv til uchun indikator */}
                 {isActive && (
-                  <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-pink-600" />
+                  <div className="size-1.5 animate-pulse rounded-full bg-pink-600" />
                 )}
               </DropdownMenuItem>
             </Link>

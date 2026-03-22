@@ -84,7 +84,7 @@ export default function KatalogMenu({ categories }: Props) {
                               className="object-contain p-1.5"
                             />
                           ) : (
-                            <div className="flex h-full w-full items-center justify-center bg-neutral-100">
+                            <div className="flex size-full items-center justify-center bg-neutral-100">
                               <ImageIcon
                                 size={16}
                                 className="text-neutral-300"
@@ -133,7 +133,7 @@ export default function KatalogMenu({ categories }: Props) {
                     <div className="flex items-center justify-between border-b border-neutral-200/70 pb-5">
                       <div className="space-y-1.5">
                         <div className="flex items-center gap-2">
-                          <span className="h-1.5 w-1.5 rounded-full bg-pink-600 shadow-[0_0_8px_rgba(219,39,119,0.5)]" />
+                          <span className="size-1.5 rounded-full bg-pink-600 shadow-[0_0_8px_rgba(219,39,119,0.5)]" />
                           <span className="text-[9px] font-black uppercase tracking-[0.2em] text-neutral-400">
                             Toifa
                           </span>
@@ -170,7 +170,7 @@ export default function KatalogMenu({ categories }: Props) {
                                 href={`/category/${activeTab.slug}`}
                                 className="group flex items-center gap-2 text-[12px] font-bold text-neutral-500 transition-all hover:text-neutral-900"
                               >
-                                <div className="h-1 w-1 rounded-full bg-neutral-200 transition-all group-hover:w-2 group-hover:bg-pink-500" />
+                                <div className="size-1 rounded-full bg-neutral-200 transition-all group-hover:w-2 group-hover:bg-pink-500" />
                                 {item}
                               </Link>
                             ))}
@@ -217,7 +217,7 @@ export default function KatalogMenu({ categories }: Props) {
                           <span className="text-[11px] font-black uppercase tracking-[0.15em] text-white">
                             {activeTab.title} bo'limiga o'tish
                           </span>
-                          <div className="h-1 w-1 rounded-full bg-white/40 transition-colors group-hover:bg-white" />
+                          <div className="size-1 rounded-full bg-white/40 transition-colors group-hover:bg-white" />
                           <span className="text-[9px] font-bold uppercase tracking-widest text-white/50">
                             Barchasi
                           </span>

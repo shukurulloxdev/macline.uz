@@ -249,7 +249,7 @@ function Location() {
 
                   <div className="space-y-8">
                     <div className="group flex items-center gap-5">
-                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-pink-600 shadow-sm ring-1 ring-pink-100 transition-all group-hover:bg-pink-600 group-hover:text-white group-hover:shadow-pink-200">
+                      <div className="flex size-14 items-center justify-center rounded-2xl bg-white text-pink-600 shadow-sm ring-1 ring-pink-100 transition-all group-hover:bg-pink-600 group-hover:text-white group-hover:shadow-pink-200">
                         <Clock size={24} />
                       </div>
                       <div>
@@ -263,7 +263,7 @@ function Location() {
                     </div>
 
                     <div className="group flex items-center gap-5">
-                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-pink-600 shadow-sm ring-1 ring-pink-100 transition-all group-hover:bg-pink-600 group-hover:text-white group-hover:shadow-pink-200">
+                      <div className="flex size-14 items-center justify-center rounded-2xl bg-white text-pink-600 shadow-sm ring-1 ring-pink-100 transition-all group-hover:bg-pink-600 group-hover:text-white group-hover:shadow-pink-200">
                         <Phone size={24} />
                       </div>
                       <div>
@@ -282,7 +282,7 @@ function Location() {
                   <span className="text-xs font-black uppercase tracking-[0.2em]">
                     Marshrutni ko&apos;rish
                   </span>
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 backdrop-blur-md transition-transform group-hover:rotate-45">
+                  <div className="flex size-10 items-center justify-center rounded-full bg-white/10 backdrop-blur-md transition-transform group-hover:rotate-45">
                     <ArrowUpRight size={20} />
                   </div>
                 </button>
@@ -304,7 +304,7 @@ function Location() {
               <div className="relative h-[500px] lg:col-span-5 lg:h-auto">
                 <iframe
                   src={branch.mapUrl}
-                  className="h-full w-full opacity-80 contrast-125 grayscale transition-all duration-700 hover:opacity-100 hover:grayscale-0"
+                  className="size-full opacity-80 contrast-125 grayscale transition-all duration-700 hover:opacity-100 hover:grayscale-0"
                   style={{
                     border: 0,
                     filter: "hue-rotate(300deg) saturate(1.2)",

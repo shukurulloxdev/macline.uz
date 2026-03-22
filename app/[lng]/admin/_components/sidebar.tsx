@@ -80,33 +80,6 @@ function Sidebar() {
               })}
             </div>
           </div>
-
-          {/* <div className='space-y-4'>
-						<p className='px-3 text-[11px] uppercase tracking-[0.2em] text-slate-500'>
-							System
-						</p>
-
-						{systemItems.map(item => {
-							const active = pathname === item.href
-							const Icon = item.icon
-
-							return (
-								<Link
-									key={item.href}
-									href={item.href}
-									className={cn(
-										'group flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-300',
-										active
-											? 'bg-white/10 text-white'
-											: 'text-slate-400 hover:bg-white/5 hover:text-white'
-									)}
-								>
-									<Icon size={18} />
-									{item.title}
-								</Link>
-							)
-						})}
-					</div> */}
         </nav>
 
         <div className="border-t border-white/10 p-5">

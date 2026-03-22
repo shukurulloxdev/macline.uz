@@ -33,6 +33,9 @@ export const addProductSchema = z
 export const idSchema = z.object({
   id: z.string(),
 });
+export const idsSchema = z.object({
+  ids: z.array(z.string()),
+});
 
 export const searchParamsSchema = z.object({
   searchQuery: z.string().optional(),
@@ -63,4 +66,31 @@ export const addCategorySchema = z.object({
 
   active: z.boolean().default(true).optional(),
   image: z.string().optional(),
+});
+
+export const registerSchema = z.object({
+  fullName: z.string().min(2, "Iltimos ismingizni kiriting!"),
+  phone: z.string().refine(
+    (val) => {
+      // Maska ichidagi barcha "_" belgilarini olib tashlaymiz
+      const cleanValue = val.replace(/_/g, "");
+      // To'liq formatlangan raqam: +998 (90) 123-45-67 (jami 19 ta belgi bo'lishi kerak)
+      return cleanValue.length === 19;
+    },
+    {
+      message: "Iltimos, telefon raqamingizni to'liq kiriting!",
+    },
+  ),
+});
+
+export const phoneSchema = z.object({
+  phone: z.string(),
+});
+
+export const otpSchema = z.object({
+  otp: z.string().length(5, { message: "OTP kod 5 ta bo'lishi kerak" }),
+});
+export const verifyOtpSchema = z.object({
+  phone: z.string(),
+  otp: z.string(),
 });

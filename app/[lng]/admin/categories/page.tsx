@@ -48,10 +48,10 @@ async function Page() {
           {/* 2. ACTION BUTTON - Senior "Elastic" Style */}
           <Button className="group relative h-12 overflow-hidden rounded-[1.25rem] bg-blue-600 px-14 shadow-lg shadow-blue-600/20 transition-all duration-500 hover:scale-105 hover:bg-blue-700 hover:shadow-[0_20px_40px_-10px_rgba(37,99,235,0.4)] active:scale-95">
             {/* Tugma ichidagi "Liquid" effekt (Hoverda o'ngga siljiydi) */}
-            <div className="absolute inset-0 translate-x-[-100%] rounded-[1.25rem] bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-1000 group-hover:translate-x-[100%]" />
+            <div className="absolute inset-0 -translate-x-full rounded-[1.25rem] bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-1000 group-hover:translate-x-full" />
 
             <div className="relative z-10 flex items-center gap-3">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 backdrop-blur-md transition-transform duration-500 group-hover:rotate-180">
+              <div className="flex size-8 items-center justify-center rounded-lg bg-white/10 backdrop-blur-md transition-transform duration-500 group-hover:rotate-180">
                 <LayersPlus size={18} className="text-white" />
               </div>
               <span className="text-xs font-black uppercase tracking-[0.15em] text-white">

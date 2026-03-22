@@ -61,6 +61,9 @@ export default RootLayout;
 
 // 1- Ui uchun shadcn ui + Tailwindcss
 
+// 1) yuklaymiz ( npm i -D eslint-config-standard, npm i -D eslint-plugin-tailwindcss, npm i -D eslint-config-prettier )  2)  .eslintrc.json ga buni yozamiz ("standard",
+//     "plugin:tailwindcss/recommended", "prettier")
+
 // 2- Tillar uchun i18n til middlewaresi uchun next-intel i18n fayili ichida konfiglar va locales da jsonlar va middlewareda doyim qo'shimcha turishi uchun yani /uz /ru
 
 // 3- Rasim yuklash uchun Uploadthing api/uploadthing ni ichida configlar lib/uploadthing.ts ni ichida configlarni Buttonlarga beryapmiz va lib/uploadthing.ts ni ichidan import qilib ishlatyapmiz

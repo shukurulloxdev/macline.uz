@@ -32,7 +32,7 @@ const Logo = ({ admin }: Props) => {
           </span>
         </h1>
         <div className="mt-0.5 flex items-center gap-1.5">
-          <div className="h-[1px] w-3 bg-neutral-300 transition-all group-hover:w-5"></div>
+          <div className="h-px w-3 bg-neutral-300 transition-all group-hover:w-5"></div>
           <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-neutral-400">
             Digital Market
           </span>

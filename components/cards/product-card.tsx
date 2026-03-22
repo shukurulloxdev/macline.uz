@@ -1,20 +1,14 @@
 "use client";
+
 import Image from "next/image";
-import {
-  Heart,
-  ShoppingBag,
-  Star,
-  ShieldCheck,
-  Truck,
-  Check,
-} from "lucide-react";
+import { Heart, ShoppingBag, ShieldCheck, Truck, Check } from "lucide-react";
 import { IProduct } from "@/types";
 import { formatCurrentPrice, cn } from "@/lib/utils";
 import Link from "next/link";
-import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { toggelFavorite } from "@/redux/reducers/favoriteState";
 import { toggleBasket } from "@/redux/reducers/basketState";
+import { useDispatch, useSelector } from "react-redux";
 
 interface Props {
   product: IProduct;
@@ -22,7 +16,6 @@ interface Props {
 }
 
 export default function ProductCard({ product, view }: Props) {
-  if (!product) return null;
   const isList = view === "list";
 
   const favoriteIds = useSelector(
@@ -33,6 +26,7 @@ export default function ProductCard({ product, view }: Props) {
 
   const isFavorite = favoriteIds.find((favorite) => favorite === product._id);
   const isBasket = basketIds.find((basket) => basket === product._id);
+  if (!product) return null;
   return (
     <div
       className={cn(
@@ -89,7 +83,7 @@ export default function ProductCard({ product, view }: Props) {
           />
         </button>
 
-        <Link href={`/product/${product._id}`} className="block h-full w-full">
+        <Link href={`/product/${product._id}`} className="block size-full">
           <Image
             src={product.images[0]}
             alt={product.name}
@@ -216,7 +210,7 @@ export default function ProductCard({ product, view }: Props) {
                 <button className="group relative flex h-12 items-center justify-center overflow-hidden rounded-xl bg-pink-600 px-6 transition-all hover:bg-pink-700 active:scale-95">
                   <div className="relative z-10 flex items-center gap-2.5 text-[11px] font-black uppercase tracking-widest text-white">
                     <ShoppingBag size={20} />
-                    <span>Savatga qo'shish</span>
+                    <span>Savatga qo&apos;shish</span>
                   </div>
                   <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
                 </button>
@@ -225,7 +219,7 @@ export default function ProductCard({ product, view }: Props) {
               <>
                 <Link
                   href={`/product/${product._id}`}
-                  className="btn-inner-group relative flex h-11 flex-1 items-center justify-center overflow-hidden rounded-lg bg-neutral-900 p-[1.3px] transition-all duration-500 active:scale-95"
+                  className="relative flex h-11 flex-1 items-center justify-center overflow-hidden rounded-lg bg-neutral-900 p-[1.3px] transition-all duration-500 active:scale-95"
                 >
                   {/* Faqat tugmaning o'ziga hover bo'lganda (hover:opacity-100) ishlaydi */}
                   <span
@@ -234,24 +228,12 @@ export default function ProductCard({ product, view }: Props) {
                   />
 
                   {/* Bu yerda hover klassini tugmaning o'ziga beramiz */}
-                  <span className="group/btn relative z-10 flex h-full w-full items-center justify-center rounded-[10px] bg-white transition-all duration-500 hover:bg-pink-600">
+                  <span className="group/btn relative z-10 flex size-full items-center justify-center rounded-[10px] bg-white transition-all duration-500 hover:bg-pink-600">
                     <span className="text-[11px] font-black uppercase tracking-[0.2em] text-neutral-900 transition-colors duration-500 group-hover/btn:text-white">
                       Sotib olish
                     </span>
                   </span>
                 </Link>
-                {/* <button
-                  onClick={() => {
-                    if (isBasket) {
-                      dispatch(deleteBasket(product._id));
-                    } else {
-                      dispatch(addBasket(product._id));
-                    }
-                  }}
-                  className="flex h-11 w-12 items-center justify-center rounded-lg bg-pink-600 text-white transition-all hover:bg-pink-700 active:scale-95"
-                >
-                  {isBasket ? <Check size={20} /> : <ShoppingBag size={20} />}
-                </button> */}
                 <button
                   onClick={() => dispatch(toggleBasket(product._id))}
                   className={cn(

@@ -54,7 +54,18 @@ export interface ICategory {
   active: boolean;
 }
 
+export interface Iuser {
+  _id: string;
+  fullName: string;
+  avatar: string;
+  phone: string;
+  role: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface ReturnActionType {
+  user: Iuser;
   status: number;
   failure: string;
   isNext: boolean;
