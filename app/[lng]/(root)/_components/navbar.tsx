@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { useParams, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import {
   Heart,
   ShoppingBag,
@@ -15,68 +15,54 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Logo from "@/components/shared/logo";
-import { useTranslation } from "@/i18n/client";
 import LngMenu from "@/components/shared/lng-menu";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
 import KatalogMenu from "./katalog-menu";
 import { getCategories } from "@/actions/user-actions";
-import { ICategory, Iuser } from "@/types";
+import { ICategory } from "@/types";
 import RegisterModal from "./register-modal";
-import { getMe } from "@/actions/auth-actions";
 import { UserMenu } from "@/components/shared/user-menu";
-import { deleteUser, setUser } from "@/redux/reducers/userState";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 function Navbar() {
-  const { lng } = useParams();
-  const { t } = useTranslation(lng as string, "home");
+  // const { lng } = useParams();
+  // const { t } = useTranslation(lng as string, "home");
 
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [isCategoryVisible, setIsCategoryVisible] = useState(true);
   const [katalog, setKatalog] = useState<ICategory[]>([]);
 
   const pathname = usePathname();
-  const dispatch = useDispatch();
+
   const isFavoritesPage = pathname.endsWith("/favorites");
   const isCartPage = pathname.endsWith("/shopping/cart");
 
   const favorites = useSelector(
     (state: RootState) => state.favorites.favoriteIds,
   );
+
   const basketIds = useSelector((state: RootState) => state.baskets.basketIds);
 
-  const user = useSelector((state: RootState) => state.user.user);
+  const { user, isLoading, isInitialized } = useSelector(
+    (state: RootState) => state.user,
+  );
 
   async function getData() {
     try {
-      const [allCategories, res] = await Promise.all([
-        getCategories(),
-        getMe(),
-      ]);
-
-      if (res?.user) {
-        dispatch(setUser(res.user as Iuser));
-      } else {
-        dispatch(deleteUser());
-      }
+      const allCategories = await getCategories();
       setKatalog(allCategories.data?.categories || []);
     } catch {
-      dispatch(deleteUser());
+      console.error("Katalog xatolik");
     }
   }
 
   useEffect(() => {
     getData();
+
     const handleScroll = () => {
       const scrollY = window.scrollY;
-
-      if (scrollY > 10 && isCategoryVisible) {
-        setIsCategoryVisible(false);
-      }
-
-      if (scrollY < 5 && !isCategoryVisible) {
-        setIsCategoryVisible(true);
-      }
+      if (scrollY > 10 && isCategoryVisible) setIsCategoryVisible(false);
+      if (scrollY < 5 && !isCategoryVisible) setIsCategoryVisible(true);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -162,7 +148,7 @@ function Navbar() {
 
               <div className="absolute right-2 top-1/2 z-10 -translate-y-1/2">
                 {/* Qidiruv tugmasi ham h-10 w-10 qilib biroz kattalashtirildi */}
-                <button className="flex h-10 w-10 items-center justify-center rounded-xl bg-pink-600 text-white shadow-md transition-all hover:scale-105 active:scale-95">
+                <button className="flex size-10 items-center justify-center rounded-xl bg-pink-600 text-white shadow-md transition-all hover:scale-105 active:scale-95">
                   <Search size={20} strokeWidth={2.5} />
                 </button>
               </div>
@@ -170,9 +156,9 @@ function Navbar() {
 
             {/* Qidiruv natijalari / Tavsiyalar */}
             {isSearchFocused && (
-              <div className="absolute left-0 top-[115%] z-40 w-full rounded-[2rem] border border-neutral-100 bg-white/80 p-6 shadow-2xl backdrop-blur-xl duration-200 animate-in fade-in zoom-in-95">
-                <div className="mb-4 flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.1em] text-neutral-400">
-                  <Sparkles size={14} className="text-pink-500" />
+              <div className="absolute left-0 top-[115%] z-40 w-full rounded-b-2xl rounded-t-sm border border-neutral-100 bg-white p-6 shadow-2xl backdrop-blur-xl duration-200 animate-in fade-in zoom-in-95">
+                <div className="mb-4 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-pink-600">
+                  <Sparkles size={14} className="text-pink-600" />
                   Ommabop qidiruvlar
                 </div>
 
@@ -182,10 +168,12 @@ function Navbar() {
                     "Samsung S24",
                     "Gaming Laptop",
                     "Nike Air",
+                    "Samsung S24",
+                    "Gaming Laptop",
                   ].map((tag) => (
                     <span
                       key={tag}
-                      className="cursor-pointer rounded-xl border border-neutral-100 bg-neutral-50/50 px-4 py-2 text-[11px] font-bold transition-all hover:border-pink-100 hover:bg-pink-50 hover:text-pink-600 active:scale-95"
+                      className="cursor-pointer rounded-xl border border-pink-100 bg-pink-50 px-4 py-2 text-[11px] font-bold transition-all hover:border-pink-100 hover:bg-pink-50 hover:text-pink-600 active:scale-95"
                     >
                       {tag}
                     </span>
@@ -249,7 +237,7 @@ function Navbar() {
                   <ShoppingBag size={22} />
                 </div>
 
-                <div className="flex flex-col items-start gap-[1px] leading-tight">
+                <div className="flex flex-col items-start gap-px leading-tight">
                   <span className="text-[11px] font-black uppercase tracking-tighter text-pink-600">
                     Savatda
                   </span>
@@ -259,7 +247,7 @@ function Navbar() {
                 </div>
               </Link>
             </div>
-            {user === undefined ? (
+            {!isInitialized || isLoading ? (
               <div className="ml-2 border-l border-neutral-100 pl-2">
                 <div className="flex size-11 animate-pulse items-center justify-center rounded-full bg-neutral-100">
                   <LoaderCircle
@@ -315,3 +303,49 @@ function Navbar() {
 }
 
 export default Navbar;
+
+// Navbar.tsx da faqat shu o'zgarishlar:
+
+// 1. Import
+// import { fetchUser, deleteUser, setUser } from "@/redux/reducers/userState";
+
+// 2. user ni isLoading bilan oling
+// const { user, isLoading } = useSelector((state: RootState) => state.user);
+
+// 3. getData dan getMe ni olib tashlang
+// async function getData() {
+//   try {
+//     const allCategories = await getCategories();
+//     setKatalog(allCategories.data?.categories || []);
+//   } catch {
+//     console.error("Katalog xatolik");
+//   }
+// }
+
+// 4. useEffect da fetchUser qo'shing
+// useEffect(() => {
+//   dispatch(fetchUser()); // ← user fetch
+//   getData();             // ← katalog fetch
+
+//   const handleScroll = () => {
+//     const scrollY = window.scrollY;
+//     if (scrollY > 10 && isCategoryVisible) setIsCategoryVisible(false);
+//     if (scrollY < 5 && !isCategoryVisible) setIsCategoryVisible(true);
+//   };
+
+//   window.addEventListener("scroll", handleScroll);
+//   return () => window.removeEventListener("scroll", handleScroll);
+// }, [isCategoryVisible]);
+
+// 5. UI da isLoading ishlatish
+// {isLoading ? (
+//   <div className="ml-2 border-l border-neutral-100 pl-2">
+//     <div className="flex size-11 animate-pulse items-center justify-center rounded-full bg-neutral-100">
+//       <LoaderCircle className="animate-spin text-pink-600" size={30} />
+//     </div>
+//   </div>
+// ) : user ? (
+//   <UserMenu user={user} />
+// ) : (
+//   <RegisterModal />
+// )}

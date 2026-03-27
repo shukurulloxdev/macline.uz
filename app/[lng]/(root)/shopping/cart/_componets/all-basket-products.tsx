@@ -1,5 +1,5 @@
 import { IProduct } from "@/types";
-import { ChevronRight, Home, ShoppingBag, ShoppingCart } from "lucide-react";
+import { ChevronRight, Home, ShoppingBag } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import BasketItem from "./basket-item";
@@ -40,7 +40,8 @@ function AllBasketProducts({ products }: Props) {
             {/* Pastki qism: Asosiy ma'lumot */}
             <div className="flex items-center gap-2">
               <span className="text-2xl font-black italic tracking-tighter text-neutral-900">
-                6 <span className="text-lg not-italic text-pink-600">ta</span>
+                {products.length || 0}{" "}
+                <span className="text-lg not-italic text-pink-600">ta</span>
               </span>
               <div className="flex size-8 items-center justify-center rounded-full bg-pink-50 text-pink-600">
                 <ShoppingBag size={15} strokeWidth={2.5} />

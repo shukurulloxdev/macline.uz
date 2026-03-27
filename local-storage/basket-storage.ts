@@ -1,6 +1,8 @@
+import { basketIdsTyp } from "@/redux/reducers/basketState";
+
 const BASKET_KEY = "basket_ids";
 
-export function setBasketIdsStorage(ids: string[]) {
+export function setBasketIdsStorage(ids: basketIdsTyp[]) {
   if (typeof window === "undefined") return;
 
   localStorage.setItem(BASKET_KEY, JSON.stringify(ids));

@@ -1,4 +1,4 @@
-import React from "react";
+"use client";
 import {
   Carousel,
   CarouselContent,
@@ -8,10 +8,20 @@ import {
 } from "@/components/ui/carousel";
 import Image from "next/image";
 
+import Autoplay from "embla-carousel-autoplay";
+
 function Hero() {
   return (
     <div className="mx-auto max-w-7xl py-6">
-      <Carousel opts={{ align: "start", loop: true }}>
+      <Carousel
+        opts={{ align: "start", loop: true }}
+        plugins={[
+          Autoplay({
+            delay: 3000,
+            stopOnInteraction: false,
+          }),
+        ]}
+      >
         <CarouselContent>
           <CarouselItem>
             <div className="relative h-[450px] w-full">

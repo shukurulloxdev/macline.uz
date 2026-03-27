@@ -106,7 +106,7 @@ export default function KatalogMenu({ categories }: Props) {
                             {cat.title}
                           </span>
                           <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-neutral-400">
-                            Kolleksiyani ko'rish
+                            Kolleksiyani ko&apos;rish
                           </span>
                         </div>
                       </div>
@@ -215,7 +215,7 @@ export default function KatalogMenu({ categories }: Props) {
                         {/* MATN - SODDA VA ANIQ */}
                         <div className="flex items-center gap-3">
                           <span className="text-[11px] font-black uppercase tracking-[0.15em] text-white">
-                            {activeTab.title} bo'limiga o'tish
+                            {activeTab.title} bo&apos;limiga o&apos;tish
                           </span>
                           <div className="size-1 rounded-full bg-white/40 transition-colors group-hover:bg-white" />
                           <span className="text-[9px] font-bold uppercase tracking-widest text-white/50">

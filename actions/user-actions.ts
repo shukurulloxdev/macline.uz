@@ -4,6 +4,7 @@ import { clientAxios } from "@/http/axios";
 import { actionClient } from "@/lib/safe-action";
 import { idSchema, idsSchema, searchParamsSchema } from "@/lib/validation";
 import { ReturnActionType } from "@/types";
+import { cookies } from "next/headers";
 
 export const getTopProducts = actionClient.action<ReturnActionType>(
   async () => {
@@ -78,3 +79,30 @@ export const getBasketProducts = actionClient
 
     return data;
   });
+
+export const newOrders = actionClient.action<ReturnActionType>(async () => {
+  const token = cookies().get("token")?.value;
+  if (!token) return null;
+
+  const res = await fetch("http://localhost:8080/api/user/new-orders", {
+    headers: { Cookie: `token=${token}` },
+    cache: "no-store",
+  });
+
+  const data = await res.json();
+  return data;
+});
+export const finishedOrders = actionClient.action<ReturnActionType>(
+  async () => {
+    const token = cookies().get("token")?.value;
+    if (!token) return null;
+
+    const res = await fetch("http://localhost:8080/api/user/finished-orders", {
+      headers: { Cookie: `token=${token}` },
+      cache: "no-store",
+    });
+
+    const data = await res.json();
+    return data;
+  },
+);

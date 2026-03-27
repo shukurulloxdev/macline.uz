@@ -22,10 +22,12 @@ export default function ProductCard({ product, view }: Props) {
     (state: RootState) => state.favorites.favoriteIds,
   );
   const basketIds = useSelector((state: RootState) => state.baskets.basketIds);
+  const basIds = basketIds.map((itm) => itm.id);
   const dispatch = useDispatch();
 
   const isFavorite = favoriteIds.find((favorite) => favorite === product._id);
-  const isBasket = basketIds.find((basket) => basket === product._id);
+
+  const isBasket = basIds.find((basket) => basket === product._id);
   if (!product) return null;
   return (
     <div

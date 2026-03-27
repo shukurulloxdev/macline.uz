@@ -94,3 +94,29 @@ export const verifyOtpSchema = z.object({
   phone: z.string(),
   otp: z.string(),
 });
+
+export const orderSchema = z.object({
+  fullName: z.string().min(3, "Ism familiya kiritish shart"),
+  phone: z.string().min(9, "Telefon raqam kiritish shart"),
+  region: z.string().min(5, "Viloyat kiritish shart"),
+  city: z.string().min(5, "Hudud kiritish shart"),
+  comment: z.string().optional(),
+  totalDiscount: z.number().optional(),
+  totalPrice: z.number().optional(),
+
+  products: z
+    .array(
+      z.object({
+        productId: z.string(),
+        count: z.number(),
+        proTotalPrice: z.number(),
+        onePrice: z.number().optional(),
+      }),
+    )
+    .optional(),
+});
+
+export const orderStatusSchema = z.object({
+  orderId: z.string(),
+  status: z.string(),
+});

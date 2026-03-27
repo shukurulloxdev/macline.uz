@@ -9,7 +9,6 @@ import {
   Handbag,
   LayersPlus,
   UserStar,
-  ListChecks,
   ChartBarStacked,
   ListPlus,
 } from "lucide-react";
@@ -20,11 +19,6 @@ import { Button } from "@/components/ui/button";
 const navItems = [
   { title: "Statistika", href: "/admin", icon: LayoutDashboard },
   { title: "Buyurtmalar", href: "/admin/orders", icon: Handbag },
-  {
-    title: "Tugatilgan buyurtmalar",
-    href: "/admin/end-orders",
-    icon: ListChecks,
-  },
   { title: "Texnikalar", href: "/admin/products", icon: Folders },
   {
     title: "Texnika kiritish",

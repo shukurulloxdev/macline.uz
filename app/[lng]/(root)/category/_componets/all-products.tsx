@@ -95,6 +95,7 @@
 // }
 "use client";
 import ProductCard from "@/components/cards/product-card";
+import EmptyCategory from "@/components/shared/empty-product";
 import { cn } from "@/lib/utils";
 import { IProduct } from "@/types";
 import { ChevronRight, LayoutGrid, List } from "lucide-react";
@@ -153,7 +154,8 @@ export default function AllProducts({
         </div>
       </div>
 
-      {/* DYNAMIC GRID CONTAINER */}
+      {products.length === 0 && <EmptyCategory />}
+
       <div
         className={cn(
           "grid gap-3 transition-all duration-500",

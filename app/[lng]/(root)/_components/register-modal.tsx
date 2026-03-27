@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { User, Phone, UserCircle, ArrowRight, LogIn } from "lucide-react";
+import { Phone, UserCircle, ArrowRight, LogIn } from "lucide-react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import z from "zod";
@@ -24,7 +24,6 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { cn } from "@/lib/utils";
-import { Iuser } from "@/types";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/redux/reducers/userState";
 
@@ -300,9 +299,9 @@ function RegisterModal() {
                         {/* O'NG TOMONDAGI IXCHAM IKONKA BLOKI */}
                         <div className="flex items-center gap-3">
                           {/* Nafis vertikal chiziqcha */}
-                          <div className="h-4 w-[1px] bg-white/20" />
+                          <div className="h-4 w-px bg-white/20" />
 
-                          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-white transition-colors group-hover:bg-white group-hover:text-pink-600">
+                          <div className="flex size-8 items-center justify-center rounded-lg bg-white/10 text-white transition-colors group-hover:bg-white group-hover:text-pink-600">
                             <ArrowRight size={16} strokeWidth={3} />
                           </div>
                         </div>

@@ -64,6 +64,28 @@ export interface Iuser {
   updatedAt: Date;
 }
 
+export interface IOrderProduct {
+  productId: IProduct;
+  count: number;
+  proTotalPrice: number;
+  onePrice: number;
+}
+
+export interface IOrder {
+  _id: string;
+  userId: string;
+  fullName: string;
+  phone: string;
+  region: string;
+  city: string;
+  comment?: string;
+  products: IOrderProduct[];
+  status: "new" | "process" | "finished";
+  totalDiscount: number;
+  totalPrice: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
 export interface ReturnActionType {
   user: Iuser;
   status: number;
@@ -73,4 +95,6 @@ export interface ReturnActionType {
   products: IProduct[];
   totalProduct: number;
   categories: ICategory[];
+  order: IOrder;
+  orders: IOrder[];
 }

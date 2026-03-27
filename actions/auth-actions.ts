@@ -48,8 +48,8 @@ export const register = actionClient
         httpOnly: true,
         secure: false,
         sameSite: "lax",
-        // maxAge: 30 * 24 * 60 * 60 * 1000,
-        maxAge: 60 * 60 * 1000,
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        // maxAge: 60 * 60 * 1000,
       });
     }
 
@@ -58,7 +58,7 @@ export const register = actionClient
 
 export async function getMe(): Promise<ReturnActionType | null> {
   try {
-    const { cookies } = await import("next/headers");
+    // const { cookies } = await import("next/headers");
     const token = cookies().get("token")?.value;
 
     if (!token) return null;

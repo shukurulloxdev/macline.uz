@@ -7,6 +7,7 @@ import { Loader2 } from "lucide-react"; // Yuklanish uchun
 import AllProducts from "./all-products";
 import FavoriteFidebar from "./favorite-sidebar";
 import { IProduct } from "@/types";
+import EmptyLike from "@/components/shared/empty-like";
 
 export default function FavoriteContent() {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -46,16 +47,7 @@ export default function FavoriteContent() {
   }
 
   if (products.length === 0) {
-    return (
-      <div className="flex h-[60vh] flex-col items-center justify-center space-y-4">
-        <h2 className="text-2xl font-black uppercase italic text-neutral-300">
-          Saralanganlar bosh
-        </h2>
-        <p className="text-sm text-neutral-400">
-          Sizga yoqqan mahsulotlarni shu yerda saqlashingiz mumkin.
-        </p>
-      </div>
-    );
+    return <EmptyLike />;
   }
 
   return (

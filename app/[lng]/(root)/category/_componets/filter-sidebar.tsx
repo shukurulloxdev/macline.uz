@@ -32,7 +32,7 @@ export default function SidebarFilter() {
         {/* Section: Narx filtri */}
         <div className="space-y-4">
           <h3 className="text-[11px] font-black uppercase tracking-[0.2em] text-neutral-400">
-            Narx oralig'i
+            Narx oralig&apos;i
           </h3>
           <div className="grid grid-cols-2 gap-2">
             <input
@@ -75,7 +75,7 @@ export default function SidebarFilter() {
             </span>
           </div>
           <p className="text-[11px] font-medium leading-relaxed text-pink-900/60">
-            Barcha mahsulotlar Texnotech sifat nazoratidan o'tgan.
+            Barcha mahsulotlar Texnotech sifat nazoratidan o&apos;tgan.
           </p>
         </div>
       </div>

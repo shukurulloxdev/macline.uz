@@ -28,3 +28,25 @@ export function generateSlug(text: string) {
     .replace(/-+/g, "-")
     .replace(/^-|-$/g, "");
 }
+export function formatDate(dateString: Date) {
+  const date = new Date(dateString);
+  const now = new Date();
+
+  const isToday =
+    date.getDate() === now.getDate() &&
+    date.getMonth() === now.getMonth() &&
+    date.getFullYear() === now.getFullYear();
+
+  if (isToday) {
+    return `Bugun, ${date.toLocaleTimeString("uz-UZ", {
+      hour: "2-digit",
+      minute: "2-digit",
+    })}`;
+  }
+
+  return date.toLocaleDateString("uz-UZ", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  });
+}
