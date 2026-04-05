@@ -43,9 +43,7 @@ function Navbar() {
 
   const basketIds = useSelector((state: RootState) => state.baskets.basketIds);
 
-  const { user, isLoading, isInitialized } = useSelector(
-    (state: RootState) => state.user,
-  );
+  const { user, isLoading } = useSelector((state: RootState) => state.user);
 
   async function getData() {
     try {
@@ -247,7 +245,7 @@ function Navbar() {
                 </div>
               </Link>
             </div>
-            {!isInitialized || isLoading ? (
+            {isLoading ? (
               <div className="ml-2 border-l border-neutral-100 pl-2">
                 <div className="flex size-11 animate-pulse items-center justify-center rounded-full bg-neutral-100">
                   <LoaderCircle
@@ -303,49 +301,3 @@ function Navbar() {
 }
 
 export default Navbar;
-
-// Navbar.tsx da faqat shu o'zgarishlar:
-
-// 1. Import
-// import { fetchUser, deleteUser, setUser } from "@/redux/reducers/userState";
-
-// 2. user ni isLoading bilan oling
-// const { user, isLoading } = useSelector((state: RootState) => state.user);
-
-// 3. getData dan getMe ni olib tashlang
-// async function getData() {
-//   try {
-//     const allCategories = await getCategories();
-//     setKatalog(allCategories.data?.categories || []);
-//   } catch {
-//     console.error("Katalog xatolik");
-//   }
-// }
-
-// 4. useEffect da fetchUser qo'shing
-// useEffect(() => {
-//   dispatch(fetchUser()); // ← user fetch
-//   getData();             // ← katalog fetch
-
-//   const handleScroll = () => {
-//     const scrollY = window.scrollY;
-//     if (scrollY > 10 && isCategoryVisible) setIsCategoryVisible(false);
-//     if (scrollY < 5 && !isCategoryVisible) setIsCategoryVisible(true);
-//   };
-
-//   window.addEventListener("scroll", handleScroll);
-//   return () => window.removeEventListener("scroll", handleScroll);
-// }, [isCategoryVisible]);
-
-// 5. UI da isLoading ishlatish
-// {isLoading ? (
-//   <div className="ml-2 border-l border-neutral-100 pl-2">
-//     <div className="flex size-11 animate-pulse items-center justify-center rounded-full bg-neutral-100">
-//       <LoaderCircle className="animate-spin text-pink-600" size={30} />
-//     </div>
-//   </div>
-// ) : user ? (
-//   <UserMenu user={user} />
-// ) : (
-//   <RegisterModal />
-// )}

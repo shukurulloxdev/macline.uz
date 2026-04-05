@@ -1,15 +1,21 @@
-import { ChildProps } from '@/types'
-import Navbar from './_components/navbar'
-import Footer from './_components/footer'
+import { ChildProps } from "@/types";
+import Navbar from "./_components/navbar";
+import Footer from "./_components/footer";
+import { getMe } from "@/actions/auth-actions";
+import AuthLoader from "@/components/shared/user-fetch";
 
-function Layout({ children }: ChildProps) {
-	return (
-		<>
-			<Navbar />
-			<div>{children}</div>
-			<Footer />
-		</>
-	)
+async function Layout({ children }: ChildProps) {
+  const data = await getMe();
+  const user = data?.user ?? null;
+
+  return (
+    <>
+      <AuthLoader user={user} />
+      <Navbar />
+      <div>{children}</div>
+      <Footer />
+    </>
+  );
 }
 
-export default Layout
+export default Layout;

@@ -19,18 +19,22 @@ import { Button } from "@/components/ui/button";
 const navItems = [
   { title: "Statistika", href: "/admin", icon: LayoutDashboard },
   { title: "Buyurtmalar", href: "/admin/orders", icon: Handbag },
-  { title: "Texnikalar", href: "/admin/products", icon: Folders },
+  { title: "Mahsulotlar", href: "/admin/products", icon: Folders },
+  { title: "Kategoriyalar", href: "/admin/categories", icon: ChartBarStacked },
+];
+const addNavItems = [
   {
-    title: "Texnika kiritish",
+    title: "Mahsulot kiritish",
     href: "/admin/add-product",
     icon: LayersPlus,
   },
-  { title: "Kategoriyalar", href: "/admin/categories", icon: ChartBarStacked },
   {
     title: "Kategoriya kiritish",
     href: "/admin/add-category",
     icon: ListPlus,
   },
+];
+const adminNavItems = [
   {
     title: "Adminlar nazorati",
     href: "/admin/add-control",
@@ -57,6 +61,44 @@ function Sidebar() {
             </p>
             <div className="flex flex-col gap-2">
               {navItems.map((item) => {
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={cn(
+                      "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-gray-300 transition-all duration-200 hover:bg-white/10 hover:text-white hover:shadow-[0_0_30px_rgba(255,255,255,0.05)]",
+                      pathname.slice(3) === item.href &&
+                        "bg-white/20 text-white shadow-[0_0_30px_rgba(255,255,255,0.05)] hover:bg-white/20",
+                    )}
+                  >
+                    <item.icon size={18} />
+                    {item.title}
+                  </Link>
+                );
+              })}
+              <p className="mt-3 px-3 text-[11px] uppercase tracking-[0.2em] text-slate-500">
+                Kiritish
+              </p>
+              {addNavItems.map((item) => {
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={cn(
+                      "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-gray-300 transition-all duration-200 hover:bg-white/10 hover:text-white hover:shadow-[0_0_30px_rgba(255,255,255,0.05)]",
+                      pathname.slice(3) === item.href &&
+                        "bg-white/20 text-white shadow-[0_0_30px_rgba(255,255,255,0.05)] hover:bg-white/20",
+                    )}
+                  >
+                    <item.icon size={18} />
+                    {item.title}
+                  </Link>
+                );
+              })}
+              <p className="mt-3 px-3 text-[11px] uppercase tracking-[0.2em] text-slate-500">
+                Admin
+              </p>
+              {adminNavItems.map((item) => {
                 return (
                   <Link
                     key={item.href}

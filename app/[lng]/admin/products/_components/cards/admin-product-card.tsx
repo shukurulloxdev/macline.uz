@@ -6,6 +6,8 @@ import { cn, formatCurrentPrice } from "@/lib/utils";
 import { IProduct } from "@/types";
 import { Loader } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "sonner";
 
@@ -14,6 +16,7 @@ interface Props {
 }
 
 function AdminProductCard({ product }: Props) {
+  const router = useRouter();
   // const [isLoading, setIsLoading] = useState(false);
 
   function removeProduct() {
@@ -55,7 +58,7 @@ function AdminProductCard({ product }: Props) {
         </div>
         <div className="flex flex-col">
           <h1 className="font-sora text-xl font-semibold text-white">
-            {product.brand}: {product.category}
+            {product.brand}
           </h1>
           <p className="line-clamp-1 font-inter text-sm text-gray-300">
             {product.name}
@@ -65,28 +68,37 @@ function AdminProductCard({ product }: Props) {
       <div className="flex flex-col">
         <h1 className="font-sora text-xl font-semibold text-white">Narxi</h1>
         <div className="flex items-center gap-2">
-          <p className="font-inter text-sm text-gray-400 line-through">
-            {product.price.toLocaleString()} so&apos;m
-          </p>
-          <p className="font-inter text-sm font-semibold text-gray-100">
+          {product.discount ? (
+            <p className="font-inter text-sm text-gray-400 line-through">
+              {product.price.toLocaleString()} so&apos;m
+            </p>
+          ) : (
+            <p className="font-inter text-sm text-gray-400 line-through">
+              Chegirma
+            </p>
+          )}
+
+          <p className={"font-inter text-sm font-semibold text-green-300"}>
             {formatCurrentPrice(product.price, product.percent)} so&apos;m
           </p>
         </div>
       </div>
       <div className="flex items-center gap-3">
         {/* Sozlash */}
-        <Button
-          // eslint-disable-next-line tailwindcss/enforces-negative-arbitrary-values
-          className="rounded-lg border border-white/20 bg-white/10 px-4 text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-[2px] hover:border-white/40 hover:bg-white/20 hover:shadow-lg"
-          variant={"outline"}
-        >
-          Sozlash
-        </Button>
+        <Link href={`/admin/products/${product._id}`}>
+          <Button
+            // eslint-disable-next-line tailwindcss/enforces-negative-arbitrary-values
+            className="rounded-lg border border-white/20 bg-white/10 px-4 text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-[2px] hover:border-white/40 hover:bg-white/20 hover:text-white hover:shadow-lg"
+            variant={"outline"}
+          >
+            Sozlash
+          </Button>
+        </Link>
 
         {/* Active / Inactive */}
         <Button
           className={cn(
-            "rounded-lg px-4 text-white transition-all duration-300 hover:-translate-y-[2px] hover:shadow-lg active:scale-95",
+            "rounded-lg px-4 text-white transition-all duration-300 hover:-translate-y-[2px] hover:text-white hover:shadow-lg active:scale-95",
             product.active
               ? "border border-green-400/40 bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-500 hover:to-emerald-400"
               : "border border-red-400/40 bg-gradient-to-r from-red-600 to-rose-500 hover:from-red-500 hover:to-rose-400",
@@ -101,7 +113,7 @@ function AdminProductCard({ product }: Props) {
         {/* Delete */}
         <Button
           // eslint-disable-next-line tailwindcss/enforces-negative-arbitrary-values
-          className="rounded-lg border border-red-400/40 bg-gradient-to-r from-red-600 to-red-500 px-4 text-white transition-all duration-300 hover:-translate-y-[2px] hover:from-red-500 hover:to-red-400 hover:shadow-xl"
+          className="rounded-lg border border-red-400/40 bg-gradient-to-r from-red-600 to-red-500 px-4 text-white transition-all duration-300 hover:-translate-y-[2px] hover:from-red-500 hover:to-red-400 hover:text-white hover:shadow-xl"
           variant={"outline"}
           onClick={removeProduct}
         >

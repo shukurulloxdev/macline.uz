@@ -12,23 +12,25 @@ import {
 import { selectCategories } from "@/components/constants";
 import { getAdminProducts } from "@/actions/admin-actions";
 import AdminProductCard from "./_components/cards/admin-product-card";
+import EmptyAdminProducts from "@/components/shared/empty-admin-products";
 
 async function Page() {
   const { data } = await getAdminProducts();
   return (
     <div className="space-y-8">
       <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-4xl font-bold tracking-tight text-white">
-            Barcha texnikalar
+        <div className="space-y-1">
+          <h1 className="font-sora text-4xl font-black uppercase italic leading-tight tracking-tighter text-white">
+            Barcha <span className="not-italic text-pink-600">Mahsulotlar</span>
           </h1>
-          <p className="mt-1 text-sm text-slate-400">
-            Saytdagi barcha aktiv texnikalar jadvali
+
+          <p className="max-w-md text-[13px] font-medium leading-relaxed text-slate-400">
+            Tizimdagi kiritilgan barcha mahsulotlar
           </p>
         </div>
         <div className="flex items-center gap-3">
           <Select>
-            <SelectTrigger className="w-[350px] border border-white bg-white/15 text-white transition-all duration-200 hover:bg-white/20 focus:ring-1 data-[placeholder]:font-inter data-[placeholder]:text-white">
+            <SelectTrigger className="h-12 w-[350px] border border-white/40 bg-gradient-to-r from-blue-500/20 to-pink-500/20 text-white transition-all duration-200 hover:bg-white/5 focus:ring-1 data-[placeholder]:font-inter data-[placeholder]:text-xs data-[placeholder]:font-semibold data-[placeholder]:uppercase data-[placeholder]:tracking-[0.15em] data-[placeholder]:text-white">
               <SelectValue
                 placeholder="Texnikalarni filtrlash
 "
@@ -48,22 +50,35 @@ async function Page() {
             </SelectContent>
           </Select>
 
-          <Button
-            className="h flex items-center bg-blue-600 text-white transition-all duration-300 hover:-translate-y-[2px] hover:bg-blue-700 active:scale-95"
-            // onClick={() => router.push(`/uz/admin/add-product`)}
-          >
-            <LayersPlus />
-            <span>Texnika kiritish</span>
+          <Button className="group relative h-12 overflow-hidden rounded-xl bg-blue-600 px-4 shadow-lg shadow-blue-600/20 transition-all duration-500 hover:scale-105 hover:bg-blue-700 hover:shadow-[0_20px_40px_-10px_rgba(37,99,235,0.4)] active:scale-95">
+            {/* Tugma ichidagi "Liquid" effekt (Hoverda o'ngga siljiydi) */}
+            <div className="absolute inset-0 -translate-x-full rounded-xl bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-1000 group-hover:translate-x-full" />
+
+            <div className="relative z-10 flex items-center gap-3">
+              <div className="flex size-8 items-center justify-center rounded-lg bg-white/10 backdrop-blur-md transition-transform duration-500 group-hover:rotate-180">
+                <LayersPlus size={18} className="text-white" />
+              </div>
+              <span className="text-xs font-black uppercase tracking-[0.15em] text-white">
+                Mahsulot kiritish
+              </span>
+            </div>
+
+            {/* Tugma chetidagi nozik nur */}
+            <div className="absolute inset-0 rounded-xl border border-white/10" />
           </Button>
         </div>
       </div>
-      <div className="rounded-3xl bg-white/5 p-6">
-        <div className="flex flex-col gap-4">
-          {data?.products.map((product) => (
-            <AdminProductCard key={product._id} product={product} />
-          ))}
+      {data && data?.products.length > 0 ? (
+        <div className="rounded-3xl bg-white/5 p-6">
+          <div className="flex flex-col gap-4">
+            {data?.products.map((product) => (
+              <AdminProductCard key={product._id} product={product} />
+            ))}
+          </div>
         </div>
-      </div>
+      ) : (
+        <EmptyAdminProducts />
+      )}
     </div>
   );
 }

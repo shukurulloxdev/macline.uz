@@ -1,20 +1,58 @@
-"use client";
 import StatisticsCard from "@/app/[lng]/admin/(dashboard)/_components/cards/statistics-card";
-import { bestSeller, statistics } from "@/components/constants";
+import { bestSeller } from "@/components/constants";
 import React from "react";
 import BestSellerCard from "./_components/cards/bestseller-card";
 import StatisticsRadio from "./_components/statistics-radio";
+import { getStatistics } from "@/actions/admin-actions";
+import {
+  MessageCircle,
+  ShoppingCart,
+  TrendingUp,
+  User,
+  Wallet,
+} from "lucide-react";
 
-function Page() {
+async function Page() {
+  const data = await getStatistics();
+  console.log(data);
+  const statisticsdb = data.data;
+
+  const statistics = [
+    {
+      title: "Jami mahsulot",
+      value: `${statisticsdb?.totalProduct}`,
+      suffix: "ta",
+      icon: TrendingUp,
+    },
+    {
+      title: "Jami sotuv",
+      value: `${statisticsdb?.totalOrder}`,
+      suffix: "ta",
+      icon: ShoppingCart,
+    },
+    {
+      title: "Jami user",
+      value: `${statisticsdb?.totalUser}`,
+      suffix: "ta",
+      icon: User,
+    },
+    {
+      title: "Jami summa",
+      price: statisticsdb?.totalOrderPrice,
+      suffix: "so'm",
+      icon: Wallet,
+    },
+  ];
   return (
     <div className="overflow-hidden">
       <div className="space-y-8">
-        <div>
-          <h1 className="text-4xl font-bold tracking-tight text-white">
-            Sayt statistikasi
+        <div className="space-y-1">
+          <h1 className="font-sora text-4xl font-black uppercase italic tracking-tighter text-white">
+            Tizim&nbsp;
+            <span className="not-italic text-pink-600"> statistikasi</span>
           </h1>
-          <p className="mt-2 text-sm text-slate-400">
-            Saytning real-vaqt nazorati paneli
+          <p className="text-sm font-medium text-slate-400">
+            Tizimning real-vaqt nazorati paneli
           </p>
         </div>
         <div className="grid grid-cols-4 gap-5">
@@ -31,7 +69,7 @@ function Page() {
           </div>
           {/**/}
           <div className="rounded-3xl border border-white/20 bg-white/10">
-            <StatisticsRadio />
+            <StatisticsRadio totalOrder={statisticsdb?.totalOrder || 0} />
           </div>
         </div>
       </div>

@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import {
   Instagram,
   Facebook,
@@ -23,7 +22,8 @@ const Footer = () => {
             <Logo />
 
             <p className="max-w-[240px] text-[13px] leading-relaxed text-gray-500">
-              OPENSHOP.UZ keng turdagi elektronika va maishiy texnika do'koni
+              OPENSHOP.UZ keng turdagi elektronika va maishiy texnika
+              do&apos;koni
             </p>
 
             <div className="flex items-center gap-2">
@@ -45,7 +45,7 @@ const Footer = () => {
           {/* 2-ustun: Ma'lumotlar */}
           <div>
             <h4 className="mb-6 text-[15px] font-bold text-black">
-              Ma'lumotlar
+              Ma&apos;lumotlar
             </h4>
             <ul className="space-y-3">
               {[
@@ -95,7 +95,7 @@ const Footer = () => {
           {/* 4-ustun: Bog'lanish va Applar */}
           <div className="space-y-6">
             <h4 className="mb-6 text-[15px] font-bold text-black">
-              Bog'lanish
+              Bog&apos;lanish
             </h4>
             <div className="space-y-4">
               <div className="flex items-center gap-3">
@@ -141,7 +141,7 @@ const Footer = () => {
         {/* Pastki qism: Copyright va To'lov tizimlari */}
         <div className="mt-16 flex flex-col items-center justify-between gap-6 border-t border-gray-100 pt-8 md:flex-row">
           <p className="text-[12px] text-gray-400">
-            © 2018 - 2026 MCHJ "OPEN SHOP" STIR 307095613.
+            © 2018 - 2026 MCHJ &apos;OPEN SHOP&apos; STIR 307095613.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-5 opacity-60 transition-opacity hover:opacity-100">

@@ -2,15 +2,19 @@
 
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { fetchUser } from "@/redux/reducers/userState";
-import type { AppDispatch } from "@/redux/store";
+import { Iuser } from "@/types";
+import { setUser } from "@/redux/reducers/userState";
 
-export default function AuthLoader() {
-  const dispatch = useDispatch<AppDispatch>();
+interface Props {
+  user: Iuser | null;
+}
+
+export default function AuthLoader({ user }: Props) {
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchUser());
-  }, [dispatch]);
+    dispatch(setUser(user));
+  }, []);
 
   return null;
 }

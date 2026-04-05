@@ -10,7 +10,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { addCategorySchema } from "@/lib/validation";
-import { Save, Rocket, ImagePlus, X } from "lucide-react";
+import { Save, Rocket, ImagePlus, X, Ban } from "lucide-react";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import { Input } from "@/components/ui/input";
@@ -77,11 +77,12 @@ function SendCategory() {
 
           <div className="flex items-center gap-4">
             <Button
+              onClick={() => form.reset()}
               type="button"
               variant="ghost"
               className="h-14 rounded-2xl border border-white/5 bg-white/5 px-6 font-bold text-white hover:bg-white/10 hover:text-pink-400"
             >
-              <Save className="mr-2 size-4" /> Bekor qilish
+              <Ban className="mr-1 size-4" /> Bekor qilish
             </Button>
             <Button
               type="submit"

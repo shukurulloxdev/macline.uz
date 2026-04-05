@@ -5,8 +5,9 @@ export interface ChildProps {
   children: ReactNode;
 }
 export interface StatisticsTip {
+  price?: number;
   title: string;
-  value: string;
+  value?: string;
   suffix: string;
   icon: LucideIcon;
 }
@@ -52,6 +53,8 @@ export interface ICategory {
   seoTitle: string;
   seoDescription: string;
   active: boolean;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface Iuser {
@@ -95,6 +98,10 @@ export interface ReturnActionType {
   products: IProduct[];
   totalProduct: number;
   categories: ICategory[];
+  category: ICategory;
   order: IOrder;
   orders: IOrder[];
+  totalOrder: number;
+  totalOrderPrice: number;
+  totalUser: number;
 }

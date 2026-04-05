@@ -17,8 +17,8 @@ async function Page() {
       <Categories allCategories={allCategories.data?.categories || []} />
       <PopProducts topProducts={topProducts.data?.products || []} />
       <DiscountProducts discountProducts={topProducts.data?.products || []} />
-      {/* <BigProducts bigProducts={topProducts.data?.products || []} /> */}
-      {/* <SmallProducts smallProducts={topProducts.data?.products || []} /> */}
+      {/* <BigProducts bigProducts={topProducts.data?.products || []} />
+      <SmallProducts smallProducts={topProducts.data?.products || []} /> */}
       <Location />
       {/* <SearchTabel /> */}
     </div>

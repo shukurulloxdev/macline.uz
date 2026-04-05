@@ -4,7 +4,10 @@ import { actionClient } from "@/lib/safe-action";
 import {
   addCategorySchema,
   addProductSchema,
+  categoryUpdateSchema,
+  getCategorySchema,
   idSchema,
+  updateProductSchema,
 } from "@/lib/validation";
 import { ReturnActionType } from "@/types";
 import { revalidatePath } from "next/cache";
@@ -25,6 +28,7 @@ export const createProduct = actionClient
         }),
       },
     );
+    revalidatePath("/admin/products");
 
     if (!response.ok) {
       throw new Error("Server error");
@@ -42,6 +46,7 @@ export const createCategory = actionClient
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(parsedInput),
     });
+    revalidatePath("/admin/categories");
 
     const data = await res.json();
     return data;
@@ -76,6 +81,22 @@ export const deleteProduct = actionClient
     const data = await res.json();
     return data;
   });
+export const adminCategoryDelete = actionClient
+  .schema(idSchema)
+  .action<ReturnActionType>(async ({ parsedInput }) => {
+    const res = await fetch(
+      `http://localhost:8080/api/admin/admin-category-delete/${parsedInput.id}`,
+      {
+        method: "DELETE",
+      },
+    );
+
+    if (!res.ok) throw new Error("Server error");
+    revalidatePath("/admin/categories");
+
+    const data = await res.json();
+    return data;
+  });
 
 export const productAction = actionClient
   .schema(idSchema)
@@ -94,7 +115,85 @@ export const productAction = actionClient
     return date;
   });
 
-// /delete-product/:id
+export const getCategory = actionClient
+  .schema(getCategorySchema)
+  .action<ReturnActionType>(async ({ parsedInput }) => {
+    const res = await fetch(
+      `http://localhost:8080/api/admin/admin-category/${parsedInput.slug}`,
+      { cache: "no-store" },
+    );
+
+    if (!res.ok) throw new Error("Server error");
+
+    const data = await res.json();
+    return data;
+  });
+
+export const adminCategoryUpdate = actionClient
+  .schema(categoryUpdateSchema)
+  .action<ReturnActionType>(async ({ parsedInput }) => {
+    const res = await fetch(
+      `http://localhost:8080/api/admin/admin-category-update/${parsedInput.id}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(parsedInput),
+      },
+    );
+
+    if (!res.ok) throw new Error("Server error");
+
+    const data = await res.json();
+
+    revalidatePath(`/admin/categories/${parsedInput.id}`);
+    revalidatePath("/admin/categories");
+
+    return data;
+  });
+export const getStatistics = actionClient.action<ReturnActionType>(async () => {
+  const res = await fetch(`http://localhost:8080/api/admin/statistics`, {
+    cache: "no-store",
+  });
+
+  if (!res.ok) throw new Error("Server error");
+
+  const data = await res.json();
+  return data;
+});
+
+export const getAdminProduct = actionClient
+  .schema(idSchema)
+  .action<ReturnActionType>(async ({ parsedInput }) => {
+    const res = await fetch(
+      `http://localhost:8080/api/admin/product/${parsedInput.id}`,
+      {
+        cache: "no-store",
+      },
+    );
+
+    if (!res.ok) throw new Error("Server error");
+
+    const data = await res.json();
+    return data;
+  });
+export const adminProductUpdate = actionClient
+  .schema(updateProductSchema)
+  .action<ReturnActionType>(async ({ parsedInput }) => {
+    const { id, ...body } = parsedInput;
+    const res = await fetch(
+      `http://localhost:8080/api/admin/update-product/${id}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      },
+    );
+
+    if (!res.ok) throw new Error("Server error");
+
+    const data = await res.json();
+    return data;
+  });
 
 // {
 //   "_id": "123",

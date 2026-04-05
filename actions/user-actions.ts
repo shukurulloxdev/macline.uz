@@ -36,6 +36,9 @@ export const getProductById = actionClient
   .action<ReturnActionType>(async ({ parsedInput }) => {
     const res = await fetch(
       `http://localhost:8080/api/user/product/${parsedInput.id}`,
+      {
+        cache: "no-store",
+      },
     );
 
     const data = await res.json();
@@ -92,6 +95,7 @@ export const newOrders = actionClient.action<ReturnActionType>(async () => {
   const data = await res.json();
   return data;
 });
+
 export const finishedOrders = actionClient.action<ReturnActionType>(
   async () => {
     const token = cookies().get("token")?.value;
@@ -106,3 +110,22 @@ export const finishedOrders = actionClient.action<ReturnActionType>(
     return data;
   },
 );
+
+// export async function productsByCategory(
+//   category: string,
+// ): Promise<ReturnActionType> {
+//   const res = await fetch(
+//     `http://localhost:8080/api/user/by-category/${category}`,
+//     {
+//       cache: "no-store",
+//     },
+//   );
+
+//   if (!res.ok) {
+//     throw new Error("Kategoriya boyicha Mahsulotlarni olishda xatolik");
+//   }
+
+//   const data = await res.json();
+
+//   return data;
+// }

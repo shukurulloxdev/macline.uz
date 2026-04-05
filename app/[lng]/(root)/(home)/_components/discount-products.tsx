@@ -20,7 +20,7 @@ interface Props {
 function DiscountProducts({ discountProducts }: Props) {
   return (
     <section className="mx-auto max-w-7xl py-6">
-      <div className="relative overflow-hidden rounded-[2rem] border border-pink-200 bg-pink-50 p-6 shadow-xl">
+      <div className="relative overflow-hidden rounded-3xl border border-pink-200 bg-pink-50 p-6 shadow-sm">
         <div className="relative z-10 mb-6 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <h2 className="font-sora text-4xl font-bold tracking-tight text-neutral-900">
             Katta <span className="text-pink-600">Chegirmalar</span>

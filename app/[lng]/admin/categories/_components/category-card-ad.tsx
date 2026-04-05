@@ -1,6 +1,7 @@
 import { ICategory } from "@/types";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 interface Props {
@@ -10,7 +11,8 @@ interface Props {
 
 function CategoryCardAd({ category, index }: Props) {
   return (
-    <div
+    <Link
+      href={`/admin/categories/${category._id}`}
       className="group relative flex cursor-pointer flex-col items-center"
       key={category._id}
     >
@@ -43,7 +45,7 @@ function CategoryCardAd({ category, index }: Props) {
       <span className="absolute -right-2 -top-4 select-none text-[60px] font-black text-pink-500/40 transition-opacity group-hover:text-pink-400">
         0{index + 1}
       </span>
-    </div>
+    </Link>
   );
 }
 

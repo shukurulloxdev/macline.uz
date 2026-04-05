@@ -1,7 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { Phone, UserCircle, ArrowRight, LogIn } from "lucide-react";
+import { Phone, UserCircle, ArrowRight, LogIn, RefreshCcw } from "lucide-react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import z from "zod";
@@ -30,6 +30,21 @@ import { setUser } from "@/redux/reducers/userState";
 function RegisterModal() {
   const [isVerifying, setIsVerifying] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+
+  const [otpTimer, setOtpTimer] = useState(0);
+
+  console.log(otpTimer);
+
+  useEffect(() => {
+    if (otpTimer <= 0) return;
+
+    const interval = setInterval(() => {
+      setOtpTimer((prev) => prev - 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [otpTimer]);
+
   const dispatch = useDispatch();
 
   function registerSuccesActions() {
@@ -38,6 +53,7 @@ function RegisterModal() {
     otpForm.reset();
     setIsOpen(false);
     setIsVerifying(false);
+    setOtpTimer(0);
   }
 
   const form = useForm<z.infer<typeof registerSchema>>({
@@ -48,23 +64,42 @@ function RegisterModal() {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof registerSchema>) {
-    console.log(values.phone);
-
-    const cleanPhone = values.phone.replace(/\D/g, ""); // faqat raqamlar
-
-    const formattedPhone = `+${cleanPhone}`; // +998902015858
+  async function handleSendOtp(phone: string) {
+    const cleanPhone = phone.replace(/\D/g, "");
+    const formattedPhone = `+${cleanPhone}`;
 
     const res = await sendOtp({ phone: formattedPhone });
 
     if (res.serverError || res.validationErrors || !res.data) {
       console.log(res);
-      return toast.error("Something went wrong");
+      toast.error("Something went wrong");
+      return false;
     }
+
     if (res.data.status === 200) {
       toast.success("OTP send successfuly");
       setIsVerifying(true);
+      setOtpTimer(100);
+      otpForm.reset();
+      return true;
     }
+
+    return false;
+  }
+
+  async function onSubmit(values: z.infer<typeof registerSchema>) {
+    await handleSendOtp(values.phone);
+  }
+
+  async function handleResendOtp() {
+    const phone = form.getValues("phone");
+
+    if (!phone) {
+      toast.error("Telefon raqam topilmadi");
+      return;
+    }
+
+    await handleSendOtp(phone);
   }
   const otpForm = useForm<z.infer<typeof otpSchema>>({
     resolver: zodResolver(otpSchema),
@@ -288,24 +323,61 @@ function RegisterModal() {
                         </FormItem>
                       )}
                     />
-                    {/* BUTTON SECTION */}
+                    {otpTimer !== 0 && (
+                      <div className="text-center">
+                        <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-400">
+                          Kodni faol vaqti:
+                        </p>
+
+                        <p
+                          className={cn(
+                            "mt-2 text-3xl font-black tracking-tight",
+                            otpTimer <= 10 ? "text-red-500" : "text-pink-600",
+                          )}
+                        >
+                          {String(otpTimer).padStart(2, "0")}
+                        </p>
+                      </div>
+                    )}
                     <div className="pt-2">
-                      <Button
-                        className="group h-12 w-full justify-between rounded-xl bg-pink-600 px-6 font-black uppercase tracking-[0.2em] text-white shadow-none transition-all hover:bg-pink-600 active:scale-[0.98]"
-                        type="submit"
-                      >
-                        <span className="text-[11px]">Tasdiqlash</span>
+                      {otpTimer === 0 ? (
+                        <Button
+                          type="button"
+                          onClick={handleResendOtp}
+                          className="group h-12 w-full justify-between rounded-xl bg-blue-600 px-6 font-black uppercase tracking-[0.2em] text-white shadow-none transition-all hover:bg-blue-600 active:scale-[0.98]"
+                        >
+                          <span className="text-[11px]">
+                            Kodni qayta yuborish
+                          </span>
 
-                        {/* O'NG TOMONDAGI IXCHAM IKONKA BLOKI */}
-                        <div className="flex items-center gap-3">
-                          {/* Nafis vertikal chiziqcha */}
-                          <div className="h-4 w-px bg-white/20" />
+                          {/* O'NG TOMONDAGI IXCHAM IKONKA BLOKI */}
+                          <div className="flex items-center gap-3">
+                            {/* Nafis vertikal chiziqcha */}
+                            <div className="h-4 w-px bg-white/20" />
 
-                          <div className="flex size-8 items-center justify-center rounded-lg bg-white/10 text-white transition-colors group-hover:bg-white group-hover:text-pink-600">
-                            <ArrowRight size={16} strokeWidth={3} />
+                            <div className="flex size-8 items-center justify-center rounded-lg bg-white/10 text-white transition-colors group-hover:bg-white group-hover:text-blue-600">
+                              <RefreshCcw size={16} strokeWidth={3} />
+                            </div>
                           </div>
-                        </div>
-                      </Button>
+                        </Button>
+                      ) : (
+                        <Button
+                          className="group h-12 w-full justify-between rounded-xl bg-pink-600 px-6 font-black uppercase tracking-[0.2em] text-white shadow-none transition-all hover:bg-pink-600 active:scale-[0.98]"
+                          type="submit"
+                        >
+                          <span className="text-[11px]">Tasdiqlash</span>
+
+                          {/* O'NG TOMONDAGI IXCHAM IKONKA BLOKI */}
+                          <div className="flex items-center gap-3">
+                            {/* Nafis vertikal chiziqcha */}
+                            <div className="h-4 w-px bg-white/20" />
+
+                            <div className="flex size-8 items-center justify-center rounded-lg bg-white/10 text-white transition-colors group-hover:bg-white group-hover:text-pink-600">
+                              <ArrowRight size={16} strokeWidth={3} />
+                            </div>
+                          </div>
+                        </Button>
+                      )}
                     </div>
                   </div>
                 </form>

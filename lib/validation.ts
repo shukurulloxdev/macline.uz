@@ -37,6 +37,18 @@ export const idsSchema = z.object({
   ids: z.array(z.string()),
 });
 
+export const updateProductSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  description: z.string(),
+  brand: z.string(),
+  price: z.number(),
+  percent: z.number(),
+  category: z.string(),
+  top: z.boolean(),
+  discount: z.boolean(),
+  active: z.boolean(),
+});
 export const searchParamsSchema = z.object({
   searchQuery: z.string().optional(),
   filter: z.string().optional(),
@@ -119,4 +131,15 @@ export const orderSchema = z.object({
 export const orderStatusSchema = z.object({
   orderId: z.string(),
   status: z.string(),
+});
+export const getCategorySchema = z.object({
+  slug: z.string(),
+});
+export const categoryUpdateSchema = z.object({
+  id: z.string(),
+  image: z.string().optional(),
+  title: z.string().optional(),
+  slug: z.string().optional(),
+  seoTitle: z.string().optional(),
+  seoDescription: z.string().optional(),
 });

@@ -1,62 +1,70 @@
 "use client";
-
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import { useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { IProduct } from "@/types";
-import { Maximize2 } from "lucide-react";
 import ProductAbout from "./product-about";
+import BenefitsBar from "./benefits-bar";
 
 export default function ProductGallery({ product }: { product: IProduct }) {
   const [active, setActive] = useState(0);
 
   return (
     <div className="w-full">
-      <div className="flex flex-col gap-4 lg:flex-row">
-        {/* 1. Miniatyuralar - Endi yanada ingichka va tartibli */}
-        <div className="order-2 flex flex-row gap-3 lg:order-1 lg:flex-col">
+      <div className="flex items-start gap-3">
+        <div className="flex w-16 flex-col gap-3">
           {product.images.map((img, i) => (
             <button
               key={i}
               onMouseEnter={() => setActive(i)} // User tajribasi uchun tezroq
               className={cn(
-                "relative aspect-square w-16 overflow-hidden rounded-xl border transition-all duration-300 lg:w-20",
+                "relative aspect-square w-full overflow-hidden rounded-xl border border-pink-500 transition-all duration-300",
                 active === i
-                  ? "border-black shadow-sm ring-1 ring-black"
+                  ? "border-pink-600 shadow-sm ring-1 ring-pink-400"
                   : "border-neutral-200 bg-white opacity-70 hover:border-neutral-400 hover:opacity-100",
               )}
             >
-              <Image src={img} alt="thumb" fill className="object-cover p-1" />
+              <Image src={img} alt="thumb" fill className="object-cover" />
             </button>
           ))}
         </div>
 
-        {/* 2. Asosiy Rasm - Balandligi qisqartirilgan va ixcham (Compact Canvas) */}
-        <div className="relative order-1 h-[400px] w-full flex-1 overflow-hidden rounded-3xl border border-neutral-100 bg-[#ffffff] lg:order-2 lg:h-[600px]">
-          {/* Badge - Premium ko'rinish uchun */}
-          <div className="absolute left-6 top-6 z-10">
-            <span className="rounded-full bg-white/80 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-black backdrop-blur-md">
-              New Arrival
-            </span>
-          </div>
-
-          <Image
-            src={product.images[active]}
-            alt={product.name}
-            fill
-            priority
-            className="object-cover p-10 transition-all duration-700 ease-in-out group-hover:scale-105"
-          />
-
-          {/* Floating Actions */}
-          <div className="absolute bottom-6 right-6">
-            <button className="flex size-11 items-center justify-center rounded-full bg-white text-neutral-800 shadow-md transition-all hover:bg-black hover:text-white active:scale-90">
-              <Maximize2 size={18} />
-            </button>
-          </div>
+        <div className="flex-1">
+          <Carousel
+            opts={{
+              align: "start",
+              dragFree: false,
+              loop: true,
+            }}
+          >
+            <CarouselContent>
+              {product.images.map((image) => (
+                <CarouselItem className="basis-1/2">
+                  <div className="relative h-[50vh] w-full rounded-xl border border-neutral-100">
+                    <Image
+                      src={image}
+                      alt={image}
+                      fill
+                      className="rounded-xl object-cover"
+                    />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            {/* <CarouselPrevious />
+            <CarouselNext /> */}
+          </Carousel>
         </div>
       </div>
-      <div className="mt-8 border-t border-gray-100 pt-8">
+      <BenefitsBar />
+      <div className="mt-6 border-t border-gray-100 pt-4">
         <ProductAbout product={product} />
       </div>
     </div>
