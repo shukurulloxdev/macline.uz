@@ -191,6 +191,8 @@ export const adminProductUpdate = actionClient
 
     if (!res.ok) throw new Error("Server error");
 
+    revalidatePath(`/admin/products/${id}`);
+
     const data = await res.json();
     return data;
   });

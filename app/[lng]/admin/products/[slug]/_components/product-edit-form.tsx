@@ -20,6 +20,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { formatCurrentPrice } from "@/lib/utils";
+import { adminProductUpdate } from "@/actions/admin-actions";
 
 interface Props {
   product: IProduct;
@@ -57,11 +58,21 @@ export default function ProductEditForm({ product, categories }: Props) {
     setForm((prev) => ({ ...prev, [key]: value }));
   }
 
-  function editInformations() {
-    if ((form.discount && form.percent === "0") || form.percent === "") {
-      return confirm(
-        "Chegirma berilgandan so'ng, Foyiz(%) ham berilishi shart❗️",
-      );
+  async function editInformations() {
+    try {
+      if ((form.discount && form.percent === "0") || form.percent === "") {
+        return confirm(
+          "Chegirma berilgandan so'ng, Foyiz(%) ham berilishi shart❗️",
+        );
+      }
+      const res = await adminProductUpdate({
+        id: product._id,
+        ...form,
+        price: Number(form.price),
+        percent: Number(form.percent),
+      });
+    } catch (err) {
+      console.log(err);
     }
   }
 
