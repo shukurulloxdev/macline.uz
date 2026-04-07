@@ -49,6 +49,7 @@ export default function CategoryInfo({ category }: CategoryInfoProps) {
     seoTitle: category.seoTitle,
     seoDescription: category.seoDescription,
   });
+  3;
 
   const isChanged =
     form.title !== category.title ||
@@ -232,12 +233,12 @@ export default function CategoryInfo({ category }: CategoryInfoProps) {
             <div className="absolute -left-20 -top-20 size-64 rounded-full bg-pink-500/5 blur-[100px]" />
 
             <div className="relative flex flex-col gap-8 p-8 md:flex-row md:items-start">
-              <div className="group relative size-52 cursor-pointer overflow-hidden rounded-2xl border border-white/10 p-6 shadow-2xl transition-transform hover:scale-[1.01]">
+              <div className="group relative aspect-square w-52 cursor-pointer overflow-hidden rounded-2xl border border-white/10 p-6 shadow-2xl transition-transform hover:scale-[1.01]">
                 <Image
                   src={category.image}
                   alt={category.title}
                   fill
-                  className="object-contain transition-all duration-500 group-hover:scale-105 group-hover:brightness-50"
+                  className="object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-50"
                 />
 
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100">
@@ -266,24 +267,21 @@ export default function CategoryInfo({ category }: CategoryInfoProps) {
                   icon={<Fingerprint size={14} />}
                   label="ID Identifikator"
                   value={category._id}
-                  isMono
+                  clas="text-cyan-300/70"
                 />
-
-                {/* Slug — edit */}
-                <EditableInfoCard
+                <InfoCard
                   icon={<Globe2 size={14} />}
                   label="Slug Manzili"
-                  value={form.slug}
-                  isEdit={isEdit}
-                  isPink
-                  onChange={(v: any) => handleChange("slug", v)}
+                  value={`/${category.slug}`}
+                  clas="text-pink-300"
                 />
 
                 {/* Sana — o'zgarmas */}
                 <InfoCard
                   icon={<Box size={14} />}
                   label="Katigoriya"
-                  value={category.active ? "Faol" : " Faol emas"}
+                  value={category.active ? "Faol" : "Faol emas"}
+                  clas={`${category.active ? "text-green-300" : "text-red-300"}`}
                 />
                 <InfoCard
                   icon={<CalendarDays size={14} />}
@@ -296,6 +294,7 @@ export default function CategoryInfo({ category }: CategoryInfoProps) {
                       day: "numeric",
                     },
                   )}
+                  clas="text-yellow-100"
                 />
               </div>
             </div>
@@ -313,7 +312,7 @@ export default function CategoryInfo({ category }: CategoryInfoProps) {
             <div className="space-y-6">
               <div className="space-y-2">
                 <label className="text-[10px] font-black uppercase tracking-widest text-white/20">
-                  Google Title
+                  Google SEO Title
                 </label>
                 {isEdit ? (
                   <input
@@ -330,7 +329,7 @@ export default function CategoryInfo({ category }: CategoryInfoProps) {
 
               <div className="space-y-2">
                 <label className="text-[10px] font-black uppercase tracking-widest text-white/20">
-                  Meta Description
+                  Google SEO Description
                 </label>
                 {isEdit ? (
                   <textarea
@@ -479,61 +478,23 @@ export default function CategoryInfo({ category }: CategoryInfoProps) {
   );
 }
 
-function InfoCard({ icon, label, value, isMono = false, isPink = false }: any) {
+function InfoCard({ icon, label, value, clas }: any) {
   return (
     <div className="group flex cursor-pointer flex-col gap-2 rounded-2xl border border-white/5 bg-white/5 p-4 transition-all hover:border-white/10 hover:bg-white/[0.05]">
-      <div className="flex items-center gap-2 text-white/80 transition-colors group-hover:text-pink-500">
+      <div className="flex items-center gap-2 text-white/80 transition-colors">
         {icon}
-        <span className="text-[9px] font-black uppercase tracking-widest">
+        <span className="text-[9px] font-black uppercase tracking-widest group-hover:text-white">
           {label}
         </span>
       </div>
       <p
         className={cn(
-          "truncate text-[13px] font-bold tracking-tight transition-colors",
-          isMono ? "font-mono text-[11px] text-white/30" : "text-white/80",
-          isPink ? "italic text-pink-500" : "group-hover:text-white",
+          "truncate text-[14px] font-bold tracking-tight transition-colors",
+          `${clas}`,
         )}
       >
         {value}
       </p>
-    </div>
-  );
-}
-
-function EditableInfoCard({ icon, label, value, isEdit, onChange }: any) {
-  return (
-    <div
-      className={cn(
-        "flex flex-col gap-2 rounded-2xl border p-4 transition-all",
-        isEdit
-          ? "border-pink-500/20 bg-white/5 ring-1 ring-pink-500/20"
-          : "border-white/5 bg-white/5 hover:border-white/10",
-      )}
-    >
-      <div className="flex items-center gap-2 text-white/80">
-        {icon}
-        <span className="text-[9px] font-black uppercase tracking-widest">
-          {label}
-        </span>
-      </div>
-      {isEdit ? (
-        <input
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          className={cn(
-            "truncate bg-transparent font-mono text-[15px] font-bold tracking-tight text-pink-400 outline-none",
-          )}
-        />
-      ) : (
-        <p
-          className={cn(
-            "truncate font-mono text-[13px] font-bold tracking-tight text-pink-400",
-          )}
-        >
-          /{value}
-        </p>
-      )}
     </div>
   );
 }

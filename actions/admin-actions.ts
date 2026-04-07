@@ -176,6 +176,7 @@ export const getAdminProduct = actionClient
     const data = await res.json();
     return data;
   });
+
 export const adminProductUpdate = actionClient
   .schema(updateProductSchema)
   .action<ReturnActionType>(async ({ parsedInput }) => {

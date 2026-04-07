@@ -23,7 +23,7 @@ function CategoryCardAd({ category, index }: Props) {
           src={category.image}
           alt={category.title}
           fill
-          className="rounded-[2.5rem] object-cover p-8 transition-transform duration-700 group-hover:scale-110 group-hover:rounded-full"
+          className="rounded-[3rem] object-cover p-8 transition-transform duration-700 group-hover:scale-110 group-hover:rounded-[4rem]"
         />
 
         <div className="absolute inset-0 flex items-center justify-center bg-black/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100">

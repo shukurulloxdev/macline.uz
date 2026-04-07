@@ -39,15 +39,17 @@ export const idsSchema = z.object({
 
 export const updateProductSchema = z.object({
   id: z.string(),
-  name: z.string(),
-  description: z.string(),
-  brand: z.string(),
-  price: z.number(),
-  percent: z.number(),
-  category: z.string(),
-  top: z.boolean(),
-  discount: z.boolean(),
-  active: z.boolean(),
+  name: z.string().optional(),
+  description: z.string().optional(),
+  brand: z.string().optional(),
+  price: z.number().optional(),
+  percent: z.number().optional(),
+  category: z.string().optional(),
+  top: z.boolean().optional(),
+  discount: z.boolean().optional(),
+  active: z.boolean().optional(),
+  // Rasmlar — optional
+  images: z.array(z.string()).optional(),
 });
 export const searchParamsSchema = z.object({
   searchQuery: z.string().optional(),

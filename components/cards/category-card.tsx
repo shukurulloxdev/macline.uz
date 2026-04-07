@@ -19,18 +19,36 @@ function CategoryCard({ category, index }: Props) {
         href={`/category/${category.slug}`}
         className="group relative flex cursor-pointer flex-col items-center"
       >
-        <div className="ease-[cubic-bezier(0.23,1,0.32,1)] relative aspect-square w-full overflow-hidden rounded-[2.5rem] bg-[#F5F5F7] transition-all duration-700 group-hover:rounded-full group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)]">
+        {/* <div className="ease-[cubic-bezier(0.23,1,0.32,1)] relative aspect-square w-full overflow-hidden rounded-[2.5rem] bg-[#F5F5F7] group-hover:border group-hover:border-pink-600/30 group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)]">
           <div className='pointer-events-none absolute inset-0 z-10 bg-[url("https://grainy-gradients.vercel.app/noise.svg")] opacity-[0.03]' />
 
           <Image
             src={category.image}
             alt={category.title}
             fill
-            className="rounded-[2.5rem] object-cover p-8 transition-transform duration-700 group-hover:scale-110 group-hover:rounded-full"
+            className="rounded-[2.5rem] border object-cover p-8 transition-transform duration-700 group-hover:scale-110"
           />
 
           <div className="absolute inset-0 flex items-center justify-center bg-black/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-            <div className="translate-y-4 scale-50 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:scale-100 group-hover:opacity-100">
+            <div className="scale-95 opacity-0 transition-all duration-300 hover:scale-105 group-hover:opacity-100">
+              <div className="flex size-12 items-center justify-center rounded-full bg-white text-pink-600 shadow-xl">
+                <ArrowUpRight size={20} />
+              </div>
+            </div>
+          </div>
+        </div> */}
+        <div className="ease-[cubic-bezier(0.23,1,0.32,1)] relative aspect-square w-full overflow-hidden rounded-[2.5rem] border border-transparent bg-[#F5F5F7] transition-all duration-500 group-hover:border-pink-600/30 group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)]">
+          <div className='pointer-events-none absolute inset-0 z-10 bg-[url("https://grainy-gradients.vercel.app/noise.svg")] opacity-[0.03]' />
+
+          <Image
+            src={category.image}
+            alt={category.title}
+            fill
+            className="rounded-[2.5rem] object-cover p-8 transition-transform duration-700 group-hover:scale-110"
+          />
+
+          <div className="absolute inset-0 flex items-center justify-center bg-black/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+            <div className="scale-95 opacity-0 transition-all duration-300 hover:scale-105 group-hover:scale-100 group-hover:opacity-100">
               <div className="flex size-12 items-center justify-center rounded-full bg-white text-pink-600 shadow-xl">
                 <ArrowUpRight size={20} />
               </div>
