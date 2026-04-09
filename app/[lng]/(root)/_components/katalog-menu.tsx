@@ -52,8 +52,8 @@ export default function KatalogMenu({ categories }: Props) {
 
           {/* MEGA MENU CONTENT */}
           <NavigationMenuContent>
-            <div className="flex w-[850px] overflow-hidden rounded-2xl bg-[#ffffff]">
-              <div className="w-[300px] border-r border-neutral-200/70 bg-white p-4">
+            <div className="flex h-96 w-[850px] overflow-hidden rounded-2xl bg-[#ffffff]">
+              <div className="always-scroll h-full w-[300px] overflow-y-scroll border-r border-neutral-200/70 bg-white p-4">
                 <div className="space-y-1">
                   {categories.map((cat) => (
                     <div

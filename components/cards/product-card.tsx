@@ -9,6 +9,7 @@ import { RootState } from "@/redux/store";
 import { toggelFavorite } from "@/redux/reducers/favoriteState";
 import { toggleBasket } from "@/redux/reducers/basketState";
 import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 
 interface Props {
   product: IProduct;
@@ -24,6 +25,7 @@ export default function ProductCard({ product, view }: Props) {
   const basketIds = useSelector((state: RootState) => state.baskets.basketIds);
   const basIds = basketIds.map((itm) => itm.id);
   const dispatch = useDispatch();
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
 
   const isFavorite = favoriteIds.find((favorite) => favorite === product._id);
 
@@ -32,7 +34,7 @@ export default function ProductCard({ product, view }: Props) {
   return (
     <div
       className={cn(
-        "group flex w-full bg-white transition-all duration-500",
+        "group flex w-full bg-white shadow-[0_0_10px_rgba(0,0,0,0.05)] transition-all duration-500",
         isList
           ? "flex-row gap-6 rounded-[2rem] border border-neutral-100 p-5 hover:border-pink-200 hover:shadow-[0_20px_50px_rgba(0,0,0,0.04)]"
           : "flex-col rounded-lg",
@@ -40,6 +42,8 @@ export default function ProductCard({ product, view }: Props) {
     >
       {/* --- IMAGE ZONE --- */}
       <div
+        onMouseEnter={() => setActiveImageIndex(product.images[1] ? 1 : 0)}
+        onMouseLeave={() => setActiveImageIndex(0)}
         className={cn(
           "relative shrink-0 overflow-hidden bg-white transition-all duration-500",
           isList
@@ -87,7 +91,7 @@ export default function ProductCard({ product, view }: Props) {
 
         <Link href={`/product/${product._id}`} className="block size-full">
           <Image
-            src={product.images[0]}
+            src={product.images[activeImageIndex]}
             alt={product.name}
             fill
             className={cn(
@@ -209,10 +213,26 @@ export default function ProductCard({ product, view }: Props) {
                 >
                   Batafsil
                 </Link>
-                <button className="group relative flex h-12 items-center justify-center overflow-hidden rounded-xl bg-pink-600 px-6 transition-all hover:bg-pink-700 active:scale-95">
+                <button
+                  onClick={() => dispatch(toggleBasket(product._id))}
+                  className={cn(
+                    "group relative flex h-12 items-center justify-center overflow-hidden rounded-xl px-6 transition-all active:scale-95",
+                    isBasket
+                      ? "bg-emerald-500 hover:bg-emerald-600"
+                      : "bg-pink-600 hover:bg-pink-700",
+                  )}
+                >
                   <div className="relative z-10 flex items-center gap-2.5 text-[11px] font-black uppercase tracking-widest text-white">
-                    <ShoppingBag size={20} />
-                    <span>Savatga qo&apos;shish</span>
+                    {isBasket ? (
+                      <Check size={22} strokeWidth={3} />
+                    ) : (
+                      <ShoppingBag size={20} />
+                    )}
+                    {isBasket ? (
+                      <span>Savatda</span>
+                    ) : (
+                      <span>Savatga qo&apos;shish</span>
+                    )}
                   </div>
                   <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
                 </button>

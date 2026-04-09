@@ -17,11 +17,15 @@ import {
   ImageUp,
   ArrowRight,
   Repeat2,
+  ChevronLeft,
+  Edit2,
+  Trash,
+  Save,
+  X,
 } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { ChevronLeft, Edit2, Trash, Save, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { UploadDropzone } from "@/lib/uploadthing";
@@ -49,7 +53,6 @@ export default function CategoryInfo({ category }: CategoryInfoProps) {
     seoTitle: category.seoTitle,
     seoDescription: category.seoDescription,
   });
-  3;
 
   const isChanged =
     form.title !== category.title ||
@@ -95,7 +98,6 @@ export default function CategoryInfo({ category }: CategoryInfoProps) {
           toast.success("Katigoriya o'chirildi ✅");
         }
       }
-      return;
     } catch (err) {
       console.log(err);
     }
@@ -478,6 +480,7 @@ export default function CategoryInfo({ category }: CategoryInfoProps) {
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function InfoCard({ icon, label, value, clas }: any) {
   return (
     <div className="group flex cursor-pointer flex-col gap-2 rounded-2xl border border-white/5 bg-white/5 p-4 transition-all hover:border-white/10 hover:bg-white/[0.05]">

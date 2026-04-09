@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import qs from "query-string";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -49,4 +50,51 @@ export function formatDate(dateString: Date) {
     month: "long",
     year: "numeric",
   });
+}
+
+interface FormatQueryProps {
+  params: string;
+  key: string;
+  toProducts: boolean;
+  value: string | null;
+}
+export function formatQuery({
+  params,
+  key,
+  toProducts,
+  value,
+}: FormatQueryProps) {
+  const parsedUrl = qs.parse(params);
+
+  parsedUrl[key] = value;
+
+  return qs.stringifyUrl(
+    {
+      url: toProducts
+        ? `${window.location.pathname.split("/")[0]}/products`
+        : window.location.pathname,
+      query: parsedUrl,
+    },
+    { skipNull: true },
+  );
+}
+
+export function formatQueryRemove({
+  params,
+  key,
+}: {
+  params: string;
+  key: string;
+}) {
+  const parsedUrl = qs.parse(params);
+
+  delete parsedUrl[key];
+
+  return qs.stringifyUrl(
+    {
+      url: window.location.pathname,
+      query: parsedUrl,
+    },
+    { skipNull: true },
+  );
 }

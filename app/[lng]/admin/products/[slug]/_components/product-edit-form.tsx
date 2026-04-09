@@ -11,13 +11,11 @@ import {
   ChevronLeft,
   Edit2,
   Trash,
-  Trash2,
   Repeat,
   Images,
   ArrowRight,
   Repeat2,
   ImageUp,
-  Sparkles,
 } from "lucide-react";
 import {
   Dialog,
@@ -43,7 +41,7 @@ interface Props {
 export default function ProductEditForm({ product, categories }: Props) {
   const [isEdit, setIsEdit] = useState(false);
   const [images, setImages] = useState<string[]>(product.images);
-  //New image
+  // New image
   const [newImage, setNewImage] = useState("");
   const [oldImage, setOldImage] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -72,8 +70,7 @@ export default function ProductEditForm({ product, categories }: Props) {
     form.discount !== product.discount ||
     form.active !== product.active;
 
-  const isChangedImages = images.length > product.images.length;
-
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function handleChange(key: string, value: any) {
     setForm((prev) => ({ ...prev, [key]: value }));
   }
@@ -250,7 +247,7 @@ export default function ProductEditForm({ product, categories }: Props) {
                   <Package size={15} className="text-pink-400" />
                 </div>
                 <h2 className="text-sm font-black uppercase tracking-widest text-white">
-                  Umumiy ma'lumotlar
+                  Umumiy ma&apos;lumotlar
                 </h2>
               </div>
 
@@ -394,7 +391,7 @@ export default function ProductEditForm({ product, categories }: Props) {
                     </div>{" "}
                     <button
                       onClick={() => deleteImage(image)}
-                      className="absolute right-[2px] top-[2px] cursor-pointer rounded-[5px] bg-red-600 p-[3px] opacity-0 transition-all duration-200 hover:scale-[1.1] hover:rounded-[7px] active:scale-95 group-hover:opacity-100"
+                      className="absolute right-[2px] top-[2px] cursor-pointer rounded-[5px] bg-red-600 p-[3px] opacity-0 transition-all duration-200 hover:scale-110 hover:rounded-[7px] active:scale-95 group-hover:opacity-100"
                     >
                       {" "}
                       <X className="size-4 p-[2px] text-white" />{" "}
@@ -404,7 +401,7 @@ export default function ProductEditForm({ product, categories }: Props) {
                 {images.length < 3 && (
                   <div className="relative aspect-square overflow-hidden rounded-sm border-[1.5px] border-dashed border-pink-300">
                     {/* USER KO'RADIGAN CUSTOM DIZAYN */}
-                    <div className="flex h-full w-full flex-col items-center justify-center border-[#bfd3ff] bg-white/10 p-1 text-center">
+                    <div className="flex size-full flex-col items-center justify-center border-[#bfd3ff] bg-white/10 p-1 text-center">
                       <div className="flex size-10 items-center justify-center">
                         <ImageUp
                           className="size-6 text-white"
@@ -419,7 +416,7 @@ export default function ProductEditForm({ product, categories }: Props) {
                     {/* ASL UPLOADTHING - KO'RINMAYDI */}
                     <div className="absolute inset-0 opacity-0">
                       <UploadDropzone
-                        className="h-full w-full cursor-pointer border-0 bg-transparent"
+                        className="size-full cursor-pointer border-0 bg-transparent"
                         config={{ appendOnPaste: true, mode: "auto" }}
                         appearance={{
                           container: {
@@ -498,7 +495,7 @@ export default function ProductEditForm({ product, categories }: Props) {
 
               <div className="flex flex-col gap-3">
                 <div>
-                  <label className={labelClass}>Asosiy narx (so'm)</label>
+                  <label className={labelClass}>Asosiy narx (so&apos;m)</label>
                   <input
                     disabled={!isEdit}
                     type="number"
@@ -570,7 +567,7 @@ export default function ProductEditForm({ product, categories }: Props) {
                       )}
                     </span>
 
-                    <span className="text-[14px] font-semibold">so'm</span>
+                    <span className="text-[14px] font-semibold">so&apos;m</span>
                   </div>
                 </div>
               </div>

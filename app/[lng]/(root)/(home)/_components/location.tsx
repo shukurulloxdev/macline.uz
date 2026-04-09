@@ -1,210 +1,74 @@
-// "use client";
-
-// import React from "react";
-// import Image from "next/image";
-// import { MapPin, Phone, Clock, ArrowUpRight } from "lucide-react";
-// import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
-// const branches = [
-//   {
-//     id: "fargona",
-//     name: "Farg‘ona filiali",
-//     address: "Mustaqillik ko‘chasi, 42-uy",
-//     workTime: "09:00 - 20:00",
-//     phone: "+998 90 123 45 67",
-//     mapUrl:
-//       "https://yandex.ru/map-widget/v1/?um=constructor%3A0b843d3353a9d831a1493ca53d631d3777888b0b86dbdd57e92a1d4e44872049&source=constructor",
-//     image: "/menejer/showroom.png",
-//   },
-// {
-//   id: "toshkent",
-//   name: "Toshkent filiali",
-//   address: "Amir Temur shoh ko‘chasi, 108",
-//   workTime: "10:00 - 22:00",
-//   phone: "+998 71 200 00 00",
-//   mapUrl:
-//     "https://yandex.ru/map-widget/v1/?um=constructor%3Atoshkent-map&source=constructor",
-//   image: "/menejer/showroom.png",
-// },
-// {
-//   id: "samarqand",
-//   name: "Samarqand filiali",
-//   address: "Registon ko‘chasi, 15",
-//   workTime: "09:00 - 19:00",
-//   phone: "+998 66 500 00 00",
-//   mapUrl:
-//     "https://yandex.ru/map-widget/v1/?um=constructor%3Asamarqand-map&source=constructor",
-//   image: "/menejer/showroom.png",
-// },
-// ];
-
-// function Location() {
-//   return (
-//     <section className="mx-auto max-w-7xl px-6 py-24">
-//       <Tabs defaultValue="fargona" className="w-full">
-//         {/* 1. Header & Tabs Navigation */}
-//         <div className="mb-16 flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
-//           <div className="max-w-2xl space-y-4">
-//             <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-blue-600">
-//               <MapPin size={14} fill="currentColor" />
-//               <span>Global Presence</span>
-//             </div>
-//             <h2 className="font-sora text-5xl font-bold tracking-tighter text-black">
-//               Bizning showroomlar
-//             </h2>
-//             <p className="max-w-lg text-lg leading-relaxed text-neutral-500">
-//               Mahsulotlarimizni jonli ko&apos;rish va mutaxassislarimizdan
-//               maslahat olish uchun sizga yaqin bo&apos;lgan filialga tashrif
-//               buyuring.
-//             </p>
-//           </div>
-
-//           <TabsList className="flex h-auto gap-2 rounded-[2rem] bg-neutral-100 p-2">
-//             {branches.map((branch) => (
-//               <TabsTrigger
-//                 key={branch.id}
-//                 value={branch.id}
-//                 className="rounded-full px-8 py-4 text-xs font-bold uppercase tracking-widest transition-all data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-2xl"
-//               >
-//                 {branch.id}
-//               </TabsTrigger>
-//             ))}
-//           </TabsList>
-//         </div>
-
-//         {/* 2. Content: The Interactive Experience */}
-//         {branches.map((branch) => (
-//           <TabsContent
-//             key={branch.id}
-//             value={branch.id}
-//             className="mt-0 outline-none"
-//           >
-//             <div className="grid grid-cols-1 overflow-hidden rounded-[3rem] bg-neutral-50 lg:grid-cols-12">
-//               {/* Chap tomonda: Ma'lumotlar kartasi */}
-//               <div className="flex flex-col justify-between p-12 lg:col-span-4">
-//                 <div className="space-y-10">
-//                   <div>
-//                     <h3 className="text-3xl font-bold tracking-tight text-black">
-//                       {branch.name}
-//                     </h3>
-//                     <p className="mt-2 text-neutral-500">{branch.address}</p>
-//                   </div>
-
-//                   <div className="grid gap-6">
-//                     <div className="group flex items-center gap-4">
-//                       <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white shadow-sm transition-colors group-hover:bg-black group-hover:text-white">
-//                         <Clock size={20} />
-//                       </div>
-//                       <div>
-//                         <p className="text-[10px] font-bold uppercase text-neutral-400">
-//                           Ish vaqti
-//                         </p>
-//                         <p className="text-sm font-semibold">
-//                           {branch.workTime}
-//                         </p>
-//                       </div>
-//                     </div>
-
-//                     <div className="group flex items-center gap-4">
-//                       <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white shadow-sm transition-colors group-hover:bg-black group-hover:text-white">
-//                         <Phone size={20} />
-//                       </div>
-//                       <div>
-//                         <p className="text-[10px] font-bold uppercase text-neutral-400">
-//                           Aloqa
-//                         </p>
-//                         <p className="text-sm font-semibold">{branch.phone}</p>
-//                       </div>
-//                     </div>
-//                   </div>
-//                 </div>
-
-//                 <button className="group mt-12 flex w-full items-center justify-between rounded-2xl bg-black p-5 text-white transition-transform active:scale-95">
-//                   <span className="text-xs font-bold uppercase tracking-widest">
-//                     Marshrutni chizish
-//                   </span>
-//                   <ArrowUpRight className="transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
-//                 </button>
-//               </div>
-
-//               {/* Markazda: Estetik Rasm */}
-//               <div className="relative h-[400px] w-full lg:col-span-3 lg:h-auto">
-//                 <Image
-//                   src={branch.image}
-//                   alt={branch.name}
-//                   fill
-//                   className="object-cover grayscale transition-all duration-700 hover:grayscale-0"
-//                 />
-//                 <div className="absolute inset-0 bg-black/10" />
-//               </div>
-
-//               {/* O'ng tomonda: Katta Xarita */}
-//               <div className="relative h-[500px] lg:col-span-5 lg:h-auto">
-//                 <iframe
-//                   src={branch.mapUrl}
-//                   className="h-full w-full contrast-125 grayscale transition-all duration-1000 hover:contrast-100 hover:grayscale-0"
-//                   style={{ border: 0 }}
-//                   allowFullScreen
-//                 />
-//               </div>
-//             </div>
-//           </TabsContent>
-//         ))}
-//       </Tabs>
-//     </section>
-//   );
-// }
-
-// export default Location;
 "use client";
 
 import React from "react";
 import Image from "next/image";
-import { MapPin, Phone, Clock, ArrowUpRight, Sparkles } from "lucide-react";
+import { Phone, Clock, Sparkles, AppleIcon, ArrowUpRight } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Link from "next/link";
 
 const branches = [
   {
-    id: "fargona",
-    name: "Farg‘ona filiali",
-    address: "Mustaqillik ko‘chasi, 42-uy",
-    workTime: "09:00 - 20:00",
-    phone: "+998 90 123 45 67",
-    mapUrl:
-      "https://yandex.ru/map-widget/v1/?um=constructor%3A0b843d3353a9d831a1493ca53d631d3777888b0b86dbdd57e92a1d4e44872049&source=constructor",
-    image: "/menejer/showroom.png",
-  },
-  {
     id: "toshkent",
-    name: "Toshkent filiali",
-    address: "Amir Temur shoh ko‘chasi, 108",
-    workTime: "10:00 - 22:00",
-    phone: "+998 71 200 00 00",
+    name: "Toshkent ",
+    address: "Toshkent shahar, Mirobod tumani, Alfraganus savdo markazi",
+    workTime: "09:00 - 22:00",
+    phone: "+998 90) 201-58-58",
     mapUrl:
-      "https://yandex.ru/map-widget/v1/?um=constructor%3Atoshkent-map&source=constructor",
-    image: "/menejer/showroom.png",
+      "https://yandex.com/map-widget/v1/?um=constructor%3Acffde96a3984f1d00fe8f10c32f1fcc613662afdd3df8a76effaef53b2d11ca2&amp;source=constructor",
+    openMapUrl:
+      "https://yandex.uz/maps/?text=Toshkent%20shahar%2C%20Mirobod%20tumani%2C%20Alfraganus%20savdo%20markazi",
+    image: "/menejer/store.png",
   },
   {
     id: "samarqand",
-    name: "Samarqand filiali",
-    address: "Registon ko‘chasi, 15",
-    workTime: "09:00 - 19:00",
-    phone: "+998 66 500 00 00",
+    name: "Samarqand",
+    address:
+      "Samarkand shahar, Shohrukh Mirzo ko'cha, Makon Mall savdo markazi",
+    workTime: "09:00 - 21:00",
+    phone: "+998 91) 813-41-41",
+    openMapUrl: "https://yandex.uz/maps/?text=Makon%20Mall%20Samarkand",
     mapUrl:
-      "https://yandex.ru/map-widget/v1/?um=constructor%3Asamarqand-map&source=constructor",
-    image: "/menejer/showroom.png",
+      "https://yandex.com/map-widget/v1/?um=constructor%3A7eca741ac99e97af468f08f3ed63230e85ca16e153571fca1dfb1ab9ea329464&amp;source=constructor",
+    image: "/menejer/store3.png",
   },
-  // ... boshqa filiallar
+  {
+    id: "fargona",
+    name: "Farg‘ona",
+    address: "Farg'ona shahar, Mustaqillik shoh ko'chasi 13, Mo'jal: Korzinka",
+    workTime: "09:00 - 22:00",
+    phone: "+998 90) 533-43-69",
+    openMapUrl:
+      "https://yandex.uz/maps/?text=Fargona%20Mustaqillik%20shoh%20kochasi%2013",
+    mapUrl:
+      "https://yandex.com/map-widget/v1/?um=constructor%3A861ec5ea6757329e7beca5d56695bd470b00a061b116012ef9c760bb2abba6a6&amp;source=constructor",
+    image: "/menejer/store2.png",
+  },
+  {
+    id: "andijon",
+    name: "Andijon",
+    address:
+      "Andijon shahar, Choʻlpon shoh koʻchasi, Uzbegim savdo majumosi,  ",
+    workTime: "09:00 - 22:00",
+    phone: "+998 90) 201-58-58",
+    openMapUrl:
+      "https://yandex.uz/maps/?text=Uzbegim%20savdo%20majmuasi%20Andijon",
+    mapUrl:
+      "https://yandex.com/map-widget/v1/?um=constructor%3Aa9ab98344cf8695c1665e92fde9ce91c645a31febdd6c79d8c446a40e4d1fe25&amp;source=constructor",
+    image: "/menejer/store4.png",
+  },
 ];
 
 function Location() {
+  function handleOpenMap(url: string) {
+    window.open(url, "_blank", "noopener,noreferrer");
+  }
+
   return (
     <section className="mx-auto max-w-7xl py-12">
-      <Tabs defaultValue="fargona" className="w-full">
-        {/* 1. Header & Navigation */}
-        <div className="mb-8 flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
-          <div className="max-w-2xl space-y-4">
-            <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-pink-600">
+      <Tabs defaultValue="toshkent" className="w-full">
+        <div className="mb-6 flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
+          <div className="space-y-2">
+            <div className="flex items-center gap-2 text-[9px] font-black uppercase tracking-[0.3em] text-pink-600">
               <Sparkles size={14} fill="currentColor" />
               <span>Do'konlar tarmog'i</span>
             </div>
@@ -213,8 +77,8 @@ function Location() {
             </h2>
           </div>
 
-          <TabsList className="flex h-auto gap-2 rounded-full border border-pink-100 bg-pink-50/30 p-2 backdrop-blur-sm">
-            {["fargona", "toshkent", "samarqand"].map((id) => (
+          <TabsList className="flex h-auto gap-2 rounded-full border border-pink-200 bg-pink-50/50 p-2 backdrop-blur-sm">
+            {["toshkent", "samarqand", "fargona", "andijon"].map((id) => (
               <TabsTrigger
                 key={id}
                 value={id}
@@ -226,28 +90,27 @@ function Location() {
           </TabsList>
         </div>
 
-        {/* 2. Main Content Card */}
         {branches.map((branch) => (
           <TabsContent
             key={branch.id}
             value={branch.id}
             className="mt-0 outline-none"
           >
-            <div className="grid grid-cols-1 overflow-hidden rounded-[2rem] border border-pink-300 bg-pink-50 shadow-[0_40px_100px_rgba(219,39,119,0.03)] lg:grid-cols-12">
-              {/* Left: Info Panel */}
-              <div className="flex flex-col justify-between bg-gradient-to-b from-pink-50/50 to-transparent p-12 lg:col-span-4">
-                <div className="space-y-12">
+            <div className="grid grid-cols-1 overflow-hidden rounded-3xl border border-pink-300 bg-pink-50 shadow-[0_40px_100px_rgba(219,39,119,0.03)] lg:grid-cols-12">
+              <div className="col-span-4 flex flex-col justify-between bg-gradient-to-b from-pink-50/50 to-transparent p-12">
+                <div className="space-y-10">
                   <div>
                     <h3 className="text-4xl font-bold tracking-tight text-neutral-900">
-                      {branch.name}
+                      <span className="text-pink-600"></span> {branch.name}{" "}
+                      filiali
                     </h3>
-                    <div className="mt-3 h-1 w-20 rounded-full bg-pink-600" />
-                    <p className="mt-6 text-[16px] font-medium leading-relaxed text-neutral-500">
+                    <div className="mt-2 h-[2px] w-44 rounded-full bg-pink-600" />
+                    <p className="mt-5 min-h-[52px] text-[16px] font-medium leading-relaxed text-neutral-500">
                       {branch.address}
                     </p>
                   </div>
 
-                  <div className="space-y-8">
+                  <div className="space-y-4">
                     <div className="group flex items-center gap-5">
                       <div className="flex size-14 items-center justify-center rounded-2xl bg-white text-pink-600 shadow-sm ring-1 ring-pink-100 transition-all group-hover:bg-pink-600 group-hover:text-white group-hover:shadow-pink-200">
                         <Clock size={24} />
@@ -277,38 +140,41 @@ function Location() {
                     </div>
                   </div>
                 </div>
-
-                <button className="group mt-16 flex w-full items-center justify-between overflow-hidden rounded-[2rem] bg-neutral-900 px-6 py-2 text-white transition-all duration-300 hover:bg-pink-600 hover:shadow-[0_20px_40px_rgba(219,39,119,0.3)] active:scale-95">
-                  <span className="text-xs font-black uppercase tracking-[0.2em]">
-                    Marshrutni ko&apos;rish
-                  </span>
-                  <div className="flex size-10 items-center justify-center rounded-full bg-white/10 backdrop-blur-md transition-transform group-hover:rotate-45">
-                    <ArrowUpRight size={20} />
-                  </div>
-                </button>
+                <div className="mt-12">
+                  <button
+                    onClick={() => handleOpenMap(branch.openMapUrl)}
+                    className="group flex w-full items-center justify-between overflow-hidden rounded-2xl bg-pink-600 px-6 py-2 text-white transition-all duration-300 hover:scale-[1.03] hover:bg-pink-700 active:scale-95"
+                  >
+                    <span className="text-xs font-black uppercase tracking-[0.2em]">
+                      Marshrutni boshlash
+                    </span>
+                    <div className="flex size-10 items-center justify-center rounded-full bg-white/15 backdrop-blur-md transition-transform group-hover:rotate-45">
+                      {/* <AppleIcon size={20} /> */}
+                      <ArrowUpRight size={20} />
+                    </div>
+                  </button>
+                </div>
               </div>
 
-              {/* Middle: Atmospheric Image */}
-              <div className="relative h-[400px] overflow-hidden lg:col-span-3 lg:h-auto">
+              <div className="relative col-span-3 h-full overflow-hidden">
                 <Image
                   src={branch.image}
                   alt={branch.name}
                   fill
                   className="object-cover transition-transform duration-1000 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-pink-900/10 mix-blend-multiply" />
-                <div className="absolute inset-0 bg-gradient-to-r from-pink-50/20 to-transparent" />
+                <div className="absolute inset-0 bg-pink-600/5" />
               </div>
 
               {/* Right: Modern Map */}
-              <div className="relative h-[500px] lg:col-span-5 lg:h-auto">
+              <div className="relative h-full lg:col-span-5">
                 <iframe
                   src={branch.mapUrl}
-                  className="size-full opacity-80 contrast-125 grayscale transition-all duration-700 hover:opacity-100 hover:grayscale-0"
+                  className="size-full opacity-80 contrast-125 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
                   style={{
                     border: 0,
                     filter: "hue-rotate(300deg) saturate(1.2)",
-                  }} // Xaritaga ham pushti ohang beradi
+                  }}
                   allowFullScreen
                 />
               </div>

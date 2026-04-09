@@ -56,6 +56,16 @@ export const getProducts = actionClient
     return JSON.parse(JSON.stringify(data));
   });
 
+export const getAllProducts = actionClient
+  .schema(searchParamsSchema)
+  .action<ReturnActionType>(async ({ parsedInput }) => {
+    const { data } = await clientAxios.get("/api/user/all-products", {
+      params: parsedInput,
+    });
+
+    return JSON.parse(JSON.stringify(data));
+  });
+
 export const getFavorites = actionClient
   .schema(idsSchema)
   .action<ReturnActionType>(async ({ parsedInput }) => {
