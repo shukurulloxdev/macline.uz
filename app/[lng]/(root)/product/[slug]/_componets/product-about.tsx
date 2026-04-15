@@ -42,9 +42,8 @@
 // }
 "use client";
 
-import { cn } from "@/lib/utils";
 import { IProduct } from "@/types";
-import { Info, Sparkles, CheckCircle2 } from "lucide-react";
+import { Info } from "lucide-react";
 
 export default function ProductAbout({ product }: { product: IProduct }) {
   // Matnni gaplarga ajratish

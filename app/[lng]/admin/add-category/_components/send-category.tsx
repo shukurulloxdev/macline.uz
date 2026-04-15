@@ -10,7 +10,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { addCategorySchema } from "@/lib/validation";
-import { Save, Rocket, ImagePlus, X, Ban } from "lucide-react";
+import { Save, Rocket, ImagePlus, X, Ban, LoaderCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import { Input } from "@/components/ui/input";
@@ -20,11 +20,13 @@ import { UploadDropzone } from "@/lib/uploadthing";
 import { useState } from "react";
 import { toast } from "sonner";
 import Image from "next/image";
-import { createCategory } from "@/actions/admin-actions";
-import { generateSlug } from "@/lib/utils";
+import { createCategory, deleteFile } from "@/actions/admin-actions";
+import { cn, generateSlug } from "@/lib/utils";
 
 function SendCategory() {
   const [image, setImage] = useState<string>();
+  const [isLoading, setIsLoading] = useState(false);
+
   const form = useForm<z.infer<typeof addCategorySchema>>({
     resolver: zodResolver(addCategorySchema),
     defaultValues: {
@@ -59,6 +61,22 @@ function SendCategory() {
 
     form.reset();
     setImage("");
+  }
+
+  async function deleteImageUplodthing(imageUrl: string) {
+    setIsLoading(true);
+    try {
+      const res = await deleteFile(imageUrl);
+
+      if (res?.status === 200) {
+        setIsLoading(false);
+        setImage("");
+      } else {
+        toast.error("O'chirishda xato yuz berdi ❌");
+      }
+    } catch (err) {
+      toast.error(`O'chirishda xato yuz berdi ❌, ERR ${err}`);
+    }
   }
   return (
     <Form {...form}>
@@ -212,19 +230,29 @@ function SendCategory() {
             )}
 
             {image && (
-              <div className="relative h-72 w-full overflow-hidden">
+              <div className="group relative h-72 w-full overflow-hidden">
                 <Image
                   src={image}
                   alt={image}
                   fill
-                  className="rounded-xl object-cover"
+                  className={cn(
+                    "rounded-xl object-cover",
+                    isLoading ? "brightness-75" : "group-hover:brightness-90",
+                  )}
                 />
-                <span
-                  className="absolute right-1 top-1 cursor-pointer rounded-sm bg-red-600/80 p-1 text-white hover:scale-105 hover:bg-red-600 hover:shadow-sm active:scale-95"
-                  onClick={() => setImage("")}
-                >
-                  <X size={16} />
-                </span>
+                {!isLoading && (
+                  <span
+                    className="absolute right-1 top-1 cursor-pointer rounded-sm bg-red-600/80 p-1 text-white hover:scale-105 hover:bg-red-600 hover:shadow-sm active:scale-95"
+                    onClick={() => deleteImageUplodthing(image)}
+                  >
+                    <X size={16} />
+                  </span>
+                )}
+                {isLoading && (
+                  <span className="absolute inset-0 flex animate-spin cursor-pointer items-center justify-center text-white">
+                    <LoaderCircle className="!size-10" />
+                  </span>
+                )}
               </div>
             )}
           </div>

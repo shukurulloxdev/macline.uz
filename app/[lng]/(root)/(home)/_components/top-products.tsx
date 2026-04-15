@@ -18,10 +18,10 @@ interface Props {
 function PopProducts({ topProducts }: Props) {
   console.log("Hammasi", topProducts.length);
   return (
-    <section className="mx-auto max-w-7xl py-3">
+    <section className="mx-auto max-w-7xl py-4">
       <div className="flex items-end justify-between pb-2">
         <h1 className="font-sora text-3xl font-semibold tracking-tight text-gray-800">
-          Top texnikalar
+          Top mahsulotlar
         </h1>
         <Link
           href={"/category/tops"}

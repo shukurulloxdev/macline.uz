@@ -1,6 +1,6 @@
 "use client";
 import ProductCard from "@/components/cards/product-card";
-import { MoveRight, Sparkles } from "lucide-react";
+import { MoveRight } from "lucide-react";
 import React from "react";
 import {
   Carousel,
@@ -19,18 +19,18 @@ interface Props {
 
 function DiscountProducts({ discountProducts }: Props) {
   return (
-    <section className="mx-auto max-w-7xl py-6">
-      <div className="relative overflow-hidden rounded-3xl border border-pink-200 bg-pink-50 p-6 shadow-sm">
-        <div className="relative z-10 mb-4 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
-          <h2 className="font-sora text-4xl font-bold tracking-tight text-neutral-900">
+    <section className="mx-auto my-4 max-w-7xl">
+      <div className="relative overflow-hidden rounded-3xl border border-pink-200 bg-pink-600/5 p-5 shadow-sm">
+        <div className="relative z-10 mb-2 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+          <h2 className="font-sora text-3xl font-bold tracking-tight text-neutral-900">
             Katta <span className="text-pink-600">Chegirmalar</span>
           </h2>
 
           <Link
             href={"/category/discounts"}
-            className="group/btn flex items-center gap-3 rounded-2xl bg-pink-600 px-6 py-2 text-xs font-black uppercase tracking-widest text-white transition-all hover:bg-pink-500 hover:shadow-xl active:scale-95"
+            className="group/btn flex items-center gap-3 rounded-2xl bg-pink-600 px-5 py-[6px] text-xs font-black uppercase tracking-widest text-white transition-all hover:bg-pink-500 hover:shadow-xl active:scale-95"
           >
-            <span>Barchasini ko'rish</span>
+            <span>Barchasini ko&apos;rish</span>
 
             <MoveRight
               size={16}

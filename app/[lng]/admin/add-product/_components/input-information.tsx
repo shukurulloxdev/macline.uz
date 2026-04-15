@@ -25,7 +25,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { formatPrice } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Ban, ImagePlus, Rocket, Save, Sparkles } from "lucide-react";
+import { Ban, ImagePlus, Rocket } from "lucide-react";
 import UploadImg from "./upload-img";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
@@ -50,6 +50,8 @@ function InputInformation({ activeCategories }: Props) {
     top: false,
     discount: false,
     percent: "",
+    kafolat: "",
+    count: "",
   };
   const form = useForm<z.infer<typeof addProductSchema>>({
     resolver: zodResolver(addProductSchema),
@@ -85,12 +87,6 @@ function InputInformation({ activeCategories }: Props) {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <div className="flex items-center justify-between">
           <div className="space-y-1">
-            {/* <div className="flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1">
-              <Sparkles size={12} className="text-pink-500" />
-              <span className="text-[10px] font-black uppercase tracking-widest text-white/70">
-                Inventarizatsiya
-              </span>
-            </div> */}
             <h1 className="font-sora text-4xl font-black uppercase italic tracking-tighter text-white">
               Yangi <span className="not-italic text-pink-600"> Mahsulot</span>{" "}
               Qoshish
@@ -105,7 +101,7 @@ function InputInformation({ activeCategories }: Props) {
               onClick={() => form.reset(defaultValues)}
               type="button"
               variant="ghost"
-              className="h-14 rounded-2xl border border-white/5 bg-white/5 px-6 font-bold text-white hover:bg-white/10 hover:text-pink-400"
+              className="h-14 rounded-2xl border border-white/5 bg-white/[0.04] px-6 font-bold text-white hover:bg-white/10 hover:text-pink-400"
             >
               <Ban className="mr-1 size-4" /> Bekor qilish
             </Button>
@@ -121,7 +117,7 @@ function InputInformation({ activeCategories }: Props) {
         <div className="grid grid-cols-3 items-start gap-4 max-md:grid-cols-1">
           <div className="rounded-2xl border border-white/20 bg-white/5 p-6 md:col-span-2">
             <div className="grid grid-cols-2 gap-4">
-              <div className="rounded-2xl bg-white/5 p-4">
+              <div className="rounded-2xl bg-white/[0.04] p-4">
                 <FormField
                   control={form.control}
                   name="name"
@@ -142,7 +138,7 @@ function InputInformation({ activeCategories }: Props) {
                   )}
                 />
               </div>
-              <div className="rounded-2xl bg-white/5 p-4">
+              <div className="rounded-2xl bg-white/[0.04] p-4">
                 <FormField
                   control={form.control}
                   name="category"
@@ -180,7 +176,7 @@ function InputInformation({ activeCategories }: Props) {
                   )}
                 />
               </div>
-              <div className="col-span-2 rounded-2xl bg-white/5 p-4">
+              <div className="col-span-2 rounded-2xl bg-white/[0.04] p-4">
                 <FormField
                   control={form.control}
                   name="description"
@@ -201,7 +197,7 @@ function InputInformation({ activeCategories }: Props) {
                   )}
                 />
               </div>
-              <div className="rounded-2xl bg-white/5 p-4">
+              <div className="items-start rounded-2xl bg-white/[0.04] p-4">
                 <FormField
                   control={form.control}
                   name="brand"
@@ -214,7 +210,7 @@ function InputInformation({ activeCategories }: Props) {
                         <Input
                           className="border-white/20 bg-white/10 text-white transition-all duration-200 placeholder:text-slate-400 focus:border-indigo-500 focus:ring-1 focus:ring-pink-500"
                           {...field}
-                          placeholder="Brend nomi"
+                          placeholder="Masalan: Iphone"
                         />
                       </FormControl>
                       <FormMessage />
@@ -222,7 +218,92 @@ function InputInformation({ activeCategories }: Props) {
                   )}
                 />
               </div>
-              <div className="rounded-2xl bg-white/5 p-4">
+              <div className="rounded-2xl bg-white/[0.04] p-4">
+                <FormField
+                  control={form.control}
+                  name="kafolat"
+                  render={({ field }) => {
+                    const rawNumber = (field.value || "").replace(/\D/g, "");
+
+                    const setKafolatUnit = (unit: "Oy" | "Yil") => {
+                      if (!rawNumber) return;
+                      form.setValue("kafolat", `${rawNumber} ${unit}`, {
+                        shouldDirty: true,
+                        shouldValidate: true,
+                      });
+                    };
+
+                    return (
+                      <FormItem>
+                        <FormLabel className="font-inter text-lg font-bold text-white">
+                          Kafolat muddati
+                        </FormLabel>
+
+                        <FormControl>
+                          <Input
+                            className="border-white/20 bg-white/10 text-white transition-all duration-200 placeholder:text-slate-400 focus:border-indigo-500 focus:ring-1 focus:ring-pink-500"
+                            value={field.value}
+                            onChange={(e) => {
+                              const value = e.target.value;
+
+                              // Faqat raqam qismini yozishga ruxsat beramiz
+                              const numberOnly = value.replace(/\D/g, "");
+                              field.onChange(numberOnly);
+                            }}
+                            placeholder="Masalan: 10"
+                          />
+                        </FormControl>
+
+                        {rawNumber && (
+                          <div className="mt-3 flex gap-2">
+                            <button
+                              type="button"
+                              onClick={() => setKafolatUnit("Oy")}
+                              className="rounded-xl border border-pink-500/30 bg-pink-500/10 px-4 py-2 text-sm font-semibold text-pink-300 transition-all hover:bg-pink-500/20 active:scale-95"
+                            >
+                              Oy
+                            </button>
+
+                            <button
+                              type="button"
+                              onClick={() => setKafolatUnit("Yil")}
+                              className="rounded-xl border border-blue-500/30 bg-blue-500/10 px-4 py-2 text-sm font-semibold text-blue-300 transition-all hover:bg-blue-500/20 active:scale-95"
+                            >
+                              Yil
+                            </button>
+                          </div>
+                        )}
+
+                        <FormMessage />
+                      </FormItem>
+                    );
+                  }}
+                />
+              </div>
+              <div className="rounded-2xl bg-white/[0.04] p-4">
+                <FormField
+                  control={form.control}
+                  name="count"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="font-inter text-lg font-bold text-white">
+                        Ushbu mahsulot soni
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="number"
+                          className="border-white/20 bg-white/10 text-white transition-all duration-200 placeholder:text-slate-400 focus:border-indigo-500 focus:ring-1 focus:ring-pink-500"
+                          {...field}
+                          placeholder="Masalan: 20"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className="rounded-2xl bg-white/[0.04] p-4">
                 <FormField
                   control={form.control}
                   name="price"
@@ -240,7 +321,7 @@ function InputInformation({ activeCategories }: Props) {
                           type="number"
                           className="border-white/20 bg-white/10 text-white transition-all duration-200 placeholder:text-slate-400 focus:border-indigo-500 focus:ring-1 focus:ring-pink-500"
                           {...field}
-                          placeholder="Mahsulot narxi"
+                          placeholder="Masalan: 3000000"
                         />
                       </FormControl>
                       <FormMessage />
@@ -248,7 +329,7 @@ function InputInformation({ activeCategories }: Props) {
                   )}
                 />
               </div>
-              <div className="col-span-2 grid grid-cols-2 gap-4 rounded-2xl bg-white/5 p-4">
+              <div className="col-span-2 grid grid-cols-2 gap-4 rounded-2xl bg-white/[0.04] p-4">
                 <div className="space-y-4">
                   <FormField
                     control={form.control}
@@ -328,7 +409,7 @@ function InputInformation({ activeCategories }: Props) {
               </div>
             </div>
           </div>
-          <div className="space-y-4 rounded-2xl border border-white/20 bg-white/5 p-6">
+          <div className="space-y-4 rounded-2xl border border-white/20 bg-white/[0.04] p-6">
             <div className="flex items-center justify-between">
               <h1 className="flex items-center gap-2 font-inter text-lg font-bold text-white">
                 <span>Rasim yuklash</span>

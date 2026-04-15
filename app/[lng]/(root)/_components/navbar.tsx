@@ -15,7 +15,6 @@ import { cn } from "@/lib/utils";
 import Logo from "@/components/shared/logo";
 import LngMenu from "@/components/shared/lng-menu";
 import KatalogMenu from "./katalog-menu";
-import { getCategories } from "@/actions/user-actions";
 import { ICategory } from "@/types";
 import RegisterModal from "./register-modal";
 import { UserMenu } from "@/components/shared/user-menu";
@@ -23,12 +22,15 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import InputSearch from "./input-search";
 
-function Navbar() {
+interface Props {
+  katalog: ICategory[];
+}
+function Navbar({ katalog }: Props) {
   // const { lng } = useParams();
   // const { t } = useTranslation(lng as string, "home");
+  console.log("KATALOGG", katalog);
 
   const [isCategoryVisible, setIsCategoryVisible] = useState(true);
-  const [katalog, setKatalog] = useState<ICategory[]>([]);
 
   const pathname = usePathname();
 
@@ -43,18 +45,7 @@ function Navbar() {
 
   const { user, isLoading } = useSelector((state: RootState) => state.user);
 
-  async function getData() {
-    try {
-      const allCategories = await getCategories();
-      setKatalog(allCategories.data?.categories || []);
-    } catch {
-      console.error("Katalog xatolik");
-    }
-  }
-
   useEffect(() => {
-    getData();
-
     const handleScroll = () => {
       const scrollY = window.scrollY;
       if (scrollY > 10 && isCategoryVisible) setIsCategoryVisible(false);
@@ -131,7 +122,7 @@ function Navbar() {
             <KatalogMenu categories={katalog} />
           </div>
 
-          <InputSearch />
+          <InputSearch categories={katalog} />
 
           <div className={cn("z-10 flex items-center gap-4")}>
             <div className="flex items-center gap-4">

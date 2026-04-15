@@ -1,16 +1,24 @@
-import React from "react";
 import Hero from "./_components/hero";
 import Categories from "./_components/categories";
 import PopProducts from "./_components/top-products";
-import Location from "./_components/location";
-import { getCategories, getTopProducts } from "@/actions/user-actions";
+import LocationSection from "./_components/location";
+import {
+  getCategories,
+  getDiscountProducts,
+  getTopProducts,
+} from "@/actions/user-actions";
 import DiscountProducts from "./_components/discount-products";
 import MaclineServices from "./_components/services";
-import TopProInfo from "./_components/top-pro-info";
+import DiscountProInfo from "./_components/top-pro-info";
+import BigProducts from "./_components/big-products";
+import SmallProducts from "./_components/small-products";
+import All16Products from "./_components/all-16products";
+import Profession from "./_components/profession";
 
 // actionClient ham javobni to'gridan to'gri qaytaramaydi o'zini obyectini qaytaradi
 async function Page() {
   const topProducts = await getTopProducts();
+  const discountProducts = await getDiscountProducts();
   const allCategories = await getCategories();
 
   return (
@@ -18,23 +26,21 @@ async function Page() {
       <Hero />
       <Categories allCategories={allCategories.data?.categories || []} />
       <PopProducts topProducts={topProducts.data?.products || []} />
-      <DiscountProducts discountProducts={topProducts.data?.products || []} />
-      <TopProInfo discountProducts={topProducts.data?.products || []} />
-      <Location />
-      <MaclineServices />;
+      <DiscountProducts
+        discountProducts={discountProducts.data?.products || []}
+      />
+      <BigProducts bigProducts={discountProducts.data?.products || []} />
+      <SmallProducts smallProducts={discountProducts.data?.products || []} />
+      <DiscountProInfo
+        discountProducts={discountProducts.data?.products || []}
+      />
+      <All16Products products={discountProducts.data?.products || []} />
+      <Profession />
+      <LocationSection />
+      {/* <Location /> */}
+      <MaclineServices />
     </div>
   );
 }
 
 export default Page;
-
-{
-  /* <BigProducts bigProducts={topProducts.data?.products || []} />
-      <SmallProducts smallProducts={topProducts.data?.products || []} /> */
-}
-{
-  /* <MaclineServices />; */
-}
-{
-  /* <SearchTabel /> */
-}

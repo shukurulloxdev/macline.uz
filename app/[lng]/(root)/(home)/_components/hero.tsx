@@ -27,6 +27,10 @@ function Hero() {
       src: "/heroimages/chegirma.png",
       slug: "discounts",
     },
+    {
+      src: "/menejer/client.jpg",
+      slug: "discount",
+    },
   ];
 
   const [api, setApi] = useState<CarouselApi>();

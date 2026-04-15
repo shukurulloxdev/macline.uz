@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Loader2, ShoppingBag } from "lucide-react";
-import Link from "next/link";
+import { Loader2 } from "lucide-react";
 import { getBasketProducts } from "@/actions/user-actions";
 import BasketSummary from "./_componets/basket-summary";
 import AllBasketProducts from "./_componets/all-basket-products";

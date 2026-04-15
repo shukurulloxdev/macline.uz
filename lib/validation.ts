@@ -11,7 +11,8 @@ export const addProductSchema = z
     brand: z.string().min(1, "Brend majburiy"),
 
     price: z.string().min(1, "Narx majburiy"),
-
+    kafolat: z.string().optional(),
+    count: z.string(),
     top: z.boolean().optional(),
     discount: z.boolean().optional(),
     percent: z.string().optional(),
@@ -56,7 +57,7 @@ export const searchParamsSchema = z.object({
   filter: z.string().optional(),
   category: z.string().optional(),
   page: z.string().default("1"),
-  pageSize: z.string().default("10"),
+  pageSize: z.string().default("9"),
 });
 
 export const addCategorySchema = z.object({

@@ -16,6 +16,8 @@ import {
   ArrowRight,
   Repeat2,
   ImageUp,
+  LoaderCircle,
+  Loader,
 } from "lucide-react";
 import {
   Dialog,
@@ -28,8 +30,8 @@ import Link from "next/link";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
-import { formatCurrentPrice } from "@/lib/utils";
-import { adminProductUpdate } from "@/actions/admin-actions";
+import { cn, formatCurrentPrice } from "@/lib/utils";
+import { adminProductUpdate, deleteFile } from "@/actions/admin-actions";
 import { toast } from "sonner";
 import { UploadDropzone } from "@/lib/uploadthing";
 
@@ -40,6 +42,10 @@ interface Props {
 
 export default function ProductEditForm({ product, categories }: Props) {
   const [isEdit, setIsEdit] = useState(false);
+  const [imageIsLoading, setImageIsLoading] = useState(false);
+  const [cencelImageIsLoading, setCencelImageIsLoading] = useState(false);
+  const [replaceIsLoading, setReplaceIsLoading] = useState(false);
+  const [deletedImage, setDeletedImage] = useState("");
   const [images, setImages] = useState<string[]>(product.images);
   // New image
   const [newImage, setNewImage] = useState("");
@@ -76,26 +82,34 @@ export default function ProductEditForm({ product, categories }: Props) {
   }
 
   async function replacementImage() {
-    const updatedImages = images.map((image) =>
-      image === oldImage ? newImage : image,
-    );
+    try {
+      const updatedImages = images.map((image) =>
+        image === oldImage ? newImage : image,
+      );
+      setReplaceIsLoading(true);
+      const res = await adminProductUpdate({
+        id: product._id,
+        images: updatedImages, // ← yangi images
+      });
 
-    // State ni yangilang
-    setImages(updatedImages);
+      if (res.serverError) return console.log(res.serverError);
 
-    // Yangi images ni yuboring
-    const res = await adminProductUpdate({
-      id: product._id,
-      images: updatedImages, // ← yangi images
-    });
+      if (res.data?.status === 200) {
+        const response = await deleteFile(oldImage);
 
-    if (res.serverError) return console.log(res.serverError);
-
-    if (res.data?.status === 200) {
+        if (response?.status === 200) {
+          setImages(updatedImages);
+          setReplaceIsLoading(false);
+          setIsOpen(false);
+          setNewImage("");
+          setOldImage("");
+          toast.success("Rasim almashtirildi ✅");
+        }
+      }
+      setReplaceIsLoading(false);
+    } catch (err) {
       setIsOpen(false);
-      setNewImage("");
-      setOldImage("");
-      toast.success("Rasim yangilandi ✅");
+      console.log(err);
     }
   }
 
@@ -133,9 +147,9 @@ export default function ProductEditForm({ product, categories }: Props) {
       const isDeleted = confirm("Haqiqatan ham rasimni o'chirmoqchimisiz 🚮");
       if (!isDeleted) return;
 
-      const newImage = images.filter((image) => image !== deletedImage);
+      setImageIsLoading(true);
 
-      setImages(newImage);
+      const newImage = images.filter((image) => image !== deletedImage);
 
       const res = await adminProductUpdate({
         id: product._id,
@@ -146,10 +160,34 @@ export default function ProductEditForm({ product, categories }: Props) {
         console.log(res.serverError);
       }
       if (res.data?.status === 200) {
-        toast.success("Rasim o'chirildi 🗑️");
+        const res = await deleteFile(deletedImage);
+
+        if (res?.status === 200) {
+          toast.success("Rasim o'chirildi 🗑️");
+          setImageIsLoading(false);
+          setImages(newImage);
+        } else {
+          toast.error("O'chirishda xato yuz berdi ❌");
+        }
       }
     } catch (err) {
-      console.log(err);
+      toast.error(`O'chirishda xato yuz berdi ❌, ERR ${err}`);
+    }
+  }
+  async function deleteNewImage(newImage: string) {
+    try {
+      setCencelImageIsLoading(true);
+      const res = await deleteFile(newImage);
+
+      if (res?.status === 200) {
+        setNewImage("");
+        setCencelImageIsLoading(false);
+        toast.success("Yangi rasim yuklashingiz mumkun ✅");
+      } else {
+        toast.error("O'chirishda xato yuz berdi ❌");
+      }
+    } catch (err) {
+      toast.error(`O'chirishda xato yuz berdi ❌, ERR ${err}`);
     }
   }
 
@@ -366,36 +404,52 @@ export default function ProductEditForm({ product, categories }: Props) {
               <div className="grid grid-cols-3 gap-3">
                 {images.map((image) => (
                   <div
-                    className="group relative aspect-square w-full"
+                    className="group relative aspect-square w-full rounded-sm bg-white"
                     key={image}
                   >
                     {" "}
                     <Image
                       src={image}
                       alt={image}
-                      className="rounded-sm object-cover group-hover:brightness-50"
+                      className={cn(
+                        "rounded-sm object-cover",
+                        imageIsLoading
+                          ? "brightness-50"
+                          : "group-hover:brightness-75",
+                      )}
                       fill
-                    />{" "}
-                    <div
-                      onClick={() => {
-                        setOldImage(image);
-                        setIsOpen(true);
-                      }}
-                      className="absolute inset-0 flex items-center justify-center"
-                    >
-                      {" "}
-                      <div className="cursor-pointer rounded-full bg-white p-2 opacity-0 shadow-sm transition-all duration-300 hover:scale-105 active:scale-95 group-hover:opacity-100">
-                        {" "}
-                        <Repeat className="size-5" />{" "}
-                      </div>{" "}
-                    </div>{" "}
-                    <button
-                      onClick={() => deleteImage(image)}
-                      className="absolute right-[2px] top-[2px] cursor-pointer rounded-[5px] bg-red-600 p-[3px] opacity-0 transition-all duration-200 hover:scale-110 hover:rounded-[7px] active:scale-95 group-hover:opacity-100"
-                    >
-                      {" "}
-                      <X className="size-4 p-[2px] text-white" />{" "}
-                    </button>{" "}
+                    />
+                    {!imageIsLoading && deletedImage !== image && (
+                      <>
+                        <div
+                          onClick={() => {
+                            setOldImage(image);
+                            setIsOpen(true);
+                          }}
+                          className="absolute inset-0 flex items-center justify-center"
+                        >
+                          {" "}
+                          <div className="cursor-pointer rounded-full bg-white p-2 opacity-0 shadow-sm transition-all duration-300 hover:scale-105 active:scale-95 group-hover:opacity-100">
+                            {" "}
+                            <Repeat className="size-5" />{" "}
+                          </div>{" "}
+                        </div>{" "}
+                        <button
+                          onClick={() => {
+                            setDeletedImage(image);
+                            deleteImage(image);
+                          }}
+                          className="absolute right-[2px] top-[2px] cursor-pointer rounded-[5px] bg-red-600 p-[3px] opacity-0 transition-all duration-200 hover:scale-110 hover:rounded-[7px] active:scale-95 group-hover:opacity-100"
+                        >
+                          <X className="size-4 p-[2px] text-white" />{" "}
+                        </button>{" "}
+                      </>
+                    )}
+                    {imageIsLoading && deletedImage === image && (
+                      <div className="absolute inset-0 flex animate-spin items-center justify-center text-white">
+                        <LoaderCircle className="!size-7" />
+                      </div>
+                    )}
                   </div>
                 ))}
                 {images.length < 3 && (
@@ -650,8 +704,18 @@ export default function ProductEditForm({ product, categories }: Props) {
                             src={oldImage}
                             alt="current"
                             fill
-                            className="object-cover"
+                            className={cn(
+                              "object-cover",
+                              replaceIsLoading
+                                ? "brightness-50"
+                                : "group-hover:brightness-75",
+                            )}
                           />
+                          {replaceIsLoading && (
+                            <div className="absolute inset-0 flex items-center justify-center text-white">
+                              <ArrowRight className="!size-9" />
+                            </div>
+                          )}
                         </div>
                       </div>
 
@@ -667,23 +731,41 @@ export default function ProductEditForm({ product, categories }: Props) {
                         <p className="text-center text-[9px] font-black uppercase tracking-[0.2em] text-pink-500">
                           Yangi
                         </p>
-                        <div className="relative h-44 w-full overflow-hidden rounded-2xl border border-pink-500 bg-pink-50">
+                        <div
+                          className={cn(
+                            "relative h-44 w-full overflow-hidden rounded-2xl border border-pink-500 bg-pink-50",
+                            replaceIsLoading && "border-none",
+                          )}
+                        >
                           <Image
                             src={newImage}
                             alt="new"
                             fill
-                            className="object-cover"
+                            className={cn(
+                              "object-cover",
+                              replaceIsLoading
+                                ? "brightness-50"
+                                : "group-hover:brightness-75",
+                            )}
                           />
+                          {replaceIsLoading && (
+                            <div className="absolute inset-0 flex animate-spin items-center justify-center text-white">
+                              <LoaderCircle className="!size-9" />
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
                     <div className="space-y-3">
                       <button
-                        onClick={() => setNewImage("")}
+                        onClick={() => deleteNewImage(newImage)}
                         className="flex h-11 w-full items-center justify-center gap-2 rounded-2xl border border-neutral-200 bg-neutral-100 text-[10px] font-black uppercase tracking-widest text-neutral-500 transition-all hover:scale-[1.01] hover:border-pink-300 hover:bg-pink-100 hover:text-black"
                       >
                         <Repeat2 size={13} />
                         Boshqa rasm tanlash
+                        {cencelImageIsLoading && (
+                          <Loader size={13} className="animate-spin" />
+                        )}
                       </button>
                       <Button
                         onClick={replacementImage}

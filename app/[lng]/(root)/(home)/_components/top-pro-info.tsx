@@ -1,16 +1,22 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { ShoppingBag, Plus } from "lucide-react";
+import { ShoppingBag, Plus, Check, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { IProduct } from "@/types";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleBasket } from "@/redux/reducers/basketState";
+import Link from "next/link";
+import { RootState } from "@/redux/store";
+import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 interface Props {
   discountProducts: IProduct[];
 }
 
-export default function TopProInfo({ discountProducts }: Props) {
+export default function DiscountProInfo({ discountProducts }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const [resetKey, setResetKey] = useState(0);
@@ -35,8 +41,14 @@ export default function TopProInfo({ discountProducts }: Props) {
     exit: (dir: number) => ({ opacity: 0, x: dir > 0 ? -60 : 60 }),
   };
 
+  const dispatch = useDispatch();
+  const basketProducts = useSelector(
+    (state: RootState) => state.baskets.basketIds,
+  );
+  const isBasket = basketProducts.find((pro) => pro.id === activeProduct._id);
+  const router = useRouter();
   return (
-    <section className="relative overflow-hidden bg-white py-8">
+    <section className="relative overflow-hidden bg-white py-10">
       <div className="mx-auto max-w-7xl px-6">
         {/* Progress dots */}
         <div className="mb-6 flex items-center gap-2">
@@ -87,12 +99,14 @@ export default function TopProInfo({ discountProducts }: Props) {
             {/* Matn */}
             <div className="col-span-5 flex flex-col justify-center space-y-7">
               <div className="flex items-center gap-3">
-                <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-black">
-                  <span className="text-sm text-pink-600">
-                    -{activeProduct.percent}%{" "}
+                {activeProduct.discount && (
+                  <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-black">
+                    <span className="text-sm text-pink-600">
+                      -{activeProduct.percent}%{" "}
+                    </span>
+                    chegirmada ulgurib qoling
                   </span>
-                  chegirmada ulgurib qoling
-                </span>
+                )}
               </div>
 
               <h2 className="line-clamp-2 select-text text-7xl font-bold tracking-tighter text-black">
@@ -104,21 +118,39 @@ export default function TopProInfo({ discountProducts }: Props) {
               </p>
 
               <div className="flex items-center gap-4 pt-4">
-                <button className="group relative flex h-14 select-none items-center gap-2 rounded-full bg-pink-600 px-8 text-white shadow-md transition-all duration-200 hover:scale-[1.02]">
-                  <span className="text-[17px] font-semibold">
-                    Savatga qo'shish
-                  </span>
-                  <ShoppingBag className="size-[17px] transition-transform duration-300 group-hover:rotate-90" />
-                </button>
-                <Button
-                  variant="outline"
-                  className="group flex h-14 select-none items-center gap-2 rounded-full px-8 font-bold text-gray-900 transition-all duration-200 hover:scale-[1.02] hover:text-[#e91e63]"
+                <button
+                  onClick={() => {
+                    if (!isBasket) {
+                      dispatch(toggleBasket(activeProduct._id));
+                    } else {
+                      router.push("/shopping/cart");
+                    }
+                  }}
+                  className={cn(
+                    "group relative flex h-14 select-none items-center gap-2 rounded-full px-8 text-white shadow-md transition-all duration-200 hover:scale-[1.02]",
+                    isBasket ? "bg-emerald-500" : "bg-pink-600",
+                  )}
                 >
                   <span className="text-[17px] font-semibold">
-                    Batafsil ko'rish
+                    {isBasket ? "Savatga o'tish" : "Savatga qo'shish"}
                   </span>
-                  <Plus className="size-[17px] transition-transform duration-300 group-hover:rotate-180" />
-                </Button>
+                  {isBasket ? (
+                    <ArrowRight className="size-[17px] transition-transform duration-300 group-hover:-rotate-90" />
+                  ) : (
+                    <ShoppingBag className="size-[17px] transition-transform duration-300 group-hover:rotate-90" />
+                  )}
+                </button>
+                <Link href={`/product/${activeProduct._id}`}>
+                  <Button
+                    variant="outline"
+                    className="group flex h-14 select-none items-center gap-2 rounded-full px-8 font-bold text-gray-900 transition-all duration-200 hover:scale-[1.02] hover:text-[#e91e63]"
+                  >
+                    <span className="text-[17px] font-semibold">
+                      Batafsil ko'rish
+                    </span>
+                    <Plus className="size-[17px] transition-transform duration-300 group-hover:rotate-180" />
+                  </Button>
+                </Link>
               </div>
             </div>
 

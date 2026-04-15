@@ -1,15 +1,9 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
-import { MoveRight, ArrowUpRight } from "lucide-react";
+import { MoveRight } from "lucide-react";
 import Autoplay from "embla-carousel-autoplay";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
-import { categories } from "@/components/constants";
+import { Carousel, CarouselContent } from "@/components/ui/carousel";
 import { ICategory } from "@/types";
 import CategoryCard from "@/components/cards/category-card";
 
@@ -19,8 +13,8 @@ interface Props {
 
 function Categories({ allCategories }: Props) {
   return (
-    <section className="mx-auto mt-4 max-w-7xl pb-6">
-      <div className="mb-4 flex items-end justify-between">
+    <section className="mx-auto max-w-7xl py-4">
+      <div className="mb-2 flex items-end justify-between">
         <h1 className="font-sora text-3xl font-semibold tracking-tight text-gray-800">
           Barcha toifalar
         </h1>
@@ -49,7 +43,11 @@ function Categories({ allCategories }: Props) {
       >
         <CarouselContent className="-ml-4 px-1 py-4">
           {allCategories.map((category, index) => (
-            <CategoryCard category={category} index={index} />
+            <CategoryCard
+              category={category}
+              key={category._id}
+              index={index}
+            />
           ))}
         </CarouselContent>
       </Carousel>

@@ -50,7 +50,7 @@ function Sidebar() {
       <div className="absolute size-full bg-blue-600/50 blur-[150px]" />
 
       <div className="relative z-10 flex h-full flex-col">
-        <div className="flex h-20 items-center border-b border-white/10 px-6">
+        <div className="flex h-20 items-center border-b border-white/10 pl-6">
           <Logo admin />
         </div>
 

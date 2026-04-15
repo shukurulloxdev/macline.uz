@@ -8,8 +8,7 @@ interface Props {
   searchParams: Promise<{
     search?: string;
     filter?: string;
-    minPrice?: string;
-    maxPrice?: string;
+    price?: string;
     page?: string;
   }>;
 }
@@ -25,7 +24,23 @@ async function Page({ params, searchParams }: Props) {
     page: sParams.page || "1",
   });
 
+  const price = sParams.price || "";
+
+  let min = 0;
+  let max = Infinity;
+
+  if (price) {
+    const [minStr, maxStr] = price.split("-");
+    min = Number(minStr);
+    max = Number(maxStr);
+  }
+
+  const filteredProducts = (data?.products || []).filter((product) => {
+    return product.price >= min && product.price <= max;
+  });
+
   const title = slug.replace(/-/g, " ");
+
   return (
     <main className="mx-auto max-w-7xl py-6">
       <div className="flex gap-4">
@@ -36,7 +51,7 @@ async function Page({ params, searchParams }: Props) {
         </aside>
 
         <div className="flex-1">
-          <AllProducts products={data?.products || []} title={title} />
+          <AllProducts products={filteredProducts || []} title={title} />
         </div>
       </div>
     </main>

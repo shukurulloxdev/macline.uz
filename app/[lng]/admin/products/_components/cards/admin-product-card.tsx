@@ -4,11 +4,8 @@ import { deleteProduct, productAction } from "@/actions/admin-actions";
 import { Button } from "@/components/ui/button";
 import { cn, formatCurrentPrice } from "@/lib/utils";
 import { IProduct } from "@/types";
-import { Loader } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
 import { toast } from "sonner";
 
 interface Props {
@@ -16,7 +13,6 @@ interface Props {
 }
 
 function AdminProductCard({ product }: Props) {
-  const router = useRouter();
   // const [isLoading, setIsLoading] = useState(false);
 
   function removeProduct() {
@@ -48,7 +44,7 @@ function AdminProductCard({ product }: Props) {
   return (
     <div className="grid grid-cols-[1.5fr_1fr_auto] items-center rounded-xl bg-white/10 p-4">
       <div className="flex items-center gap-3">
-        <div className="relative size-14">
+        <div className="relative size-14 rounded-sm bg-white">
           <Image
             src={product.images[0]}
             alt={product.name}

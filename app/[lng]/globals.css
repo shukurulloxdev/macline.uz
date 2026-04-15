@@ -89,3 +89,16 @@
 .always-scroll::-webkit-scrollbar-thumb {
   background: #ec4899;
 }
+
+.pink-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.pink-scroll::-webkit-scrollbar-track {
+  margin: 1px 0px 10px 0px; /* 👈 bu haqiqiy padding */
+}
+
+.pink-scroll::-webkit-scrollbar-thumb {
+  background: #db2777;
+  border-radius: 999px;
+}

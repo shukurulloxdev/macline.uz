@@ -13,7 +13,7 @@ function OrderProductCard({ product }: Props) {
       <div className="flex items-center gap-2">
         <div className="relative flex size-20 items-center justify-center rounded-xl bg-white/5 ring-1 ring-white/10">
           {/* Rasmning o'zi alohida div ichida qirqilishi mumkin */}
-          <div className="relative size-full overflow-hidden rounded-xl">
+          <div className="relative size-full overflow-hidden rounded-md bg-white">
             <Image
               src={product.productId.images[0]}
               alt={product.productId.name}

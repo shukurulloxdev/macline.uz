@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { CopyPlus, ListFilterPlus } from "lucide-react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { CopyPlus } from "lucide-react";
 
 function EmptyAdminCategoris() {
   return (
@@ -59,7 +59,7 @@ function EmptyAdminCategoris() {
           className="group flex h-12 items-center gap-2 rounded-2xl bg-pink-600 px-8 text-[11px] font-black uppercase tracking-widest text-white transition-all active:scale-95"
         >
           Katigoriya q&apos;shish
-          <ListFilterPlus
+          <CopyPlus
             size={14}
             strokeWidth={2.5}
             className="transition-transform group-hover:-translate-x-0.5"

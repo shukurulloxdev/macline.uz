@@ -39,6 +39,8 @@ export interface IProduct {
   category: string;
   description: string;
   brand: string;
+  count: string;
+  kafolat: string;
   price: number;
   discount: boolean;
   percent: number;

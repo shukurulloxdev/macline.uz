@@ -10,6 +10,20 @@ async function Page({ searchParams }: searchParamsProps) {
   const res = await getAllProducts({ searchQuery: search });
   console.log("Searched", res.data?.products);
 
+  const price = searchParams.price || "";
+
+  let min = 0;
+  let max = Infinity;
+
+  if (price) {
+    const [minStr, maxStr] = price.split("-");
+    min = Number(minStr);
+    max = Number(maxStr);
+  }
+
+  const filteredProducts = (res.data?.products || []).filter((product) => {
+    return product.price >= min && product.price <= max;
+  });
   return (
     <main className="mx-auto max-w-7xl py-6">
       <div className="flex gap-4">
@@ -20,10 +34,7 @@ async function Page({ searchParams }: searchParamsProps) {
         </aside>
 
         <div className="flex-1">
-          <AllProducts
-            products={res.data?.products || []}
-            title={search || ""}
-          />
+          <AllProducts products={filteredProducts || []} title={search || ""} />
         </div>
       </div>
     </main>

@@ -22,6 +22,8 @@ import {
   Trash,
   Save,
   X,
+  LoaderCircle,
+  Loader,
 } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -33,6 +35,7 @@ import { toast } from "sonner";
 import {
   adminCategoryDelete,
   adminCategoryUpdate,
+  deleteFile,
 } from "@/actions/admin-actions";
 import { useRouter } from "next/navigation";
 
@@ -43,6 +46,8 @@ interface CategoryInfoProps {
 export default function CategoryInfo({ category }: CategoryInfoProps) {
   const [isEdit, setIsEdit] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [newImageIsLoading, setNewImageIsLoading] = useState(false);
+  const [deleteNewImageLoading, setDeleteNewImageLoading] = useState(false);
   const [newImage, setNewImage] = useState("");
   const router = useRouter();
   console.log(newImage);
@@ -105,6 +110,7 @@ export default function CategoryInfo({ category }: CategoryInfoProps) {
 
   async function updateImage() {
     try {
+      setNewImageIsLoading(true);
       const res = await adminCategoryUpdate({
         id: category._id,
         image: newImage,
@@ -114,12 +120,32 @@ export default function CategoryInfo({ category }: CategoryInfoProps) {
         toast.error(res.data?.failure);
       }
       if (res.data?.status === 200) {
-        setIsOpen(false);
-        setNewImage("");
-        toast.success("Rasim yangilandi ✅");
+        const response = await deleteFile(category.image);
+        if (response?.status === 200) {
+          setNewImageIsLoading(false);
+          setIsOpen(false);
+          setNewImage("");
+          toast.success("Rasim yangilandi ✅");
+        }
       }
     } catch (err) {
+      setNewImageIsLoading(false);
       console.log(err);
+    }
+  }
+  async function deleteNewImage(imageUrl: string) {
+    try {
+      setDeleteNewImageLoading(true);
+
+      const response = await deleteFile(imageUrl);
+      if (response?.status === 200) {
+        setNewImageIsLoading(false);
+        setNewImage("");
+        toast.success("Yangi rasim yuklashingiz mumkun ✅");
+      }
+    } catch (err) {
+      setDeleteNewImageLoading(false);
+      toast.error(`Xatolik ${err}`);
     }
   }
 
@@ -235,15 +261,34 @@ export default function CategoryInfo({ category }: CategoryInfoProps) {
             <div className="absolute -left-20 -top-20 size-64 rounded-full bg-pink-500/5 blur-[100px]" />
 
             <div className="relative flex flex-col gap-8 p-8 md:flex-row md:items-start">
-              <div className="group relative aspect-square w-52 cursor-pointer overflow-hidden rounded-2xl border border-white/10 p-6 shadow-2xl transition-transform hover:scale-[1.01]">
+              {/* <div className="group relative aspect-square w-52 cursor-pointer overflow-hidden rounded-2xl border border-white/10 bg-white p-6 shadow-2xl transition-transform hover:scale-[1.01] hover:brightness-50">
                 <Image
                   src={category.image}
                   alt={category.title}
                   fill
-                  className="object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-50"
+                  className="object-contain transition-all duration-500 group-hover:scale-105"
                 />
 
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100">
+                <div className="absolute inset-0 z-10 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100">
+                  <div
+                    onClick={() => setIsOpen(true)}
+                    className="rounded-full bg-white p-4 shadow-2xl transition-transform duration-300 hover:scale-110 active:scale-95"
+                  >
+                    <Repeat size={20} className="text-neutral-900" />
+                  </div>
+                </div>
+              </div> */}
+              <div className="group relative aspect-square w-52 cursor-pointer overflow-hidden rounded-2xl border border-white/10 bg-white p-6 shadow-2xl transition-transform hover:scale-[1.01]">
+                <Image
+                  src={category.image}
+                  alt={category.title}
+                  fill
+                  className="object-contain transition-all duration-500 group-hover:scale-105"
+                />
+
+                <div className="absolute inset-0 bg-black/0 transition-all duration-300 group-hover:bg-black/50" />
+
+                <div className="absolute inset-0 z-10 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100">
                   <div
                     onClick={() => setIsOpen(true)}
                     className="rounded-full bg-white p-4 shadow-2xl transition-transform duration-300 hover:scale-110 active:scale-95"
@@ -422,13 +467,28 @@ export default function CategoryInfo({ category }: CategoryInfoProps) {
                         <p className="text-center text-[9px] font-black uppercase tracking-[0.2em] text-neutral-400">
                           Hozirgi
                         </p>
-                        <div className="relative h-44 w-full overflow-hidden rounded-2xl border border-pink-100 bg-neutral-50">
+
+                        <div
+                          className={cn(
+                            "relative aspect-square w-full overflow-hidden rounded-2xl border border-pink-100 bg-white",
+                          )}
+                        >
                           <Image
                             src={category.image}
-                            alt="current"
+                            alt="old"
                             fill
-                            className="object-cover"
+                            className={cn(
+                              "object-contain",
+                              newImageIsLoading
+                                ? "brightness-50"
+                                : "group-hover:brightness-75",
+                            )}
                           />
+                          {newImageIsLoading && (
+                            <div className="absolute inset-0 flex items-center justify-center text-white">
+                              <ArrowRight className="!size-9" />
+                            </div>
+                          )}
                         </div>
                       </div>
 
@@ -444,23 +504,41 @@ export default function CategoryInfo({ category }: CategoryInfoProps) {
                         <p className="text-center text-[9px] font-black uppercase tracking-[0.2em] text-pink-500">
                           Yangi
                         </p>
-                        <div className="relative h-44 w-full overflow-hidden rounded-2xl border border-pink-500 bg-pink-50">
+                        <div
+                          className={cn(
+                            "relative aspect-square w-full overflow-hidden rounded-2xl border border-pink-500 bg-white",
+                            newImageIsLoading && "border-none",
+                          )}
+                        >
                           <Image
                             src={newImage}
                             alt="new"
                             fill
-                            className="object-cover"
+                            className={cn(
+                              "object-contain",
+                              newImageIsLoading
+                                ? "brightness-50"
+                                : "group-hover:brightness-75",
+                            )}
                           />
+                          {newImageIsLoading && (
+                            <div className="absolute inset-0 flex animate-spin items-center justify-center text-white">
+                              <LoaderCircle className="!size-9" />
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
                     <div className="space-y-3">
                       <button
-                        onClick={() => setNewImage("")}
+                        onClick={() => deleteNewImage(newImage)}
                         className="flex h-11 w-full items-center justify-center gap-2 rounded-2xl border border-neutral-200 bg-neutral-100 text-[10px] font-black uppercase tracking-widest text-neutral-500 transition-all hover:scale-[1.01] hover:border-pink-300 hover:bg-pink-100 hover:text-black"
                       >
                         <Repeat2 size={13} />
                         Boshqa rasm tanlash
+                        {deleteNewImageLoading && (
+                          <Loader size={13} className="animate-spin" />
+                        )}
                       </button>
                       <Button
                         onClick={updateImage}

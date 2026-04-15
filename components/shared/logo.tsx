@@ -9,13 +9,13 @@ function Logo({ admin = false }: Props) {
   return (
     <Link
       href={"/"}
-      className="relative h-14 w-52 cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95"
+      className="relative inline-block h-12 w-48 cursor-pointer transition-all duration-300 hover:scale-[1.02] active:scale-95"
     >
       <Image
-        src={admin ? "/logo/logooq.png" : "/logo/macline.png"}
+        src={admin ? "/logo/maclinewhite.png" : "/logo/macline.png"}
         alt="Macline.uz"
         fill
-        className="rounded-2xl object-cover"
+        className="object-contain"
       />
     </Link>
   );

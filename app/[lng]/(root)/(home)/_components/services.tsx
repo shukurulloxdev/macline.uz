@@ -319,126 +319,473 @@
 //   );
 // }
 // MaclineServices
-import { Award, ShieldCheck, Zap, Headphones, ArrowRight } from "lucide-react";
-import Image from "next/image";
 
-// 1. Ma'lumotlar - Apple Store-ga mos, real konvertatsiya beruvchi matnlar
-const benefits = [
+// import { Award, ShieldCheck, Zap, Headphones, ArrowRight } from "lucide-react";
+// import Image from "next/image";
+
+// // 1. Ma'lumotlar - Apple Store-ga mos, real konvertatsiya beruvchi matnlar
+// const benefits = [
+//   {
+//     icon: <Award className="h-8 w-8 text-[#e91e63]" />, // Pushti icon
+//     title: "Rasmiy Diler",
+//     description:
+//       "Macline — O'zbekistondagi rasmiy Apple dileri. Barcha mahsulotlar 100% original va yangi.",
+//     pos: "top-left", // Matn chapda
+//   },
+//   {
+//     icon: <ShieldCheck className="h-8 w-8 text-[#e91e63]" />,
+//     title: "Rasmiy Kafolat",
+//     description:
+//       "Xarid qilingan har bir qurilmaga 1 yil muddatli rasmiy xalqaro kafolat beriladi.",
+//     pos: "top-right", // Matn o'ngda
+//   },
+//   {
+//     icon: <Zap className="h-8 w-8 text-[#e91e63]" />,
+//     title: "Tezkor Yetkazib Berish",
+//     description:
+//       "Toshkent shahri bo'ylab 2 soat ichida, viloyatlarga 24 soat ichida yetkazamiz.",
+//     pos: "bottom-left", // Matn chapda
+//   },
+//   {
+//     icon: <Headphones className="h-8 w-8 text-[#e91e63]" />,
+//     title: "Professional Servis",
+//     description:
+//       "Mutaxassislarimiz qurilmangizni bepul sozlab, ma'lumotlarni ko'chirib berishadi.",
+//     pos: "bottom-right", // Matn o'ngda
+//   },
+// ];
+
+// export default function MaclineServices() {
+//   return (
+//     <section className="mx-auto my-12 max-w-7xl">
+//       <div className="mb-12 text-center">
+//         <h2 className="text-5xl font-extrabold text-gray-900">
+//           Nima uchun{" "}
+//           <span className="font-medium italic text-pink-600">biz?</span>
+//         </h2>
+//         <p className="mx-auto mt-4 max-w-4xl text-lg text-gray-500">
+//           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi
+//           architecto velit odio, dolores distinctio mollitia rem ipsa, ipsum
+//           obcaecati, sapiente cum repellendus tenetur sit expedita ut reiciendis
+//           quibusdam omnis. Vitae.
+//         </p>
+//       </div>
+//       <div className="grid grid-cols-3 gap-8">
+//         <div className="flex w-full flex-col gap-20 text-right">
+//           <div className="space-y-3">
+//             <div className="flex justify-end">
+//               <Award className="h-8 w-8 text-[#e91e63]" />
+//             </div>
+//             <h3 className="text-xl font-bold text-gray-900">
+//               Expert Technicians
+//             </h3>
+//             <p className="text-sm leading-relaxed text-gray-500">
+//               Our certified experts provide top-quality service. Trust us for
+//               accurate diagnostics and repairs.
+//             </p>
+//           </div>
+
+//           <div className="space-y-3">
+//             <div className="flex justify-end">
+//               <Zap className="h-8 w-8 text-[#e91e63]" />
+//             </div>
+//             <h3 className="text-xl font-bold text-gray-900">Fast Turnaround</h3>
+//             <p className="text-sm leading-relaxed text-gray-500">
+//               Get back on the road quickly with our efficient service. Most
+//               repairs are completed within the same day.
+//             </p>
+//           </div>
+//         </div>
+
+//         <div className="relative flex w-full justify-center">
+//           <div className="relative aspect-square h-[380px] w-full">
+//             <Image
+//               src="/menejer/client.jpg"
+//               alt="Center Product"
+//               fill
+//               className="object-cover"
+//             />
+//           </div>
+//         </div>
+
+//         <div className="flex w-full flex-col gap-20 text-left">
+//           <div className="space-y-3">
+//             <div className="flex justify-start">
+//               <ShieldCheck className="h-8 w-8 text-[#e91e63]" />
+//             </div>
+//             <h3 className="text-xl font-bold text-gray-900">
+//               Affordable Pricing
+//             </h3>
+//             <p className="text-sm leading-relaxed text-gray-500">
+//               High-quality repairs at prices you can afford. No hidden fees,
+//               just honest and transparent pricing.
+//             </p>
+//           </div>
+
+//           <div className="space-y-3">
+//             <div className="flex justify-start">
+//               <Headphones className="h-8 w-8 text-[#e91e63]" />
+//             </div>
+//             <h3 className="text-xl font-bold text-gray-900">
+//               All-Inclusive Services
+//             </h3>
+//             <p className="text-sm leading-relaxed text-gray-500">
+//               From routine maintenance to complex repairs, we handle it all.
+//               Your one-stop shop for all your car care needs.
+//             </p>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+// "use client";
+
+// import React from "react";
+// import {
+//   Award,
+//   ShieldCheck,
+//   Zap,
+//   Headphones,
+//   RefreshCw,
+//   CreditCard,
+// } from "lucide-react";
+
+// const services = [
+//   {
+//     icon: <Award className="h-6 w-6" />,
+//     title: "Rasmiy Kafolat",
+//     desc: "Barcha mahsulotlarga 1 yillik xalqaro Apple kafolati va Macline servis markazi xizmati.",
+//     color: "bg-blue-50 text-blue-600",
+//   },
+//   {
+//     icon: <Zap className="h-6 w-6" />,
+//     title: "Tezkor Yetkazib Berish",
+//     desc: "Toshkent shahri ichida 2 soat, viloyat markazlariga 24 soat ichida xavfsiz yetkazish.",
+//     color: "bg-amber-50 text-amber-600",
+//   },
+//   {
+//     icon: <RefreshCw className="h-6 w-6" />,
+//     title: "Trade-In Dasturi",
+//     desc: "Eski iPhone qurilmangizni topshirib, yangisini ustiga pul to'lash orqali xarid qiling.",
+//     color: "bg-emerald-50 text-emerald-600",
+//   },
+//   {
+//     icon: <CreditCard className="h-6 w-6" />,
+//     title: "Muddatli To'lov",
+//     desc: "Bank orqali ortiqcha hujjatlarsiz, 12 oygacha bo'lgan qulay bo'lib to'lash imkoniyati.",
+//     color: "bg-purple-50 text-purple-600",
+//   },
+//   {
+//     icon: <ShieldCheck className="h-6 w-6" />,
+//     title: "100% Original",
+//     desc: "Faqatgina yangi, upakovka va global versiyadagi original Apple mahsulotlari.",
+//     color: "bg-rose-50 text-rose-600",
+//   },
+//   {
+//     icon: <Headphones className="h-6 w-6" />,
+//     title: "Ekspert Maslahati",
+//     desc: "Mutaxassislarimiz qurilmangizni sozlash va ma'lumotlarni ko'chirishda yordam berishadi.",
+//     color: "bg-indigo-50 text-indigo-600",
+//   },
+// ];
+
+// export default function MaclineServices() {
+//   return (
+//     <section className="bg-[#fbfbfd] py-24">
+//       <div className="mx-auto max-w-7xl px-6">
+//         {/* Header Section */}
+//         <div className="mb-16 max-w-2xl">
+//           <h2 className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#e91e63]">
+//             Nima uchun biz?
+//           </h2>
+//           <h3 className="text-4xl font-bold tracking-tight text-neutral-900 md:text-5xl">
+//             Macline bilan mukammal <br />
+//             <span className="text-neutral-400">xarid tajribasi.</span>
+//           </h3>
+//           <p className="mt-6 text-lg leading-relaxed text-neutral-500">
+//             Biz shunchaki texnika sotmaymiz. Biz sizga Apple ekotizimining
+//             barcha imkoniyatlarini va ishonchli servis xizmatini taqdim etamiz.
+//           </p>
+//         </div>
+
+//         {/* Bento-style Grid */}
+//         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+//           {services.map((item, index) => (
+//             <div
+//               key={index}
+//               className="group relative overflow-hidden rounded-3xl border border-neutral-100 bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-neutral-200/50"
+//             >
+//               <div
+//                 className={`mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl ${item.color} transition-transform duration-500 group-hover:scale-110`}
+//               >
+//                 {item.icon}
+//               </div>
+
+//               <h4 className="mb-3 text-xl font-semibold text-neutral-900">
+//                 {item.title}
+//               </h4>
+
+//               <p className="leading-relaxed text-neutral-500">{item.desc}</p>
+
+//               {/* Dekorativ element - hoverda ko'rinadi */}
+//               <div className="absolute -bottom-4 -right-4 h-24 w-24 rounded-full bg-neutral-50 opacity-0 transition-opacity group-hover:opacity-100" />
+//             </div>
+//           ))}
+//         </div>
+
+//         {/* Bottom CTA (Optional) */}
+//         <div className="mt-16 flex justify-center border-t border-neutral-100 pt-10">
+//           <div className="flex items-center gap-8 opacity-60 grayscale transition-all hover:opacity-100 hover:grayscale-0">
+//             <span className="text-sm font-medium uppercase tracking-widest text-neutral-400">
+//               Hamkorlarimiz:
+//             </span>
+//             <div className="h-6 w-px bg-neutral-200" />
+//             <p className="text-xl font-bold text-neutral-800">Anorbank</p>
+//             <p className="text-xl font-bold text-neutral-800">Uzum</p>
+//             <p className="text-xl font-bold text-neutral-800">ZoodPay</p>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+"use client";
+import {
+  Award,
+  ShieldCheck,
+  Zap,
+  Headphones,
+  CheckCircle2,
+} from "lucide-react";
+import Image from "next/image";
+import { motion } from "framer-motion";
+
+const leftBenefits = [
   {
-    icon: <Award className="h-8 w-8 text-[#e91e63]" />, // Pushti icon
-    title: "Rasmiy Diler",
+    icon: Award,
+    title: "Rasmiy diler",
     description:
-      "Macline — O'zbekistondagi rasmiy Apple dileri. Barcha mahsulotlar 100% original va yangi.",
-    pos: "top-left", // Matn chapda
+      "Macline — O'zbekistondagi ishonchli Apple dilerlaridan biri. Barcha qurilmalar original, yangi va to‘liq tekshirilgan holda taqdim etiladi.",
   },
   {
-    icon: <ShieldCheck className="h-8 w-8 text-[#e91e63]" />,
-    title: "Rasmiy Kafolat",
+    icon: Zap,
+    title: "Tezkor yetkazib berish",
     description:
-      "Xarid qilingan har bir qurilmaga 1 yil muddatli rasmiy xalqaro kafolat beriladi.",
-    pos: "top-right", // Matn o'ngda
-  },
-  {
-    icon: <Zap className="h-8 w-8 text-[#e91e63]" />,
-    title: "Tezkor Yetkazib Berish",
-    description:
-      "Toshkent shahri bo'ylab 2 soat ichida, viloyatlarga 24 soat ichida yetkazamiz.",
-    pos: "bottom-left", // Matn chapda
-  },
-  {
-    icon: <Headphones className="h-8 w-8 text-[#e91e63]" />,
-    title: "Professional Servis",
-    description:
-      "Mutaxassislarimiz qurilmangizni bepul sozlab, ma'lumotlarni ko'chirib berishadi.",
-    pos: "bottom-right", // Matn o'ngda
+      "O‘zbekiston bo‘ylab tezkor va ishonchli yetkazib berish — buyurtmangizni eng qisqa muddatda, xavfsiz tarzda manzilingizga yetkazamiz.",
   },
 ];
 
+const rightBenefits = [
+  {
+    icon: ShieldCheck,
+    title: "Rasmiy kafolat",
+    description:
+      "Har bir xarid qilingan qurilma uchun rasmiy kafolat va servis qo‘llab-quvvatlovi taqdim etiladi. Xaridingizdan keyin ham siz bilanmiz.",
+  },
+  {
+    icon: Headphones,
+    title: "Professional yordam",
+    description:
+      "Barcha filiallarimizda mutaxassislarimiz qurilma tanlash, sozlash, ma’lumot ko‘chirish va foydalanish bo‘yicha to‘liq yordam beradi.",
+  },
+];
+
+const stats = [
+  { value: "100%", label: "Original mahsulotlar" },
+  { value: "1 yil", label: "Rasmiy kafolat" },
+  { value: "24/7", label: "Mijozlarga yordam" },
+  { value: "Top", label: "Premium servis sifati" },
+];
+
+function BenefitCard({
+  icon: Icon,
+  title,
+  description,
+}: {
+  icon: React.ElementType;
+  title: string;
+  description: string;
+}) {
+  const isRight = "right";
+
+  return (
+    <div
+      className={`group cursor-pointer rounded-[28px] border border-neutral-200 bg-white p-6 shadow-[0_0_30px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-pink-200 hover:shadow-[0_0_40px_rgba(236,72,153,0.10)] ${
+        isRight ? "text-left" : "text-right"
+      }`}
+    >
+      <div className={`mb-4 flex ${isRight ? "justify-start" : "justify-end"}`}>
+        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-pink-50 text-pink-600 ring-1 ring-pink-100 transition-transform duration-300 group-hover:scale-110">
+          <Icon className="h-7 w-7" />
+        </div>
+      </div>
+
+      <h3 className="text-xl font-bold tracking-tight text-neutral-900">
+        {title}
+      </h3>
+
+      <p className="mt-3 text-sm leading-7 text-neutral-500">{description}</p>
+
+      <div
+        className={`mt-5 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-pink-600 ${
+          isRight ? "justify-start" : "justify-end"
+        }`}
+      >
+        <CheckCircle2 className="h-4 w-4" />
+        Ishonchli tanlov
+      </div>
+    </div>
+  );
+}
+
 export default function MaclineServices() {
   return (
-    <section className="mx-auto my-12 max-w-7xl px-4">
-      {/* Sarlavha - 1ga1 andozadagidek */}
-      <div className="mb-20 text-center">
-        <h2 className="text-5xl font-extrabold text-gray-900">
-          Why choose{" "}
-          <span className="font-medium italic text-gray-600">us?</span>
-        </h2>
-        <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-500">
-          From routine maintenance to major repairs, we've got your car covered
-          with reliable and friendly service.
-        </p>
-      </div>
-      <div className="flex flex-col items-center justify-center gap-8 lg:flex-row lg:gap-16">
-        {/* Chap tarafdagi ustun */}
-        <div className="flex w-full flex-col gap-20 text-right lg:w-1/3">
-          <div className="space-y-3">
-            <div className="flex justify-end">
-              <Award className="h-8 w-8 text-[#e91e63]" />
-            </div>
-            <h3 className="text-xl font-bold text-gray-900">
-              Expert Technicians
-            </h3>
-            <p className="text-sm leading-relaxed text-gray-500">
-              Our certified experts provide top-quality service. Trust us for
-              accurate diagnostics and repairs.
-            </p>
-          </div>
+    <div className="mt-8 bg-white py-12">
+      <section className="mx-auto max-w-7xl space-y-6">
+        <div className="text-center">
+          <span className="inline-flex items-center rounded-full border border-pink-200 bg-pink-50 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.25em] text-pink-600">
+            Nima uchun Macline
+          </span>
+          <h2 className="mt-5 text-5xl font-bold tracking-tighter text-neutral-900">
+            Apple xaridi uchun
+            <span className="italic text-pink-600"> to‘g‘ri manzil</span>
+          </h2>
 
-          <div className="space-y-3">
-            <div className="flex justify-end">
-              <Zap className="h-8 w-8 text-[#e91e63]" />
-            </div>
-            <h3 className="text-xl font-bold text-gray-900">Fast Turnaround</h3>
-            <p className="text-sm leading-relaxed text-gray-500">
-              Get back on the road quickly with our efficient service. Most
-              repairs are completed within the same day.
-            </p>
-          </div>
+          <p className="mx-auto mt-5 max-w-3xl font-inter text-lg leading-8 text-neutral-500">
+            Biz faqat mahsulot sotmaymiz. Biz sizga original qurilma, rasmiy
+            kafolat, professional maslahat va premium darajadagi xizmatni bir
+            joyning o‘zida taqdim etamiz.
+          </p>
         </div>
 
-        {/* Markaziy Rasm - Orqa fon shadowi bilan (2-rasmdagidek) */}
-        <div className="relative flex w-full justify-center lg:w-1/3">
-          <div className="relative z-10 h-[380px] w-[380px] overflow-hidden">
-            {/* Rasmdagi pushti "L" shaklidagi orqa fon */}
-            <div className="absolute -bottom-4 -right-4 -z-10 h-full w-full translate-x-2 translate-y-2 bg-pink-200"></div>
-            <Image
-              src="/menejer/store4.png"
-              alt="Center Product"
-              fill
-              className="object-cover"
-            />
+        <div className="grid items-center gap-8 lg:grid-cols-3">
+          <div className="flex flex-col gap-8">
+            {leftBenefits.map((item) => (
+              <motion.div
+                key={item.title}
+                animate={{ y: [0, -6, 0] }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                <BenefitCard
+                  icon={item.icon}
+                  title={item.title}
+                  description={item.description}
+                />
+              </motion.div>
+            ))}
+          </div>
+          <motion.div
+            animate={{ y: [0, -4, 0] }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <div className="relative flex justify-center">
+              <div className="relative w-full max-w-[420px] overflow-hidden rounded-[36px] border border-neutral-200 bg-gradient-to-br from-white via-pink-50/40 to-white p-4 shadow-[0_0_40px_rgba(0,0,0,0.06)]">
+                <div className="absolute inset-x-10 top-6 h-24 rounded-full bg-pink-200/30 blur-3xl" />
+
+                {/* <div className="relative overflow-hidden rounded-[28px] bg-[#f8f8fa]">
+                  <div className="absolute left-4 top-4 z-20 rounded-full bg-white/90 px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-pink-600 shadow-sm">
+                    Premium hizmat
+                  </div>
+
+                  <div className="relative aspect-[4/5] w-full">
+                    <Image
+                      src="/menejer/client.jpg"
+                      alt="Macline service"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </div> */}
+                <div className="relative overflow-hidden rounded-[28px] bg-[#f8f8fa]">
+                  <div className="absolute left-4 top-4 z-20 rounded-full bg-white/90 px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-pink-600 shadow-sm">
+                    Premium hizmat
+                  </div>
+
+                  <div className="relative aspect-[4/5] w-full overflow-hidden">
+                    <motion.div
+                      className="absolute inset-0"
+                      animate={{
+                        scale: [1, 1.03, 1],
+                      }}
+                      transition={{
+                        duration: 3,
+                        ease: "easeInOut",
+                        repeat: Infinity,
+                      }}
+                    >
+                      <Image
+                        src="/menejer/client.jpg"
+                        alt="Macline service"
+                        fill
+                        className="object-cover"
+                      />
+                    </motion.div>
+                  </div>
+                </div>
+
+                <div className="relative mt-4 rounded-[24px] border border-pink-100 bg-white/90 p-5 backdrop-blur-sm">
+                  <p className="text-sm leading-7 text-neutral-600">
+                    <span className="text-[15px] font-semibold text-pink-600">
+                      Maclineda -
+                    </span>{" "}
+                    Qurilma tanlashdan tortib, foydalanishga tayyor holatgacha —
+                    har bir bosqichda siz bilan birgamiz. Macline’da xarid
+                    qilish bu shunchaki savdo emas, bu ishonch demakdur.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          <div className="flex flex-col gap-8">
+            {rightBenefits.map((item) => (
+              <motion.div
+                key={item.title}
+                animate={{ y: [0, -6, 0] }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                <BenefitCard
+                  icon={item.icon}
+                  title={item.title}
+                  description={item.description}
+                />
+              </motion.div>
+            ))}
           </div>
         </div>
-
-        {/* O'ng tarafdagi ustun */}
-        <div className="flex w-full flex-col gap-20 text-left lg:w-1/3">
-          <div className="space-y-3">
-            <div className="flex justify-start">
-              <ShieldCheck className="h-8 w-8 text-[#e91e63]" />
-            </div>
-            <h3 className="text-xl font-bold text-gray-900">
-              Affordable Pricing
-            </h3>
-            <p className="text-sm leading-relaxed text-gray-500">
-              High-quality repairs at prices you can afford. No hidden fees,
-              just honest and transparent pricing.
-            </p>
-          </div>
-
-          <div className="space-y-3">
-            <div className="flex justify-start">
-              <Headphones className="h-8 w-8 text-[#e91e63]" />
-            </div>
-            <h3 className="text-xl font-bold text-gray-900">
-              All-Inclusive Services
-            </h3>
-            <p className="text-sm leading-relaxed text-gray-500">
-              From routine maintenance to complex repairs, we handle it all.
-              Your one-stop shop for all your car care needs.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
+}
+
+{
+  /* <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+  {stats.map((item) => (
+    <div
+      key={item.label}
+      className="rounded-[28px] border border-neutral-200 bg-white p-6 text-center shadow-[0_0_25px_rgba(0,0,0,0.04)]"
+    >
+      <div className="text-3xl font-black tracking-tighter text-neutral-900">
+        {item.value}
+      </div>
+      <p className="mt-2 text-sm font-medium text-neutral-500">
+        {item.label}
+      </p>
+    </div>
+  ))}
+</div> */
 }

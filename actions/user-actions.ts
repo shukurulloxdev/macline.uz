@@ -19,6 +19,22 @@ export const getTopProducts = actionClient.action<ReturnActionType>(
     return data;
   },
 );
+export const getDiscountProducts = actionClient.action<ReturnActionType>(
+  async () => {
+    const res = await fetch(
+      "http://localhost:8080/api/user/discount-products",
+      {
+        cache: "no-store",
+      },
+    );
+
+    if (!res.ok) throw new Error("Server error");
+
+    const data = await res.json(); // ✅ JSONni ochib arrayga aylantiramiz
+
+    return data;
+  },
+);
 export const getCategories = actionClient.action<ReturnActionType>(async () => {
   const res = await fetch("http://localhost:8080/api/user/categories", {
     cache: "no-store",

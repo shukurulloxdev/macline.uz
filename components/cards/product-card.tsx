@@ -95,8 +95,7 @@ export default function ProductCard({ product, view }: Props) {
             alt={product.name}
             fill
             className={cn(
-              "transition-transform duration-700 hover:scale-105",
-              isList ? "object-contain p-2" : "object-contain",
+              "object-contain p-2 transition-transform duration-700 hover:scale-105",
             )}
             priority
           />
@@ -241,16 +240,16 @@ export default function ProductCard({ product, view }: Props) {
               <>
                 <Link
                   href={`/product/${product._id}`}
-                  className="relative flex h-11 flex-1 items-center justify-center overflow-hidden rounded-lg bg-neutral-900 p-[1.3px] transition-all duration-500 active:scale-95"
+                  className="relative flex h-11 flex-1 items-center justify-center overflow-hidden rounded-lg bg-pink-600 p-[1.3px] transition-all duration-500 active:scale-95"
                 >
                   {/* Faqat tugmaning o'ziga hover bo'lganda (hover:opacity-100) ishlaydi */}
-                  <span
+                  {/* <span
                     className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2E8F0_0%,#DB2777_50%,#E2E8F0_100%)] opacity-0 transition-opacity duration-500 hover:opacity-100 group-hover/btn:opacity-0"
                     style={{ opacity: "var(--tw-opacity)" }} // Bu yerda klasslarni boshqarish uchun qo'shimcha mantiq
-                  />
+                  /> */}
 
                   {/* Bu yerda hover klassini tugmaning o'ziga beramiz */}
-                  <span className="group/btn relative z-10 flex size-full items-center justify-center rounded-[10px] bg-white transition-all duration-500 hover:bg-pink-600">
+                  <span className="group/btn relative z-10 flex size-full items-center justify-center rounded-[10px] border border-pink-600 bg-white transition-all duration-500 hover:bg-pink-600">
                     <span className="text-[11px] font-black uppercase tracking-[0.2em] text-neutral-900 transition-colors duration-500 group-hover/btn:text-white">
                       Sotib olish
                     </span>

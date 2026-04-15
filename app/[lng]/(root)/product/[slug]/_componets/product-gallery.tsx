@@ -25,7 +25,7 @@ export default function ProductGallery({ product }: { product: IProduct }) {
               key={i}
               onMouseEnter={() => setActive(i)} // User tajribasi uchun tezroq
               className={cn(
-                "relative aspect-square w-full overflow-hidden rounded-xl border border-pink-500 transition-all duration-300",
+                "relative aspect-square w-full overflow-hidden rounded-sm border border-pink-500 bg-white transition-all duration-300",
                 active === i
                   ? "border-pink-600 shadow-sm ring-1 ring-pink-400"
                   : "border-neutral-200 bg-white opacity-70 hover:border-neutral-400 hover:opacity-100",
@@ -47,7 +47,7 @@ export default function ProductGallery({ product }: { product: IProduct }) {
             <CarouselContent>
               {product.images.map((image) => (
                 <CarouselItem className="basis-1/2">
-                  <div className="relative h-[50vh] w-full rounded-xl border border-neutral-100">
+                  <div className="relative h-[50vh] w-full rounded-xl border border-neutral-100 bg-white">
                     <Image
                       src={image}
                       alt={image}

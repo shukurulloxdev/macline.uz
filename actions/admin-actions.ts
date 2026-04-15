@@ -11,6 +11,19 @@ import {
 } from "@/lib/validation";
 import { ReturnActionType } from "@/types";
 import { revalidatePath } from "next/cache";
+import { UTApi } from "uploadthing/server";
+
+const utapi = new UTApi();
+
+export const deleteFile = async (imageUrl: string) => {
+  try {
+    const fileKey = imageUrl.split("/f/")[1];
+    await utapi.deleteFiles(fileKey);
+    return { status: 200 };
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export const createProduct = actionClient
   .schema(addProductSchema)

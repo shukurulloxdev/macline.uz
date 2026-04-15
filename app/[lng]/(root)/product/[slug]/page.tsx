@@ -28,7 +28,7 @@ async function Page({ params }: { params: { slug: string } }) {
           <ProductActions product={data.product} />
         </div>
       </div>
-      {data.products && (
+      {data.products.length > 0 && (
         <div className="mt-6 space-y-2 border-t border-gray-100 py-6">
           <div className="relative z-10 mb-4 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
             <h2 className="font-sora text-4xl font-bold tracking-tight text-neutral-900">

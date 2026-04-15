@@ -21,6 +21,202 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/[lng]/admin/add-product"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "app/[lng]/admin/add-product"
+  ],
   "exclude": ["node_modules"]
 }
+
+// "use client";
+// import React, { useState } from "react";
+// import { motion, AnimatePresence } from "framer-motion"; // Animatsiya juda muhim premium his uchun
+// import { Zap, BookOpen, Clapperboard, CodeXml, ArrowRight } from "lucide-react";
+
+// const scenarios = [
+//   {
+//     id: "student",
+//     name: "O'qish va Ofis",
+//     icon: <BookOpen className="h-5 w-5" />,
+//     description: "Yengil, batareyasi uzoqqa yetadigan va hamyonbop yechim.",
+//     products: [
+//       {
+//         type: "Mac",
+//         name: 'MacBook Air 13" M2',
+//         price: "1 200 $ dan",
+//         image:
+//           "https://www.apple.com/v/macbook-air-13-and-15-m2/e/images/overview/hero/hero_starlight__epm50z5y5w6u_large.jpg",
+//       },
+//       {
+//         type: "Accessory",
+//         name: "AirPods (3-avlod)",
+//         price: "190 $",
+//         image:
+//           "https://www.apple.com/v/airpods-3rd-generation/f/images/overview/hero/hero__8b1b51e9b1b1_large.jpg",
+//       },
+//     ],
+//   },
+//   {
+//     id: "pro",
+//     name: "Professional Montaj",
+//     icon: <Clapperboard className="h-5 w-5" />,
+//     description:
+//       "Kuchli grafika va yuqori aniqlikdagi displey talab qiladiganlar uchun.",
+//     products: [
+//       {
+//         type: "Mac",
+//         name: 'MacBook Pro 16" M3 Max',
+//         price: "3 500 $ dan",
+//         image:
+//           "https://www.apple.com/v/macbook-pro-14-and-16/e/images/overview/hero/hero_intro_endframe__e6khc13636ie_large.jpg",
+//       },
+//       {
+//         type: "Accessory",
+//         name: "Studio Display",
+//         price: "1 600 $",
+//         image:
+//           "https://www.apple.com/v/studio-display/b/images/overview/hero/hero__b1b1b1b1b1b1_large.jpg",
+//       },
+//     ],
+//   },
+//   {
+//     id: "dev",
+//     name: "Dasturlash",
+//     icon: <CodeXml className="h-5 w-5" />,
+//     description:
+//       "Ko'p vazifalilik va tezkor komilyatsiya uchun optimallashgan.",
+//     products: [
+//       {
+//         type: "Mac",
+//         name: "Mac mini M2 Pro",
+//         price: "1 300 $ dan",
+//         image:
+//           "https://www.apple.com/v/mac-mini/p/images/overview/hero/hero__b1b1b1b1b1b1_large.jpg",
+//       },
+//       {
+//         type: "Accessory",
+//         name: "Magic Keyboard with Touch ID",
+//         price: "150 $",
+//         image:
+//           "https://www.apple.com/v/magic-keyboard/b/images/overview/hero/hero__b1b1b1b1b1b1_large.jpg",
+//       },
+//     ],
+//   },
+// ];
+
+// export default function Profession() {
+
+//   return (
+//     <section className="bg-white py-10">
+//       <div className="mx-auto max-w-7xl px-6">
+//         <div className="mb-8 text-center">
+//           <span className="inline-flex items-center rounded-full border border-pink-200 bg-pink-50 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.25em] text-pink-600">
+//             Sizga mosini toping
+//           </span>
+//           <h2 className="mt-5 text-5xl font-bold tracking-tighter text-neutral-900">
+//             Mukammal Ekotizimni
+//             <span className="italic text-pink-600"> Yig'ing</span>
+//           </h2>
+
+//           <p className="mx-auto mt-4 max-w-3xl font-inter text-lg leading-8 text-neutral-500">
+//             O'z ehtiyojingizni tanlang, biz esa sizga eng mos keladigan Apple
+//             qurilmalari kombinatsiyasini taklif qilamiz. tanlang, biz esa sizga
+//             eng mos keladigan Apple
+//           </p>
+//         </div>
+
+//         {/* Tanlov tugmalari */}
+//         <div className="mb-16 flex flex-wrap justify-center gap-4">
+//           {scenarios.map((scenario) => (
+//             <button
+//               key={scenario.id}
+//               className={`flex items-center gap-3 rounded-full border-2 px-6 py-3.5 text-sm font-medium transition-all duration-300 ${
+//                 selectedScenario.id === scenario.id
+//                   ? "border-gray-950 bg-gray-950 text-white shadow-lg"
+//                   : "border-gray-100 bg-gray-50 text-gray-700 hover:border-gray-200 hover:bg-white"
+//               }`}
+//             >
+//               {scenario.icon}
+//               {scenario.name}
+//             </button>
+//           ))}
+//         </div>
+
+//         {/* Mahsulotlar namoyishi (Dinamik qism) */}
+//         <div className="grid min-h-[400px] grid-cols-1 items-center gap-12 md:grid-cols-2">
+//           {/* Chap taraf: Tavsif */}
+//           <div className="space-y-6">
+//             <AnimatePresence mode="wait">
+//               <motion.div
+//                 key={selectedScenario.id}
+//                 initial={{ opacity: 0, x: -20 }}
+//                 animate={{ opacity: 1, x: 0 }}
+//                 exit={{ opacity: 0, x: 20 }}
+//                 transition={{ duration: 0.4 }}
+//                 className="space-y-4"
+//               >
+//                 <h3 className="text-3xl font-bold text-gray-950">
+//                   {selectedScenario.name} uchun yechim
+//                 </h3>
+//                 <p className="text-lg leading-relaxed text-gray-600">
+//                   {selectedScenario.description} Ushbu kombinatsiya sizga
+//                   maksimal samaradorlik va qulaylikni ta'minlaydi.
+//                 </p>
+//                 <div className="flex gap-3 pt-4">
+//                   <button className="group flex items-center gap-2 rounded-full bg-[#e91e63] px-6 py-3 text-sm font-medium text-white">
+//                     Kombinatsiyani ko'rish
+//                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+//                   </button>
+//                 </div>
+//               </motion.div>
+//             </AnimatePresence>
+//           </div>
+
+//           {/* O'ng taraf: Vizual kartochkalar */}
+//           <div className="relative grid grid-cols-2 gap-6">
+//             {/* Orqa fondagi "birlashtiruvchi" chiziq/effekt */}
+//             <div className="absolute inset-0 flex items-center justify-center">
+//               <div className="h-0.5 w-full bg-gray-100" />
+//               <div className="absolute flex h-10 w-10 items-center justify-center rounded-full border-2 border-gray-100 bg-white shadow-inner">
+//                 <Zap className="h-5 w-5 text-[#e91e63]" />
+//               </div>
+//             </div>
+
+//             <AnimatePresence mode="wait">
+//               {selectedScenario.map((product, index) => (
+//                 <motion.div
+//                   key={`${selectedScenario.id}-${index}`}
+//                   initial={{ opacity: 0, y: 30, scale: 0.95 }}
+//                   animate={{ opacity: 1, y: 0, scale: 1 }}
+//                   exit={{ opacity: 0, y: -30, scale: 0.95 }}
+//                   transition={{ duration: 0.5, delay: index * 0.1 }}
+//                   className="group relative z-10 flex flex-col items-center rounded-3xl border border-gray-100 bg-gray-50 p-6 text-center"
+//                 >
+//                   <span className="absolute left-4 top-4 font-mono text-xs uppercase tracking-widest text-gray-400">
+//                     {product.type}
+//                   </span>
+//                   <div className="mb-6 mt-4 flex h-40 w-full items-center justify-center">
+//                     <img
+//                       src={product.image}
+//                       alt={product.name}
+//                       className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-105"
+//                     />
+//                   </div>
+//                   <h4 className="mb-1 line-clamp-1 text-sm font-semibold text-gray-900">
+//                     {product.name}
+//                   </h4>
+//                   <p className="text-sm font-bold text-[#e91e63]">
+//                     {product.price}
+//                   </p>
+//                 </motion.div>
+//               ))}
+//             </AnimatePresence>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
