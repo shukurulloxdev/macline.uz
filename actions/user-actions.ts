@@ -8,7 +8,7 @@ import { cookies } from "next/headers";
 
 export const getTopProducts = actionClient.action<ReturnActionType>(
   async () => {
-    const res = await fetch("http://localhost:8080/api/user/top-products", {
+    const res = await fetch(`${process.env.SERVER_URL}/api/user/top-products`, {
       cache: "no-store",
     });
 
@@ -22,7 +22,7 @@ export const getTopProducts = actionClient.action<ReturnActionType>(
 export const getDiscountProducts = actionClient.action<ReturnActionType>(
   async () => {
     const res = await fetch(
-      "http://localhost:8080/api/user/discount-products",
+      `${process.env.SERVER_URL}/api/user/discount-products`,
       {
         cache: "no-store",
       },
@@ -36,7 +36,7 @@ export const getDiscountProducts = actionClient.action<ReturnActionType>(
   },
 );
 export const getCategories = actionClient.action<ReturnActionType>(async () => {
-  const res = await fetch("http://localhost:8080/api/user/categories", {
+  const res = await fetch(`${process.env.SERVER_URL}/api/user/categories`, {
     cache: "no-store",
   });
 
@@ -51,7 +51,7 @@ export const getProductById = actionClient
   .schema(idSchema)
   .action<ReturnActionType>(async ({ parsedInput }) => {
     const res = await fetch(
-      `http://localhost:8080/api/user/product/${parsedInput.id}`,
+      `${process.env.SERVER_URL}/api/user/product/${parsedInput.id}`,
       {
         cache: "no-store",
       },
@@ -85,7 +85,7 @@ export const getAllProducts = actionClient
 export const getFavorites = actionClient
   .schema(idsSchema)
   .action<ReturnActionType>(async ({ parsedInput }) => {
-    const res = await fetch("http://localhost:8080/api/user/favorites", {
+    const res = await fetch(`${process.env.SERVER_URL}/api/user/favorites`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ids: parsedInput.ids }),
@@ -99,11 +99,14 @@ export const getFavorites = actionClient
 export const getBasketProducts = actionClient
   .schema(idsSchema)
   .action<ReturnActionType>(async ({ parsedInput }) => {
-    const res = await fetch("http://localhost:8080/api/user/basket-products", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ids: parsedInput.ids }),
-    });
+    const res = await fetch(
+      `${process.env.SERVER_URL}/api/user/basket-products`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ids: parsedInput.ids }),
+      },
+    );
     const data = await res.json();
 
     return data;
@@ -113,7 +116,7 @@ export const newOrders = actionClient.action<ReturnActionType>(async () => {
   const token = cookies().get("token")?.value;
   if (!token) return null;
 
-  const res = await fetch("http://localhost:8080/api/user/new-orders", {
+  const res = await fetch(`${process.env.SERVER_URL}/api/user/new-orders`, {
     headers: { Cookie: `token=${token}` },
     cache: "no-store",
   });
@@ -127,10 +130,13 @@ export const finishedOrders = actionClient.action<ReturnActionType>(
     const token = cookies().get("token")?.value;
     if (!token) return null;
 
-    const res = await fetch("http://localhost:8080/api/user/finished-orders", {
-      headers: { Cookie: `token=${token}` },
-      cache: "no-store",
-    });
+    const res = await fetch(
+      `${process.env.SERVER_URL}/api/user/finished-orders`,
+      {
+        headers: { Cookie: `token=${token}` },
+        cache: "no-store",
+      },
+    );
 
     const data = await res.json();
     return data;
@@ -141,7 +147,7 @@ export const finishedOrders = actionClient.action<ReturnActionType>(
 //   category: string,
 // ): Promise<ReturnActionType> {
 //   const res = await fetch(
-//     `http://localhost:8080/api/user/by-category/${category}`,
+//     `${process.env.SERVER_URL}/api/user/by-category/${category}`,
 //     {
 //       cache: "no-store",
 //     },

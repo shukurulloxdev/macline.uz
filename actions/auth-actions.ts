@@ -8,7 +8,7 @@ import { cookies } from "next/headers";
 export const sendOtp = actionClient
   .schema(phoneSchema)
   .action<ReturnActionType>(async ({ parsedInput }) => {
-    const res = await fetch("http://localhost:8080/api/otp/send", {
+    const res = await fetch(`${process.env.SERVER_URL}/api/otp/send`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ phone: parsedInput.phone }),
@@ -21,7 +21,7 @@ export const sendOtp = actionClient
 export const verifyOtpAc = actionClient
   .schema(verifyOtpSchema)
   .action<ReturnActionType>(async ({ parsedInput }) => {
-    const res = await fetch("http://localhost:8080/api/otp/verify", {
+    const res = await fetch(`${process.env.SERVER_URL}/api/otp/verify`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(parsedInput),
@@ -34,7 +34,7 @@ export const verifyOtpAc = actionClient
 export const register = actionClient
   .schema(registerSchema)
   .action<ReturnActionType>(async ({ parsedInput }) => {
-    const res = await fetch("http://localhost:8080/api/auth/register", {
+    const res = await fetch(`${process.env.SERVER_URL}/api/auth/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(parsedInput),
@@ -63,7 +63,7 @@ export async function getMe(): Promise<ReturnActionType | null> {
 
     if (!token) return null;
 
-    const res = await fetch("http://localhost:8080/api/auth/me", {
+    const res = await fetch(`${process.env.SERVER_URL}/api/auth/me`, {
       headers: { Cookie: `token=${token}` },
       cache: "no-store",
     });
@@ -79,7 +79,7 @@ export async function logoutAction() {
   const { cookies } = await import("next/headers");
   cookies().delete("token");
 
-  await fetch("http://localhost:8080/api/auth/logout", {
+  await fetch(`${process.env.SERVER_URL}/api/auth/logout`, {
     method: "POST",
     credentials: "include",
   });

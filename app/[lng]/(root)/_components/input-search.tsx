@@ -166,7 +166,7 @@ function InputSearch({ categories }: Props) {
                   </p>
 
                   <span className="text-xs text-neutral-400">
-                    {product.price?.toLocaleString()} so'm
+                    {product.price?.toLocaleString()} so&apos;m
                   </span>
                 </div>
 
@@ -180,7 +180,7 @@ function InputSearch({ categories }: Props) {
             onMouseDown={handleSearch}
             className="group mt-4 w-full bg-pink-600 py-2 transition-all duration-300 hover:scale-[1.01] hover:bg-pink-600"
           >
-            Hammasini ko'rish
+            Hammasini ko&apos;rish
             <div className="opacity-0 transition-all duration-200 group-hover:translate-x-1 group-hover:opacity-100">
               →
             </div>

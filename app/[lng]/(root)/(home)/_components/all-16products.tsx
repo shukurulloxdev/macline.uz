@@ -36,7 +36,7 @@ function All16Products({ products }: Props) {
           className="rounded-md bg-pink-600/90 px-32 py-6 text-lg transition-all duration-300 hover:scale-[1.03] hover:bg-pink-600"
           size={"lg"}
         >
-          Hammasini ko'rish
+          Hammasini ko&apos;rish
         </Button>
       </Link>
     </section>

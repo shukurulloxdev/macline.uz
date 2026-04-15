@@ -10,7 +10,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { addCategorySchema } from "@/lib/validation";
-import { Save, Rocket, ImagePlus, X, Ban, LoaderCircle } from "lucide-react";
+import { Rocket, ImagePlus, X, Ban, LoaderCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import { Input } from "@/components/ui/input";

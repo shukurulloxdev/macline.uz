@@ -4,13 +4,7 @@ import React from "react";
 import BestSellerCard from "./_components/cards/bestseller-card";
 import StatisticsRadio from "./_components/statistics-radio";
 import { getStatistics } from "@/actions/admin-actions";
-import {
-  MessageCircle,
-  ShoppingCart,
-  TrendingUp,
-  User,
-  Wallet,
-} from "lucide-react";
+import { ShoppingCart, TrendingUp, User, Wallet } from "lucide-react";
 
 async function Page() {
   const data = await getStatistics();

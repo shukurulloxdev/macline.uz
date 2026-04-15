@@ -22,7 +22,7 @@ const branches = [
     id: "samarqand",
     name: "Samarqand",
     address:
-      "Samarkand shahar, Shohrukh Mirzo ko'cha, Makon Mall savdo markazi",
+      "Samarkand shahar, Shohrukh Mirzo ko&apos;cha, Makon Mall savdo markazi",
     workTime: "09:00 - 21:00",
     phone: "+998 91) 813-41-41",
     openMapUrl: "https://yandex.uz/maps/?text=Makon%20Mall%20Samarkand",
@@ -33,7 +33,8 @@ const branches = [
   {
     id: "fargona",
     name: "Farg‘ona",
-    address: "Farg'ona shahar, Mustaqillik shoh ko'chasi 13, Mo'jal: Korzinka",
+    address:
+      "Farg&apos;ona shahar, Mustaqillik shoh ko&apos;chasi 13, Mo&apos;jal: Korzinka",
     workTime: "09:00 - 22:00",
     phone: "+998 90) 533-43-69",
     openMapUrl:
@@ -69,7 +70,7 @@ function Location() {
           <div className="space-y-2">
             <div className="flex items-center gap-2 text-[9px] font-black uppercase tracking-[0.3em] text-pink-600">
               <Sparkles size={14} fill="currentColor" />
-              <span>Do'konlar tarmog'i</span>
+              <span>Do&apos;konlar tarmog&apos;i</span>
             </div>
             <h2 className="font-sora text-5xl font-bold tracking-tighter text-neutral-900">
               Bizning <span className="text-pink-600">Showroomlar</span>
@@ -216,7 +217,7 @@ export default Location;
 //   {
 //     id: "samarqand",
 //     name: "Samarqand",
-//     address: "Shohrukh Mirzo ko'chasi, Makon Mall SM",
+//     address: "Shohrukh Mirzo ko&apos;chasi, Makon Mall SM",
 //     workTime: "09:00 - 21:00",
 //     phone: "+998 91 813 41 41",
 //     mapUrl:
@@ -227,7 +228,7 @@ export default Location;
 //   {
 //     id: "fargona",
 //     name: "Farg‘ona",
-//     address: "Mustaqillik shoh ko'chasi 13, Korzinka",
+//     address: "Mustaqillik shoh ko&apos;chasi 13, Korzinka",
 //     workTime: "09:00 - 22:00",
 //     phone: "+998 90 533 43 69",
 //     mapUrl:
@@ -256,7 +257,7 @@ export default Location;
 //         {/* <div className="mb-16 space-y-4">
 //           <div className="inline-flex items-center gap-2 rounded-full bg-pink-50 px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-pink-600 ring-1 ring-pink-100">
 //             <Sparkles size={14} className="fill-current" />
-//             <span>Showroomlar tarmog'i</span>
+//             <span>Showroomlar tarmog&apos;i</span>
 //           </div>
 //           <h2 className="text-5xl font-bold tracking-tight text-zinc-900 md:text-6xl">
 //             Bizning <span className="text-pink-600">Showroomlar.</span>

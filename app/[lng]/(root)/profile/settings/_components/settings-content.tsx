@@ -28,7 +28,7 @@ function SettingsContent({ user }: Props) {
   async function handleLogout() {
     await logoutAction();
     dispatch(deleteUser());
-    router.push("/"); // Navbar qayta render bo'ladi
+    router.push("/"); // Navbar qayta render bo&apos;ladi
   }
   return (
     <div className="overflow-hidden rounded-3xl border border-neutral-100 bg-white shadow-sm">
@@ -36,7 +36,7 @@ function SettingsContent({ user }: Props) {
       <div className="flex items-center justify-between border-b border-neutral-100 px-8 py-5">
         <div>
           <h1 className="text-sm font-black uppercase tracking-[0.15em] text-neutral-900">
-            Shaxsiy ma'lumotlar
+            Shaxsiy ma&apos;lumotlar
           </h1>
           <p className="mt-0.5 text-xs text-neutral-400">
             Profilingizni boshqaring
@@ -115,9 +115,9 @@ function SettingsContent({ user }: Props) {
 
       {/* ── FIELDS ── */}
       <div className="divide-y divide-neutral-50">
-        {/* To'liq ism */}
+        {/* To&apos;liq ism */}
         <div className="grid grid-cols-[180px_1fr] items-center px-8 py-5">
-          <p className="text-xs font-bold text-neutral-400">To'liq ism</p>
+          <p className="text-xs font-bold text-neutral-400">To&apos;liq ism</p>
           {isEditing ? (
             <input
               value={fullName}
@@ -145,10 +145,10 @@ function SettingsContent({ user }: Props) {
           </div>
         </div>
 
-        {/* A'zo sana */}
+        {/* A&apos;zo sana */}
         <div className="grid grid-cols-[180px_1fr] items-center px-8 py-5">
           <p className="text-xs font-bold text-neutral-400">
-            A'zo bo'lgan sana
+            A&apos;zo bo&apos;lgan sana
           </p>
           <p className="text-sm font-semibold text-neutral-800">{joinDate}</p>
         </div>
@@ -175,14 +175,14 @@ function SettingsContent({ user }: Props) {
       >
         <div>
           <p className="text-sm font-bold text-neutral-700">
-            Hisobni o'chirish
+            Hisobni o&apos;chirish
           </p>
           <p className="text-xs text-neutral-400">
-            Barcha ma'lumotlar butunlay o'chiriladi
+            Barcha ma&apos;lumotlar butunlay o&apos;chiriladi
           </p>
         </div>
         <button className="rounded-xl border border-red-200 bg-white px-4 py-2 text-[11px] font-black uppercase tracking-wider text-red-500 transition-all hover:bg-red-500 hover:text-white active:scale-95">
-          O'chirish
+          O&apos;chirish
         </button>
       </div>
     </div>

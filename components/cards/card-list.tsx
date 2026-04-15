@@ -28,7 +28,7 @@
 //         </Link>
 //       </div>
 
-//       {/* 2. INFO ZONE: O'ng tomonda tartibli ierarxiya */}
+//       {/* 2. INFO ZONE: O&apos;ng tomonda tartibli ierarxiya */}
 //       <div className="flex flex-1 flex-col justify-between py-2">
 //         <div className="space-y-4">
 //           <div className="flex items-center justify-between">
@@ -83,7 +83,7 @@
 //             </span>
 //             {product.percent > 0 && (
 //               <span className="text-sm font-bold text-neutral-400 line-through">
-//                 {product.price.toLocaleString()} so'm
+//                 {product.price.toLocaleString()} so&apos;m
 //               </span>
 //             )}
 //           </div>
@@ -98,7 +98,7 @@
 //             <button className="group relative flex h-14 flex-[2] items-center justify-center overflow-hidden rounded-2xl bg-pink-600 px-8 transition-all hover:bg-pink-700 active:scale-95 sm:flex-none">
 //               <div className="relative z-10 flex items-center gap-3 text-[11px] font-black uppercase tracking-widest text-white">
 //                 <ShoppingBag size={20} />
-//                 <span>Savatga qo'shish</span>
+//                 <span>Savatga qo&apos;shish</span>
 //               </div>
 //               <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-1000 group-hover:translate-x-full" />
 //             </button>
@@ -182,7 +182,7 @@ export default function ProductListCard({ product }: { product: IProduct }) {
           </div>
         </div>
 
-        {/* 3. FOOTER ZONE - Narx chapda, tugmalar o'ngda */}
+        {/* 3. FOOTER ZONE - Narx chapda, tugmalar o&apos;ngda */}
         <div className="mt-6 flex flex-col items-center justify-between gap-4 border-t border-neutral-50 pt-5 sm:flex-row">
           <div className="flex flex-col items-center sm:items-start">
             <span className="text-2xl font-black tracking-tight text-neutral-900">
@@ -190,7 +190,7 @@ export default function ProductListCard({ product }: { product: IProduct }) {
             </span>
             {product.percent > 0 && (
               <span className="text-xs font-bold text-neutral-400 line-through">
-                {product.price.toLocaleString()} so'm
+                {product.price.toLocaleString()} so&apos;m
               </span>
             )}
           </div>

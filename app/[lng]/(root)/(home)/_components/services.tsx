@@ -659,7 +659,7 @@ export default function MaclineServices() {
             joyning o‘zida taqdim etamiz.
           </p>
         </div>
-
+        `
         <div className="grid items-center gap-8 lg:grid-cols-3">
           <div className="flex flex-col gap-8">
             {leftBenefits.map((item) => (

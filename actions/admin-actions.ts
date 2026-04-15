@@ -30,7 +30,7 @@ export const createProduct = actionClient
   .action<ReturnActionType>(async ({ parsedInput }) => {
     const response = await fetch(
       // response hardoyim res obyectini qaytaradi malumotni emas malumotni olish uchun
-      "http://localhost:8080/api/admin/add-product",
+      `${process.env.SERVER_URL}/api/admin/add-product`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -54,11 +54,14 @@ export const createProduct = actionClient
 export const createCategory = actionClient
   .schema(addCategorySchema)
   .action(async ({ parsedInput }) => {
-    const res = await fetch("http://localhost:8080/api/admin/add-category", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(parsedInput),
-    });
+    const res = await fetch(
+      `${process.env.SERVER_URL}/api/admin/add-category`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(parsedInput),
+      },
+    );
     revalidatePath("/admin/categories");
 
     const data = await res.json();
@@ -67,9 +70,12 @@ export const createCategory = actionClient
 
 export const getAdminProducts = actionClient.action<ReturnActionType>(
   async () => {
-    const res = await fetch("http://localhost:8080/api/admin/admin-products", {
-      cache: "no-store",
-    });
+    const res = await fetch(
+      `${process.env.SERVER_URL}/api/admin/admin-products`,
+      {
+        cache: "no-store",
+      },
+    );
 
     if (!res.ok) throw new Error("Server error");
 
@@ -82,7 +88,7 @@ export const deleteProduct = actionClient
   .schema(idSchema)
   .action<ReturnActionType>(async ({ parsedInput }) => {
     const res = await fetch(
-      `http://localhost:8080/api/admin/delete-product/${parsedInput.id}`,
+      `${process.env.SERVER_URL}/api/admin/delete-product/${parsedInput.id}`,
       {
         method: "DELETE",
       },
@@ -98,7 +104,7 @@ export const adminCategoryDelete = actionClient
   .schema(idSchema)
   .action<ReturnActionType>(async ({ parsedInput }) => {
     const res = await fetch(
-      `http://localhost:8080/api/admin/admin-category-delete/${parsedInput.id}`,
+      `${process.env.SERVER_URL}/api/admin/admin-category-delete/${parsedInput.id}`,
       {
         method: "DELETE",
       },
@@ -115,7 +121,7 @@ export const productAction = actionClient
   .schema(idSchema)
   .action<ReturnActionType>(async ({ parsedInput }) => {
     const res = await fetch(
-      `http://localhost:8080/api/admin/update-active/${parsedInput.id}`,
+      `${process.env.SERVER_URL}/api/admin/update-active/${parsedInput.id}`,
       {
         method: "PUT",
       },
@@ -132,7 +138,7 @@ export const getCategory = actionClient
   .schema(getCategorySchema)
   .action<ReturnActionType>(async ({ parsedInput }) => {
     const res = await fetch(
-      `http://localhost:8080/api/admin/admin-category/${parsedInput.slug}`,
+      `${process.env.SERVER_URL}/api/admin/admin-category/${parsedInput.slug}`,
       { cache: "no-store" },
     );
 
@@ -146,7 +152,7 @@ export const adminCategoryUpdate = actionClient
   .schema(categoryUpdateSchema)
   .action<ReturnActionType>(async ({ parsedInput }) => {
     const res = await fetch(
-      `http://localhost:8080/api/admin/admin-category-update/${parsedInput.id}`,
+      `${process.env.SERVER_URL}/api/admin/admin-category-update/${parsedInput.id}`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -164,7 +170,7 @@ export const adminCategoryUpdate = actionClient
     return data;
   });
 export const getStatistics = actionClient.action<ReturnActionType>(async () => {
-  const res = await fetch(`http://localhost:8080/api/admin/statistics`, {
+  const res = await fetch(`${process.env.SERVER_URL}/api/admin/statistics`, {
     cache: "no-store",
   });
 
@@ -178,7 +184,7 @@ export const getAdminProduct = actionClient
   .schema(idSchema)
   .action<ReturnActionType>(async ({ parsedInput }) => {
     const res = await fetch(
-      `http://localhost:8080/api/admin/product/${parsedInput.id}`,
+      `${process.env.SERVER_URL}/api/admin/product/${parsedInput.id}`,
       {
         cache: "no-store",
       },
@@ -195,7 +201,7 @@ export const adminProductUpdate = actionClient
   .action<ReturnActionType>(async ({ parsedInput }) => {
     const { id, ...body } = parsedInput;
     const res = await fetch(
-      `http://localhost:8080/api/admin/update-product/${id}`,
+      `${process.env.SERVER_URL}/api/admin/update-product/${id}`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },

@@ -10,7 +10,7 @@ export const createOrder = actionClient
     const token = cookies().get("token")?.value;
     if (!token) return null;
 
-    const res = await fetch("http://localhost:8080/api/order/create", {
+    const res = await fetch(`${process.env.SERVER_URL}/api/order/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -25,9 +25,12 @@ export const createOrder = actionClient
 
 export const getAdminOrders = actionClient.action<ReturnActionType>(
   async () => {
-    const res = await fetch(`http://localhost:8080/api/order/admin-orders`, {
-      cache: "no-store",
-    });
+    const res = await fetch(
+      `${process.env.SERVER_URL}/api/order/admin-orders`,
+      {
+        cache: "no-store",
+      },
+    );
 
     const data = await res.json();
     return data;
@@ -37,7 +40,7 @@ export const adminOrderUpdate = actionClient
   .schema(orderStatusSchema)
   .action<ReturnActionType>(async ({ parsedInput }) => {
     const res = await fetch(
-      `http://localhost:8080/api/order/update-order/${parsedInput.orderId}`,
+      `${process.env.SERVER_URL}/api/order/update-order/${parsedInput.orderId}`,
       {
         headers: { "Content-Type": "application/json" },
         method: "PUT",
