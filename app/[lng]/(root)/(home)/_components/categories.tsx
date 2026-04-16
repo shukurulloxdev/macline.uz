@@ -3,7 +3,11 @@
 import React from "react";
 import { MoveRight } from "lucide-react";
 import Autoplay from "embla-carousel-autoplay";
-import { Carousel, CarouselContent } from "@/components/ui/carousel";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
 import { ICategory } from "@/types";
 import CategoryCard from "@/components/cards/category-card";
 
@@ -43,11 +47,12 @@ function Categories({ allCategories }: Props) {
       >
         <CarouselContent className="-ml-4 px-1 py-4">
           {allCategories.map((category, index) => (
-            <CategoryCard
-              category={category}
+            <CarouselItem
               key={category._id}
-              index={index}
-            />
+              className="basis-1/6 max-md:basis-1/3"
+            >
+              <CategoryCard category={category} index={index} />
+            </CarouselItem>
           ))}
         </CarouselContent>
       </Carousel>

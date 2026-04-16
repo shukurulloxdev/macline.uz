@@ -58,9 +58,9 @@ function Hero({ discountProducts }: Props) {
   }, [api]);
 
   return (
-    <section className="mx-auto max-w-7xl py-5">
-      <div className="grid grid-cols-4 items-center gap-6">
-        <div className="col-span-3">
+    <section className="mx-auto max-w-7xl py-5 max-md:px-3">
+      <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-4 md:gap-6">
+        <div className="md:col-span-3">
           <Carousel
             setApi={setApi}
             opts={{ align: "start", loop: true }}
@@ -76,7 +76,7 @@ function Hero({ discountProducts }: Props) {
               {heroImages.map((image, index) => (
                 <CarouselItem key={`${image.src}-${index}`}>
                   <Link href={`category/${image.slug}`}>
-                    <div className="relative h-[50vh] w-full overflow-hidden rounded-2xl border border-pink-100">
+                    <div className="relative h-[200px] w-full overflow-hidden rounded-2xl border border-pink-100 md:h-[50vh]">
                       <Image
                         src={image.src}
                         alt="Texnotech"
@@ -91,18 +91,18 @@ function Hero({ discountProducts }: Props) {
               ))}
             </CarouselContent>
 
-            <CarouselPrevious className="absolute left-4 top-1/2 z-20 size-10 -translate-y-1/2 rounded-full border border-white/20 bg-white/80 shadow-2xl backdrop-blur-xl transition-all duration-300 hover:scale-110 hover:border-pink-500 [&_svg]:size-6 [&_svg]:text-pink-600" />
+            <CarouselPrevious className="absolute left-2 top-1/2 z-20 size-8 -translate-y-1/2 rounded-full border border-white/20 bg-white/80 shadow-2xl backdrop-blur-xl transition-all duration-300 hover:scale-110 hover:border-pink-500 md:left-4 md:size-10 [&_svg]:size-4 [&_svg]:text-pink-600 md:[&_svg]:size-6" />
 
-            <CarouselNext className="absolute right-4 top-1/2 z-20 size-10 -translate-y-1/2 rounded-full border border-white/20 bg-white/80 shadow-2xl backdrop-blur-xl transition-all duration-300 hover:scale-110 hover:border-pink-500 [&_svg]:size-6 [&_svg]:text-pink-600" />
+            <CarouselNext className="absolute right-2 top-1/2 z-20 size-8 -translate-y-1/2 rounded-full border border-white/20 bg-white/80 shadow-2xl backdrop-blur-xl transition-all duration-300 hover:scale-110 hover:border-pink-500 md:right-4 md:size-10 [&_svg]:size-4 [&_svg]:text-pink-600 md:[&_svg]:size-6" />
 
             {/* DOTS */}
-            <div className="absolute bottom-4 left-1/2 z-20 -translate-x-1/2">
-              <div className="flex items-center gap-4 rounded-full bg-white/85 px-6 py-3 shadow-2xl backdrop-blur-xl">
+            <div className="absolute bottom-2 left-1/2 z-20 -translate-x-1/2 md:bottom-4">
+              <div className="flex items-center gap-2 rounded-full bg-white/85 px-2 py-1 shadow-2xl backdrop-blur-xl md:gap-4 md:px-6 md:py-3">
                 {heroImages.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => api?.scrollTo(index)}
-                    className={`size-3 rounded-full transition-all duration-300 ${
+                    className={`size-[7px] rounded-full transition-all duration-300 md:size-3 ${
                       current === index
                         ? "scale-110 bg-pink-500"
                         : "bg-neutral-300 hover:bg-pink-300"
@@ -114,8 +114,8 @@ function Hero({ discountProducts }: Props) {
             </div>
           </Carousel>
         </div>
-        <div className="col-span-1">
-          <div className="flex h-[50vh] items-center rounded-2xl bg-white">
+        <div className="max-md:hidden md:col-span-1">
+          <div className="flex items-center rounded-2xl bg-white md:h-[50vh]">
             <Carousel
               opts={{ align: "start", loop: true }}
               plugins={[

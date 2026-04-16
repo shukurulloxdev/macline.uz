@@ -110,27 +110,6 @@
 // }
 // export default RootLayout;
 
-// 1- Ui uchun shadcn ui + Tailwindcss
-
-// 1) yuklaymiz ( npm i -D eslint-config-standard, npm i -D eslint-plugin-tailwindcss, npm i -D eslint-config-prettier )  2)  .eslintrc.json ga buni yozamiz ("standard",
-//     "plugin:tailwindcss/recommended", "prettier")
-
-// 2- Tillar uchun i18n til middlewaresi uchun next-intel i18n fayili ichida konfiglar va locales da jsonlar va middlewareda doyim qo'shimcha turishi uchun yani /uz /ru
-
-// 3- Rasim yuklash uchun Uploadthing api/uploadthing ni ichida configlar lib/uploadthing.ts ni ichida configlarni Buttonlarga beryapmiz va lib/uploadthing.ts ni ichidan import qilib ishlatyapmiz
-
-// 4- State menejment Redux toolkit orqali | npm install @reduxjs/toolkit react-redux
-
-// git add .
-// git commit -m "Updated"
-// git push
-
-// git add .
-// GIT_AUTHOR_DATE="2026-03-6T12:00:00" \
-// GIT_COMMITTER_DATE="2026-03-6T12:00:00" \
-// git commit -m "Updated"
-// git push
-
 import type { Metadata } from "next";
 // Agar ./globals.css xato bersa, @/app/globals.css yoki mutlaq yo'lni ishlating
 import "./globals.css";
@@ -261,3 +240,24 @@ async function RootLayout({ children, params: { lng } }: Props) {
 }
 
 export default RootLayout;
+
+// 1- Ui uchun shadcn ui + Tailwindcss
+
+// 1) yuklaymiz ( npm i -D eslint-config-standard, npm i -D eslint-plugin-tailwindcss, npm i -D eslint-config-prettier )  2)  .eslintrc.json ga buni yozamiz ("standard",
+//     "plugin:tailwindcss/recommended", "prettier")
+
+// 2- Tillar uchun i18n til middlewaresi uchun next-intel i18n fayili ichida konfiglar va locales da jsonlar va middlewareda doyim qo'shimcha turishi uchun yani /uz /ru
+
+// 3- Rasim yuklash uchun Uploadthing api/uploadthing ni ichida configlar lib/uploadthing.ts ni ichida configlarni Buttonlarga beryapmiz va lib/uploadthing.ts ni ichidan import qilib ishlatyapmiz
+
+// 4- State menejment Redux toolkit orqali | npm install @reduxjs/toolkit react-redux
+
+// git add .
+// git commit -m "Updated"
+// git push
+
+// git add .
+// GIT_AUTHOR_DATE="2026-03-6T12:00:00" \
+// GIT_COMMITTER_DATE="2026-03-6T12:00:00" \
+// git commit -m "Updated"
+// git push
