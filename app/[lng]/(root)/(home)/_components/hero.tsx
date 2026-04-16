@@ -67,7 +67,7 @@ function Hero() {
           {heroImages.map((image, index) => (
             <CarouselItem key={`${image.src}-${index}`}>
               <Link href={`category/${image.slug}`}>
-                <div className="relative h-[52vh] w-full overflow-hidden rounded-2xl border border-pink-100">
+                <div className="relative h-[62vh] w-full overflow-hidden rounded-2xl border border-pink-100">
                   <Image
                     src={image.src}
                     alt="Texnotech"
