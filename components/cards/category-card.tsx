@@ -73,7 +73,7 @@ function CategoryCard({ category, index }: Props) {
 
   return (
     // 🔧 key prop bu yerda emas — parent map() da beriladi
-    <CarouselItem className="basis-1/2 pl-4 md:basis-1/4 lg:basis-1/5 xl:basis-[16.666%]">
+    <CarouselItem className="pl-4">
       <Link
         href={`/category/${category.slug}`}
         className="group relative flex cursor-pointer flex-col items-center"
@@ -103,7 +103,7 @@ function CategoryCard({ category, index }: Props) {
           </div>
 
           {/* 🔧 Raqam div ichiga ko'chirildi, overflow-hidden tashqarisida */}
-          <span className="pointer-events-none absolute -right-2 -top-4 select-none text-[60px] font-black text-pink-500/15 transition-opacity group-hover:opacity-10">
+          <span className="pointer-events-none absolute select-none text-4xl font-black text-pink-500/15 transition-opacity group-hover:opacity-10 md:-right-2 md:-top-4 md:text-[60px]">
             {displayIndex}
           </span>
         </div>
