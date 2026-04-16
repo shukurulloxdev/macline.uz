@@ -23,7 +23,7 @@ async function Page() {
 
   return (
     <div>
-      <Hero />
+      <Hero discountProducts={discountProducts.data?.products || []} />
       <Categories allCategories={allCategories.data?.categories || []} />
       <PopProducts topProducts={topProducts.data?.products || []} />
       <DiscountProducts

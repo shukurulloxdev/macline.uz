@@ -14,9 +14,10 @@ import { useState } from "react";
 interface Props {
   product: IProduct;
   view: "grid" | "list";
+  white?: boolean;
 }
 
-export default function ProductCard({ product, view }: Props) {
+export default function ProductCard({ product, view, white = true }: Props) {
   const isList = view === "list";
 
   const favoriteIds = useSelector(
@@ -35,6 +36,8 @@ export default function ProductCard({ product, view }: Props) {
     <div
       className={cn(
         "group flex w-full bg-white shadow-[0_0_10px_rgba(0,0,0,0.05)] transition-all duration-500",
+        !white && "border border-pink-100",
+
         isList
           ? "flex-row gap-6 rounded-[2rem] border border-neutral-100 p-5 hover:border-pink-200 hover:shadow-[0_20px_50px_rgba(0,0,0,0.04)]"
           : "flex-col rounded-lg",
