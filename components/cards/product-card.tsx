@@ -407,7 +407,7 @@ export default function ProductCard({ product, view, white = true }: Props) {
             <span
               className={cn(
                 "font-black uppercase tracking-[0.1em]",
-                "text-[11px] text-pink-600",
+                "text-[8px] text-pink-600 md:text-[11px]",
               )}
             >
               {product.brand || "Original"}
@@ -415,8 +415,8 @@ export default function ProductCard({ product, view, white = true }: Props) {
             {product.percent > 0 && (
               <span
                 className={cn(
-                  "font-medium text-neutral-400 line-through",
-                  isList ? "text-sm" : "text-xs",
+                  "text-[8px] font-medium text-neutral-400 line-through",
+                  isList ? "md:text-sm" : "md:text-xs",
                 )}
               >
                 {product.price.toLocaleString()}{" "}
@@ -429,7 +429,9 @@ export default function ProductCard({ product, view, white = true }: Props) {
             <h3
               className={cn(
                 "mt-2 line-clamp-2 font-semibold leading-snug text-neutral-900 transition-colors hover:text-pink-900",
-                isList ? "font-sora text-2xl" : "min-h-[3.2rem] text-[15px]",
+                isList
+                  ? "font-inter text-2xl"
+                  : "min-h-[2.5rem] text-[12px] md:min-h-[3.2rem] md:text-[15px]",
               )}
             >
               {product.name}
@@ -482,11 +484,15 @@ export default function ProductCard({ product, view, white = true }: Props) {
             <span
               className={cn(
                 "font-black text-pink-600",
-                isList ? "text-3xl" : "text-xl",
+                isList ? "text-3xl" : "text-[11px] md:text-xl",
               )}
             >
               {formatCurrentPrice(product.price, product.percent)}{" "}
-              <span className={cn(isList ? "text-xl" : "text-[14px]")}>
+              <span
+                className={cn(
+                  isList ? "text-xl" : "text-[10px] md:text-[14px]",
+                )}
+              >
                 so&apos;m
               </span>
             </span>
@@ -542,7 +548,7 @@ export default function ProductCard({ product, view, white = true }: Props) {
 
                   {/* Bu yerda hover klassini tugmaning o'ziga beramiz */}
                   <span className="group/btn relative z-10 flex size-full items-center justify-center rounded-[10px] border border-pink-600 bg-white transition-all duration-500 hover:bg-pink-600">
-                    <span className="text-[11px] font-black uppercase tracking-[0.2em] text-neutral-900 transition-colors duration-500 group-hover/btn:text-white">
+                    <span className="text-[8px] font-black uppercase tracking-[0.2em] text-neutral-900 transition-colors duration-500 group-hover/btn:text-white md:text-[11px]">
                       Sotib olish
                     </span>
                   </span>

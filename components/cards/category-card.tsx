@@ -91,7 +91,7 @@ function CategoryCard({ category, index }: Props) {
             />
           </div>
 
-          <div className="absolute inset-0 flex items-center justify-center rounded-3xl bg-black/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100 md:rounded-[2.5rem]">
+          <div className="absolute inset-0 flex items-center justify-center rounded-3xl bg-black/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100 max-md:hidden md:rounded-[2.5rem]">
             {/* 🔧 hover:scale-105 olib tashlandi — group-hover bilan boshqariladi */}
             <div className="scale-95 opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
               <div className="flex size-12 items-center justify-center rounded-full bg-white text-pink-600 shadow-xl transition-all duration-300 hover:scale-105 hover:border-pink-500">
