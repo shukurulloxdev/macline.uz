@@ -150,7 +150,7 @@ function PopProducts({ topProducts }: Props) {
             {topProducts?.map((product) => (
               <CarouselItem
                 key={product._id}
-                className="basis-[52%] pl-3 md:basis-[22%]"
+                className="basis-[55%] pl-3 md:basis-[22%]"
               >
                 <ProductCard product={product} view={"grid"} />
               </CarouselItem>

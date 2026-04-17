@@ -340,14 +340,14 @@ export default function ProductCard({ product, view, white = true }: Props) {
           "relative shrink-0 overflow-hidden bg-white transition-all duration-500",
           isList
             ? "h-56 w-60 rounded-2xl"
-            : "aspect-[8/6] w-full rounded-3xl border border-transparent",
+            : "aspect-[8/6] w-full rounded-md border border-transparent md:rounded-3xl",
         )}
       >
         {/* Badges */}
         <div
           className={cn(
-            "absolute z-20 flex flex-col gap-1.5",
-            isList ? "left-3 top-3" : "left-3 top-3",
+            "absolute z-20 flex flex-col gap-[3px] md:gap-1.5",
+            isList ? "left-3 top-3" : "left-[6px] top-[6px] md:left-3 md:top-3",
           )}
         >
           {product.top && (
@@ -368,14 +368,15 @@ export default function ProductCard({ product, view, white = true }: Props) {
           className={cn(
             "absolute z-20 flex items-center justify-center rounded-full border border-neutral-100 bg-white/80 text-neutral-400 shadow-sm backdrop-blur-sm transition-all hover:scale-110 active:scale-90",
             isFavorite ? "hover:text-neutral-500" : "hover:text-red-500",
-            isList ? "right-3 top-3 h-10 w-10" : "right-2 top-2 h-10 w-10",
+            isList
+              ? "right-3 top-3 h-10 w-10"
+              : "right-1 top-1 size-7 md:right-2 md:top-2 md:size-10",
           )}
         >
           <Heart
-            size={22}
             fill={isFavorite ? "#ef4444" : "none"}
             className={cn(
-              "transition-all duration-300",
+              "size-4 transition-all duration-300 md:size-6",
               isFavorite ? "scale-110 text-red-500" : "text-neutral-400",
             )}
           />
@@ -465,11 +466,18 @@ export default function ProductCard({ product, view, white = true }: Props) {
         <div
           className={cn(
             "flex items-center justify-between gap-2",
-            isList ? "mt-6 border-t border-neutral-50 pt-5" : "flex-wrap pt-1",
+            isList
+              ? "mt-6 border-t border-neutral-50 pt-5"
+              : "flex-wrap pt-[3px] md:pt-1",
           )}
         >
           {/* Narx qismi - Har doim tugmalardan oldin (Gridda tepada bo'lishi uchun) */}
-          <div className={cn("flex flex-col gap-1", !isList && "mb-1 w-full")}>
+          <div
+            className={cn(
+              "flex flex-col gap-1",
+              !isList && "mb-[2px] w-full md:mb-1",
+            )}
+          >
             {isList && product.percent > 0 && (
               <span
                 className={cn(
@@ -500,7 +508,10 @@ export default function ProductCard({ product, view, white = true }: Props) {
 
           {/* Tugmalar qismi */}
           <div
-            className={cn("flex items-center gap-2", !isList ? "w-full" : "")}
+            className={cn(
+              "flex items-center gap-2 max-md:hidden",
+              !isList ? "w-full" : "",
+            )}
           >
             {isList ? (
               <>
@@ -576,6 +587,10 @@ export default function ProductCard({ product, view, white = true }: Props) {
               </>
             )}
           </div>
+          <button className="flex w-full items-center justify-center gap-2 rounded-sm bg-pink-600 py-1 font-inter text-sm text-white md:hidden">
+            <ShoppingBag className="size-4" />
+            <span>Savatga</span>
+          </button>
         </div>
       </div>
     </div>
