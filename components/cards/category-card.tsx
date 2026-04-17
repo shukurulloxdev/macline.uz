@@ -78,22 +78,20 @@ function CategoryCard({ category, index }: Props) {
         href={`/category/${category.slug}`}
         className="group relative flex cursor-pointer flex-col items-center"
       >
-        {/* 🔧 bo'sh joy qo'shildi: bg-[#F5F5F7] transition-all */}
-        {/* 🔧 overflow-hidden olib tashlandi — raqam qirqilmasin deb */}
-        <div className="ease-[cubic-bezier(0.23,1,0.32,1)] relative aspect-square w-full rounded-[2.5rem] border border-transparent bg-[#F5F5F7] transition-all duration-500 group-hover:border-pink-600/30 group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)]">
+        <div className="ease-[cubic-bezier(0.23,1,0.32,1)] relative aspect-square w-full rounded-3xl border border-transparent bg-[#F5F5F7] transition-all duration-500 group-hover:border-pink-600/30 group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] md:rounded-[2.5rem]">
           {/* overflow-hidden ni Image wrapper ga ko'chirdik */}
-          <div className="absolute inset-0 overflow-hidden rounded-[2.5rem]">
+          <div className="absolute inset-0 overflow-hidden rounded-3xl md:rounded-[2.5rem]">
             <Image
               src={category.image}
               alt={category.title}
               fill
               // 🔧 sizes prop qo'shildi — Next.js talab qiladi
               sizes="(max-width: 768px) 50vw, (max-width: 1024px) 25vw, (max-width: 1280px) 20vw, 16vw"
-              className="bg-white object-cover p-8 transition-transform duration-700 group-hover:scale-110"
+              className="bg-white object-cover p-4 transition-transform duration-700 group-hover:scale-110 md:p-6"
             />
           </div>
 
-          <div className="absolute inset-0 flex items-center justify-center rounded-[2.5rem] bg-black/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+          <div className="absolute inset-0 flex items-center justify-center rounded-3xl bg-black/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100 md:rounded-[2.5rem]">
             {/* 🔧 hover:scale-105 olib tashlandi — group-hover bilan boshqariladi */}
             <div className="scale-95 opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
               <div className="flex size-12 items-center justify-center rounded-full bg-white text-pink-600 shadow-xl transition-all duration-300 hover:scale-105 hover:border-pink-500">
@@ -103,12 +101,12 @@ function CategoryCard({ category, index }: Props) {
           </div>
 
           {/* 🔧 Raqam div ichiga ko'chirildi, overflow-hidden tashqarisida */}
-          <span className="pointer-events-none absolute select-none text-4xl font-black text-pink-500/15 transition-opacity group-hover:opacity-10 md:-right-2 md:-top-4 md:text-[60px]">
+          <span className="pointer-events-none absolute left-1 select-none text-3xl font-black text-pink-500/15 transition-opacity group-hover:opacity-10 md:-right-2 md:-top-4 md:text-[60px]">
             {displayIndex}
           </span>
         </div>
 
-        <div className="mt-6 text-center transition-transform duration-500 group-hover:-translate-y-2">
+        <div className="mt-3 text-center transition-transform duration-500 group-hover:-translate-y-2 md:mt-5">
           <h3 className="font-sora text-[15px] font-bold tracking-tight text-neutral-400 transition-colors group-hover:text-pink-500">
             {category.title}
           </h3>

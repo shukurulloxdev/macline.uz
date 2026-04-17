@@ -81,7 +81,7 @@ interface Props {
 
 function Categories({ allCategories }: Props) {
   return (
-    <section className="mx-auto max-w-7xl py-6 md:py-10">
+    <section className="mx-auto max-w-7xl py-4 max-md:px-3">
       {/* Header Section */}
       {/* <div className="mb-4 flex items-center justify-between px-4 md:mb-8 md:px-0">
         <h2 className="font-sora text-xl font-bold tracking-tight text-gray-900 md:text-3xl">
@@ -101,12 +101,15 @@ function Categories({ allCategories }: Props) {
           />
         </Link>
       </div> */}
-      <div className="mb-2 flex items-end justify-between">
-        <h1 className="font-sora text-xl font-semibold tracking-tight text-gray-800 md:text-3xl">
+      <div className="mb-1 flex items-end justify-between md:mb-3">
+        <h1 className="font-sora text-2xl font-semibold tracking-tight text-gray-800 md:text-3xl">
           Barcha toifalar
         </h1>
         <div className="group flex cursor-pointer items-center gap-1">
-          <span className="text-sm text-pink-600 transition-colors duration-300 md:text-[18px]">
+          <span className="text-sm text-pink-600 transition-colors duration-300 md:hidden">
+            Hammasini
+          </span>
+          <span className="text-[18px] text-pink-600 transition-colors duration-300 max-md:hidden">
             Hammasini ko&apos;rish
           </span>
 
@@ -132,15 +135,15 @@ function Categories({ allCategories }: Props) {
         ]}
         className="w-full"
       >
-        <CarouselContent className="-ml-2 md:-ml-4">
+        <CarouselContent className="my-6 px-1">
           {allCategories.map((category, index) => (
             <CarouselItem
               key={category._id || index}
               // Mobil: 2.5 ta karta (keyingi karta ko'rinib turishi userga "surish kerak" degan signal beradi)
               // Tablet: 4 ta karta, Desktop: 6 ta karta
-              className="basis-[40%] pl-2 sm:basis-1/3 md:basis-1/4 md:pl-4 lg:basis-1/6"
+              className="basis-[38%] pl-[2px] sm:basis-1/3 md:basis-1/4 md:pl-4 lg:basis-1/6"
             >
-              <div className="h-full py-2">
+              <div className="h-full">
                 <CategoryCard category={category} index={index} />
               </div>
             </CarouselItem>
