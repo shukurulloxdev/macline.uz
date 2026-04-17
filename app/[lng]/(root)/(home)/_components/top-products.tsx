@@ -146,7 +146,7 @@ function PopProducts({ topProducts }: Props) {
           }}
           className="overflow-visible"
         >
-          <CarouselContent className="-ml-3 py-4">
+          <CarouselContent className="-ml-3 py-2 md:py-4">
             {topProducts?.map((product) => (
               <CarouselItem
                 key={product._id}

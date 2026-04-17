@@ -484,7 +484,7 @@ export default function ProductCard({ product, view, white = true }: Props) {
             <span
               className={cn(
                 "font-black text-pink-600",
-                isList ? "text-3xl" : "text-[11px] md:text-xl",
+                isList ? "text-3xl" : "text-sm md:text-xl",
               )}
             >
               {formatCurrentPrice(product.price, product.percent)}{" "}
@@ -538,7 +538,7 @@ export default function ProductCard({ product, view, white = true }: Props) {
               <>
                 <Link
                   href={`/product/${product._id}`}
-                  className="relative flex h-11 flex-1 items-center justify-center overflow-hidden rounded-lg bg-pink-600 p-[1.3px] transition-all duration-500 active:scale-95"
+                  className="relative flex h-9 flex-1 items-center justify-center overflow-hidden rounded-sm bg-pink-600 p-[1px] transition-all duration-500 active:scale-95 md:h-11 md:rounded-lg"
                 >
                   {/* Faqat tugmaning o'ziga hover bo'lganda (hover:opacity-100) ishlaydi */}
                   {/* <span
@@ -547,8 +547,8 @@ export default function ProductCard({ product, view, white = true }: Props) {
                   /> */}
 
                   {/* Bu yerda hover klassini tugmaning o'ziga beramiz */}
-                  <span className="group/btn relative z-10 flex size-full items-center justify-center rounded-[10px] border border-pink-600 bg-white transition-all duration-500 hover:bg-pink-600">
-                    <span className="text-[8px] font-black uppercase tracking-[0.2em] text-neutral-900 transition-colors duration-500 group-hover/btn:text-white md:text-[11px]">
+                  <span className="group/btn relative z-10 flex size-full items-center justify-center rounded-sm border border-pink-600 bg-white transition-all duration-500 hover:bg-pink-600 md:rounded-[10px]">
+                    <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-neutral-900 transition-colors duration-500 group-hover/btn:text-white md:text-[11px]">
                       Sotib olish
                     </span>
                   </span>
@@ -556,13 +556,12 @@ export default function ProductCard({ product, view, white = true }: Props) {
                 <button
                   onClick={() => dispatch(toggleBasket(product._id))}
                   className={cn(
-                    "group/btn relative flex h-11 w-12 items-center justify-center overflow-hidden rounded-xl transition-all duration-500 active:scale-90", // group/btn qo'shildi
+                    "group/btn relative flex h-9 w-12 items-center justify-center overflow-hidden rounded-sm transition-all duration-500 active:scale-90 md:h-11 md:rounded-xl",
                     isBasket
                       ? "bg-emerald-500 text-white shadow-lg shadow-emerald-500/20"
                       : "bg-pink-600 text-white shadow-lg shadow-pink-600/20 hover:bg-pink-700",
                   )}
                 >
-                  {/* IKONKA */}
                   <div className="relative z-10">
                     {isBasket ? (
                       <Check size={22} strokeWidth={3} />

@@ -81,45 +81,8 @@ interface Props {
 
 function Categories({ allCategories }: Props) {
   return (
-    <section className="mx-auto max-w-7xl py-2 max-md:px-3 md:py-4">
-      {/* Header Section */}
-      {/* <div className="mb-4 flex items-center justify-between px-4 md:mb-8 md:px-0">
-        <h2 className="font-sora text-xl font-bold tracking-tight text-gray-900 md:text-3xl">
-          Barcha toifalar
-        </h2>
-
-        <Link
-          href="/categories"
-          className="group flex items-center gap-1.5 transition-opacity active:opacity-70"
-        >
-          <span className="text-sm font-bold text-pink-600 md:text-lg">
-            Hammasi
-          </span>
-          <MoveRight
-            size={18}
-            className="text-pink-600 transition-transform duration-300 group-hover:translate-x-1 md:size-5"
-          />
-        </Link>
-      </div> */}
-      {/* <div className="mb-1 flex items-end justify-between md:mb-3">
-        <h1 className="font-sora text-2xl font-semibold tracking-tight text-gray-800 md:text-3xl">
-          Barcha toifalar
-        </h1>
-        <div className="group flex cursor-pointer items-center gap-1">
-          <span className="text-sm text-pink-600 transition-colors duration-300 md:hidden">
-            Hammasini
-          </span>
-          <span className="text-[18px] text-pink-600 transition-colors duration-300 max-md:hidden">
-            Hammasini ko&apos;rish
-          </span>
-
-          <MoveRight
-            size={20}
-            className="text-pink-600 transition-transform duration-300 ease-out group-hover:translate-x-1"
-          />
-        </div>
-      </div> */}
-      <div className="mb-3 flex items-center justify-between px-1 md:mb-4">
+    <section className="mx-auto max-w-7xl py-2 max-md:px-4 md:py-4">
+      <div className="mb-1 flex items-center justify-between px-1 md:mb-4">
         <div className="flex flex-col gap-0.5">
           <h2 className="font-sora text-xl font-semibold tracking-tight text-gray-800 md:text-3xl">
             Barcha toifalar
@@ -153,7 +116,7 @@ function Categories({ allCategories }: Props) {
         opts={{
           align: "start",
           loop: true,
-          dragFree: true, // Mobil foydalanuvchilar uchun qulay sudrash
+          // dragFree: true, // Mobil foydalanuvchilar uchun qulay sudrash
         }}
         plugins={[
           Autoplay({
@@ -163,7 +126,7 @@ function Categories({ allCategories }: Props) {
         ]}
         className="w-full"
       >
-        <CarouselContent className="my-1 px-1 md:my-6">
+        <CarouselContent className="px-1 py-2 md:py-6">
           {allCategories.map((category, index) => (
             <CarouselItem
               key={category._id || index}

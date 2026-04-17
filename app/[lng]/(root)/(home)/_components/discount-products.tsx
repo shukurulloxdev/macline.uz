@@ -19,7 +19,7 @@ interface Props {
 
 function DiscountProducts({ discountProducts }: Props) {
   return (
-    <section className="mx-auto my-4 max-w-7xl max-md:px-3">
+    <section className="mx-auto my-4 max-w-7xl max-md:px-4">
       <div className="relative overflow-hidden rounded-3xl border border-pink-200 bg-pink-600/5 p-5 shadow-sm">
         {/* <div className="relative z-10 mb-2 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <h2 className="font-sora text-3xl font-bold tracking-tight text-neutral-900">
