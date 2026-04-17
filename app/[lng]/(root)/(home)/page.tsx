@@ -34,7 +34,9 @@ async function Page() {
       <DiscountProInfo
         discountProducts={discountProducts.data?.products || []}
       />
-      <All16Products products={discountProducts.data?.products || []} />
+      <All16Products
+        products={discountProducts.data?.products.slice(0, 12) || []}
+      />
       <Profession />
       <LocationSection />
       {/* <Location /> */}

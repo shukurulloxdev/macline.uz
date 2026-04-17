@@ -112,7 +112,7 @@ interface Props {
 
 function DiscountProducts({ discountProducts }: Props) {
   return (
-    <section className="mx-auto my-4 max-w-7xl px-4 md:px-0">
+    <section className="mx-auto my-4 max-w-7xl max-md:px-3 md:px-0">
       {/* Konteyner: Mobil uchun paddingni kamaytirdik va rangni yumshatdik */}
       <div className="mx- relative overflow-hidden rounded-[1rem] border border-pink-100 shadow-sm max-md:bg-pink-100 md:rounded-[2rem] md:bg-gradient-to-br md:from-pink-50/50 md:to-white md:p-8">
         <div className="flex items-center justify-between max-md:p-4 md:mb-2">

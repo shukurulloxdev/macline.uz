@@ -67,12 +67,13 @@
 // }
 
 // export default PopProducts;
-
+"use client";
 import ProductCard from "@/components/cards/product-card";
 import { MoveRight } from "lucide-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Carousel,
+  CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
@@ -86,9 +87,25 @@ interface Props {
 }
 
 function PopProducts({ topProducts }: Props) {
-  console.log("Hammasi", topProducts.length);
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    if (!api) return;
+
+    const updateCurrent = () => {
+      setCurrent(api.selectedScrollSnap());
+    };
+
+    updateCurrent();
+    api.on("select", updateCurrent);
+
+    return () => {
+      api.off("select", updateCurrent);
+    };
+  }, [api]);
   return (
-    <section className="mx-auto max-w-7xl px-3 py-4">
+    <section className="mx-auto max-w-7xl py-4 max-md:px-3">
       <div className="mb-2 flex items-center justify-between px-1">
         <div className="flex flex-col gap-0.5">
           <h2 className="font-sora text-xl font-semibold tracking-tight text-gray-800 md:text-3xl">
@@ -119,6 +136,7 @@ function PopProducts({ topProducts }: Props) {
       </div>
       <div>
         <Carousel
+          setApi={setApi}
           opts={{
             align: "start",
             loop: true,
@@ -140,6 +158,20 @@ function PopProducts({ topProducts }: Props) {
 
           {/* NEXT */}
           <CarouselNext className="-right-6 top-1/2 size-11 -translate-y-1/2 rounded-full border bg-white/80 shadow-xl backdrop-blur-xl transition-all duration-300 hover:scale-110 hover:border-pink-600 [&_svg]:text-pink-600" />
+          <div className="mt-1 flex items-center justify-center gap-2 backdrop-blur-xl md:hidden">
+            {topProducts.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => api?.scrollTo(index)}
+                className={`size-[7px] rounded-full transition-all duration-300 md:size-3 ${
+                  current === index
+                    ? "scale-110 bg-pink-500"
+                    : "bg-neutral-300 hover:bg-pink-300"
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
         </Carousel>
       </div>
     </section>
