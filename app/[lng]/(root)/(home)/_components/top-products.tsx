@@ -89,27 +89,6 @@ function PopProducts({ topProducts }: Props) {
   console.log("Hammasi", topProducts.length);
   return (
     <section className="mx-auto max-w-7xl px-3 py-4">
-      {/* <div className="flex items-end justify-between pb-2">
-        <h1 className="font-sora text-2xl font-semibold tracking-tight text-gray-800 md:text-3xl">
-          Top mahsulotlar
-        </h1>
-        <Link
-          href={"/category/tops"}
-          className="group flex cursor-pointer items-center gap-1"
-        >
-          <span className="text-[16px] text-pink-600 transition-colors duration-300 md:hidden">
-            Hammasini
-          </span>
-          <span className="text-[18px] text-pink-600 transition-colors duration-300 max-md:hidden">
-            Hammasini ko&apos;rish
-          </span>
-
-          <MoveRight
-            size={20}
-            className="text-pink-600 transition-transform duration-300 ease-out group-hover:translate-x-1"
-          />
-        </Link>
-      </div> */}
       <div className="mb-2 flex items-center justify-between px-1">
         <div className="flex flex-col gap-0.5">
           <h2 className="font-sora text-xl font-semibold tracking-tight text-gray-800 md:text-3xl">

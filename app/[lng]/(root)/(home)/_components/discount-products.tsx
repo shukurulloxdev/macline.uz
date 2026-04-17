@@ -161,7 +161,7 @@ function DiscountProducts({ discountProducts }: Props) {
             {discountProducts?.map((product, index) => (
               <CarouselItem
                 key={product._id + index}
-                className="basis-[45%] pl-3 sm:basis-1/3 md:basis-1/4 lg:basis-[22%]"
+                className="basis-[57%] pl-3 sm:basis-1/3 md:basis-1/4 lg:basis-[22%]"
               >
                 <div className="h-full py-2">
                   {/* ProductCard ichida padding/margin bo'lsa uni tekshiring */}
