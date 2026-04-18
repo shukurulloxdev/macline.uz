@@ -128,7 +128,7 @@ function DiscountProducts({ discountProducts }: Props) {
   }, [api]);
   return (
     <section className="mx-auto max-w-7xl py-4 max-md:px-3">
-      <div className="mb-2 flex items-center justify-between px-1">
+      <div className="mb-1 flex items-center justify-between px-1">
         <div className="flex flex-col gap-0.5">
           <h2 className="font-sora text-xl font-semibold tracking-tight text-gray-800 md:text-3xl">
             Katta <span className="text-pink-600">Chegirmalar</span>
