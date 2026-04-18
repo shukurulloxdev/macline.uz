@@ -26,7 +26,7 @@ function All16Products({ products }: Props) {
           />
         </div>
       </div> */}
-      <div className="mb-2 flex items-center justify-between px-1">
+      <div className="mb-1 flex items-center justify-between px-1">
         <div className="flex flex-col gap-0.5">
           <h2 className="font-sora text-xl font-semibold tracking-tight text-gray-800 md:text-4xl">
             Barcha mahsulotlar
@@ -54,7 +54,7 @@ function All16Products({ products }: Props) {
           </div>
         </Link>
       </div>
-      <div className="grid grid-cols-2 gap-3 py-4 md:grid-cols-4 md:gap-[14px] lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 py-2 md:grid-cols-4 md:gap-[14px] md:py-4 lg:grid-cols-4">
         {products.map((product) => (
           <ProductCard key={product._id} product={product} view="grid" />
         ))}

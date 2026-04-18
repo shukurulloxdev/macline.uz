@@ -14,6 +14,7 @@ import BigProducts from "./_components/big-products";
 import SmallProducts from "./_components/small-products";
 import All16Products from "./_components/all-16products";
 import Profession from "./_components/profession";
+import NewsProducts from "./_components/news-products";
 
 // actionClient ham javobni to'gridan to'gri qaytaramaydi o'zini obyectini qaytaradi
 async function Page() {
@@ -29,6 +30,7 @@ async function Page() {
       <DiscountProducts
         discountProducts={discountProducts.data?.products || []}
       />
+      <NewsProducts discountProducts={discountProducts.data?.products || []} />
       <BigProducts bigProducts={discountProducts.data?.products || []} />
       <SmallProducts smallProducts={discountProducts.data?.products || []} />
       <DiscountProInfo
