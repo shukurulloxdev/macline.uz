@@ -38,7 +38,7 @@ async function Page() {
         products={discountProducts.data?.products.slice(0, 12) || []}
       />
       <Profession />
-      <LocationSection />
+      {/* <LocationSection /> */}
       {/* <Location /> */}
       <MaclineServices />
     </div>

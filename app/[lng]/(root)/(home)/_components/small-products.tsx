@@ -166,12 +166,12 @@ function SmallProducts({ smallProducts }: Props) {
               />
             ))}
           </div> */}
-          <div className="flex items-center justify-center gap-2 rounded-sm bg-white/95 px-2 py-2 shadow-sm backdrop-blur-xl md:hidden">
+          <div className="mt-1 flex items-center justify-center gap-2 backdrop-blur-xl md:hidden">
             {smallProducts.map((_, index) => (
               <button
                 key={index}
                 onClick={() => api?.scrollTo(index)}
-                className={`size-[7px] rounded-full transition-all duration-300 md:size-3 ${
+                className={`size-[5px] rounded-full transition-all duration-300 md:size-3 ${
                   current === index
                     ? "scale-110 bg-pink-500"
                     : "bg-neutral-300 hover:bg-pink-300"

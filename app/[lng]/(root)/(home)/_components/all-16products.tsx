@@ -61,7 +61,7 @@ function All16Products({ products }: Props) {
       </div>
       <Link href={"/products"} className="mx-auto mt-1 md:mt-4">
         <Button
-          className="rounded-md bg-blue-600/90 text-xs transition-all duration-300 hover:scale-[1.03] hover:bg-blue-600 md:bg-pink-600/90 md:px-32 md:py-6 md:text-lg md:hover:bg-pink-600"
+          className="rounded-md bg-pink-600/90 text-xs transition-all duration-300 hover:scale-[1.03] hover:bg-pink-600 md:px-32 md:py-6 md:text-lg"
           size={"lg"}
         >
           Hammasini ko&apos;rish
