@@ -56,7 +56,7 @@ export default function DiscountProInfo({ discountProducts }: Props) {
             initial="enter"
             animate="center"
             exit="exit"
-            transition={{ duration: 0.5, ease: "easeInOut" }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
             className="flex flex-col gap-6"
             drag="x"
             dragConstraints={{ left: 0, right: 0 }} // ← joyida qoladi
@@ -126,7 +126,7 @@ export default function DiscountProInfo({ discountProducts }: Props) {
             </div>
 
             {/* 2. MATN VA TUGMALAR (Mobilda Ikkinchi) */}
-            <div className="order-2 col-span-1 space-y-5 text-center">
+            {/* <div className="order-2 col-span-1 space-y-5 text-center">
               <div className="flex flex-col items-center gap-3 md:items-start">
                 {activeProduct.percent && (
                   <span className="inline-block rounded-full bg-pink-50 px-4 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-pink-600">
@@ -139,6 +139,138 @@ export default function DiscountProInfo({ discountProducts }: Props) {
               </div>
 
               <div className="grid grid-cols-2 items-center gap-3 pt-4">
+                <Link href={`/product/${activeProduct._id}`} className="">
+                  <Button
+                    variant="outline"
+                    className="h-14 w-full rounded-full border-2 border-neutral-100 bg-neutral-50 px-8 font-bold hover:bg-pink-50 active:scale-95"
+                  >
+                    Batafsil
+                    <Plus size={18} className="ml-2" />
+                  </Button>
+                </Link>
+                <button
+                  onClick={() => {
+                    if (!isBasket) dispatch(toggleBasket(activeProduct._id));
+                    else router.push("/shopping/cart");
+                  }}
+                  className={cn(
+                    "flex h-14 items-center justify-center gap-3 rounded-full px-8 text-white shadow-lg transition-all active:scale-95",
+                    isBasket
+                      ? "bg-emerald-500 shadow-emerald-100"
+                      : "bg-pink-600 shadow-pink-100",
+                  )}
+                >
+                  <span className="font-bold">
+                    {isBasket ? "O'tish" : "Savatga"}
+                  </span>
+                  {isBasket ? (
+                    <ArrowRight size={18} />
+                  ) : (
+                    <ShoppingBag size={18} />
+                  )}
+                </button>
+              </div>
+            </div> */}
+            <div className="order-2 col-span-1 space-y-6 text-center">
+              <div className="flex flex-col items-center gap-2 md:items-start">
+                <div className="flex items-center gap-2">
+                  <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-pink-600">
+                    {activeProduct.category}
+                  </span>
+                  <span className="h-1 w-1 rounded-full bg-neutral-300" />
+                  <span className="text-[11px] font-medium text-neutral-400">
+                    Omborda: {activeProduct.count} dona
+                  </span>
+                </div>
+                <h2 className="line-clamp-2 text-3xl font-bold leading-tight tracking-tight text-black md:text-5xl">
+                  {activeProduct.name}
+                </h2>
+              </div>
+
+              <div className="flex flex-col items-center gap-1">
+                <div className="flex items-baseline gap-3">
+                  <span className="text-3xl font-black text-pink-600 md:text-4xl">
+                    {new Intl.NumberFormat("uz-UZ").format(activeProduct.price)}{" "}
+                    <small className="text-sm">SO'M</small>
+                  </span>
+                  {activeProduct.percent && (
+                    <span className="text-lg text-neutral-400 line-through decoration-pink-500/30">
+                      {new Intl.NumberFormat("uz-UZ").format(
+                        activeProduct.price +
+                          (activeProduct.price * activeProduct.percent) / 100,
+                      )}
+                    </span>
+                  )}
+                </div>
+                <p className="rounded bg-emerald-50 px-2 py-0.5 text-xs font-medium text-emerald-600">
+                  Muddatli to'lovga:{" "}
+                  {new Intl.NumberFormat("uz-UZ").format(
+                    Math.floor(activeProduct.price / 12),
+                  )}{" "}
+                  so'mdan / 12 oy
+                </p>
+              </div>
+
+              {/* <div className="flex flex-wrap justify-center gap-2 md:justify-start">
+                <div className="flex items-center gap-1.5 rounded-xl border border-neutral-200/50 bg-neutral-100 px-3 py-2">
+                  <div className="h-1.5 w-1.5 rounded-full bg-blue-500" />
+                  <span className="text-[11px] font-bold text-neutral-700">
+                    {activeProduct.kafolat || "1 Yil"} Kafolat
+                  </span>
+                </div>
+                <div className="flex items-center gap-1.5 rounded-xl border border-neutral-200/50 bg-neutral-100 px-3 py-2">
+                  <div className="h-1.5 w-1.5 rounded-full bg-orange-500" />
+                  <span className="text-[11px] font-bold text-neutral-700">
+                    Bepul Yetkazish
+                  </span>
+                </div>
+                <div className="flex items-center gap-1.5 rounded-xl border border-neutral-200/50 bg-neutral-100 px-3 py-2">
+                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                  <span className="text-[11px] font-bold text-neutral-700">
+                    Original Apple
+                  </span>
+                </div>
+              </div> */}
+
+              {/* <div className="flex flex-col gap-3 pt-4 sm:flex-row">
+                <button
+                  onClick={() => {
+                    if (!isBasket) dispatch(toggleBasket(activeProduct._id));
+                    else router.push("/shopping/cart");
+                  }}
+                  className={cn(
+                    "flex- relative flex h-16 items-center justify-center gap-3 overflow-hidden rounded-2xl px-8 transition-all active:scale-95",
+                    isBasket
+                      ? "bg-black text-white"
+                      : "bg-pink-600 text-white shadow-xl shadow-pink-200 hover:bg-pink-700",
+                  )}
+                >
+                  <div className="flex flex-col items-start leading-none">
+                    <span className="text-[10px] font-medium uppercase tracking-wider opacity-70">
+                      {isBasket ? "Savatda mavjud" : "Hoziroq xarid qilish"}
+                    </span>
+                    <span className="text-lg font-bold">
+                      {isBasket ? "Savatga o'tish" : "Savatga qo'shish"}
+                    </span>
+                  </div>
+                  {isBasket ? (
+                    <ArrowRight size={20} />
+                  ) : (
+                    <ShoppingBag size={20} />
+                  )}
+                </button>
+
+                <Link href={`/product/${activeProduct._id}`} className="flex-1">
+                  <Button
+                    variant="outline"
+                    className="h-16 w-full rounded-2xl border-2 border-neutral-100 bg-white px-8 text-base font-bold text-black hover:bg-neutral-50 active:scale-95"
+                  >
+                    Batafsil
+                    <Plus size={20} className="ml-2 text-neutral-400" />
+                  </Button>
+                </Link>
+              </div> */}
+              <div className="grid grid-cols-2 items-center gap-3 pt-2">
                 <Link href={`/product/${activeProduct._id}`} className="">
                   <Button
                     variant="outline"
