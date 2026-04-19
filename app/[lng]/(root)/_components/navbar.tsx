@@ -71,16 +71,16 @@ function Navbar({ katalog }: Props) {
   ];
 
   return (
-    <header className="sticky top-0 z-30 border-b border-neutral-100 bg-white shadow-md backdrop-blur-2xl">
-      <div className="border-b border-neutral-100 py-2">
+    <header className="sticky top-0 z-30 border-b border-neutral-100 bg-white shadow-md backdrop-blur-2xl max-md:px-3">
+      <div className="border-b border-neutral-100 py-1 md:py-2">
         <div className="mx-auto flex max-w-7xl items-center justify-between">
           <div className="flex items-center gap-6">
             <Link
               href={"/category/discounts"}
-              className="group flex cursor-pointer items-center gap-2 rounded-full border border-pink-100 bg-pink-50 px-3 py-1 transition-all hover:bg-pink-100"
+              className="group flex cursor-pointer items-center gap-2 rounded-full border border-pink-100 bg-pink-50 px-3 py-[2px] transition-all hover:bg-pink-100 md:py-1"
             >
               <Flame size={12} className="animate-pulse text-pink-600" />
-              <span className="text-[10px] font-black uppercase tracking-[0.12em] text-pink-600">
+              <span className="text-[6px] font-black uppercase tracking-[0.12em] text-pink-600 md:text-[10px]">
                 Hafta chegirmalari -30% gacha
               </span>
             </Link>
@@ -101,8 +101,8 @@ function Navbar({ katalog }: Props) {
 
           <div className="flex items-center gap-4">
             <LngMenu />
-            <div className="h-3 w-px bg-neutral-200" />
-            <div className="group flex cursor-pointer items-center gap-1.5 transition-all">
+            <div className="h-3 w-px bg-neutral-200 max-md:hidden" />
+            <div className="group flex cursor-pointer items-center gap-1.5 transition-all max-md:hidden">
               <MapPin
                 size={12}
                 className="text-pink-500 transition-transform group-hover:scale-110"
@@ -119,12 +119,14 @@ function Navbar({ katalog }: Props) {
         <div className="flex items-center justify-between gap-8">
           <div className="flex items-center gap-8">
             <Logo />
-            <KatalogMenu categories={katalog} />
+            <div className="max-md:hidden">
+              <KatalogMenu categories={katalog} />
+            </div>
           </div>
 
           <InputSearch categories={katalog} />
 
-          <div className={cn("z-10 flex items-center gap-4")}>
+          <div className={cn("z-10 flex items-center gap-4 max-md:hidden")}>
             <div className="flex items-center gap-4">
               {/* BELL BUTTON */}
               <button className="relative flex h-[54px] w-14 items-center justify-center rounded-2xl bg-neutral-50 text-neutral-700 transition-all hover:bg-pink-50 hover:text-pink-600 active:scale-95">
@@ -157,7 +159,6 @@ function Navbar({ katalog }: Props) {
                 </div>
               </Link>
 
-              {/* SHOPPING CART LINK */}
               <Link
                 href={"/shopping/cart"}
                 className={cn(
@@ -210,17 +211,17 @@ function Navbar({ katalog }: Props) {
         className={cn(
           "overflow-hidden border-t border-neutral-100 bg-white/50 backdrop-blur-sm transition-all duration-300",
           isCategoryVisible
-            ? "max-h-32 translate-y-0 py-3 opacity-100"
+            ? "max-h-32 translate-y-0 py-1 opacity-100 md:py-3"
             : "max-h-0 -translate-y-2 py-0 opacity-0",
         )}
       >
         <div className="mx-auto flex max-w-7xl">
-          <nav className="flex w-full items-center justify-between gap-2">
+          <nav className="flex w-full items-center justify-between gap-1 md:gap-2">
             {categories.map((cat, index, array) => (
               <React.Fragment key={cat._id}>
                 <Link
                   href={`/category/${cat.slug}`}
-                  className="group flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.15em] text-neutral-500 transition-all hover:text-pink-600"
+                  className="group flex items-center gap-1 text-[8px] font-black uppercase tracking-[0.15em] text-neutral-500 transition-all hover:text-pink-600 md:gap-3 md:text-[11px]"
                 >
                   <div className="relative flex size-2 items-center justify-center">
                     <div className="size-1.5 rounded-full bg-pink-100 transition-all duration-300 group-hover:size-2 group-hover:bg-pink-600 group-hover:shadow-[0_0_10px_rgba(219,39,119,0.5)]" />

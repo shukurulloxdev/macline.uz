@@ -119,14 +119,14 @@ function InputSearch({ categories }: Props) {
           onBlur={() => setIsSearchFocused(false)}
           type="text"
           placeholder="Smart qidiruv: iPhone 15 Pro..."
-          className="h-[54px] w-full rounded-2xl border-2 border-neutral-100 bg-neutral-50 pl-6 pr-16 text-sm font-bold outline-none transition-all placeholder:font-medium placeholder:text-neutral-400 focus:border-pink-200 focus:bg-white focus:ring-4 focus:ring-pink-100/30"
+          className="h-9 w-full rounded-md border-2 border-neutral-100 bg-neutral-50 pl-6 pr-16 text-sm font-bold outline-none transition-all placeholder:font-medium placeholder:text-neutral-400 focus:border-pink-200 focus:bg-white focus:ring-4 focus:ring-pink-100/30 md:h-[54px] md:rounded-2xl"
         />
 
         <div className="absolute right-2 top-1/2 z-10 -translate-y-1/2">
           <button
             type="button"
             onClick={handleSearch}
-            className="flex size-10 items-center justify-center rounded-xl bg-pink-600 text-white shadow-md transition-all hover:scale-105 active:scale-95"
+            className="flex items-center justify-center text-pink-600 transition-all hover:scale-105 active:scale-95 md:size-10 md:rounded-xl md:bg-pink-600 md:text-white md:shadow-md"
           >
             <Search size={20} strokeWidth={2.5} />
           </button>

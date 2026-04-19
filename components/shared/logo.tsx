@@ -9,7 +9,7 @@ function Logo({ admin = false }: Props) {
   return (
     <Link
       href={"/"}
-      className="relative inline-block h-12 w-48 cursor-pointer transition-all duration-300 hover:scale-[1.02] active:scale-95"
+      className="relative inline-block cursor-pointer transition-all duration-300 hover:scale-[1.02] active:scale-95 max-md:h-10 max-md:w-24 md:h-12 md:w-48"
     >
       <Image
         src={admin ? "/logo/maclinewhite.png" : "/logo/macline.png"}

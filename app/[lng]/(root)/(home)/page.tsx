@@ -30,7 +30,7 @@ async function Page() {
       <DiscountProducts
         discountProducts={discountProducts.data?.products || []}
       />
-      <NewsProducts discountProducts={discountProducts.data?.products || []} />
+      <NewsProducts discountProducts={topProducts.data?.products || []} />
       <BigProducts bigProducts={discountProducts.data?.products || []} />
       <SmallProducts smallProducts={discountProducts.data?.products || []} />
       <DiscountProInfo
@@ -39,7 +39,7 @@ async function Page() {
       <All16Products
         products={discountProducts.data?.products.slice(0, 12) || []}
       />
-      <Profession />
+      {/* <Profession /> */}
       {/* <LocationSection /> */}
       {/* <Location /> */}
       <MaclineServices />
