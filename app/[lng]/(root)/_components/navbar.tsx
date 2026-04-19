@@ -10,6 +10,7 @@ import {
   Phone,
   Flame,
   LoaderCircle,
+  Menu,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Logo from "@/components/shared/logo";
@@ -21,6 +22,16 @@ import { UserMenu } from "@/components/shared/user-menu";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import InputSearch from "./input-search";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 interface Props {
   katalog: ICategory[];
@@ -72,7 +83,7 @@ function Navbar({ katalog }: Props) {
 
   return (
     <header className="sticky top-0 z-30 border-b border-neutral-100 bg-white shadow-md backdrop-blur-2xl max-md:px-3">
-      <div className="border-b border-neutral-100 py-1 md:py-2">
+      <div className="border-b border-neutral-100 py-1 max-md:hidden md:py-2">
         <div className="mx-auto flex max-w-7xl items-center justify-between">
           <div className="flex items-center gap-6">
             <Link
@@ -116,15 +127,33 @@ function Navbar({ katalog }: Props) {
       </div>
 
       <div className="mx-auto max-w-7xl py-3">
-        <div className="flex items-center justify-between gap-8">
+        <div className="flex items-center max-md:flex-col max-md:gap-2 md:justify-between md:gap-8">
           <div className="flex items-center gap-8">
             <Logo />
             <div className="max-md:hidden">
               <KatalogMenu categories={katalog} />
             </div>
           </div>
+          <div className="w-full max-md:hidden">
+            <InputSearch categories={katalog} />
+          </div>
+          <div className="flex w-full items-center justify-between gap-3 md:hidden">
+            <div className="flex-1">
+              <InputSearch categories={katalog} />
+            </div>
 
-          <InputSearch categories={katalog} />
+            <Sheet>
+              <SheetTrigger asChild>
+                <button className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-neutral-50 text-neutral-700 active:scale-95">
+                  <Menu size={24} />
+                </button>
+              </SheetTrigger>
+              <SheetContent
+                side="left"
+                className="w-[300px] p-0"
+              ></SheetContent>
+            </Sheet>
+          </div>
 
           <div className={cn("z-10 flex items-center gap-4 max-md:hidden")}>
             <div className="flex items-center gap-4">

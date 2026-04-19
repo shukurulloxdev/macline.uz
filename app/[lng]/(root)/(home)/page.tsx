@@ -42,7 +42,7 @@ async function Page() {
       {/* <Profession /> */}
       {/* <LocationSection /> */}
       {/* <Location /> */}
-      <MaclineServices />
+      {/* <MaclineServices /> */}
     </div>
   );
 }

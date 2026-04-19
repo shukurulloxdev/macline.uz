@@ -106,7 +106,7 @@ function InputSearch({ categories }: Props) {
   return (
     <div
       className={cn(
-        "relative max-w-2xl flex-1 transition-all duration-500",
+        "relative w-full flex-1 transition-all duration-500 md:max-w-2xl",
         isSearchFocused ? "z-40 scale-[1.01]" : "z-10",
       )}
     >
