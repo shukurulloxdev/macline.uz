@@ -147,9 +147,12 @@ function RegisterModal() {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <div className="ml-2 flex items-center border-l border-neutral-100 pl-4">
-          <button className="flex h-[54px] w-[48px] items-center justify-center rounded-2xl bg-neutral-50 text-pink-600 transition-all hover:bg-pink-50 hover:text-pink-600 active:scale-95">
+        <div className="flex items-center border-l border-neutral-100 pl-3 md:ml-2 md:pl-4">
+          <button className="hidden size-10 items-center justify-center rounded-sm bg-neutral-50 text-pink-600 transition-all hover:bg-pink-50 hover:text-pink-600 active:scale-95 md:flex md:h-[54px] md:w-[48px] md:rounded-2xl">
             <LogIn size={22} strokeWidth={2.3} />
+          </button>
+          <button className="flex size-10 shrink-0 items-center justify-center rounded-2xl bg-pink-50 text-pink-600 transition-all active:scale-90 active:bg-pink-100/50 md:hidden">
+            <LogIn size={20} strokeWidth={2.3} />
           </button>
         </div>
       </DialogTrigger>

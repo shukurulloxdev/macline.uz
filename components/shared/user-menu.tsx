@@ -30,9 +30,9 @@ export function UserMenu({ user }: { user: Iuser }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div className="ml-2 flex items-center border-l border-neutral-100 pl-4">
+        <div className="flex items-center border-l border-neutral-100 pl-3 md:ml-2 md:pl-4">
           <Button variant="ghost" size="icon" className="rounded-full">
-            <Avatar className="size-12 bg-slate-50">
+            <Avatar className="size-10 bg-slate-50 md:size-12">
               <AvatarImage
                 src={user.avatar}
                 alt={user.fullName}
