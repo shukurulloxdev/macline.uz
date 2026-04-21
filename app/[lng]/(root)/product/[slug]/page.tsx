@@ -17,6 +17,7 @@ async function Page({ params }: { params: { slug: string } }) {
     console.log(data?.failure);
     return <div className="py-20 text-center">Mahsulot topilmadi</div>;
   }
+  console.log(data.products);
 
   return (
     <div className="relative mx-auto max-w-7xl max-md:bg-white max-md:px-3 md:py-4">

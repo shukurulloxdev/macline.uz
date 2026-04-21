@@ -25,6 +25,7 @@ import {
 import { toggelFavorite } from "@/redux/reducers/favoriteState";
 import Link from "next/link";
 import { toast } from "sonner";
+import ProductAbout from "./product-about";
 
 interface Props {
   product: IProduct;
@@ -42,7 +43,7 @@ export default function ProductActions({ product }: Props) {
   const favoriteProduct = favoriteIds.find((id) => id === product._id);
   console.log(product);
   return (
-    <aside className="flex w-full flex-col gap-3 font-sans">
+    <aside className="flex w-full flex-col gap-4 font-sans">
       <div className="flex items-center gap-2">
         <div className="flex items-center rounded-sm bg-pink-500 px-1.5 py-0.5 text-[9px] font-black uppercase tracking-tighter text-white">
           Arzon narx kafolati
@@ -66,32 +67,22 @@ export default function ProductActions({ product }: Props) {
           </div>
         )}
       </div>
-      {/* <h1 className="font-inter text-2xl font-bold tracking-tighter text-neutral-900">
-        {product.name}
-      </h1> */}
+
       <h1 className="text-2xl font-bold leading-tight tracking-tight text-neutral-900">
         {product.name}
       </h1>
-      {/*  */}
-      <div className="flex flex-col gap-6">
-        {/* NARX QISMI */}
-        {/* <div className="space-y-1">
-          <div className="flex items-baseline gap-2">
-            <span className="text-[32px] font-black leading-none text-pink-600">
-              {formatCurrentPrice(product.price, product.percent)} so&apos;m
-            </span>
+      <div className="flex w-full flex-col gap-2 font-sans">
+        <div className="flex items-center gap-2">
+          <div className="flex size-11 items-center justify-center rounded-xl bg-emerald-100/80 text-emerald-600 transition-colors">
+            <BadgeCheck size={24} strokeWidth={2.5} />
           </div>
-          {product.discount && (
-            <span className="text-[12px] font-medium">
-              Chegirmasiz:{" "}
-              <span className="text-gray-500 line-through">
-                {" "}
-                {product.price.toLocaleString()} so&apos;m
-              </span>
-            </span>
-          )}
-        </div> */}
-        <div className="w-full rounded-md bg-[#F5F5F7] p-4 font-sans">
+          <span className="text-[15px] font-semibold tracking-tight text-neutral-800">
+            {product.count} dona xarid qilish mumkin
+          </span>
+        </div>
+      </div>
+      <div className="flex flex-col gap-3">
+        <div className="w-full rounded-xl bg-neutral-100 p-4 font-sans">
           {/* 1. Badge - Chegirma haqida ma'lumot */}
           <div className="mb-2 flex w-fit items-center rounded-sm bg-pink-500 px-1.5 py-0.5 text-[9px] font-black uppercase tracking-tighter text-white">
             -{product.percent}% chegirma
@@ -110,12 +101,12 @@ export default function ProductActions({ product }: Props) {
 
           {/* 3. Ikkinchi darajali narxlar */}
           <div className="flex items-center gap-2 whitespace-nowrap">
-            <p className="text-[15px] font-medium text-neutral-800">
+            <p className="text-[12px] font-medium text-neutral-800">
               Chegirmasiz:
             </p>
 
             {/* Eski narx - o'chirilgan holatda */}
-            <span className="relative text-[15px] font-medium text-neutral-400">
+            <span className="relative text-[12px] font-medium text-neutral-400">
               {product.price.toLocaleString()} so&apos;m
               {/* Rasmdagi pushti o'chirish chizig'i */}
               <span className="absolute left-0 top-1/2 h-[1.5px] w-full -translate-y-1/2 bg-pink-500/60" />
@@ -123,12 +114,38 @@ export default function ProductActions({ product }: Props) {
           </div>
         </div>
 
-        {/* TUGMALAR */}
+        <div className="group relative cursor-pointer rounded-xl bg-neutral-100 p-4 transition-all">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="flex size-10 items-center justify-center rounded-xl bg-white shadow-sm">
+                <ShieldCheck className="size-full p-[6px] text-pink-600" />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[13px] font-bold text-neutral-900">
+                  Rasmiy kafolat mavjud
+                </span>
+                <span className="text-[11px] font-medium text-pink-600">
+                  Macline tomonidan {product.kafolat} kafolat
+                </span>
+              </div>
+            </div>
+            <ChevronRight size={18} className="text-neutral-400" />
+          </div>
+          <div className="mt-3 flex items-center gap-2">
+            <div className="rounded-md bg-[#ffff00] px-2 py-1 text-[11px] font-black italic shadow-sm">
+              KAFOLAT +{product.kafolat}
+            </div>
+            <span className="text-[11px] font-bold text-neutral-400">
+              × 0% komissiya
+            </span>
+          </div>
+        </div>
         <div className="flex flex-col gap-3">
           <div className="flex gap-2">
-            <Button className="h-14 flex-[4.5] rounded-xl border border-gray-100 bg-[#f2f4f7] text-sm font-bold uppercase text-black backdrop-blur-md transition-all duration-300 hover:border-gray-300 hover:bg-white hover:shadow-[0_10px_20px_rgba(0,0,0,0.04)] active:scale-95">
+            <Button className="h-14 flex-[4.5] rounded-xl border border-pink-200 bg-neutral-50 text-sm font-bold uppercase text-black backdrop-blur-md transition-all duration-300 hover:border-gray-300 hover:bg-white hover:shadow-[0_10px_20px_rgba(0,0,0,0.04)] active:scale-95">
               Hoziroq xarid qilish
             </Button>
+
             {favoriteProduct ? (
               <Button
                 onClick={() => dispatch(toggelFavorite(product._id))}
@@ -155,7 +172,8 @@ export default function ProductActions({ product }: Props) {
                 transition={{ duration: 0.3, ease: "easeOut" }}
                 className="grid grid-cols-5 gap-2"
               >
-                <div className="col-span-3 flex h-14 items-center justify-between overflow-hidden rounded-xl border border-gray-100 bg-white/80 px-2 backdrop-blur-md transition-all duration-300 hover:border-gray-300 hover:bg-white hover:shadow-[0_15px_30px_rgba(0,0,0,0.04)] active:scale-95">
+                <div className="col-span-3 flex h-14 items-center justify-between overflow-hidden rounded-2xl border border-neutral-200/60 bg-[#f8f8f8] p-1 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] transition-all duration-300">
+                  {/* Minus tugmasi */}
                   <button
                     onClick={() => {
                       if (basketProduct.count === 1) {
@@ -164,15 +182,22 @@ export default function ProductActions({ product }: Props) {
                         dispatch(basketDecre(product._id));
                       }
                     }}
-                    className="flex size-10 items-center justify-center rounded-xl text-gray-400 transition-all hover:bg-white hover:text-pink-600 active:scale-90"
+                    className="flex size-11 items-center justify-center rounded-xl bg-white text-neutral-400 shadow-sm transition-all hover:text-pink-600 active:scale-90 active:shadow-inner"
                   >
-                    <Minus size={16} strokeWidth={3} />
+                    <Minus size={18} strokeWidth={3} />
                   </button>
 
-                  <span className="text-[16px] font-bold tabular-nums text-gray-900">
-                    {basketProduct.count}
-                  </span>
+                  {/* Raqam qismi */}
+                  <div className="flex flex-col items-center">
+                    <span className="text-[17px] font-black tabular-nums tracking-tighter text-neutral-900">
+                      {basketProduct.count}
+                    </span>
+                    <span className="text-[8px] font-bold uppercase tracking-widest text-neutral-400">
+                      Soni
+                    </span>
+                  </div>
 
+                  {/* Plus tugmasi */}
                   <button
                     onClick={() => {
                       if (basketProduct.count >= Number(product.count)) {
@@ -183,9 +208,9 @@ export default function ProductActions({ product }: Props) {
                       }
                       dispatch(basketIncer(product._id));
                     }}
-                    className="flex size-10 items-center justify-center rounded-xl text-gray-400 transition-all hover:bg-white hover:text-pink-600 active:scale-90"
+                    className="flex size-11 items-center justify-center rounded-xl bg-white text-neutral-400 shadow-sm transition-all hover:text-pink-600 active:scale-90 active:shadow-inner"
                   >
-                    <Plus size={16} strokeWidth={3} />
+                    <Plus size={18} strokeWidth={3} />
                   </button>
                 </div>
 
@@ -231,93 +256,31 @@ export default function ProductActions({ product }: Props) {
             )}
           </AnimatePresence>
         </div>
-        <div className="group relative cursor-pointer rounded-2xl bg-[#f2f4f7] p-4 transition-all hover:bg-[#ebedf0]">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="flex size-10 items-center justify-center rounded-xl bg-white shadow-sm">
-                <ShieldCheck className="size-full p-[6px] text-pink-600" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-[13px] font-bold text-neutral-900">
-                  Rasmiy kafolat mavjud
-                </span>
-                <span className="text-[11px] font-medium text-pink-600">
-                  Macline tomonidan {product.kafolat} kafolat
-                </span>
-              </div>
+        <div className="mt-2 w-full rounded-xl bg-neutral-100 p-4">
+          <div className="flex flex-col gap-5">
+            <div className="flex items-center justify-between">
+              <h3 className="font-inter text-2xl font-bold tracking-tight text-pink-600">
+                Mahsulot tavsifi
+              </h3>
             </div>
-            <ChevronRight size={18} className="text-neutral-400" />
-          </div>
-          <div className="mt-3 flex items-center gap-2">
-            <div className="rounded-md bg-[#ffff00] px-2 py-1 text-[11px] font-black italic shadow-sm">
-              KAFOLAT +{product.kafolat}
-            </div>
-            <span className="text-[11px] font-bold text-neutral-400">
-              × 0% komissiya
-            </span>
-          </div>
-        </div>
 
-        {/* STATUSLAR */}
-        {/* <div className="border-t border-neutral-100 pt-2">
-          <div className="flex items-center gap-3">
-            <div className="flex size-10 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600 ring-1 ring-emerald-100">
-              <BadgeCheck size={20} strokeWidth={2.5} />
-            </div>
-            <span className="text-[13px] font-semibold text-neutral-700">
-              {product.count} dona xarid qilish mumkin
-            </span>
-          </div>
-        </div> */}
-      </div>
-
-      {/* 3. TO&apos;LOV VA QAYTARISH */}
-      <div className="flex flex-col gap-4 rounded-[1.25rem] border border-neutral-100 bg-white p-6 shadow-sm">
-        <div className="group relative flex items-center gap-4 transition-all duration-300 hover:border-pink-200/50 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-          {/* Chap tomondagi nafis vizual indikator */}
-          <div className="relative flex size-12 shrink-0 items-center justify-center rounded-2xl bg-pink-50 transition-colors">
-            <Truck
-              size={20}
-              strokeWidth={2.2}
-              className="text-pink-600 transition-colors"
-            />
-            <div className="absolute -right-0.5 -top-0.5 size-2.5 rounded-full border-2 border-white bg-emerald-500" />
-          </div>
-
-          {/* Matn qismi */}
-          <div className="flex flex-col gap-0.5">
-            <div className="flex items-center gap-2">
-              <h4 className="font-sora text-[15px] font-black uppercase italic tracking-tighter text-neutral-900 md:text-[16px]">
-                Ertaga <span className="text-pink-600">yetkazamiz</span>
-              </h4>
-            </div>
-            <p className="text-[12px] font-bold leading-tight text-neutral-600 group-hover:text-neutral-700">
-              Haydovchilar uyingizgacha yetkazadi
+            <p className="line-clamp-2 text-[14px] leading-relaxed text-neutral-500">
+              Ushbu mahsulot yuqori sifatli materiallardan tayyorlangan bo'lib,
+              kundalik foydalanish uchun maksimal qulaylik va uzoq muddatli
+              chidamlilikni ta'minlaydi.
             </p>
+
+            {/* Tugma qismi */}
+            <button className="group relative flex h-[52px] w-full items-center justify-center rounded-2xl bg-white transition-all hover:shadow-sm active:scale-[0.98]">
+              <span className="text-[15px] font-bold text-neutral-900">
+                To'liq tavsif
+              </span>
+              <ChevronRight
+                size={18}
+                className="ml-1 text-neutral-400 transition-transform group-hover:translate-x-0.5"
+              />
+            </button>
           </div>
-
-          {/* O&apos;ng tomondagi nafis strelka (faqat hoverda biroz suriladi) */}
-          <div className="ml-auto -translate-x-2 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
-            <ChevronRight size={16} className="text-pink-300" />
-          </div>
-
-          {/* Orqa fondagi sezilar-sezilmas gradient nur */}
-          <div className="absolute -right-4 -top-4 size-20 rounded-full bg-pink-500/5 opacity-0 blur-3xl transition-opacity group-hover:opacity-100" />
-        </div>
-
-        <div className="h-px w-full bg-neutral-100" />
-
-        <div className="space-y-2">
-          <h4 className="text-[15px] font-black uppercase text-neutral-950">
-            Tolov usuli
-          </h4>
-          <p className="text-[12px] font-medium leading-relaxed text-neutral-500">
-            Mahsulotni olganingizdan so&apos;ng naqt yoki plastik orqali
-            to&apos;lash mumkun.{" "}
-            <span className="cursor-pointer font-bold text-pink-600 underline decoration-pink-200 underline-offset-2">
-              Batafsil
-            </span>
-          </p>
         </div>
       </div>
     </aside>
