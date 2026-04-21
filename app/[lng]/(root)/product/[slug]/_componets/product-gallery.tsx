@@ -146,14 +146,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  Maximize2,
-  Share2,
-  Heart,
-  ChevronRight,
-  ChevronLeft,
-} from "lucide-react";
+import { ChevronRight, ChevronLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   Carousel,
@@ -193,20 +186,20 @@ export default function ProductGallery({ product }: { product: IProduct }) {
           </CarouselContent>
 
           {/* Custom Navigation - Faqat Hoverda chiqadi */}
-          {/* <div className="absolute inset-x-4 top-1/2 flex -translate-y-1/2 justify-between opacity-0 transition-opacity group-hover:opacity-100">
+          <div className="absolute inset-x-4 top-1/2 flex -translate-y-1/2 justify-between opacity-0 transition-opacity group-hover:opacity-100">
             <button
               onClick={() => api?.scrollPrev()}
-              className="flex size-12 items-center justify-center rounded-full bg-white/90 shadow-lg backdrop-blur-sm hover:bg-white"
+              className="flex size-10 items-center justify-center rounded-full bg-white/90 shadow-md backdrop-blur-sm hover:bg-white"
             >
               <ChevronLeft />
             </button>
             <button
               onClick={() => api?.scrollNext()}
-              className="flex size-12 items-center justify-center rounded-full bg-white/90 shadow-lg backdrop-blur-sm hover:bg-white"
+              className="flex size-10 items-center justify-center rounded-full bg-white/90 shadow-md backdrop-blur-sm hover:bg-white"
             >
               <ChevronRight />
             </button>
-          </div> */}
+          </div>
         </Carousel>
         <div className="flex items-center justify-center gap-2">
           {product.images.map((img, i) => (
@@ -214,7 +207,7 @@ export default function ProductGallery({ product }: { product: IProduct }) {
               key={i}
               onClick={() => api?.scrollTo(i)}
               className={cn(
-                "group relative aspect-square w-20 overflow-hidden rounded-xl border-2 bg-white transition-all duration-300",
+                "group relative aspect-square w-16 overflow-hidden rounded-xl border-2 bg-white transition-all duration-300",
                 current === i ? "border-pink-600" : "border-pink-400/10",
               )}
             >
