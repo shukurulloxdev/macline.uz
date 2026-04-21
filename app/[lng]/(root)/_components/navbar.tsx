@@ -11,6 +11,9 @@ import {
   Flame,
   LoaderCircle,
   Menu,
+  ChevronRight,
+  RefreshCcw,
+  ShieldCheck,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Logo from "@/components/shared/logo";
@@ -127,7 +130,7 @@ function Navbar({ katalog }: Props) {
       </div>
 
       <div className="mx-auto max-w-7xl py-3">
-        <div className="flex items-center max-md:flex-col max-md:gap-2 md:justify-between md:gap-8">
+        <div className="flex items-center gap-2 max-md:flex-col md:justify-between md:gap-8">
           <div className="flex items-center gap-8">
             <Logo />
             <div className="max-md:hidden">
@@ -148,10 +151,127 @@ function Navbar({ katalog }: Props) {
                   <Menu size={24} />
                 </button>
               </SheetTrigger>
-              <SheetContent
+              {/* <SheetContent
                 side="left"
                 className="w-[300px] p-0"
-              ></SheetContent>
+              ></SheetContent> */}
+              <SheetContent
+                side="left"
+                className="flex w-[280px] flex-col border-r-0 bg-white p-0 sm:w-[320px]"
+              >
+                {/* 1. BRANDING - Juda sodda va toza */}
+                <div className="px-6 pb-6 pt-6">
+                  <Logo />
+                  <div className="mt-[2px] flex items-center gap-2">
+                    <div className="h-[2px] w-3 rounded-full bg-pink-600" />
+                    <span className="text-[9px] font-black uppercase tracking-[0.3em] text-neutral-400">
+                      Premium Edition
+                    </span>
+                  </div>
+                </div>
+
+                {/* 2. CATEGORIES - Zich va Swipe-ga qulay */}
+                <div className="no-scrollbar flex-1 overflow-y-auto px-3">
+                  <nav className="space-y-0.5">
+                    {categories.map((cat) => {
+                      const isDiscount = cat.slug === "discounts";
+                      return (
+                        <SheetClose asChild key={cat._id}>
+                          <Link
+                            href={`/category/${cat.slug}`}
+                            className={cn(
+                              "group flex items-center justify-between rounded-2xl px-4 py-3.5 transition-all duration-200 active:scale-[0.97]",
+                              "text-neutral-900 hover:bg-neutral-50",
+                            )}
+                          >
+                            <div className="flex items-center gap-3">
+                              {/* Ikonka bloki - zichroq va minimalist */}
+                              <div
+                                className={cn(
+                                  "flex size-8 items-center justify-center rounded-xl border transition-all duration-300",
+                                  isDiscount
+                                    ? "border-pink-200 bg-white shadow-sm"
+                                    : "border-neutral-100 bg-white group-hover:border-pink-100 group-hover:shadow-sm",
+                                )}
+                              >
+                                {isDiscount ? (
+                                  <Flame size={14} className="fill-pink-600" />
+                                ) : (
+                                  <div className="size-1 rounded-full bg-neutral-300 group-hover:bg-pink-500" />
+                                )}
+                              </div>
+                              <span
+                                className={cn(
+                                  "text-[13px] font-bold tracking-tight",
+                                  isDiscount ? "font-black" : "font-semibold",
+                                )}
+                              >
+                                {cat.title}
+                              </span>
+                            </div>
+                            <ChevronRight
+                              size={14}
+                              className="text-neutral-300 transition-transform group-hover:translate-x-0.5 group-hover:text-pink-600"
+                            />
+                          </Link>
+                        </SheetClose>
+                      );
+                    })}
+                  </nav>
+
+                  {/* 3. SEPARATOR & SERVICES */}
+                  <div className="mt-8 px-4">
+                    <div className="mb-6 h-px w-full bg-neutral-50" />
+                    <div className="space-y-4">
+                      {[
+                        {
+                          label: "Trade-in",
+                          icon: <RefreshCcw size={14} />,
+                          color: "text-emerald-500",
+                        },
+                        {
+                          label: "Servis Markazi",
+                          icon: <ShieldCheck size={14} />,
+                          color: "text-blue-500",
+                        },
+                      ].map((item, i) => (
+                        <Link
+                          key={i}
+                          href="#"
+                          className="flex items-center gap-3 text-[12px] font-bold text-neutral-500 transition-colors hover:text-black"
+                        >
+                          <span className={item.color}>{item.icon}</span>
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* 4. FOOTER - Minimalist Action */}
+                <div className="border-t border-neutral-50 bg-[#FAFAFA] p-6">
+                  <div className="mb-5 flex items-center justify-between">
+                    <LngMenu />
+                    <div className="flex items-center gap-1.5 rounded-full border border-neutral-100 bg-white px-2.5 py-1 shadow-sm">
+                      <span className="relative flex h-1.5 w-1.5">
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+                        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                      </span>
+                      <span className="text-[9px] font-black uppercase tracking-tighter text-neutral-500">
+                        Live Chat
+                      </span>
+                    </div>
+                  </div>
+
+                  <a
+                    href="tel:+998902015858"
+                    className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-pink-600 text-[13px] font-bold text-white shadow-lg shadow-black/5 transition-all active:scale-95"
+                  >
+                    <Phone size={14} />
+                    Bog'lanish
+                  </a>
+                </div>
+              </SheetContent>
             </Sheet>
           </div>
 
