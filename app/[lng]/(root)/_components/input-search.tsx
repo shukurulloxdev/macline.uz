@@ -110,7 +110,30 @@ function InputSearch({ categories }: Props) {
         isSearchFocused ? "z-40 scale-[1.01]" : "z-10",
       )}
     >
-      <div className="group relative flex items-center">
+      {/* <div className="group relative flex items-center">
+        <input
+          value={searchValue}
+          onChange={(e) => handleInputChange(e)}
+          onKeyDown={handleKeyDown}
+          onFocus={() => setIsSearchFocused(true)}
+          onBlur={() => setIsSearchFocused(false)}
+          type="text"
+          placeholder="Smart qidiruv: iPhone 15 Pro..."
+          className="h-9 w-full rounded-md border-2 border-neutral-100 bg-neutral-50 pl-6 pr-16 text-sm font-bold outline-none transition-all placeholder:font-medium placeholder:text-neutral-400 focus:border-pink-200 focus:bg-white focus:ring-4 focus:ring-pink-100/30 md:h-[54px] md:rounded-2xl"
+        />
+
+        <div className="absolute right-2 top-1/2 z-10 -translate-y-1/2">
+          <button
+            type="button"
+            onClick={handleSearch}
+            className="flex items-center justify-center text-pink-600 transition-all hover:scale-105 active:scale-95 md:size-10 md:rounded-xl md:bg-pink-600 md:text-white md:shadow-md"
+          >
+            <Search size={20} strokeWidth={2.5} />
+          </button>
+        </div>
+      </div> */}
+      {/* ///////////////////////////////////////////////// */}
+      <div className="group relative hidden items-center md:flex">
         <input
           value={searchValue}
           onChange={(e) => handleInputChange(e)}
@@ -133,6 +156,86 @@ function InputSearch({ categories }: Props) {
         </div>
       </div>
 
+      {/* <div className="group relative flex w-full items-center md:hidden">
+        <div className="relative w-full">
+          <input
+            value={searchValue}
+            onChange={(e) => handleInputChange(e)}
+            onKeyDown={handleKeyDown}
+            onFocus={() => setIsSearchFocused(true)}
+            onBlur={() => setIsSearchFocused(false)}
+            type="text"
+            placeholder="Qidiruv..."
+            className={cn(
+              "h-11 w-full rounded-2xl border-none bg-neutral-100/70 pl-11 pr-4 text-[14px] font-semibold outline-none transition-all duration-300",
+              "placeholder:font-medium placeholder:text-neutral-400",
+              "focus:bg-white focus:shadow-[0_8px_30px_rgb(0,0,0,0.04)] focus:ring-[3px] focus:ring-pink-500/10",
+            )}
+          />
+
+          <div className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 transition-colors group-focus-within:text-pink-600">
+            <Search size={17} strokeWidth={2.5} />
+          </div>
+
+          <div className="absolute right-1.5 top-1/2 -translate-y-1/2">
+            <button
+              type="button"
+              onClick={handleSearch}
+              className={cn(
+                "flex size-8 items-center justify-center rounded-[12px] transition-all active:scale-90",
+                searchValue.length > 0
+                  ? "bg-pink-600 text-white shadow-lg shadow-pink-200"
+                  : "border border-neutral-100 bg-white text-neutral-400",
+              )}
+            >
+              <Search size={15} strokeWidth={3} />
+            </button>
+          </div>
+        </div>
+      </div> */}
+      <div className="group relative flex w-full items-center md:hidden">
+        <div className="relative w-full">
+          <input
+            value={searchValue}
+            onChange={(e) => handleInputChange(e)}
+            onKeyDown={handleKeyDown}
+            onFocus={() => setIsSearchFocused(true)}
+            onBlur={() => setIsSearchFocused(false)}
+            type="text"
+            placeholder="Qidirish..."
+            className={cn(
+              "h-11 w-full rounded-md border border-neutral-100 bg-neutral-50 pl-11 pr-4 text-[15px] font-semibold outline-none transition-all duration-300",
+              "placeholder:font-medium placeholder:text-neutral-400",
+              "focus:border-pink-500/30 focus:bg-white focus:ring-1 focus:ring-pink-500/5",
+            )}
+          />
+
+          {/* Chap tomondagi ikonka - Minimalist */}
+          <div className="absolute left-4 top-1/2 -translate-y-1/2">
+            <Search
+              size={18}
+              className={cn(
+                "transition-colors duration-300",
+                isSearchFocused ? "text-pink-500" : "text-neutral-400",
+              )}
+              strokeWidth={2}
+            />
+          </div>
+
+          {/* O'ng tomondagi qidirish matni - Faqat fokus bo'lganda chiqadi (UX signal) */}
+          {searchValue.length > 0 && (
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 duration-200 animate-in fade-in zoom-in">
+              <button
+                onMouseDown={handleSearch}
+                className="px-2 py-1 text-[13px] font-bold text-pink-600 active:opacity-60"
+              >
+                Topish
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+      {/* ///////////////////////////////////////////////// */}
       {searchedProducts.length > 0 && isSearchFocused && (
         <div
           className={cn(

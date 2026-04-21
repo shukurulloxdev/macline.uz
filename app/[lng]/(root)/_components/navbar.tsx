@@ -35,6 +35,11 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
 
 interface Props {
   katalog: ICategory[];
@@ -140,21 +145,17 @@ function Navbar({ katalog }: Props) {
           <div className="w-full max-md:hidden">
             <InputSearch categories={katalog} />
           </div>
-          <div className="flex w-full items-center justify-between gap-3 md:hidden">
+          <div className="flex w-full items-center justify-between gap-2 md:hidden">
             <div className="flex-1">
               <InputSearch categories={katalog} />
             </div>
 
             <Sheet>
               <SheetTrigger asChild>
-                <button className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-neutral-50 text-neutral-700 active:scale-95">
+                <button className="flex h-11 w-12 shrink-0 items-center justify-center rounded-sm bg-pink-500 text-white active:scale-95">
                   <Menu size={24} />
                 </button>
               </SheetTrigger>
-              {/* <SheetContent
-                side="left"
-                className="w-[300px] p-0"
-              ></SheetContent> */}
               <SheetContent
                 side="left"
                 className="flex w-[280px] flex-col border-r-0 bg-white p-0 sm:w-[320px]"
@@ -365,7 +366,7 @@ function Navbar({ katalog }: Props) {
         )}
       >
         <div className="mx-auto flex max-w-7xl">
-          <nav className="flex w-full items-center justify-between gap-1 md:gap-2">
+          <nav className="hidden w-full items-center justify-between gap-1 md:flex md:gap-2">
             {categories.map((cat, index, array) => (
               <React.Fragment key={cat._id}>
                 <Link
@@ -387,6 +388,51 @@ function Navbar({ katalog }: Props) {
               </React.Fragment>
             ))}
           </nav>
+          <div className="w-full md:hidden">
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              className="w-full py-1"
+            >
+              <CarouselContent className="-ml-4">
+                {categories.map((cat) => (
+                  <CarouselItem
+                    key={cat._id}
+                    className="flex-none basis-auto pl-4"
+                  >
+                    <Link
+                      href={`/category/${cat.slug}`}
+                      className={cn(
+                        "group flex items-center gap-1 transition-all active:scale-95",
+                        cat.slug === "discounts"
+                          ? "text-pink-600"
+                          : "text-neutral-500",
+                      )}
+                    >
+                      {/* Minimalist nuqta */}
+                      <div className="relative flex size-1.5 items-center justify-center">
+                        <div
+                          className={cn(
+                            "size-1 rounded-full transition-all duration-300",
+                            cat.slug === "discounts"
+                              ? "scale-125 bg-pink-600 shadow-[0_0_8px_rgba(219,39,119,0.5)]"
+                              : "bg-neutral-200 group-hover:bg-pink-500",
+                          )}
+                        />
+                      </div>
+
+                      {/* Kategoriya matni */}
+                      <span className="whitespace-nowrap text-[9px] font-black uppercase tracking-widest transition-transform group-hover:translate-x-0.5">
+                        {cat.title}
+                      </span>
+                    </Link>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            </Carousel>
+          </div>
         </div>
       </div>
     </header>
