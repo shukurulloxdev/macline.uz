@@ -5,6 +5,9 @@ import PathLink from "@/components/shared/path-link";
 import ProductCard from "@/components/cards/product-card";
 import Link from "next/link";
 import { MoveRight } from "lucide-react";
+import ProductGalleryMd from "./_componets/product-gallery-md";
+import ProductActionsMd from "./_componets/product-actions-md";
+import { Separator } from "@/components/ui/separator";
 export const dynamic = "force-dynamic";
 
 async function Page({ params }: { params: { slug: string } }) {
@@ -19,14 +22,21 @@ async function Page({ params }: { params: { slug: string } }) {
     <div className="relative mx-auto max-w-7xl max-md:bg-white max-md:px-3 md:py-4">
       <PathLink productName={data.product.name} />
 
-      <div className="flex gap-4 max-md:flex-col md:items-start">
-        <div className="w-full md:flex-1">
-          <ProductGallery product={data.product} />
+      <div className="hidden items-start gap-4 md:flex">
+        <div className="flex-1">
+          <ProductGalleryMd product={data.product} />
         </div>
 
-        <div className="sticky top-36 w-full space-y-8 md:w-[380px]">
-          <ProductActions product={data.product} />
+        <div className="sticky top-36 w-[380px] space-y-8">
+          <ProductActionsMd product={data.product} />
         </div>
+      </div>
+
+      <div className="flex flex-col gap-4 md:hidden">
+        <ProductGallery product={data.product} />
+        <Separator />
+
+        <ProductActions product={data.product} />
       </div>
       {data.products.length > 0 && (
         <div className="mt-6 space-y-2 border-t border-gray-100 py-6">

@@ -30,7 +30,7 @@ interface Props {
   product: IProduct;
 }
 
-export default function ProductActions({ product }: Props) {
+export default function ProductActionsMd({ product }: Props) {
   const dispatch = useDispatch();
   const basketProducts = useSelector(
     (state: RootState) => state.baskets.basketIds,
@@ -43,39 +43,21 @@ export default function ProductActions({ product }: Props) {
   console.log(product);
   return (
     <aside className="flex w-full flex-col gap-3 font-sans">
-      <div className="flex items-center gap-2">
-        <div className="flex items-center rounded-sm bg-pink-500 px-1.5 py-0.5 text-[9px] font-black uppercase tracking-tighter text-white">
-          Arzon narx kafolati
-          <ChevronRightIcon size={10} className="ml-0.5" />
-        </div>
-        {product.kafolat && (
-          <div className="flex items-center rounded-sm bg-emerald-400 px-1.5 py-0.5 text-[9px] font-black uppercase tracking-tighter text-white">
-            {product.kafolat} kafolat
+      {/* 1. ASOSIY BLOK */}
+      <div className="flex flex-col gap-6 rounded-2xl border border-neutral-100 bg-white p-6 shadow-sm">
+        {/* BADGE-LAR (Rasmda tepada turgandek) */}
+        <div className="flex items-center gap-2">
+          <div className="flex items-center rounded-sm bg-pink-600 px-1.5 py-0.5 text-[9px] font-black uppercase tracking-tighter text-white">
+            Arzon narx kafolati
             <ChevronRightIcon size={10} className="ml-0.5" />
           </div>
-        )}
-        {product.discount && (
           <div className="rounded-sm bg-pink-50 px-1.5 py-0.5 text-[9px] font-bold uppercase text-pink-600 ring-1 ring-inset ring-pink-100">
             —{product.percent}% Chegirma
           </div>
-        )}
-        {!product.discount && product.top && (
-          <div className="flex items-center rounded-sm bg-sky-500 px-1.5 py-0.5 text-[9px] font-black uppercase tracking-tighter text-white">
-            Top
-            <ChevronRightIcon size={10} className="ml-0.5" />
-          </div>
-        )}
-      </div>
-      {/* <h1 className="font-inter text-2xl font-bold tracking-tighter text-neutral-900">
-        {product.name}
-      </h1> */}
-      <h1 className="text-2xl font-bold leading-tight tracking-tight text-neutral-900">
-        {product.name}
-      </h1>
-      {/*  */}
-      <div className="flex flex-col gap-6">
+        </div>
+
         {/* NARX QISMI */}
-        {/* <div className="space-y-1">
+        <div className="space-y-1">
           <div className="flex items-baseline gap-2">
             <span className="text-[32px] font-black leading-none text-pink-600">
               {formatCurrentPrice(product.price, product.percent)} so&apos;m
@@ -90,35 +72,31 @@ export default function ProductActions({ product }: Props) {
               </span>
             </span>
           )}
-        </div> */}
-        <div className="w-full rounded-md bg-[#F5F5F7] p-4 font-sans">
-          {/* 1. Badge - Chegirma haqida ma'lumot */}
-          <div className="mb-2 flex w-fit items-center rounded-sm bg-pink-500 px-1.5 py-0.5 text-[9px] font-black uppercase tracking-tighter text-white">
-            -{product.percent}% chegirma
-            <ChevronRightIcon size={10} className="ml-0.5" />
+        </div>
+
+        <div className="group relative cursor-pointer rounded-2xl bg-[#f2f4f7] p-4 transition-all hover:bg-[#ebedf0]">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="flex size-10 items-center justify-center rounded-xl bg-white shadow-sm">
+                <ShieldCheck className="size-full p-[6px] text-pink-600" />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[13px] font-bold text-neutral-900">
+                  Rasmiy kafolat mavjud
+                </span>
+                <span className="text-[11px] font-medium text-pink-600">
+                  Macline tomonidan {product.kafolat} kafolat
+                </span>
+              </div>
+            </div>
+            <ChevronRight size={18} className="text-neutral-400" />
           </div>
-
-          {/* 2. Asosiy Narx */}
-          <div className="mb-1 flex items-baseline">
-            <h2 className="text-2xl font-black leading-none tracking-tighter text-pink-600">
-              {formatCurrentPrice(product.price, product.percent)}
-              <span className="ml-1 text-[24px] font-bold text-pink-600">
-                so'm
-              </span>
-            </h2>
-          </div>
-
-          {/* 3. Ikkinchi darajali narxlar */}
-          <div className="flex items-center gap-2 whitespace-nowrap">
-            <p className="text-[15px] font-medium text-neutral-800">
-              Chegirmasiz:
-            </p>
-
-            {/* Eski narx - o'chirilgan holatda */}
-            <span className="relative text-[15px] font-medium text-neutral-400">
-              {product.price.toLocaleString()} so&apos;m
-              {/* Rasmdagi pushti o'chirish chizig'i */}
-              <span className="absolute left-0 top-1/2 h-[1.5px] w-full -translate-y-1/2 bg-pink-500/60" />
+          <div className="mt-3 flex items-center gap-2">
+            <div className="rounded-md bg-[#ffff00] px-2 py-1 text-[11px] font-black italic shadow-sm">
+              KAFOLAT +{product.kafolat}
+            </div>
+            <span className="text-[11px] font-bold text-neutral-400">
+              × 0% komissiya
             </span>
           </div>
         </div>
@@ -231,35 +209,9 @@ export default function ProductActions({ product }: Props) {
             )}
           </AnimatePresence>
         </div>
-        <div className="group relative cursor-pointer rounded-2xl bg-[#f2f4f7] p-4 transition-all hover:bg-[#ebedf0]">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="flex size-10 items-center justify-center rounded-xl bg-white shadow-sm">
-                <ShieldCheck className="size-full p-[6px] text-pink-600" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-[13px] font-bold text-neutral-900">
-                  Rasmiy kafolat mavjud
-                </span>
-                <span className="text-[11px] font-medium text-pink-600">
-                  Macline tomonidan {product.kafolat} kafolat
-                </span>
-              </div>
-            </div>
-            <ChevronRight size={18} className="text-neutral-400" />
-          </div>
-          <div className="mt-3 flex items-center gap-2">
-            <div className="rounded-md bg-[#ffff00] px-2 py-1 text-[11px] font-black italic shadow-sm">
-              KAFOLAT +{product.kafolat}
-            </div>
-            <span className="text-[11px] font-bold text-neutral-400">
-              × 0% komissiya
-            </span>
-          </div>
-        </div>
 
         {/* STATUSLAR */}
-        {/* <div className="border-t border-neutral-100 pt-2">
+        <div className="border-t border-neutral-100 pt-2">
           <div className="flex items-center gap-3">
             <div className="flex size-10 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600 ring-1 ring-emerald-100">
               <BadgeCheck size={20} strokeWidth={2.5} />
@@ -268,7 +220,7 @@ export default function ProductActions({ product }: Props) {
               {product.count} dona xarid qilish mumkin
             </span>
           </div>
-        </div> */}
+        </div>
       </div>
 
       {/* 3. TO&apos;LOV VA QAYTARISH */}
