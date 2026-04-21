@@ -76,7 +76,7 @@ function Hero({ discountProducts }: Props) {
               {heroImages.map((image, index) => (
                 <CarouselItem key={`${image.src}-${index}`}>
                   <Link href={`category/${image.slug}`}>
-                    <div className="relative h-[200px] w-full overflow-hidden rounded-2xl border border-pink-100 md:h-[50vh]">
+                    <div className="relative h-[180px] w-full overflow-hidden rounded-2xl border border-pink-100 md:h-[50vh]">
                       <Image
                         src={image.src}
                         alt="Texnotech"

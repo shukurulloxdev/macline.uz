@@ -157,20 +157,20 @@ function RegisterModal() {
         </div>
       </DialogTrigger>
 
-      <DialogContent className="max-w-[850px] overflow-hidden rounded-[2rem] border-none p-0">
+      <DialogContent className="w-[90%] overflow-hidden rounded-2xl border-none p-0 md:max-w-[850px] md:rounded-[2rem]">
         <div className="flex min-h-[500px] flex-row">
-          <div className="flex flex-1 flex-col justify-center space-y-8 bg-white p-10">
+          <div className="flex flex-1 flex-col justify-center space-y-8 bg-white p-8 md:p-10">
             {!isVerifying ? (
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
                   <div className="space-y-6">
                     <div className="space-y-2">
-                      <h2 className="text-4xl font-black uppercase italic tracking-tighter text-neutral-900">
+                      <h2 className="text-2xl font-black uppercase italic tracking-tighter text-neutral-900 md:text-4xl">
                         <span className="text-pink-600">
                           Royxatdan o&apos;tish
                         </span>
                       </h2>
-                      <p className="text-[11px] font-bold uppercase tracking-widest text-neutral-400">
+                      <p className="text-[9px] font-bold uppercase tracking-widest text-neutral-400 md:text-[11px]">
                         Xush kelibsiz! Malumotlaringizni kiriting.
                       </p>
                     </div>
@@ -387,7 +387,7 @@ function RegisterModal() {
               </Form>
             )}
 
-            <p className="mt-auto pt-6 text-center text-[10px] font-bold uppercase leading-relaxed tracking-tight text-neutral-400 underline decoration-neutral-200 underline-offset-4">
+            <p className="mt-2 text-center text-[10px] font-bold uppercase leading-relaxed tracking-tight text-neutral-400 underline decoration-neutral-200 underline-offset-4 md:pt-6">
               Tizimga kirish orqali <br /> siz saytning barcha funksiyalaridan
               <br /> cheklovlarsiz foydalanishingiz mumkin!
             </p>

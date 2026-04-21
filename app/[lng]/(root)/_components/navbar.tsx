@@ -529,7 +529,7 @@ function Navbar({ katalog }: Props) {
   ];
 
   return (
-    <header className="sticky top-0 z-30 border-b border-neutral-100 bg-white shadow-md backdrop-blur-2xl max-md:px-3">
+    <header className="sticky top-0 z-30 border-b border-neutral-100 bg-white shadow-sm backdrop-blur-2xl max-md:px-4 md:shadow-md">
       <div className="border-b border-neutral-100 py-1 max-md:hidden md:py-2">
         <div className="mx-auto flex max-w-7xl items-center justify-between">
           <div className="flex items-center gap-6">
@@ -573,7 +573,7 @@ function Navbar({ katalog }: Props) {
         </div>
       </div>
 
-      <div className="mx-auto max-w-7xl py-3">
+      <div className="mx-auto max-w-7xl py-4 md:py-3">
         <div className="flex items-center gap-2 max-md:flex-col md:justify-between md:gap-8">
           <div className="flex items-center gap-8 max-md:hidden">
             <Logo />
@@ -589,7 +589,7 @@ function Navbar({ katalog }: Props) {
             {/* <div className="flex-1">
               <InputSearch categories={katalog} />
             </div> */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <a
                 href="tel:+998902015858"
                 className="flex size-10 shrink-0 items-center justify-center rounded-2xl bg-neutral-50 text-neutral-800 transition-all active:scale-90 active:bg-neutral-100"
@@ -880,9 +880,7 @@ function Navbar({ katalog }: Props) {
                       href={`/category/${cat.slug}`}
                       className={cn(
                         "group flex items-center gap-1 transition-all active:scale-95",
-                        cat.slug === "discounts"
-                          ? "text-pink-600"
-                          : "text-neutral-500",
+                        "text-neutral-500",
                       )}
                     >
                       {/* Minimalist nuqta */}

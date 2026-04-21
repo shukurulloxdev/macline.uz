@@ -616,7 +616,7 @@ export default function MaclineFooter() {
   const [openSection, setOpenSection] = useState<string | null>(null);
 
   return (
-    <footer className="w-full border-t border-neutral-100 bg-white">
+    <footer className="w-full border-t border-neutral-100 bg-white pb-[80px]">
       <div className="mx-auto max-w-7xl px-4 py-8 md:py-14">
         {/* TOP: Newsletter (Mobil uchun ixcham) */}
         <div className="mb-10 flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">

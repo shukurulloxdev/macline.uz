@@ -1,7 +1,6 @@
 import Hero from "./_components/hero";
 import Categories from "./_components/categories";
 import PopProducts from "./_components/top-products";
-import LocationSection from "./_components/location";
 import {
   getCategories,
   getDiscountProducts,
@@ -13,8 +12,8 @@ import DiscountProInfo from "./_components/top-pro-info";
 import BigProducts from "./_components/big-products";
 import SmallProducts from "./_components/small-products";
 import All16Products from "./_components/all-16products";
-import Profession from "./_components/profession";
 import NewsProducts from "./_components/news-products";
+import NavbarBottom from "../_components/navbar-bottom";
 
 // actionClient ham javobni to'gridan to'gri qaytaramaydi o'zini obyectini qaytaradi
 async function Page() {
@@ -42,7 +41,8 @@ async function Page() {
       {/* <Profession /> */}
       {/* <LocationSection /> */}
       {/* <Location /> */}
-      {/* <MaclineServices /> */}
+      <MaclineServices />
+      <NavbarBottom />
     </div>
   );
 }
