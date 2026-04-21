@@ -142,7 +142,7 @@ export default function TeknotechSidebar({ product }: Props) {
                         dispatch(basketDecre(product._id));
                       }
                     }}
-                    className="flex h-10 w-10 items-center justify-center rounded-xl text-gray-400 transition-all hover:bg-white hover:text-pink-600 active:scale-90"
+                    className="flex size-10 items-center justify-center rounded-xl text-gray-400 transition-all hover:bg-white hover:text-pink-600 active:scale-90"
                   >
                     <Minus size={16} strokeWidth={3} />
                   </button>
@@ -161,7 +161,7 @@ export default function TeknotechSidebar({ product }: Props) {
                       }
                       dispatch(basketIncer(product._id));
                     }}
-                    className="flex h-10 w-10 items-center justify-center rounded-xl text-gray-400 transition-all hover:bg-white hover:text-pink-600 active:scale-90"
+                    className="flex size-10 items-center justify-center rounded-xl text-gray-400 transition-all hover:bg-white hover:text-pink-600 active:scale-90"
                   >
                     <Plus size={16} strokeWidth={3} />
                   </button>
@@ -257,7 +257,7 @@ export default function TeknotechSidebar({ product }: Props) {
           <div className="absolute -right-4 -top-4 size-20 rounded-full bg-pink-500/5 opacity-0 blur-3xl transition-opacity group-hover:opacity-100" />
         </div>
 
-        <div className="h-[1px] w-full bg-neutral-100" />
+        <div className="h-px w-full bg-neutral-100" />
 
         <div className="space-y-2">
           <h4 className="text-[15px] font-black uppercase text-neutral-950">

@@ -106,7 +106,7 @@ function CategoryCard({ category, index }: Props) {
           </span>
         </div>
 
-        <div className="mt-3 text-center transition-transform duration-500 group-hover:-translate-y-2 md:mt-5">
+        <div className="mt-2 text-center transition-transform duration-500 group-hover:-translate-y-2 md:mt-5">
           <h3 className="font-sora text-[15px] font-bold tracking-tight text-neutral-400 transition-colors group-hover:text-pink-500">
             {category.title}
           </h3>

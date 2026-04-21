@@ -16,15 +16,15 @@ async function Page({ params }: { params: { slug: string } }) {
   }
 
   return (
-    <div className="relative mx-auto max-w-7xl space-y-4 py-4 max-md:px-3">
+    <div className="relative mx-auto max-w-7xl max-md:bg-white max-md:px-3 md:py-4">
       <PathLink productName={data.product.name} />
 
-      <div className="flex flex-col gap-4 md:items-start">
-        <div className="flex-1">
+      <div className="flex gap-4 max-md:flex-col md:items-start">
+        <div className="w-full md:flex-1">
           <ProductGallery product={data.product} />
         </div>
 
-        <div className="sticky top-36 w-[380px] space-y-8">
+        <div className="sticky top-36 w-full space-y-8 md:w-[380px]">
           <ProductActions product={data.product} />
         </div>
       </div>
