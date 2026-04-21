@@ -54,7 +54,7 @@ function All16Products({ products }: Props) {
           </div>
         </Link>
       </div>
-      <div className="grid grid-cols-2 gap-3 py-2 md:grid-cols-4 md:gap-[14px] md:py-4 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-2 py-2 md:grid-cols-4 md:gap-[14px] md:py-4 lg:grid-cols-4">
         {products.map((product) => (
           <ProductCard key={product._id} product={product} view="grid" />
         ))}

@@ -590,16 +590,6 @@ function Navbar({ katalog }: Props) {
               <InputSearch categories={katalog} />
             </div> */}
             <div className="flex items-center gap-3">
-              <a
-                href="tel:+998902015858"
-                className="flex size-10 shrink-0 items-center justify-center rounded-2xl bg-neutral-50 text-neutral-800 transition-all active:scale-90 active:bg-neutral-100"
-              >
-                <div className="relative">
-                  <Phone size={20} strokeWidth={2.2} />
-                  <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full border-2 border-white bg-emerald-500" />
-                </div>
-              </a>
-
               <button className="flex size-10 shrink-0 items-center justify-center rounded-2xl bg-neutral-50 text-pink-600 transition-all active:scale-90 active:bg-pink-100/50">
                 <Search size={20} strokeWidth={2.5} />
               </button>

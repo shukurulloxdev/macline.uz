@@ -561,190 +561,346 @@
 //   );
 // }
 "use client";
+
 import React, { useState } from "react";
-import Logo from "@/components/shared/logo";
 import Link from "next/link";
 import {
   Instagram,
   Send,
   Youtube,
   Facebook,
-  ChevronDown,
   Globe,
+  ChevronDown,
+  ArrowRight,
+  CheckCircle2,
+  CreditCard,
+  Truck,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const footerData = {
-  sections: [
-    {
-      title: "Xaridorlar",
-      links: [
-        { label: "iPhone", href: "/iphone" },
-        { label: "MacBook", href: "/macbook" },
-        { label: "Trade-in", href: "/trade-in" },
-        { label: "Bo'lib to'lash", href: "/installment" },
-      ],
-    },
-    {
-      title: "Yordam",
-      links: [
-        { label: "Kafolat", href: "/warranty" },
-        { label: "Yetkazib berish", href: "/delivery" },
-        { label: "Servis markazi", href: "/service" },
-        { label: "Savollar", href: "/faq" },
-      ],
-    },
-    {
-      title: "Macline",
-      links: [
-        { label: "Biz haqimizda", href: "/about" },
-        { label: "Filiallar", href: "/stores" },
-        { label: "Vakansiyalar", href: "/careers" },
-        { label: "Kontaktlar", href: "/contact" },
-      ],
-    },
-  ],
-  socials: [
-    { icon: Instagram, href: "#" },
-    { icon: Send, href: "#" },
-    { icon: Youtube, href: "#" },
-    { icon: Facebook, href: "#" },
-  ],
-};
+// ─── Data ────────────────────────────────────────────────────────────────────
 
-export default function MaclineFooter() {
-  const [openSection, setOpenSection] = useState<string | null>(null);
+const PROMO_ITEMS = [
+  { icon: Truck, text: "Bepul yetkazib berish", sub: "500 000 so'm dan" },
+  { icon: CheckCircle2, text: "1 yil kafolat", sub: "barcha mahsulotlar" },
+  { icon: CreditCard, text: "Bo'lib to'lash", sub: "0% foiz" },
+];
+
+const NAV = [
+  {
+    title: "Xaridorlar",
+    links: [
+      { label: "iPhone", href: "/catalog/iphone", badge: "Yangi" },
+      { label: "MacBook", href: "/catalog/macbook" },
+      { label: "iPad", href: "/catalog/ipad" },
+      { label: "AirPods", href: "/catalog/airpods" },
+      { label: "Aksessuarlar", href: "/catalog/accessories" },
+      { label: "Trade-in", href: "/trade-in" },
+    ],
+  },
+  {
+    title: "Yordam",
+    links: [
+      { label: "Kafolat", href: "/warranty" },
+      { label: "Yetkazib berish", href: "/delivery" },
+      { label: "Servis markazi", href: "/service" },
+      { label: "Bo'lib to'lash", href: "/installment" },
+      { label: "Qaytarish", href: "/returns" },
+      { label: "FAQ", href: "/faq" },
+    ],
+  },
+  {
+    title: "Kompaniya",
+    links: [
+      { label: "Biz haqimizda", href: "/about" },
+      { label: "Filiallar", href: "/stores" },
+      { label: "Vakansiyalar", href: "/careers", badge: "2 ta" },
+      { label: "Kontaktlar", href: "/contact" },
+      { label: "Press", href: "/press" },
+    ],
+  },
+];
+
+const SOCIALS = [
+  { icon: Instagram, href: "#", label: "Instagram" },
+  { icon: Send, href: "#", label: "Telegram" },
+  { icon: Youtube, href: "#", label: "YouTube" },
+  { icon: Facebook, href: "#", label: "Facebook" },
+];
+
+const PAYMENTS = ["VISA", "MC", "HUMO", "UZCARD", "PAYME", "CLICK"];
+
+// ─── Sub-components ───────────────────────────────────────────────────────────
+
+function Badge({ text }: { text: string }) {
+  return (
+    <span className="rounded-[4px] bg-[#fdf0e8] px-[7px] py-[2px] text-[9px] font-semibold uppercase tracking-wider text-[#b05e1e]">
+      {text}
+    </span>
+  );
+}
+
+function SocialBtn({
+  icon: Icon,
+  href,
+  label,
+}: {
+  icon: React.ElementType;
+  href: string;
+  label: string;
+}) {
+  return (
+    <a
+      href={href}
+      aria-label={label}
+      className={cn(
+        "flex h-[34px] w-[34px] items-center justify-center rounded-full",
+        "border border-[#e4ddd5] bg-white",
+        "text-[#7a7065] transition-all duration-200",
+        "hover:border-[#c9722a] hover:bg-[#fdf5ee] hover:text-[#c9722a]",
+      )}
+    >
+      <Icon size={14} strokeWidth={1.6} />
+    </a>
+  );
+}
+
+function NavColumn({
+  title,
+  links,
+}: {
+  title: string;
+  links: { label: string; href: string; badge?: string }[];
+}) {
+  const [open, setOpen] = useState(false);
 
   return (
-    <footer className="w-full border-t border-neutral-100 bg-white pb-[80px]">
-      <div className="mx-auto max-w-7xl px-4 py-8 md:py-14">
-        {/* TOP: Newsletter (Mobil uchun ixcham) */}
-        <div className="mb-10 flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
-          <div className="max-w-sm">
-            <h3 className="text-lg font-bold tracking-tight text-black">
-              Macline yangiliklari
-            </h3>
-            <p className="text-xs text-neutral-500">
-              Chegirmalar va yangi modellar haqida birinchi bo'lib biling.
-            </p>
-          </div>
-          <form className="flex w-full max-w-md items-center gap-2">
-            <input
-              type="email"
-              placeholder="Email"
-              className="h-10 w-full rounded-xl border border-neutral-100 bg-neutral-50 px-4 text-xs outline-none focus:border-pink-500/50"
-            />
-            <button className="h-10 rounded-xl bg-black px-6 text-xs font-bold text-white transition-all active:scale-95">
-              OK
-            </button>
-          </form>
+    <div className="border-b border-[#ede8e1] md:border-none">
+      <button
+        onClick={() => setOpen((p) => !p)}
+        className="flex w-full items-center justify-between py-4 md:hidden"
+      >
+        <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#bbb4ab]">
+          {title}
+        </span>
+        <ChevronDown
+          size={14}
+          strokeWidth={1.6}
+          className={cn(
+            "duration-250 text-[#bbb4ab] transition-transform",
+            open && "rotate-180",
+          )}
+        />
+      </button>
+
+      <p className="mb-[22px] hidden text-[10px] font-semibold uppercase tracking-[0.15em] text-[#bbb4ab] md:block">
+        {title}
+      </p>
+
+      <ul
+        className={cn(
+          "space-y-3 overflow-hidden transition-all duration-300 md:block md:max-h-none",
+          open ? "max-h-72 pb-4" : "max-h-0 md:max-h-none",
+        )}
+      >
+        {links.map((link) => (
+          <li key={link.label}>
+            <Link
+              href={link.href}
+              className="inline-flex items-center gap-[7px] text-[13.5px] tracking-[0.01em] text-[#5a5048] transition-colors duration-200 hover:text-[#c9722a]"
+            >
+              {link.label}
+              {link.badge && <Badge text={link.badge} />}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+// ─── Main ─────────────────────────────────────────────────────────────────────
+
+export default function MaclineFooter() {
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+
+  function handleSub() {
+    if (!email) return;
+    setSubscribed(true);
+    setEmail("");
+  }
+
+  return (
+    <footer
+      className="bg-white pb-[80px] lg:pb-0"
+      style={{ fontFamily: "'Outfit', sans-serif" }}
+    >
+      <div className="flex flex-col items-start justify-between gap-4 border-b border-[#ede8e1] px-5 py-8 md:flex-row md:items-center md:px-12">
+        <div>
+          <h3
+            className="text-[22px] font-medium text-[#1a1510]"
+            style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+          >
+            Yangiliklar va aksiyalar
+          </h3>
+          <p className="mt-1 text-[12.5px] text-[#9a9088]">
+            Chegirmalar va yangi modellar haqida birinchi bo'lib biling
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-0 border-y border-neutral-50 md:grid-cols-4 md:gap-8 md:border-none">
-          {/* Brand Col */}
-          <div className="py-6 md:py-0">
-            <Logo />
-            <div className="mt-4 space-y-1">
-              <p className="text-[13px] font-bold text-black">
-                +998 90 201-58-58
-              </p>
-              <p className="text-[12px] text-neutral-400">
-                Har kuni 09:00 dan 20:00 gacha
-              </p>
-            </div>
+        {subscribed ? (
+          <p className="flex items-center gap-2 text-[13px] font-medium text-[#c9722a]">
+            <CheckCircle2 size={15} /> Obuna bo'ldingiz!
+          </p>
+        ) : (
+          <div className="flex w-full overflow-hidden rounded-[8px] border border-[#ddd8d0] bg-white md:w-auto">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSub()}
+              placeholder="Email manzilingiz"
+              className="h-[42px] flex-1 bg-transparent px-4 text-[13px] text-[#1a1510] outline-none placeholder:text-[#bbb4ab] md:w-[220px] md:flex-none"
+            />
+            <button
+              onClick={handleSub}
+              className="flex h-[42px] items-center gap-1 bg-[#1a1510] px-[22px] text-[11.5px] font-medium uppercase tracking-[0.07em] text-white transition-colors hover:bg-[#2f2820] active:scale-[0.98]"
+            >
+              Obuna <ArrowRight size={12} />
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* Grid */}
+      <div className="grid grid-cols-1 gap-0 px-5 pb-10 pt-12 md:grid-cols-[1.7fr_1fr_1fr_1fr] md:gap-12 md:px-12">
+        <div className="border-b border-[#ede8e1] pb-8 md:border-none md:pb-0">
+          <Link href="/">
+            <span
+              className="text-[28px] font-semibold tracking-tight text-[#1a1510]"
+              style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+            >
+              Mac<span className="text-[#c9722a]">line</span>
+            </span>
+          </Link>
+
+          <p className="mt-3 max-w-[210px] text-[12px] leading-[1.85] text-[#9a9088]">
+            O'zbekistondagi eng yirik Apple mahsulotlari do'koni. Asl
+            sertifikatlar, kafolat va professional servis.
+          </p>
+
+          <div className="mt-5 inline-flex items-center gap-[6px] rounded-[6px] border border-[#ede8e1] bg-[#f9f6f2] px-3 py-[7px]">
+            <span className="inline-block size-[6px] rounded-full bg-[#c9722a]" />
+            <span className="text-[10.5px] font-medium uppercase tracking-[0.04em] text-[#6a5f55]">
+              Apple Premium Reseller
+            </span>
           </div>
 
-          {/* Accordion Links */}
-          {footerData.sections.map((section) => (
-            <div
-              key={section.title}
-              className="border-b border-neutral-50 md:border-none"
-            >
-              <button
-                onClick={() =>
-                  setOpenSection(
-                    openSection === section.title ? null : section.title,
-                  )
-                }
-                className="flex w-full items-center justify-between py-4 md:mb-4 md:cursor-default md:py-0"
-              >
-                <span className="text-[11px] font-black uppercase tracking-widest text-neutral-400">
-                  {section.title}
-                </span>
-                <ChevronDown
-                  className={cn(
-                    "size-4 text-neutral-300 transition-transform md:hidden",
-                    openSection === section.title && "rotate-180",
-                  )}
-                />
-              </button>
+          <div className="mt-6">
+            <p className="mb-[6px] text-[10px] font-semibold uppercase tracking-widest text-[#bbb4ab]">
+              Ish vaqti
+            </p>
+            <p className="text-[13px] font-medium text-[#2a2520]">
+              Dushanba — Shanba
+            </p>
+            <p className="mt-[2px] text-[12.5px] text-[#7a7065]">
+              09:00 — 21:00
+            </p>
+          </div>
+        </div>
 
-              <ul
-                className={cn(
-                  "space-y-3 overflow-hidden transition-all duration-300 md:max-h-none",
-                  openSection === section.title
-                    ? "max-h-60 pb-5"
-                    : "max-h-0 md:block",
-                )}
-              >
-                {section.links.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="text-[13px] font-medium text-neutral-600 transition-colors hover:text-black"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+        {NAV.map((section) => (
+          <NavColumn
+            key={section.title}
+            title={section.title}
+            links={section.links}
+          />
+        ))}
+      </div>
+
+      {/* App + Payments */}
+      <div className="mx-5 flex flex-wrap items-center justify-between gap-4 border-t border-[#ede8e1] py-7 md:mx-12">
+        <div className="flex flex-wrap gap-[10px]">
+          {[
+            { label: "App Store", sub: "iOS" },
+            { label: "Google Play", sub: "Android" },
+          ].map(({ label, sub }) => (
+            <a
+              key={label}
+              href="#"
+              className={cn(
+                "flex items-center gap-[8px] rounded-[8px]",
+                "border border-[#ede8e1] bg-[#faf9f7] px-[14px] py-[9px]",
+                "transition-all duration-200 hover:border-[#c9722a] hover:bg-[#fdf5ee]",
+              )}
+            >
+              <div className="flex size-7 shrink-0 items-center justify-center rounded-[6px] bg-[#1a1510]">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
+                  {sub === "iOS" ? (
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                  ) : (
+                    <path d="M3.18 23.76c.33.18.72.19 1.08.01l11.7-6.87-2.37-2.38-10.41 9.24zm16.31-9.66L17.04 12.5l2.48-2.48a1.33 1.33 0 000-1.88l-1.16-1.16a1.33 1.33 0 00-1.88 0L13.96 9.5 1.96.74A1.33 1.33 0 000 1.8v20.4a1.33 1.33 0 001.96 1.06l12-8.76 2.53 2.53 3 1.74c.37.22.84.19 1.17-.07.62-.47.69-1.38.14-1.94l-.29-.66z" />
+                  )}
+                </svg>
+              </div>
+              <div>
+                <p className="text-[9px] uppercase tracking-[0.06em] text-[#9a9088]">
+                  Yuklab olish
+                </p>
+                <p className="mt-px text-[12px] font-medium text-[#1a1510]">
+                  {label}
+                </p>
+              </div>
+            </a>
           ))}
         </div>
 
-        {/* BOTTOM: Socials & Payments */}
-        <div className="mt-8 flex flex-col items-center justify-between gap-6 md:flex-row">
-          <div className="flex gap-4">
-            {footerData.socials.map((social, i) => (
-              <a
-                key={i}
-                href={social.href}
-                className="text-neutral-400 transition-colors hover:text-black"
-              >
-                <social.icon size={20} />
-              </a>
-            ))}
-          </div>
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="mr-1 text-[10.5px] uppercase tracking-[0.08em] text-[#bbb4ab]">
+            To'lov
+          </span>
+          {PAYMENTS.map((p) => (
+            <span
+              key={p}
+              className="rounded-[5px] border border-[#e8e2da] bg-white px-[11px] py-[5px] text-[10px] font-semibold tracking-wider text-[#8a8078] transition-all hover:border-[#c0b9b0]"
+            >
+              {p}
+            </span>
+          ))}
+        </div>
+      </div>
 
-          <div className="flex flex-wrap justify-center gap-2">
-            {["Visa", "Mastercard", "Humo", "Uzcard", "Payme"].map((p) => (
-              <span
-                key={p}
-                className="rounded-md border border-neutral-100 px-2 py-1 text-[9px] font-bold text-neutral-400"
-              >
-                {p.toUpperCase()}
-              </span>
-            ))}
-          </div>
+      {/* Bottom bar */}
+      <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[#ede8e1] p-5 md:px-12">
+        <div className="flex gap-[6px]">
+          {SOCIALS.map((s) => (
+            <SocialBtn
+              key={s.label}
+              icon={s.icon}
+              href={s.href}
+              label={s.label}
+            />
+          ))}
         </div>
 
-        {/* Legal */}
-        <div className="mt-8 flex flex-col items-center justify-between border-t border-neutral-50 pt-6 text-[10px] font-medium text-neutral-400 md:flex-row">
-          <p>
-            © {new Date().getFullYear()} Macline Store. Toshkent, O'zbekiston.
-          </p>
-          <div className="mt-4 flex gap-4 md:mt-0">
-            <Link href="#" className="hover:underline">
-              Maxfiylik
+        <div className="flex flex-wrap items-center gap-4 text-[11.5px] text-[#aaa098]">
+          <span>© {new Date().getFullYear()} Macline Store · Toshkent</span>
+          <span className="h-3 w-px bg-[#ddd8d0]" />
+          {["Maxfiylik", "Oferta", "Cookie"].map((l) => (
+            <Link
+              key={l}
+              href="#"
+              className="transition-colors hover:text-[#5a5048]"
+            >
+              {l}
             </Link>
-            <Link href="#" className="hover:underline">
-              Oferta
-            </Link>
-            <div className="flex items-center gap-1 text-black">
-              <Globe size={12} />
-              <span>O'zbekcha</span>
-            </div>
-          </div>
+          ))}
+          <span className="h-3 w-px bg-[#ddd8d0]" />
+          <button className="flex items-center gap-1 transition-colors hover:text-[#5a5048]">
+            <Globe size={12} strokeWidth={1.5} /> O'zbekcha
+            <ChevronDown size={10} strokeWidth={1.5} />
+          </button>
         </div>
       </div>
     </footer>

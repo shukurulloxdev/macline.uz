@@ -38,7 +38,7 @@ export default function PathLink({ productName }: { productName: string }) {
   return (
     <nav
       aria-label="Breadcrumb"
-      className="flex flex-wrap items-center gap-2 rounded-2xl border border-neutral-200 bg-white px-4 py-3"
+      className="flex flex-wrap items-center gap-2 rounded-2xl border border-neutral-200 bg-white px-4 py-3 max-md:hidden"
     >
       <Link
         href="/"

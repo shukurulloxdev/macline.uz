@@ -3,8 +3,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 import { useState } from "react";
 import Image from "next/image";
@@ -17,56 +15,136 @@ export default function ProductGallery({ product }: { product: IProduct }) {
   const [active, setActive] = useState(0);
 
   return (
-    <div className="w-full">
-      <div className="flex items-start gap-3">
-        <div className="flex w-16 flex-col gap-3">
-          {product.images.map((img, i) => (
-            <button
-              key={i}
-              onMouseEnter={() => setActive(i)} // User tajribasi uchun tezroq
-              className={cn(
-                "relative aspect-square w-full overflow-hidden rounded-sm border border-pink-500 bg-white transition-all duration-300",
-                active === i
-                  ? "border-pink-600 shadow-sm ring-1 ring-pink-400"
-                  : "border-neutral-200 bg-white opacity-70 hover:border-neutral-400 hover:opacity-100",
-              )}
-            >
-              <Image src={img} alt="thumb" fill className="object-cover" />
-            </button>
-          ))}
-        </div>
+    <>
+      <div className="w-full max-md:hidden">
+        <div className="flex items-start gap-3">
+          <div className="flex w-16 flex-col gap-3">
+            {product.images.map((img, i) => (
+              <button
+                key={i}
+                onMouseEnter={() => setActive(i)} // User tajribasi uchun tezroq
+                className={cn(
+                  "relative aspect-square w-full overflow-hidden rounded-sm border border-pink-500 bg-white transition-all duration-300",
+                  active === i
+                    ? "border-pink-600 shadow-sm ring-1 ring-pink-400"
+                    : "border-neutral-200 bg-white opacity-70 hover:border-neutral-400 hover:opacity-100",
+                )}
+              >
+                <Image src={img} alt="thumb" fill className="object-cover" />
+              </button>
+            ))}
+          </div>
 
-        <div className="flex-1">
+          <div className="flex-1">
+            <Carousel
+              opts={{
+                align: "start",
+                dragFree: false,
+                loop: true,
+              }}
+            >
+              <CarouselContent>
+                {product.images.map((image) => (
+                  <CarouselItem className="basis-1/2" key={image}>
+                    <div className="relative h-[50vh] w-full rounded-xl border border-neutral-100 bg-white">
+                      <Image
+                        src={image}
+                        alt={image}
+                        fill
+                        className="rounded-xl object-cover"
+                      />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              {/* <CarouselPrevious />
+            <CarouselNext /> */}
+            </Carousel>
+          </div>
+        </div>
+        <BenefitsBar />
+        <div className="mt-6 border-t border-gray-100 pt-4">
+          <ProductAbout product={product} />
+        </div>
+      </div>
+      <div className="w-full md:hidden">
+        {/* 1. MOBIL GALLERY (Faqat mobil uchun) */}
+        <div className="relative block md:hidden">
           <Carousel
             opts={{
               align: "start",
-              dragFree: false,
               loop: true,
             }}
+            className="w-full"
           >
-            <CarouselContent>
-              {product.images.map((image) => (
-                <CarouselItem className="basis-1/2">
-                  <div className="relative h-[50vh] w-full rounded-xl border border-neutral-100 bg-white">
+            <CarouselContent className="-ml-0">
+              {product.images.map((image, index) => (
+                <CarouselItem key={index} className="pl-0">
+                  <div className="relative aspect-[1/1] w-full overflow-hidden bg-neutral-50">
                     <Image
                       src={image}
-                      alt={image}
+                      alt={`${product.name} - ${index}`}
                       fill
-                      className="rounded-xl object-cover"
+                      priority={index === 0}
+                      className="object-contain" // Apple mahsulotlari uchun contain yaxshiroq, chetlari kesilmaydi
                     />
                   </div>
                 </CarouselItem>
               ))}
             </CarouselContent>
-            {/* <CarouselPrevious />
-            <CarouselNext /> */}
+
+            {/* Rasm soni ko'rsatkichi (Badge style) */}
+            <div className="absolute bottom-4 right-4 z-10 rounded-full bg-black/50 px-3 py-1 text-[10px] font-bold text-white backdrop-blur-md">
+              {/* {current + 1} / {product.images.length} */}
+            </div>
+
+            {/* Instagram style Pagination Dots */}
+            <div className="mt-4 flex justify-center gap-1.5">
+              {product.images.map((_, index) => (
+                <div
+                  key={index}
+                  className={cn(
+                    "h-1.5 rounded-full transition-all duration-300",
+                    // current === index
+                    // ? "w-6 bg-pink-600"
+                    "w-1.5 bg-neutral-200",
+                  )}
+                />
+              ))}
+            </div>
           </Carousel>
         </div>
+
+        {/* 2. DESKTOP GALLERY (Sizning kodingiz, faqat md:flex klassi qo'shildi) */}
+        <div className="hidden items-start gap-3 md:flex">
+          <div className="flex w-16 flex-col gap-3">
+            {product.images.map((img, i) => (
+              <button
+                key={i}
+                className={cn(
+                  "relative aspect-square w-full overflow-hidden rounded-xl border transition-all duration-300",
+                  i === 0
+                    ? "border-pink-600 ring-1 ring-pink-400"
+                    : "border-neutral-200",
+                )}
+              >
+                <Image src={img} alt="thumb" fill className="object-cover" />
+              </button>
+            ))}
+          </div>
+          <div className="flex-1">
+            {/* Desktop uchun karusel qismi qoladi... */}
+          </div>
+        </div>
+
+        {/* Umumiy qismlar */}
+        <div className="px-4 max-md:hidden md:px-0">
+          <BenefitsBar />
+          <div className="mt-6 border-t border-gray-100 pt-4">
+            <ProductAbout product={product} />
+          </div>
+        </div>
       </div>
-      <BenefitsBar />
-      <div className="mt-6 border-t border-gray-100 pt-4">
-        <ProductAbout product={product} />
-      </div>
-    </div>
+    </>
   );
 }

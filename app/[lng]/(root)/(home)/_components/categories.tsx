@@ -81,7 +81,7 @@ interface Props {
 
 function Categories({ allCategories }: Props) {
   return (
-    <section className="mx-auto max-w-7xl py-2 max-md:px-4 md:py-4">
+    <section className="mx-auto max-w-7xl py-2 max-md:px-3 md:py-4">
       <div className="mb-1 flex items-center justify-between px-1 md:mb-4">
         <div className="flex flex-col gap-0.5">
           <h2 className="font-sora text-xl font-semibold tracking-tight text-gray-800 md:text-3xl">
