@@ -8,10 +8,19 @@ import {
   ShieldCheck,
   ShoppingBag,
   BadgeCheck,
-  Truck,
   Minus,
   Plus,
 } from "lucide-react";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 import { formatCurrentPrice } from "@/lib/utils";
 import { IProduct } from "@/types";
@@ -25,7 +34,6 @@ import {
 import { toggelFavorite } from "@/redux/reducers/favoriteState";
 import Link from "next/link";
 import { toast } from "sonner";
-import ProductAbout from "./product-about";
 
 interface Props {
   product: IProduct;
@@ -265,21 +273,188 @@ export default function ProductActions({ product }: Props) {
             </div>
 
             <p className="line-clamp-2 text-[14px] leading-relaxed text-neutral-500">
-              Ushbu mahsulot yuqori sifatli materiallardan tayyorlangan bo'lib,
-              kundalik foydalanish uchun maksimal qulaylik va uzoq muddatli
-              chidamlilikni ta'minlaydi.
+              Ushbu mahsulot haqida to'liq malumot olish uchun "To'liq tavsif"
+              ni bosing
             </p>
 
             {/* Tugma qismi */}
-            <button className="group relative flex h-[52px] w-full items-center justify-center rounded-2xl bg-white transition-all hover:shadow-sm active:scale-[0.98]">
-              <span className="text-[15px] font-bold text-neutral-900">
-                To'liq tavsif
-              </span>
-              <ChevronRight
-                size={18}
-                className="ml-1 text-neutral-400 transition-transform group-hover:translate-x-0.5"
-              />
-            </button>
+
+            <Drawer>
+              <DrawerTrigger asChild>
+                <button className="group relative flex h-[52px] w-full items-center justify-center rounded-2xl bg-white transition-all hover:shadow-sm active:scale-[0.98]">
+                  <span className="text-[15px] font-bold text-neutral-900">
+                    To'liq tavsif
+                  </span>
+                  <ChevronRight
+                    size={18}
+                    className="ml-1 text-neutral-400 transition-transform group-hover:translate-x-0.5"
+                  />
+                </button>
+              </DrawerTrigger>
+
+              {/* DrawerContent balandligini belgilaymiz */}
+              <DrawerContent className="flex max-h-[80vh] flex-col outline-none">
+                {/* 1. Header - Qotib turadi (Sticky) */}
+                <DrawerHeader className="shrink-0 border-b border-neutral-100 pb-4">
+                  <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-neutral-200" />{" "}
+                  {/* Mobil tutqich */}
+                  <div className="relative flex items-center justify-center">
+                    <DrawerTitle className="font-inter text-lg font-black uppercase tracking-tighter text-neutral-900">
+                      Mahsulot tavsifi
+                    </DrawerTitle>
+                    <DrawerClose className="absolute right-0 rounded-full bg-neutral-100 p-1.5 text-neutral-500 active:scale-90">
+                      <Plus className="rotate-45" size={20} />
+                    </DrawerClose>
+                  </div>
+                </DrawerHeader>
+
+                {/* 2. Scrollable Area - Faqat shu qism skrol bo'ladi */}
+                <div className="flex-1 overflow-y-auto scroll-smooth p-6">
+                  <div className="mx-auto max-w-md space-y-6 pb-10">
+                    {/* Sarlavha va Breand chizig'i */}
+                    <div className="space-y-2">
+                      <h2 className="text-2xl font-black tracking-tight text-neutral-900">
+                        {product.name}
+                      </h2>
+                      <div className="h-1.5 w-14 rounded-full bg-pink-600" />
+                    </div>
+
+                    {/* Asosiy matn */}
+                    <div className="prose prose-neutral max-w-none">
+                      <div
+                        className="space-y-4 text-[15.5px] leading-[1.6] text-neutral-600"
+                        dangerouslySetInnerHTML={{
+                          __html: product.description,
+                        }}
+                      />
+                    </div>
+
+                    {/* Spec Card */}
+                    <div className="space-y-3 rounded-lg bg-white p-5 ring-1 ring-neutral-100">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-400">
+                          Kafolat
+                        </span>
+                        <span className="text-sm font-bold text-neutral-900">
+                          {product.kafolat}
+                        </span>
+                      </div>
+                      <div className="h-px bg-neutral-200/60" />
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-400">
+                          Yetkazib berish
+                        </span>
+                        <span className="text-sm font-bold text-emerald-600">
+                          Bepul (24 soatda)
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Uzun matn bo'lsa oxirida bo'sh joy qoldiramiz */}
+                    {/* <div className="h-20" /> */}
+                  </div>
+                </div>
+
+                {/* 3. Footer - Pastda qotib turadi */}
+                <DrawerFooter className="shrink-0 border-t border-neutral-100 bg-white/95 p-4 shadow-md backdrop-blur-md">
+                  <AnimatePresence mode="wait">
+                    {basketProduct ? (
+                      <motion.div
+                        key="basket-controls"
+                        initial={{ opacity: 0, y: 16, scale: 0.96 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 12, scale: 0.96 }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                        className="grid grid-cols-5 gap-2"
+                      >
+                        <div className="col-span-3 flex h-14 items-center justify-between overflow-hidden rounded-2xl border border-neutral-200/60 bg-[#f8f8f8] p-1 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] transition-all duration-300">
+                          {/* Minus tugmasi */}
+                          <button
+                            onClick={() => {
+                              if (basketProduct.count === 1) {
+                                dispatch(toggleBasket(product._id));
+                              } else {
+                                dispatch(basketDecre(product._id));
+                              }
+                            }}
+                            className="flex size-11 items-center justify-center rounded-xl bg-white text-neutral-400 shadow-sm transition-all hover:text-pink-600 active:scale-90 active:shadow-inner"
+                          >
+                            <Minus size={18} strokeWidth={3} />
+                          </button>
+
+                          {/* Raqam qismi */}
+                          <div className="flex flex-col items-center">
+                            <span className="text-[17px] font-black tabular-nums tracking-tighter text-neutral-900">
+                              {basketProduct.count}
+                            </span>
+                            <span className="text-[8px] font-bold uppercase tracking-widest text-neutral-400">
+                              Soni
+                            </span>
+                          </div>
+
+                          {/* Plus tugmasi */}
+                          <button
+                            onClick={() => {
+                              if (
+                                basketProduct.count >= Number(product.count)
+                              ) {
+                                toast.warning(
+                                  `Hozircha faqat ${product.count} ta mavjud`,
+                                );
+                                return;
+                              }
+                              dispatch(basketIncer(product._id));
+                            }}
+                            className="flex size-11 items-center justify-center rounded-xl bg-white text-neutral-400 shadow-sm transition-all hover:text-pink-600 active:scale-90 active:shadow-inner"
+                          >
+                            <Plus size={18} strokeWidth={3} />
+                          </button>
+                        </div>
+
+                        <motion.div
+                          initial={{ opacity: 0, x: 12 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          exit={{ opacity: 0, x: 8 }}
+                          transition={{ duration: 0.35, delay: 0.05 }}
+                        >
+                          <Link href="/shopping/cart">
+                            <Button className="group relative col-span-2 flex h-14 items-center justify-between overflow-hidden rounded-xl border border-gray-100 bg-white/80 backdrop-blur-md transition-all duration-300 hover:border-gray-300 hover:bg-white hover:shadow-[0_15px_30px_rgba(0,0,0,0.04)] active:scale-95">
+                              <div className="absolute inset-0 z-0 bg-gradient-to-tr from-gray-50 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+                              <div className="relative z-10 flex items-center gap-4">
+                                <ShoppingBag className="!size-6 text-pink-600 transition-transform duration-500 group-hover:rotate-12" />
+
+                                <span className="text-[13px] font-extrabold uppercase tracking-[0.2em] text-pink-600">
+                                  O&apos;tish
+                                </span>
+                              </div>
+                            </Button>
+                          </Link>
+                        </motion.div>
+                      </motion.div>
+                    ) : (
+                      <motion.div
+                        key="add-button"
+                        initial={{ opacity: 0, y: 16, scale: 0.96 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 12, scale: 0.96 }}
+                        transition={{ duration: 0.25, ease: "easeOut" }}
+                      >
+                        <Button
+                          onClick={() => dispatch(toggleBasket(product._id))}
+                          className="group flex h-14 w-full items-center justify-center gap-3 rounded-xl bg-pink-600 text-white transition-all duration-300 hover:scale-[1.01] hover:bg-pink-700/90 active:scale-95"
+                        >
+                          <ShoppingBag className="size-5 transition-transform duration-300 group-hover:rotate-12" />
+                          <span className="text-[14px] font-black uppercase leading-tight tracking-widest">
+                            Savatga qo&apos;shish
+                          </span>
+                        </Button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </DrawerFooter>
+              </DrawerContent>
+            </Drawer>
           </div>
         </div>
       </div>

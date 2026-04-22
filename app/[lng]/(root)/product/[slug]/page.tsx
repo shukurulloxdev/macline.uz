@@ -23,7 +23,7 @@ async function Page({ params }: { params: { slug: string } }) {
     <div className="relative mx-auto max-w-7xl max-md:bg-white max-md:px-3 md:py-4">
       <PathLink productName={data.product.name} />
 
-      <div className="hidden items-start gap-4 md:flex">
+      <div className="mt-4 hidden items-start gap-4 md:flex">
         <div className="flex-1">
           <ProductGalleryMd product={data.product} />
         </div>

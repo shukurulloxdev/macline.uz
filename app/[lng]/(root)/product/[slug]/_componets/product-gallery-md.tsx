@@ -1,10 +1,11 @@
 "use client";
 import {
   Carousel,
+  CarouselApi,
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { IProduct } from "@/types";
@@ -12,7 +13,13 @@ import ProductAbout from "./product-about";
 import BenefitsBar from "./benefits-bar";
 
 export default function ProductGalleryMd({ product }: { product: IProduct }) {
-  const [active, setActive] = useState(0);
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    if (!api) return;
+    api.on("select", () => setCurrent(api.selectedScrollSnap()));
+  }, [api]);
 
   return (
     <>
@@ -22,10 +29,10 @@ export default function ProductGalleryMd({ product }: { product: IProduct }) {
             {product.images.map((img, i) => (
               <button
                 key={i}
-                onMouseEnter={() => setActive(i)} // User tajribasi uchun tezroq
+                onMouseEnter={() => api?.scrollTo(i)} // User tajribasi uchun tezroq
                 className={cn(
                   "relative aspect-square w-full overflow-hidden rounded-sm border border-pink-500 bg-white transition-all duration-300",
-                  active === i
+                  current === i
                     ? "border-pink-600 shadow-sm ring-1 ring-pink-400"
                     : "border-neutral-200 bg-white opacity-70 hover:border-neutral-400 hover:opacity-100",
                 )}
@@ -37,6 +44,7 @@ export default function ProductGalleryMd({ product }: { product: IProduct }) {
 
           <div className="flex-1">
             <Carousel
+              setApi={setApi}
               opts={{
                 align: "start",
                 dragFree: false,
@@ -51,14 +59,14 @@ export default function ProductGalleryMd({ product }: { product: IProduct }) {
                         src={image}
                         alt={image}
                         fill
-                        className="rounded-xl object-cover"
+                        className="rounded-xl object-contain p-4"
                       />
                     </div>
                   </CarouselItem>
                 ))}
               </CarouselContent>
               {/* <CarouselPrevious />
-            <CarouselNext /> */}
+              <CarouselNext /> */}
             </Carousel>
           </div>
         </div>
