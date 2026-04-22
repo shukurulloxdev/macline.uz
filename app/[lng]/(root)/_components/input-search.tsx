@@ -110,28 +110,6 @@ function InputSearch({ categories }: Props) {
         isSearchFocused ? "z-40 scale-[1.01]" : "z-10",
       )}
     >
-      {/* <div className="group relative flex items-center">
-        <input
-          value={searchValue}
-          onChange={(e) => handleInputChange(e)}
-          onKeyDown={handleKeyDown}
-          onFocus={() => setIsSearchFocused(true)}
-          onBlur={() => setIsSearchFocused(false)}
-          type="text"
-          placeholder="Smart qidiruv: iPhone 15 Pro..."
-          className="h-9 w-full rounded-md border-2 border-neutral-100 bg-neutral-50 pl-6 pr-16 text-sm font-bold outline-none transition-all placeholder:font-medium placeholder:text-neutral-400 focus:border-pink-200 focus:bg-white focus:ring-4 focus:ring-pink-100/30 md:h-[54px] md:rounded-2xl"
-        />
-
-        <div className="absolute right-2 top-1/2 z-10 -translate-y-1/2">
-          <button
-            type="button"
-            onClick={handleSearch}
-            className="flex items-center justify-center text-pink-600 transition-all hover:scale-105 active:scale-95 md:size-10 md:rounded-xl md:bg-pink-600 md:text-white md:shadow-md"
-          >
-            <Search size={20} strokeWidth={2.5} />
-          </button>
-        </div>
-      </div> */}
       {/* ///////////////////////////////////////////////// */}
       <div className="group relative hidden items-center md:flex">
         <input
@@ -156,6 +134,45 @@ function InputSearch({ categories }: Props) {
         </div>
       </div>
 
+      {/* <div className="group relative flex w-full items-center md:hidden">
+        <div className="relative w-full">
+          <input
+            value={searchValue}
+            onChange={(e) => handleInputChange(e)}
+            onKeyDown={handleKeyDown}
+            onFocus={() => setIsSearchFocused(true)}
+            onPointerDown={() => setIsSearchFocused(false)}
+            type="text"
+            placeholder="Qidiruv: Iphone 17 pro..."
+            className={cn(
+              "h-10 w-full rounded-md border border-neutral-100 border-pink-500/10 bg-neutral-50 pl-11 pr-4 text-[15px] font-semibold outline-none transition-all duration-300",
+              "placeholder:text-sm placeholder:font-medium placeholder:text-neutral-400",
+              "focus:border-pink-500/30 focus:bg-white focus:ring-1 focus:ring-pink-500/5",
+            )}
+          />
+          =
+          <div className="absolute left-4 top-1/2 -translate-y-1/2">
+            <Search
+              size={18}
+              className={cn(
+                "transition-colors duration-300",
+                isSearchFocused ? "text-pink-500" : "text-neutral-400",
+              )}
+              strokeWidth={2}
+            />
+          </div>
+          {searchValue.length > 2 && (
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 duration-200 animate-in fade-in zoom-in">
+              <button
+                onClick={handleSearch}
+                className="px-2 py-1 text-[13px] font-bold text-pink-600 active:opacity-60"
+              >
+                Topish
+              </button>
+            </div>
+          )}
+        </div>
+      </div> */}
       <div className="group relative flex w-full items-center md:hidden">
         <div className="relative w-full">
           <input
@@ -163,7 +180,7 @@ function InputSearch({ categories }: Props) {
             onChange={(e) => handleInputChange(e)}
             onKeyDown={handleKeyDown}
             onFocus={() => setIsSearchFocused(true)}
-            onBlur={() => setIsSearchFocused(false)}
+            onBlur={() => setTimeout(() => setIsSearchFocused(false), 150)}
             type="text"
             placeholder="Qidiruv: Iphone 17 pro..."
             className={cn(
@@ -173,7 +190,6 @@ function InputSearch({ categories }: Props) {
             )}
           />
 
-          {/* Chap tomondagi ikonka - Minimalist */}
           <div className="absolute left-4 top-1/2 -translate-y-1/2">
             <Search
               size={18}
@@ -185,11 +201,10 @@ function InputSearch({ categories }: Props) {
             />
           </div>
 
-          {/* O'ng tomondagi qidirish matni - Faqat fokus bo'lganda chiqadi (UX signal) */}
           {searchValue.length > 2 && (
             <div className="absolute right-3 top-1/2 -translate-y-1/2 duration-200 animate-in fade-in zoom-in">
               <button
-                onClick={handleSearch}
+                onMouseDown={handleSearch}
                 className="px-2 py-1 text-[13px] font-bold text-pink-600 active:opacity-60"
               >
                 Topish
@@ -217,7 +232,7 @@ function InputSearch({ categories }: Props) {
                 onMouseDown={() => router.push(`/product/${product._id}`)}
                 className="group flex cursor-pointer items-center gap-[10px] rounded-xl border-b border-neutral-100 p-2 transition-all duration-200 hover:bg-pink-50 active:scale-[0.98]"
               >
-                <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-sm border border-pink-100 bg-neutral-400">
+                <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-sm border border-pink-100 bg-white">
                   <Image
                     src={product.images?.[0]}
                     alt={product.name}

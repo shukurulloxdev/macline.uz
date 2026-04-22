@@ -575,7 +575,7 @@ function Navbar({ katalog }: Props) {
         </div>
       </div>
 
-      <div className="mx-auto max-w-7xl py-4 md:py-3">
+      <div className="mx-auto max-w-7xl py-3 md:py-4">
         <div className="flex items-center gap-2 max-md:flex-col md:justify-between md:gap-8">
           <div className="flex items-center gap-8 max-md:hidden">
             <Logo />
@@ -868,7 +868,7 @@ function Navbar({ katalog }: Props) {
               }}
               className="overflow-hidden md:hidden" // overflow-hidden juda muhim!
             >
-              <div className="px-1 pt-3">
+              <div className="px-1 pb-1 pt-3">
                 {" "}
                 {/* Paddingni ichki divga bering */}
                 <InputSearch categories={katalog} />

@@ -2,6 +2,7 @@ import React from "react";
 import AllProducts from "../_componets/all-products";
 import { getProducts } from "@/actions/user-actions";
 import SidebarFilter from "../_componets/filter-sidebar";
+import AllProductsMd from "../_componets/all-products-md";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -42,17 +43,20 @@ async function Page({ params, searchParams }: Props) {
   const title = slug.replace(/-/g, " ");
 
   return (
-    <main className="mx-auto max-w-7xl py-6">
-      <div className="flex gap-4">
-        <aside className="w-72">
+    <main className="mx-auto max-w-7xl py-2 max-md:px-3 md:py-6">
+      <div className="hidden gap-4 md:flex">
+        <aside className="w-72 max-md:hidden">
           <div className="sticky top-36 space-y-6">
             <SidebarFilter />
           </div>
         </aside>
 
         <div className="flex-1">
-          <AllProducts products={filteredProducts || []} title={title} />
+          <AllProductsMd products={filteredProducts || []} title={title} />
         </div>
+      </div>
+      <div className="pb-4 md:hidden">
+        <AllProducts products={filteredProducts || []} title={title} />
       </div>
     </main>
   );
