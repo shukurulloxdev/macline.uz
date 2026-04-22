@@ -560,6 +560,353 @@
 //     </footer>
 //   );
 // }
+
+// "use client";
+
+// import React, { useState } from "react";
+// import Link from "next/link";
+// import {
+//   Instagram,
+//   Send,
+//   Youtube,
+//   Facebook,
+//   Globe,
+//   ChevronDown,
+//   ArrowRight,
+//   CheckCircle2,
+//   CreditCard,
+//   Truck,
+// } from "lucide-react";
+// import { cn } from "@/lib/utils";
+
+// // ─── Data ────────────────────────────────────────────────────────────────────
+
+// const PROMO_ITEMS = [
+//   { icon: Truck, text: "Bepul yetkazib berish", sub: "500 000 so'm dan" },
+//   { icon: CheckCircle2, text: "1 yil kafolat", sub: "barcha mahsulotlar" },
+//   { icon: CreditCard, text: "Bo'lib to'lash", sub: "0% foiz" },
+// ];
+
+// const NAV = [
+//   {
+//     title: "Xaridorlar",
+//     links: [
+//       { label: "iPhone", href: "/catalog/iphone", badge: "Yangi" },
+//       { label: "MacBook", href: "/catalog/macbook" },
+//       { label: "iPad", href: "/catalog/ipad" },
+//       { label: "AirPods", href: "/catalog/airpods" },
+//       { label: "Aksessuarlar", href: "/catalog/accessories" },
+//       { label: "Trade-in", href: "/trade-in" },
+//     ],
+//   },
+//   {
+//     title: "Yordam",
+//     links: [
+//       { label: "Kafolat", href: "/warranty" },
+//       { label: "Yetkazib berish", href: "/delivery" },
+//       { label: "Servis markazi", href: "/service" },
+//       { label: "Bo'lib to'lash", href: "/installment" },
+//       { label: "Qaytarish", href: "/returns" },
+//       { label: "FAQ", href: "/faq" },
+//     ],
+//   },
+//   {
+//     title: "Kompaniya",
+//     links: [
+//       { label: "Biz haqimizda", href: "/about" },
+//       { label: "Filiallar", href: "/stores" },
+//       { label: "Vakansiyalar", href: "/careers", badge: "2 ta" },
+//       { label: "Kontaktlar", href: "/contact" },
+//       { label: "Press", href: "/press" },
+//     ],
+//   },
+// ];
+
+// const SOCIALS = [
+//   { icon: Instagram, href: "#", label: "Instagram" },
+//   { icon: Send, href: "#", label: "Telegram" },
+//   { icon: Youtube, href: "#", label: "YouTube" },
+//   { icon: Facebook, href: "#", label: "Facebook" },
+// ];
+
+// const PAYMENTS = ["VISA", "MC", "HUMO", "UZCARD", "PAYME", "CLICK"];
+
+// // ─── Sub-components ───────────────────────────────────────────────────────────
+
+// function Badge({ text }: { text: string }) {
+//   return (
+//     <span className="rounded-[4px] bg-[#fdf0e8] px-[7px] py-[2px] text-[9px] font-semibold uppercase tracking-wider text-[#b05e1e]">
+//       {text}
+//     </span>
+//   );
+// }
+
+// function SocialBtn({
+//   icon: Icon,
+//   href,
+//   label,
+// }: {
+//   icon: React.ElementType;
+//   href: string;
+//   label: string;
+// }) {
+//   return (
+//     <a
+//       href={href}
+//       aria-label={label}
+//       className={cn(
+//         "flex h-[34px] w-[34px] items-center justify-center rounded-full",
+//         "border border-[#e4ddd5] bg-white",
+//         "text-[#7a7065] transition-all duration-200",
+//         "hover:border-[#c9722a] hover:bg-[#fdf5ee] hover:text-[#c9722a]",
+//       )}
+//     >
+//       <Icon size={14} strokeWidth={1.6} />
+//     </a>
+//   );
+// }
+
+// function NavColumn({
+//   title,
+//   links,
+// }: {
+//   title: string;
+//   links: { label: string; href: string; badge?: string }[];
+// }) {
+//   const [open, setOpen] = useState(false);
+
+//   return (
+//     <div className="border-b border-[#ede8e1] md:border-none">
+//       <button
+//         onClick={() => setOpen((p) => !p)}
+//         className="flex w-full items-center justify-between py-4 md:hidden"
+//       >
+//         <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#bbb4ab]">
+//           {title}
+//         </span>
+//         <ChevronDown
+//           size={14}
+//           strokeWidth={1.6}
+//           className={cn(
+//             "duration-250 text-[#bbb4ab] transition-transform",
+//             open && "rotate-180",
+//           )}
+//         />
+//       </button>
+
+//       <p className="mb-[22px] hidden text-[10px] font-semibold uppercase tracking-[0.15em] text-[#bbb4ab] md:block">
+//         {title}
+//       </p>
+
+//       <ul
+//         className={cn(
+//           "space-y-3 overflow-hidden transition-all duration-300 md:block md:max-h-none",
+//           open ? "max-h-72 pb-4" : "max-h-0 md:max-h-none",
+//         )}
+//       >
+//         {links.map((link) => (
+//           <li key={link.label}>
+//             <Link
+//               href={link.href}
+//               className="inline-flex items-center gap-[7px] text-[13.5px] tracking-[0.01em] text-[#5a5048] transition-colors duration-200 hover:text-[#c9722a]"
+//             >
+//               {link.label}
+//               {link.badge && <Badge text={link.badge} />}
+//             </Link>
+//           </li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// }
+
+// // ─── Main ─────────────────────────────────────────────────────────────────────
+
+// export default function MaclineFooter() {
+//   const [email, setEmail] = useState("");
+//   const [subscribed, setSubscribed] = useState(false);
+
+//   function handleSub() {
+//     if (!email) return;
+//     setSubscribed(true);
+//     setEmail("");
+//   }
+
+//   return (
+//     <footer
+//       className="bg-white pb-[80px] lg:pb-0"
+//       style={{ fontFamily: "'Outfit', sans-serif" }}
+//     >
+//       <div className="flex flex-col items-start justify-between gap-4 border-b border-[#ede8e1] px-5 py-8 md:flex-row md:items-center md:px-12">
+//         <div>
+//           <h3
+//             className="text-[22px] font-medium text-[#1a1510]"
+//             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+//           >
+//             Yangiliklar va aksiyalar
+//           </h3>
+//           <p className="mt-1 text-[12.5px] text-[#9a9088]">
+//             Chegirmalar va yangi modellar haqida birinchi bo'lib biling
+//           </p>
+//         </div>
+
+//         {subscribed ? (
+//           <p className="flex items-center gap-2 text-[13px] font-medium text-[#c9722a]">
+//             <CheckCircle2 size={15} /> Obuna bo'ldingiz!
+//           </p>
+//         ) : (
+//           <div className="flex w-full overflow-hidden rounded-[8px] border border-[#ddd8d0] bg-white md:w-auto">
+//             <input
+//               type="email"
+//               value={email}
+//               onChange={(e) => setEmail(e.target.value)}
+//               onKeyDown={(e) => e.key === "Enter" && handleSub()}
+//               placeholder="Email manzilingiz"
+//               className="h-[42px] flex-1 bg-transparent px-4 text-[13px] text-[#1a1510] outline-none placeholder:text-[#bbb4ab] md:w-[220px] md:flex-none"
+//             />
+//             <button
+//               onClick={handleSub}
+//               className="flex h-[42px] items-center gap-1 bg-[#1a1510] px-[22px] text-[11.5px] font-medium uppercase tracking-[0.07em] text-white transition-colors hover:bg-[#2f2820] active:scale-[0.98]"
+//             >
+//               Obuna <ArrowRight size={12} />
+//             </button>
+//           </div>
+//         )}
+//       </div>
+
+//       {/* Grid */}
+//       <div className="grid grid-cols-1 gap-0 px-5 pb-10 pt-12 md:grid-cols-[1.7fr_1fr_1fr_1fr] md:gap-12 md:px-12">
+//         <div className="border-b border-[#ede8e1] pb-8 md:border-none md:pb-0">
+//           <Link href="/">
+//             <span
+//               className="text-[28px] font-semibold tracking-tight text-[#1a1510]"
+//               style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+//             >
+//               Mac<span className="text-[#c9722a]">line</span>
+//             </span>
+//           </Link>
+
+//           <p className="mt-3 max-w-[210px] text-[12px] leading-[1.85] text-[#9a9088]">
+//             O'zbekistondagi eng yirik Apple mahsulotlari do'koni. Asl
+//             sertifikatlar, kafolat va professional servis.
+//           </p>
+
+//           <div className="mt-5 inline-flex items-center gap-[6px] rounded-[6px] border border-[#ede8e1] bg-[#f9f6f2] px-3 py-[7px]">
+//             <span className="inline-block size-[6px] rounded-full bg-[#c9722a]" />
+//             <span className="text-[10.5px] font-medium uppercase tracking-[0.04em] text-[#6a5f55]">
+//               Apple Premium Reseller
+//             </span>
+//           </div>
+
+//           <div className="mt-6">
+//             <p className="mb-[6px] text-[10px] font-semibold uppercase tracking-widest text-[#bbb4ab]">
+//               Ish vaqti
+//             </p>
+//             <p className="text-[13px] font-medium text-[#2a2520]">
+//               Dushanba — Shanba
+//             </p>
+//             <p className="mt-[2px] text-[12.5px] text-[#7a7065]">
+//               09:00 — 21:00
+//             </p>
+//           </div>
+//         </div>
+
+//         {NAV.map((section) => (
+//           <NavColumn
+//             key={section.title}
+//             title={section.title}
+//             links={section.links}
+//           />
+//         ))}
+//       </div>
+
+//       {/* App + Payments */}
+//       <div className="mx-5 flex flex-wrap items-center justify-between gap-4 border-t border-[#ede8e1] py-7 md:mx-12">
+//         <div className="flex flex-wrap gap-[10px]">
+//           {[
+//             { label: "App Store", sub: "iOS" },
+//             { label: "Google Play", sub: "Android" },
+//           ].map(({ label, sub }) => (
+//             <a
+//               key={label}
+//               href="#"
+//               className={cn(
+//                 "flex items-center gap-[8px] rounded-[8px]",
+//                 "border border-[#ede8e1] bg-[#faf9f7] px-[14px] py-[9px]",
+//                 "transition-all duration-200 hover:border-[#c9722a] hover:bg-[#fdf5ee]",
+//               )}
+//             >
+//               <div className="flex size-7 shrink-0 items-center justify-center rounded-[6px] bg-[#1a1510]">
+//                 <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
+//                   {sub === "iOS" ? (
+//                     <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+//                   ) : (
+//                     <path d="M3.18 23.76c.33.18.72.19 1.08.01l11.7-6.87-2.37-2.38-10.41 9.24zm16.31-9.66L17.04 12.5l2.48-2.48a1.33 1.33 0 000-1.88l-1.16-1.16a1.33 1.33 0 00-1.88 0L13.96 9.5 1.96.74A1.33 1.33 0 000 1.8v20.4a1.33 1.33 0 001.96 1.06l12-8.76 2.53 2.53 3 1.74c.37.22.84.19 1.17-.07.62-.47.69-1.38.14-1.94l-.29-.66z" />
+//                   )}
+//                 </svg>
+//               </div>
+//               <div>
+//                 <p className="text-[9px] uppercase tracking-[0.06em] text-[#9a9088]">
+//                   Yuklab olish
+//                 </p>
+//                 <p className="mt-px text-[12px] font-medium text-[#1a1510]">
+//                   {label}
+//                 </p>
+//               </div>
+//             </a>
+//           ))}
+//         </div>
+
+//         <div className="flex flex-wrap items-center gap-2">
+//           <span className="mr-1 text-[10.5px] uppercase tracking-[0.08em] text-[#bbb4ab]">
+//             To'lov
+//           </span>
+//           {PAYMENTS.map((p) => (
+//             <span
+//               key={p}
+//               className="rounded-[5px] border border-[#e8e2da] bg-white px-[11px] py-[5px] text-[10px] font-semibold tracking-wider text-[#8a8078] transition-all hover:border-[#c0b9b0]"
+//             >
+//               {p}
+//             </span>
+//           ))}
+//         </div>
+//       </div>
+
+//       {/* Bottom bar */}
+//       <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[#ede8e1] p-5 md:px-12">
+//         <div className="flex gap-[6px]">
+//           {SOCIALS.map((s) => (
+//             <SocialBtn
+//               key={s.label}
+//               icon={s.icon}
+//               href={s.href}
+//               label={s.label}
+//             />
+//           ))}
+//         </div>
+
+//         <div className="flex flex-wrap items-center gap-4 text-[11.5px] text-[#aaa098]">
+//           <span>© {new Date().getFullYear()} Macline Store · Toshkent</span>
+//           <span className="h-3 w-px bg-[#ddd8d0]" />
+//           {["Maxfiylik", "Oferta", "Cookie"].map((l) => (
+//             <Link
+//               key={l}
+//               href="#"
+//               className="transition-colors hover:text-[#5a5048]"
+//             >
+//               {l}
+//             </Link>
+//           ))}
+//           <span className="h-3 w-px bg-[#ddd8d0]" />
+//           <button className="flex items-center gap-1 transition-colors hover:text-[#5a5048]">
+//             <Globe size={12} strokeWidth={1.5} /> O'zbekcha
+//             <ChevronDown size={10} strokeWidth={1.5} />
+//           </button>
+//         </div>
+//       </div>
+//     </footer>
+//   );
+// }
 "use client";
 
 import React, { useState } from "react";
@@ -575,27 +922,45 @@ import {
   CheckCircle2,
   CreditCard,
   Truck,
+  Shield,
+  MapPin,
+  Phone,
+  Clock,
+  ShieldCheck,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Logo from "@/components/shared/logo"; // ← sizning Logo komponentingiz
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
 const PROMO_ITEMS = [
-  { icon: Truck, text: "Bepul yetkazib berish", sub: "500 000 so'm dan" },
-  { icon: CheckCircle2, text: "1 yil kafolat", sub: "barcha mahsulotlar" },
-  { icon: CreditCard, text: "Bo'lib to'lash", sub: "0% foiz" },
+  {
+    icon: Truck,
+    text: "Bepul yetkazib berish",
+    sub: "500 000 so'm dan yuqori",
+  },
+  {
+    icon: ShieldCheck,
+    text: "Rasmiy kafolat",
+    sub: "Barcha mahsulotlar",
+  },
+  {
+    icon: CreditCard,
+    text: "Bo'lib to'lash",
+    sub: "0% foiz bilan",
+  },
 ];
 
 const NAV = [
   {
-    title: "Xaridorlar",
+    title: "Katalog",
     links: [
       { label: "iPhone", href: "/catalog/iphone", badge: "Yangi" },
       { label: "MacBook", href: "/catalog/macbook" },
       { label: "iPad", href: "/catalog/ipad" },
       { label: "AirPods", href: "/catalog/airpods" },
+      { label: "Apple Watch", href: "/catalog/watch" },
       { label: "Aksessuarlar", href: "/catalog/accessories" },
-      { label: "Trade-in", href: "/trade-in" },
     ],
   },
   {
@@ -622,19 +987,26 @@ const NAV = [
 ];
 
 const SOCIALS = [
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Send, href: "#", label: "Telegram" },
-  { icon: Youtube, href: "#", label: "YouTube" },
-  { icon: Facebook, href: "#", label: "Facebook" },
+  { icon: Instagram, href: "#", label: "Instagram", color: "#E1306C" },
+  { icon: Send, href: "#", label: "Telegram", color: "#229ED9" },
+  { icon: Youtube, href: "#", label: "YouTube", color: "#FF0000" },
+  { icon: Facebook, href: "#", label: "Facebook", color: "#1877F2" },
 ];
 
-const PAYMENTS = ["VISA", "MC", "HUMO", "UZCARD", "PAYME", "CLICK"];
+const PAYMENTS = [
+  { label: "VISA" },
+  { label: "MC" },
+  { label: "HUMO" },
+  { label: "UZCARD" },
+  { label: "PAYME" },
+  { label: "CLICK" },
+];
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
 function Badge({ text }: { text: string }) {
   return (
-    <span className="rounded-[4px] bg-[#fdf0e8] px-[7px] py-[2px] text-[9px] font-semibold uppercase tracking-wider text-[#b05e1e]">
+    <span className="rounded-[4px] bg-pink-50 px-[7px] py-[2px] text-[9px] font-bold uppercase tracking-wider text-pink-600 ring-1 ring-pink-200">
       {text}
     </span>
   );
@@ -653,14 +1025,9 @@ function SocialBtn({
     <a
       href={href}
       aria-label={label}
-      className={cn(
-        "flex h-[34px] w-[34px] items-center justify-center rounded-full",
-        "border border-[#e4ddd5] bg-white",
-        "text-[#7a7065] transition-all duration-200",
-        "hover:border-[#c9722a] hover:bg-[#fdf5ee] hover:text-[#c9722a]",
-      )}
+      className="flex h-9 w-9 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-500 transition-all duration-200 hover:border-pink-300 hover:bg-pink-50 hover:text-pink-600"
     >
-      <Icon size={14} strokeWidth={1.6} />
+      <Icon size={15} strokeWidth={1.7} />
     </a>
   );
 }
@@ -675,39 +1042,41 @@ function NavColumn({
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border-b border-[#ede8e1] md:border-none">
+    <div className="border-b border-neutral-100 md:border-none">
+      {/* Mobile toggle */}
       <button
         onClick={() => setOpen((p) => !p)}
         className="flex w-full items-center justify-between py-4 md:hidden"
       >
-        <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#bbb4ab]">
+        <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-neutral-400">
           {title}
         </span>
         <ChevronDown
           size={14}
-          strokeWidth={1.6}
+          strokeWidth={2}
           className={cn(
-            "duration-250 text-[#bbb4ab] transition-transform",
+            "text-neutral-400 transition-transform duration-200",
             open && "rotate-180",
           )}
         />
       </button>
 
-      <p className="mb-[22px] hidden text-[10px] font-semibold uppercase tracking-[0.15em] text-[#bbb4ab] md:block">
+      {/* Desktop label */}
+      <p className="mb-5 hidden text-[10px] font-bold uppercase tracking-[0.15em] text-neutral-400 md:block">
         {title}
       </p>
 
       <ul
         className={cn(
           "space-y-3 overflow-hidden transition-all duration-300 md:block md:max-h-none",
-          open ? "max-h-72 pb-4" : "max-h-0 md:max-h-none",
+          open ? "max-h-80 pb-4" : "max-h-0",
         )}
       >
         {links.map((link) => (
           <li key={link.label}>
             <Link
               href={link.href}
-              className="inline-flex items-center gap-[7px] text-[13.5px] tracking-[0.01em] text-[#5a5048] transition-colors duration-200 hover:text-[#c9722a]"
+              className="inline-flex items-center gap-2 text-[13px] font-medium text-neutral-600 transition-colors duration-150 hover:text-pink-600"
             >
               {link.label}
               {link.badge && <Badge text={link.badge} />}
@@ -719,188 +1088,213 @@ function NavColumn({
   );
 }
 
-// ─── Main ─────────────────────────────────────────────────────────────────────
+// ─── Main Component ───────────────────────────────────────────────────────────
 
-export default function MaclineFooter() {
+export default function Footer() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
 
   function handleSub() {
-    if (!email) return;
+    if (!email.trim()) return;
     setSubscribed(true);
     setEmail("");
   }
 
   return (
-    <footer
-      className="bg-white pb-[80px] lg:pb-0"
-      style={{ fontFamily: "'Outfit', sans-serif" }}
-    >
-      <div className="flex flex-col items-start justify-between gap-4 border-b border-[#ede8e1] px-5 py-8 md:flex-row md:items-center md:px-12">
-        <div>
-          <h3
-            className="text-[22px] font-medium text-[#1a1510]"
-            style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
-          >
-            Yangiliklar va aksiyalar
-          </h3>
-          <p className="mt-1 text-[12.5px] text-[#9a9088]">
-            Chegirmalar va yangi modellar haqida birinchi bo'lib biling
-          </p>
-        </div>
-
-        {subscribed ? (
-          <p className="flex items-center gap-2 text-[13px] font-medium text-[#c9722a]">
-            <CheckCircle2 size={15} /> Obuna bo'ldingiz!
-          </p>
-        ) : (
-          <div className="flex w-full overflow-hidden rounded-[8px] border border-[#ddd8d0] bg-white md:w-auto">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleSub()}
-              placeholder="Email manzilingiz"
-              className="h-[42px] flex-1 bg-transparent px-4 text-[13px] text-[#1a1510] outline-none placeholder:text-[#bbb4ab] md:w-[220px] md:flex-none"
-            />
-            <button
-              onClick={handleSub}
-              className="flex h-[42px] items-center gap-1 bg-[#1a1510] px-[22px] text-[11.5px] font-medium uppercase tracking-[0.07em] text-white transition-colors hover:bg-[#2f2820] active:scale-[0.98]"
+    <footer className="border-t border-neutral-100 bg-white pb-20 font-sans">
+      <div className="mx-auto max-w-7xl max-md:px-4">
+        {/* ── PROMO STRIP ────────────────────────────────────────────────── */}
+        <div className="grid grid-cols-1 divide-y divide-neutral-100 border-b border-neutral-100 sm:grid-cols-3 sm:divide-x sm:divide-y-0 md:hidden">
+          {PROMO_ITEMS.map(({ icon: Icon, text, sub }) => (
+            <div
+              key={text}
+              className="flex items-center gap-3.5 py-5 sm:px-6 sm:py-6 first:sm:pl-0 last:sm:pr-0"
             >
-              Obuna <ArrowRight size={12} />
-            </button>
-          </div>
-        )}
-      </div>
-
-      {/* Grid */}
-      <div className="grid grid-cols-1 gap-0 px-5 pb-10 pt-12 md:grid-cols-[1.7fr_1fr_1fr_1fr] md:gap-12 md:px-12">
-        <div className="border-b border-[#ede8e1] pb-8 md:border-none md:pb-0">
-          <Link href="/">
-            <span
-              className="text-[28px] font-semibold tracking-tight text-[#1a1510]"
-              style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
-            >
-              Mac<span className="text-[#c9722a]">line</span>
-            </span>
-          </Link>
-
-          <p className="mt-3 max-w-[210px] text-[12px] leading-[1.85] text-[#9a9088]">
-            O'zbekistondagi eng yirik Apple mahsulotlari do'koni. Asl
-            sertifikatlar, kafolat va professional servis.
-          </p>
-
-          <div className="mt-5 inline-flex items-center gap-[6px] rounded-[6px] border border-[#ede8e1] bg-[#f9f6f2] px-3 py-[7px]">
-            <span className="inline-block size-[6px] rounded-full bg-[#c9722a]" />
-            <span className="text-[10.5px] font-medium uppercase tracking-[0.04em] text-[#6a5f55]">
-              Apple Premium Reseller
-            </span>
-          </div>
-
-          <div className="mt-6">
-            <p className="mb-[6px] text-[10px] font-semibold uppercase tracking-widest text-[#bbb4ab]">
-              Ish vaqti
-            </p>
-            <p className="text-[13px] font-medium text-[#2a2520]">
-              Dushanba — Shanba
-            </p>
-            <p className="mt-[2px] text-[12.5px] text-[#7a7065]">
-              09:00 — 21:00
-            </p>
-          </div>
-        </div>
-
-        {NAV.map((section) => (
-          <NavColumn
-            key={section.title}
-            title={section.title}
-            links={section.links}
-          />
-        ))}
-      </div>
-
-      {/* App + Payments */}
-      <div className="mx-5 flex flex-wrap items-center justify-between gap-4 border-t border-[#ede8e1] py-7 md:mx-12">
-        <div className="flex flex-wrap gap-[10px]">
-          {[
-            { label: "App Store", sub: "iOS" },
-            { label: "Google Play", sub: "Android" },
-          ].map(({ label, sub }) => (
-            <a
-              key={label}
-              href="#"
-              className={cn(
-                "flex items-center gap-[8px] rounded-[8px]",
-                "border border-[#ede8e1] bg-[#faf9f7] px-[14px] py-[9px]",
-                "transition-all duration-200 hover:border-[#c9722a] hover:bg-[#fdf5ee]",
-              )}
-            >
-              <div className="flex size-7 shrink-0 items-center justify-center rounded-[6px] bg-[#1a1510]">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
-                  {sub === "iOS" ? (
-                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-                  ) : (
-                    <path d="M3.18 23.76c.33.18.72.19 1.08.01l11.7-6.87-2.37-2.38-10.41 9.24zm16.31-9.66L17.04 12.5l2.48-2.48a1.33 1.33 0 000-1.88l-1.16-1.16a1.33 1.33 0 00-1.88 0L13.96 9.5 1.96.74A1.33 1.33 0 000 1.8v20.4a1.33 1.33 0 001.96 1.06l12-8.76 2.53 2.53 3 1.74c.37.22.84.19 1.17-.07.62-.47.69-1.38.14-1.94l-.29-.66z" />
-                  )}
-                </svg>
+              <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-pink-50">
+                <Icon size={18} strokeWidth={1.8} className="text-pink-600" />
               </div>
               <div>
-                <p className="text-[9px] uppercase tracking-[0.06em] text-[#9a9088]">
-                  Yuklab olish
-                </p>
-                <p className="mt-px text-[12px] font-medium text-[#1a1510]">
-                  {label}
-                </p>
+                <p className="text-[13px] font-bold text-neutral-900">{text}</p>
+                <p className="text-[11px] text-neutral-400">{sub}</p>
               </div>
-            </a>
+            </div>
           ))}
         </div>
 
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="mr-1 text-[10.5px] uppercase tracking-[0.08em] text-[#bbb4ab]">
-            To'lov
-          </span>
-          {PAYMENTS.map((p) => (
-            <span
-              key={p}
-              className="rounded-[5px] border border-[#e8e2da] bg-white px-[11px] py-[5px] text-[10px] font-semibold tracking-wider text-[#8a8078] transition-all hover:border-[#c0b9b0]"
-            >
-              {p}
-            </span>
-          ))}
-        </div>
-      </div>
+        {/* ── NEWSLETTER ─────────────────────────────────────────────────── */}
+        <div className="flex flex-col items-start justify-between gap-5 border-b border-neutral-100 py-8 md:flex-row md:items-center">
+          <div>
+            <h3 className="text-[18px] font-bold tracking-tight text-neutral-950">
+              Yangiliklar va aksiyalar
+            </h3>
+            <p className="mt-1 text-[12px] text-neutral-400">
+              Chegirmalar va yangi modellar haqida birinchi bo'lib biling
+            </p>
+          </div>
 
-      {/* Bottom bar */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[#ede8e1] p-5 md:px-12">
-        <div className="flex gap-[6px]">
-          {SOCIALS.map((s) => (
-            <SocialBtn
-              key={s.label}
-              icon={s.icon}
-              href={s.href}
-              label={s.label}
+          {subscribed ? (
+            <div className="flex items-center gap-2 rounded-xl bg-pink-50 px-4 py-3">
+              <CheckCircle2 size={16} className="text-pink-600" />
+              <span className="text-[13px] font-semibold text-pink-700">
+                Muvaffaqiyatli obuna bo'ldingiz!
+              </span>
+            </div>
+          ) : (
+            <div className="flex w-full overflow-hidden rounded-xl border border-neutral-200 bg-white ring-0 transition-all focus-within:border-pink-400 focus-within:ring-2 focus-within:ring-pink-100 md:w-auto">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSub()}
+                placeholder="Email manzilingiz"
+                className="h-11 flex-1 bg-transparent px-4 text-[13px] text-neutral-950 outline-none placeholder:text-neutral-400 md:w-[230px] md:flex-none"
+              />
+              <button
+                onClick={handleSub}
+                className="flex h-11 items-center gap-1.5 bg-pink-600 px-5 text-[11px] font-bold uppercase tracking-widest text-white transition-colors hover:bg-pink-700 active:scale-[.98]"
+              >
+                Obuna <ArrowRight size={12} />
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* ── MAIN GRID ──────────────────────────────────────────────────── */}
+        <div className="grid grid-cols-1 gap-0 py-10 md:grid-cols-[1.8fr_1fr_1fr_1fr] md:gap-10">
+          {/* Brand column */}
+          <div className="border-b border-neutral-100 pb-8 md:border-none md:pb-0 md:pr-8">
+            {/* Logo */}
+            <Link href="/">
+              <Logo />
+            </Link>
+
+            <p className="mt-4 max-w-[220px] text-[12.5px] leading-[1.8] text-neutral-500">
+              O'zbekistondagi eng yirik Apple mahsulotlari do'koni. Asl
+              sertifikatlar, kafolat va professional servis.
+            </p>
+
+            {/* Premium badge */}
+            <div className="mt-4 inline-flex items-center gap-2 rounded-lg border border-pink-100 bg-pink-50 px-3 py-2">
+              <span className="h-2 w-2 rounded-full bg-pink-600" />
+              <span className="text-[10.5px] font-bold uppercase tracking-wider text-pink-700">
+                Apple Premium Reseller
+              </span>
+            </div>
+
+            {/* Contact info */}
+            <div className="mt-5 flex flex-col gap-3">
+              <a
+                href="tel:+998901234567"
+                className="flex items-center gap-2.5 text-[13px] font-semibold text-neutral-700 transition-colors hover:text-pink-600"
+              >
+                <Phone size={14} strokeWidth={2} className="text-pink-500" />
+                +998 90 123 45 67
+              </a>
+              <div className="flex items-center gap-2.5 text-[13px] text-neutral-500">
+                <MapPin
+                  size={14}
+                  strokeWidth={2}
+                  className="flex-shrink-0 text-pink-500"
+                />
+                Toshkent, Chilonzor
+              </div>
+              <div className="flex items-center gap-2.5 text-[13px] text-neutral-500">
+                <Clock size={14} strokeWidth={2} className="text-pink-500" />
+                Du—Sha: 09:00 – 21:00
+              </div>
+            </div>
+          </div>
+
+          {/* Nav columns */}
+          {NAV.map((section) => (
+            <NavColumn
+              key={section.title}
+              title={section.title}
+              links={section.links}
             />
           ))}
         </div>
 
-        <div className="flex flex-wrap items-center gap-4 text-[11.5px] text-[#aaa098]">
-          <span>© {new Date().getFullYear()} Macline Store · Toshkent</span>
-          <span className="h-3 w-px bg-[#ddd8d0]" />
-          {["Maxfiylik", "Oferta", "Cookie"].map((l) => (
-            <Link
-              key={l}
-              href="#"
-              className="transition-colors hover:text-[#5a5048]"
-            >
-              {l}
-            </Link>
-          ))}
-          <span className="h-3 w-px bg-[#ddd8d0]" />
-          <button className="flex items-center gap-1 transition-colors hover:text-[#5a5048]">
-            <Globe size={12} strokeWidth={1.5} /> O'zbekcha
-            <ChevronDown size={10} strokeWidth={1.5} />
-          </button>
+        {/* ── APP + PAYMENTS ─────────────────────────────────────────────── */}
+        <div className="flex flex-wrap items-center justify-between gap-5 border-t border-neutral-100 py-6">
+          {/* App Badges */}
+          <div className="flex flex-wrap gap-3">
+            {[
+              { label: "App Store", sub: "iOS uchun" },
+              { label: "Google Play", sub: "Android uchun" },
+            ].map(({ label, sub }) => (
+              <a
+                key={label}
+                href="/"
+                className="flex items-center gap-2.5 rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-2.5 transition-all hover:border-pink-300 hover:bg-pink-50"
+              >
+                <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-neutral-900">
+                  <span className="text-md font-black text-white">
+                    {label === "App Store" ? "" : "▶"}
+                  </span>
+                </div>
+                <div>
+                  <p className="text-[9px] font-medium uppercase tracking-wider text-neutral-400">
+                    {sub}
+                  </p>
+                  <p className="text-[12px] font-bold text-neutral-900">
+                    {label}
+                  </p>
+                </div>
+              </a>
+            ))}
+          </div>
+
+          {/* Payment methods */}
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="mr-1 text-[10px] font-bold uppercase tracking-widest text-neutral-400">
+              To'lov
+            </span>
+            {PAYMENTS.map(({ label }) => (
+              <span
+                key={label}
+                className="rounded-md border border-neutral-200 bg-white px-3 py-1.5 text-[10px] font-bold tracking-wider text-neutral-600 transition-colors hover:border-pink-200 hover:bg-pink-50 hover:text-pink-600"
+              >
+                {label}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* ── BOTTOM BAR ─────────────────────────────────────────────────── */}
+        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-neutral-100 py-5">
+          {/* Socials */}
+          <div className="flex items-center gap-2">
+            {SOCIALS.map((s) => (
+              <SocialBtn
+                key={s.label}
+                icon={s.icon}
+                href={s.href}
+                label={s.label}
+              />
+            ))}
+          </div>
+
+          {/* Legal */}
+          <div className="flex flex-wrap items-center gap-3 text-[11px] text-neutral-400">
+            <span>© {new Date().getFullYear()} Macline · Toshkent</span>
+            <span className="h-3 w-px bg-neutral-200" />
+            {["Maxfiylik", "Oferta", "Cookie"].map((l) => (
+              <Link
+                key={l}
+                href="#"
+                className="transition-colors hover:text-pink-600"
+              >
+                {l}
+              </Link>
+            ))}
+            <span className="h-3 w-px bg-neutral-200" />
+            <button className="flex items-center gap-1 transition-colors hover:text-neutral-700">
+              <Globe size={11} strokeWidth={1.5} />
+              O'zbekcha
+              <ChevronDown size={10} strokeWidth={1.5} />
+            </button>
+          </div>
         </div>
       </div>
     </footer>
