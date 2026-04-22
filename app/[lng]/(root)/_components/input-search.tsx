@@ -156,43 +156,6 @@ function InputSearch({ categories }: Props) {
         </div>
       </div>
 
-      {/* <div className="group relative flex w-full items-center md:hidden">
-        <div className="relative w-full">
-          <input
-            value={searchValue}
-            onChange={(e) => handleInputChange(e)}
-            onKeyDown={handleKeyDown}
-            onFocus={() => setIsSearchFocused(true)}
-            onBlur={() => setIsSearchFocused(false)}
-            type="text"
-            placeholder="Qidiruv..."
-            className={cn(
-              "h-11 w-full rounded-2xl border-none bg-neutral-100/70 pl-11 pr-4 text-[14px] font-semibold outline-none transition-all duration-300",
-              "placeholder:font-medium placeholder:text-neutral-400",
-              "focus:bg-white focus:shadow-[0_8px_30px_rgb(0,0,0,0.04)] focus:ring-[3px] focus:ring-pink-500/10",
-            )}
-          />
-
-          <div className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 transition-colors group-focus-within:text-pink-600">
-            <Search size={17} strokeWidth={2.5} />
-          </div>
-
-          <div className="absolute right-1.5 top-1/2 -translate-y-1/2">
-            <button
-              type="button"
-              onClick={handleSearch}
-              className={cn(
-                "flex size-8 items-center justify-center rounded-[12px] transition-all active:scale-90",
-                searchValue.length > 0
-                  ? "bg-pink-600 text-white shadow-lg shadow-pink-200"
-                  : "border border-neutral-100 bg-white text-neutral-400",
-              )}
-            >
-              <Search size={15} strokeWidth={3} />
-            </button>
-          </div>
-        </div>
-      </div> */}
       <div className="group relative flex w-full items-center md:hidden">
         <div className="relative w-full">
           <input
@@ -202,10 +165,10 @@ function InputSearch({ categories }: Props) {
             onFocus={() => setIsSearchFocused(true)}
             onBlur={() => setIsSearchFocused(false)}
             type="text"
-            placeholder="Qidirish..."
+            placeholder="Qidiruv: Iphone 17 pro..."
             className={cn(
-              "h-11 w-full rounded-md border border-neutral-100 bg-neutral-50 pl-11 pr-4 text-[15px] font-semibold outline-none transition-all duration-300",
-              "placeholder:font-medium placeholder:text-neutral-400",
+              "h-10 w-full rounded-md border border-neutral-100 border-pink-500/10 bg-neutral-50 pl-11 pr-4 text-[15px] font-semibold outline-none transition-all duration-300",
+              "placeholder:text-sm placeholder:font-medium placeholder:text-neutral-400",
               "focus:border-pink-500/30 focus:bg-white focus:ring-1 focus:ring-pink-500/5",
             )}
           />
@@ -291,7 +254,7 @@ function InputSearch({ categories }: Props) {
         </div>
       )}
       {searchValue.length === 0 && isSearchFocused && (
-        <div className="absolute left-0 top-[115%] z-40 w-full rounded-b-2xl rounded-t-sm border border-neutral-100 bg-white p-6 shadow-2xl backdrop-blur-xl duration-200 animate-in fade-in zoom-in-95">
+        <div className="absolute left-0 top-[115%] z-40 w-full rounded-b-2xl rounded-t-sm border border-neutral-100 bg-white p-4 shadow-2xl backdrop-blur-xl duration-200 animate-in fade-in zoom-in-95 md:p-6">
           <div className="mb-4 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-pink-600">
             <Sparkles size={14} className="text-pink-600" />
             Ommabop qidiruvlar
@@ -302,7 +265,7 @@ function InputSearch({ categories }: Props) {
               <span
                 onMouseDown={() => router.push(`/category/${katalog.slug}`)}
                 key={katalog._id}
-                className="cursor-pointer rounded-xl border border-pink-100 bg-pink-50 px-4 py-2 text-[11px] font-bold transition-all hover:border-pink-100 hover:bg-pink-50 hover:text-pink-600 active:scale-95"
+                className="cursor-pointer rounded-xl border border-pink-100 bg-pink-50 px-3 py-2 text-[9px] font-bold transition-all hover:border-pink-100 hover:bg-pink-50 hover:text-pink-600 active:scale-95 md:px-4 md:text-[11px]"
               >
                 {katalog.title}
               </span>

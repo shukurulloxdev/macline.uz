@@ -479,6 +479,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface Props {
   katalog: ICategory[];
@@ -489,6 +490,7 @@ function Navbar({ katalog }: Props) {
   console.log("KATALOGG", katalog);
 
   const [isCategoryVisible, setIsCategoryVisible] = useState(true);
+  const [isMobilSearch, setIsMobilSearch] = useState(false);
 
   const pathname = usePathname();
 
@@ -586,11 +588,17 @@ function Navbar({ katalog }: Props) {
           </div>
           <div className="flex w-full items-center justify-between gap-2 md:hidden">
             <Logo />
-            {/* <div className="flex-1">
-              <InputSearch categories={katalog} />
-            </div> */}
+
             <div className="flex items-center gap-3">
-              <button className="flex size-10 shrink-0 items-center justify-center rounded-2xl bg-neutral-50 text-pink-600 transition-all active:scale-90 active:bg-pink-100/50">
+              <button
+                onClick={() => setIsMobilSearch((prev) => !prev)}
+                className={cn(
+                  "flex size-10 shrink-0 items-center justify-center rounded-2xl bg-neutral-50 text-pink-600 transition-all active:scale-90 active:bg-pink-100/50",
+                  isMobilSearch
+                    ? "bg-pink-500/90 text-white"
+                    : "bg-neutral-50 text-pink-600",
+                )}
+              >
                 <Search size={20} strokeWidth={2.5} />
               </button>
               <Sheet>
@@ -819,6 +827,27 @@ function Navbar({ katalog }: Props) {
             )}
           </div>
         </div>
+        {/* {isMobilSearch && (
+          <div className="pt-3 md:hidden">
+            <InputSearch categories={katalog} />
+          </div>
+        )} */}
+        <AnimatePresence>
+          {isMobilSearch && (
+            <motion.div
+              initial={{ opacity: 0, y: -30 }} // Boshlang'ich holati: tepada va ko'rinmas
+              animate={{ opacity: 1, y: 0 }} // Ko'rinish holati: o'z joyiga tushadi
+              exit={{ opacity: 0, y: -30 }} // Yopilganda: yana tepaga qarab yo'qoladi
+              transition={{
+                duration: 0.6,
+                ease: [0.22, 1, 0.36, 1], // Apple-style silliq easing
+              }}
+              className="overflow-hidden pt-3 md:hidden"
+            >
+              <InputSearch categories={katalog} />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       <div
