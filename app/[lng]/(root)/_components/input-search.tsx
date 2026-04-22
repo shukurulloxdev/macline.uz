@@ -186,10 +186,10 @@ function InputSearch({ categories }: Props) {
           </div>
 
           {/* O'ng tomondagi qidirish matni - Faqat fokus bo'lganda chiqadi (UX signal) */}
-          {searchValue.length > 0 && (
+          {searchValue.length > 2 && (
             <div className="absolute right-3 top-1/2 -translate-y-1/2 duration-200 animate-in fade-in zoom-in">
               <button
-                onMouseDown={handleSearch}
+                onClick={handleSearch}
                 className="px-2 py-1 text-[13px] font-bold text-pink-600 active:opacity-60"
               >
                 Topish

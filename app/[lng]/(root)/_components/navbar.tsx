@@ -832,7 +832,7 @@ function Navbar({ katalog }: Props) {
             <InputSearch categories={katalog} />
           </div>
         )} */}
-        <AnimatePresence>
+        {/* <AnimatePresence>
           {isMobilSearch && (
             <motion.div
               initial={{ opacity: 0, y: -30 }} // Boshlang'ich holati: tepada va ko'rinmas
@@ -842,9 +842,37 @@ function Navbar({ katalog }: Props) {
                 duration: 0.6,
                 ease: [0.22, 1, 0.36, 1], // Apple-style silliq easing
               }}
-              className="overflow-hidden pt-3 md:hidden"
+              className="pt-3 md:hidden"
             >
               <InputSearch categories={katalog} />
+            </motion.div>
+          )}
+        </AnimatePresence> */}
+        <AnimatePresence initial={false}>
+          {isMobilSearch && (
+            <motion.div
+              initial={{ opacity: 0, height: 0, y: -20 }}
+              animate={{
+                opacity: 1,
+                height: "auto", // Avtomatik kontent bo'yicha balandlik
+                y: 0,
+              }}
+              exit={{
+                opacity: 0,
+                height: 0, // Yo'qolayotganda balandlikni 0 qilish
+                y: -20,
+              }}
+              transition={{
+                duration: 0.4,
+                ease: [0.4, 0, 0.2, 1],
+              }}
+              className="overflow-hidden md:hidden" // overflow-hidden juda muhim!
+            >
+              <div className="px-1 pt-3">
+                {" "}
+                {/* Paddingni ichki divga bering */}
+                <InputSearch categories={katalog} />
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
