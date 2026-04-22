@@ -51,7 +51,7 @@ export default function ProductActions({ product }: Props) {
   const favoriteProduct = favoriteIds.find((id) => id === product._id);
   console.log(product);
   return (
-    <aside className="flex w-full flex-col gap-4 font-sans">
+    <aside className="flex w-full flex-col gap-4 px-1 font-sans">
       <div className="flex items-center gap-2">
         <div className="flex items-center rounded-sm bg-pink-500 px-1.5 py-0.5 text-[9px] font-black uppercase tracking-tighter text-white">
           Arzon narx kafolati
@@ -76,7 +76,12 @@ export default function ProductActions({ product }: Props) {
         )}
       </div>
 
-      <h1 className="text-2xl font-bold leading-tight tracking-tight text-neutral-900">
+      {/* <h1 className="text-2xl font-bold leading-tight tracking-tight text-neutral-900">
+        {product.name}
+      </h1> */}
+
+      {/* Asosiy Mahsulot Nomi */}
+      <h1 className="font-inter text-2xl font-black leading-[1.1] tracking-tight text-neutral-900">
         {product.name}
       </h1>
       <div className="flex w-full flex-col gap-2 font-sans">
@@ -281,7 +286,7 @@ export default function ProductActions({ product }: Props) {
 
             <Drawer>
               <DrawerTrigger asChild>
-                <button className="group relative flex h-[52px] w-full items-center justify-center rounded-2xl bg-white transition-all hover:shadow-sm active:scale-[0.98]">
+                <button className="group relative flex h-[52px] w-full items-center justify-center rounded-2xl border border-pink-100 bg-white transition-all hover:shadow-sm active:scale-[0.98]">
                   <span className="text-[15px] font-bold text-neutral-900">
                     To'liq tavsif
                   </span>
@@ -296,7 +301,6 @@ export default function ProductActions({ product }: Props) {
               <DrawerContent className="flex max-h-[80vh] flex-col outline-none">
                 {/* 1. Header - Qotib turadi (Sticky) */}
                 <DrawerHeader className="shrink-0 border-b border-neutral-100 pb-4">
-                  <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-neutral-200" />{" "}
                   {/* Mobil tutqich */}
                   <div className="relative flex items-center justify-center">
                     <DrawerTitle className="font-inter text-lg font-black uppercase tracking-tighter text-neutral-900">
@@ -310,10 +314,10 @@ export default function ProductActions({ product }: Props) {
 
                 {/* 2. Scrollable Area - Faqat shu qism skrol bo'ladi */}
                 <div className="flex-1 overflow-y-auto scroll-smooth p-6">
-                  <div className="mx-auto max-w-md space-y-6 pb-10">
+                  <div className="mx-auto space-y-6 pb-4">
                     {/* Sarlavha va Breand chizig'i */}
                     <div className="space-y-2">
-                      <h2 className="text-2xl font-black tracking-tight text-neutral-900">
+                      <h2 className="font-inter text-2xl font-bold tracking-tight text-neutral-900">
                         {product.name}
                       </h2>
                       <div className="h-1.5 w-14 rounded-full bg-pink-600" />
@@ -330,25 +334,27 @@ export default function ProductActions({ product }: Props) {
                     </div>
 
                     {/* Spec Card */}
-                    <div className="space-y-3 rounded-lg bg-white p-5 ring-1 ring-neutral-100">
-                      <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-400">
-                          Kafolat
-                        </span>
-                        <span className="text-sm font-bold text-neutral-900">
-                          {product.kafolat}
-                        </span>
+                    {product.kafolat && (
+                      <div className="space-y-3 rounded-lg bg-white p-5 ring-1 ring-neutral-100">
+                        <div className="flex items-center justify-between">
+                          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-400">
+                            Kafolat
+                          </span>
+                          <span className="text-sm font-bold text-neutral-900">
+                            {product.kafolat}
+                          </span>
+                        </div>
+                        <div className="h-px bg-neutral-200/60" />
+                        <div className="flex items-center justify-between">
+                          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-400">
+                            Yetkazib berish
+                          </span>
+                          <span className="text-sm font-bold text-emerald-600">
+                            Bepul (24 soatda)
+                          </span>
+                        </div>
                       </div>
-                      <div className="h-px bg-neutral-200/60" />
-                      <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-400">
-                          Yetkazib berish
-                        </span>
-                        <span className="text-sm font-bold text-emerald-600">
-                          Bepul (24 soatda)
-                        </span>
-                      </div>
-                    </div>
+                    )}
 
                     {/* Uzun matn bo'lsa oxirida bo'sh joy qoldiramiz */}
                     {/* <div className="h-20" /> */}

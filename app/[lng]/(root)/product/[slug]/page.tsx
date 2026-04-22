@@ -41,8 +41,8 @@ async function Page({ params }: { params: { slug: string } }) {
       </div>
       {data.products.length > 0 && (
         <div className="mt-6 space-y-2 border-t border-gray-100 py-6">
-          <div className="relative z-10 mb-4 hidden flex-col items-start justify-between gap-6 md:flex md:flex-row md:items-end">
-            <h2 className="font-sora text-4xl font-bold tracking-tight text-neutral-900">
+          <div className="relative z-10 mb-4 hidden flex-col items-start justify-between gap-6">
+            <h2 className="font-sora text-2xl font-bold tracking-tight text-neutral-900">
               Siz uchun <span className="text-pink-600">maxsus</span>
             </h2>
 
