@@ -45,7 +45,7 @@ async function Page({ params, searchParams }: Props) {
   return (
     <main className="mx-auto max-w-7xl py-2 max-md:px-3 md:py-6">
       <div className="hidden gap-4 md:flex">
-        <aside className="w-72 max-md:hidden">
+        <aside className="w-72">
           <div className="sticky top-36 space-y-6">
             <SidebarFilter />
           </div>
@@ -55,6 +55,7 @@ async function Page({ params, searchParams }: Props) {
           <AllProductsMd products={filteredProducts || []} title={title} />
         </div>
       </div>
+      {/*  */}
       <div className="pb-4 md:hidden">
         <AllProducts products={filteredProducts || []} title={title} />
       </div>

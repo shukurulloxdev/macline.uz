@@ -205,7 +205,7 @@ function FilterPanel({
 // ─────────────────────────────────────────────────────────────────────────────
 // AllProducts
 // ─────────────────────────────────────────────────────────────────────────────
-export default function AllProducts({
+export default function AllProductsSm({
   products,
   title,
 }: {
@@ -347,32 +347,30 @@ export default function AllProducts({
   return (
     <div className="space-y-3">
       {/* ── HEADER ────────────────────────────────────────────────────── */}
-      <div className="flex items-center justify-between rounded-2xl border border-neutral-100 bg-white px-4 py-3.5 shadow-sm md:px-6 md:py-4">
+      <div className="flex flex-col gap-2 rounded-2xl border border-neutral-100 bg-white px-4 py-3.5 shadow-sm md:px-6 md:py-4">
         <div>
           <div className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-widest text-neutral-400">
             <span>Katalog</span>
             <span className="text-neutral-300">/</span>
-            <span className="font-bold text-pink-600">{title}</span>
+            <span className="font-bold text-pink-600">
+              {title || "Mahsulotlar"}
+            </span>
           </div>
-          {/* <h1 className="mt-0.5 text-[22px] font-black leading-none tracking-tight text-neutral-950 md:text-[32px]">
-            {title}
-          </h1> */}
           <h1 className="text-2xl font-black uppercase italic tracking-tighter text-neutral-900">
-            {title}
+            {title || "Barcha Mahsulotlar"}
           </h1>
           <p className="mt-1 text-[11px] font-medium text-neutral-400">
             {products.length} ta mahsulot
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
-          {/* Mobile filter button */}
+        <div className="flex w-full items-center gap-3">
           <button
             onClick={() => setMobileFilterOpen(true)}
-            className="relative flex h-9 items-center gap-1.5 rounded-xl border border-neutral-200 bg-white px-3 text-[12px] font-bold text-neutral-700 transition-all hover:border-pink-300 hover:bg-pink-50 hover:text-pink-600 md:hidden"
+            className="relative flex h-9 w-4/5 items-center gap-1.5 rounded-xl border border-neutral-200 bg-white px-3 text-[12px] font-bold text-neutral-700 transition-all hover:border-pink-300 hover:bg-pink-50 hover:text-pink-600 md:hidden"
           >
-            <SlidersHorizontal size={14} />
-            <span>Filter</span>
+            <SlidersHorizontal size={14} className="text-pink-600" />
+            <span>Mahsulotlarni filterlash</span>
             {activeFiltersCount > 0 && (
               <span className="absolute -right-1.5 -top-1.5 flex size-[18px] items-center justify-center rounded-full bg-pink-600 text-[9px] font-black text-white">
                 {activeFiltersCount}
@@ -380,8 +378,7 @@ export default function AllProducts({
             )}
           </button>
 
-          {/* View switcher */}
-          <div className="relative flex items-center gap-0.5 rounded-xl border border-neutral-100 bg-neutral-50 p-1">
+          <div className="relative flex flex-1 items-center gap-0.5 rounded-xl border border-neutral-100 bg-neutral-50 p-1">
             <div
               className={cn(
                 "absolute h-8 w-8 rounded-lg bg-pink-600 shadow-sm transition-all duration-300",
