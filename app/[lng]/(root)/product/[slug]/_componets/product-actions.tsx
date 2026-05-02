@@ -175,7 +175,7 @@ export default function ProductActions({ product }: Props) {
               </Button>
             )}
           </div>
-          {/* <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait">
             {basketProduct ? (
               <motion.div
                 key="basket-controls"
@@ -186,7 +186,6 @@ export default function ProductActions({ product }: Props) {
                 className="grid grid-cols-5 gap-2"
               >
                 <div className="col-span-3 flex h-14 items-center justify-between overflow-hidden rounded-2xl border border-neutral-200/60 bg-[#f8f8f8] p-1 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] transition-all duration-300">
-               
                   <button
                     onClick={() => {
                       if (basketProduct.count === 1) {
@@ -265,7 +264,7 @@ export default function ProductActions({ product }: Props) {
                 </Button>
               </motion.div>
             )}
-          </AnimatePresence> */}
+          </AnimatePresence>
         </div>
         <div className="mt-2 w-full rounded-xl bg-neutral-100 p-4">
           <div className="flex flex-col gap-5">
