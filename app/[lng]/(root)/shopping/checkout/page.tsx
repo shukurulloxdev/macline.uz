@@ -7,6 +7,7 @@ import { IProduct } from "@/types";
 import { getBasketProducts } from "@/actions/user-actions";
 import CheckoutForm from "./_components/checkout-form";
 import CheckoutSummary from "./_components/checkout-summary";
+import CheckoutMobile from "./_components/checkout-mobile";
 
 function CheckoutPage() {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -35,19 +36,22 @@ function CheckoutPage() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl py-6">
-      <div className="flex flex-col gap-4 lg:flex-row">
-        <div className="flex-1">
-          <CheckoutForm products={products} />
-        </div>
-
-        <aside className="w-full lg:w-[450px]">
-          <div className="sticky top-36">
-            <CheckoutSummary products={products} />
+    <>
+      <div className="mx-auto max-w-7xl py-3 max-md:hidden max-md:px-3 md:py-6">
+        <div className="flex flex-col gap-4 lg:flex-row">
+          <div className="flex-1">
+            <CheckoutForm products={products} />
           </div>
-        </aside>
+
+          <aside className="w-full lg:w-[450px]">
+            <div className="sticky top-36">
+              <CheckoutSummary products={products} />
+            </div>
+          </aside>
+        </div>
       </div>
-    </div>
+      <CheckoutMobile products={products} />
+    </>
   );
 }
 
