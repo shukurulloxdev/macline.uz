@@ -10,8 +10,43 @@ interface Props {
 
 function AllBasketProducts({ products }: Props) {
   return (
-    <div className="space-y-4 max-md:px-3">
-      {/* <div className="hidden items-center justify-between rounded-2xl border border-neutral-100 bg-white p-6 shadow-[0_20px_50px_rgba(0,0,0,0.02)] md:flex">
+    <div>
+      <div className="w-full rounded-2xl border border-neutral-100 bg-white p-5 shadow-[0_10px_30px_rgba(0,0,0,0.04)] md:hidden">
+        <nav className="flex items-center gap-1 text-[11px] font-medium text-neutral-400">
+          <Link
+            href="/"
+            className="flex items-center gap-1 transition hover:text-neutral-600"
+          >
+            <Home size={14} />
+            <span>Bosh sahifa</span>
+          </Link>
+          <ChevronRight size={12} />
+          <span className="text-pink-600">Savat</span>
+        </nav>
+
+        <div className="mt-2 flex items-center justify-between">
+          <div className="flex flex-col">
+            <h1 className="text-2xl font-semibold tracking-tight text-neutral-900">
+              Savat
+            </h1>
+            <span className="text-sm text-neutral-400">
+              {products.length || 0} ta mahsulot
+            </span>
+          </div>
+
+          <div className="relative">
+            <div className="flex size-11 items-center justify-center rounded-full bg-pink-50">
+              <ShoppingBag size={20} className="text-pink-600" />
+            </div>
+
+            <div className="absolute -right-1 -top-1 flex size-5 items-center justify-center rounded-full bg-pink-600 text-[10px] font-bold text-white shadow">
+              {products.length || 0}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="hidden items-center justify-between rounded-2xl border border-neutral-100 bg-white p-6 shadow-[0_20px_50px_rgba(0,0,0,0.02)] md:flex">
         <div className="flex flex-col gap-2">
           <nav className="flex items-center gap-1 text-[10px] font-black uppercase tracking-widest text-neutral-400">
             <Link href={"/"} className="flex items-center gap-1">
@@ -46,48 +81,9 @@ function AllBasketProducts({ products }: Props) {
             </div>
           </div>
         </div>
-      </div> */}
-      <div className="w-full rounded-3xl border border-neutral-100 bg-white p-5 shadow-[0_10px_30px_rgba(0,0,0,0.04)] md:hidden">
-        {/* Breadcrumb */}
-        <nav className="flex items-center gap-1 text-[11px] font-medium text-neutral-400">
-          <Link
-            href="/"
-            className="flex items-center gap-1 transition hover:text-neutral-600"
-          >
-            <Home size={14} />
-            <span>Bosh sahifa</span>
-          </Link>
-          <ChevronRight size={12} />
-          <span className="text-pink-600">Savat</span>
-        </nav>
-
-        {/* Main */}
-        <div className="mt-4 flex items-center justify-between">
-          {/* Title */}
-          <div className="flex flex-col">
-            <h1 className="text-2xl font-semibold tracking-tight text-neutral-900">
-              Savat
-            </h1>
-            <span className="text-sm text-neutral-400">
-              {products.length || 0} ta mahsulot
-            </span>
-          </div>
-
-          {/* Icon + badge */}
-          <div className="relative">
-            <div className="flex size-11 items-center justify-center rounded-full bg-pink-50">
-              <ShoppingBag size={20} className="text-pink-600" />
-            </div>
-
-            {/* Count */}
-            <div className="absolute -right-1 -top-1 flex size-5 items-center justify-center rounded-full bg-pink-600 text-[10px] font-bold text-white shadow">
-              {products.length || 0}
-            </div>
-          </div>
-        </div>
       </div>
 
-      <div className="space-y-2">
+      <div className="mt-3 space-y-2">
         {products.map((product) => (
           <BasketItem key={product._id} product={product} />
         ))}

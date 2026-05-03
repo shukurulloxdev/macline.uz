@@ -8,6 +8,7 @@ import { IProduct } from "@/types";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import EmptyBasket from "@/components/shared/cart-empty";
+import BasketSummaryMobile from "./_componets/basket-summary-mobile";
 
 function Page() {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -22,6 +23,7 @@ function Page() {
       setLoading(false);
       return;
     }
+
     setLoading(true);
     const res = await getBasketProducts({ ids });
     if (res.data?.products) {
@@ -46,18 +48,19 @@ function Page() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl py-6">
+    <div className="mx-auto max-w-7xl py-3 max-md:px-3 md:py-6">
       <div className="flex flex-col gap-4 lg:flex-row">
         <div className="flex-1">
           <AllBasketProducts products={products} />
         </div>
 
-        <aside className="w-full lg:w-96">
+        <aside className="w-full max-md:hidden lg:w-96">
           <div className="sticky top-36">
             <BasketSummary products={products} />
           </div>
         </aside>
       </div>
+      <BasketSummaryMobile products={products} />
     </div>
   );
 }
