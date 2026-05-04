@@ -38,36 +38,29 @@ function BasketSummaryMobile({ products }: Props) {
           {/* Narx va Ma'lumot qismi */}
           <div className="flex flex-col pl-2">
             <div className="flex items-center gap-1.5">
-              <span className="text-[10px] font-black uppercase tracking-wider text-neutral-400">
+              <span className="text-[9px] font-black uppercase tracking-wider text-neutral-400">
                 Jami:
               </span>
               {totalDiscount > 0 && (
-                <span className="text-[9px] font-bold text-pink-500 line-through decoration-1">
-                  {subtotal.toLocaleString()}
+                <span className="text-[8px] font-bold text-pink-500 line-through decoration-1">
+                  {subtotal.toLocaleString()} so&apos;m
                 </span>
               )}
             </div>
 
             <div className="flex items-baseline gap-1">
-              <span className="text-2xl font-[1000] tracking-tighter text-neutral-950">
+              <span className="text-xl font-[1000] tracking-tighter text-neutral-950">
                 {finalPrice.toLocaleString()}
               </span>
               <span className="text-[10px] font-black uppercase italic text-pink-600">
                 so&apos;m
               </span>
             </div>
-
-            <div className="flex items-center gap-1">
-              <div className="size-1 animate-pulse rounded-full bg-emerald-500" />
-              <span className="text-[9px] font-bold uppercase tracking-tighter text-neutral-500">
-                {totalItems} mahsulot tayyor
-              </span>
-            </div>
           </div>
 
           {/* Rasmiylashtirish tugmasi */}
           <Link href="/shopping/checkout">
-            <button className="group relative flex h-14 w-fit items-center justify-center gap-2 overflow-hidden rounded-[20px] bg-pink-600 px-5 text-white shadow-lg shadow-neutral-200 transition-all active:scale-95">
+            <button className="group relative flex h-12 w-fit items-center justify-center gap-2 overflow-hidden rounded-[20px] bg-pink-600 px-4 text-white shadow-lg shadow-neutral-200 transition-all active:scale-95">
               {/* Animatsiyali fon */}
               <div className="absolute inset-0 bg-gradient-to-r from-pink-600 to-pink-500 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 

@@ -16,7 +16,6 @@ async function Layout({ children }: ChildProps) {
       <AuthLoader user={user} />
       <Navbar katalog={categories} />
       <div>{children}</div>
-      <Footer />
     </>
   );
 }
