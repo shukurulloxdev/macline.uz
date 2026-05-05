@@ -606,9 +606,9 @@ export default function MobileProfile({ user }: Props) {
   return (
     <div className="min-h-screen bg-neutral-50 pb-10">
       {/* ── USER CARD ─────────────────────────────────────────────────── */}
-      <div className="bg-white px-4 pb-4 pt-8 shadow-[0_1px_0_rgba(0,0,0,0.06)]">
+      <div className="bg-white px-4 pb-4 pt-6 shadow-[0_1px_0_rgba(0,0,0,0.06)]">
         {/* Avatar + info + links */}
-        <div className="flex items-start gap-3.5">
+        <div className="flex items-center gap-3.5">
           <div className="relative flex-shrink-0">
             <Avatar className="h-14 w-14 rounded-2xl border border-neutral-100">
               <AvatarImage
