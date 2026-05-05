@@ -64,11 +64,11 @@ export default function LocationMobile() {
     <section className="px-4 pb-10 pt-8 md:hidden">
       {/* Header */}
       <div className="mb-5">
-        <div className="mb-2 flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.25em] text-pink-600">
+        <div className="mb-1 flex items-center justify-center gap-1.5 text-[10px] font-black uppercase tracking-[0.25em] text-pink-600">
           <Sparkles size={11} fill="currentColor" />
           Do'konlar tarmog'i
         </div>
-        <h2 className="text-[26px] font-black leading-tight tracking-tight text-neutral-950">
+        <h2 className="text-center text-[26px] font-black leading-tight tracking-tight text-neutral-950">
           Bizning <span className="text-pink-600">Showroomlar</span>
         </h2>
       </div>
@@ -129,11 +129,11 @@ export default function LocationMobile() {
           {/* Info */}
           <div className="p-4">
             {/* Address */}
-            <div className="mb-4 flex items-start gap-2.5">
-              <div className="mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl bg-pink-50">
-                <MapPin size={14} className="text-pink-600" />
+            <div className="mb-4 flex items-center gap-2.5">
+              <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl bg-pink-50">
+                <MapPin size={18} className="text-pink-600" />
               </div>
-              <p className="text-[13px] font-semibold leading-snug text-neutral-700">
+              <p className="text-[14px] font-semibold leading-snug text-neutral-700">
                 {branch.address}
               </p>
             </div>
@@ -186,7 +186,7 @@ export default function LocationMobile() {
               onClick={() =>
                 window.open(branch.openMapUrl, "_blank", "noopener,noreferrer")
               }
-              className="group flex w-full items-center justify-between rounded-2xl bg-pink-600 px-5 py-3.5 transition-all active:scale-[.98]"
+              className="group flex w-full items-center justify-between rounded-2xl bg-pink-600 px-5 py-2 transition-all active:scale-[.98]"
             >
               <span className="text-[12px] font-black uppercase tracking-widest text-white">
                 Marshrutni boshlash

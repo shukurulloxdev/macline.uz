@@ -9,6 +9,7 @@ import ProductGalleryMd from "./_componets/product-gallery-md";
 import ProductActionsMd from "./_componets/product-actions-md";
 import { Separator } from "@/components/ui/separator";
 import BottomBar from "./_componets/bottom-bar";
+import Footer from "../../_components/footer";
 export const dynamic = "force-dynamic";
 
 async function Page({ params }: { params: { slug: string } }) {
@@ -102,6 +103,8 @@ async function Page({ params }: { params: { slug: string } }) {
         )}
       </div>
       <BottomBar product={data.product || []} />
+
+      <Footer />
     </>
   );
 }

@@ -4,6 +4,7 @@ import React from "react";
 import AllProducts from "./_components/all-products";
 import SidebarFilter from "../category/_componets/filter-sidebar";
 import AllProductsSm from "./_components/all-products-sm";
+import Footer from "../_components/footer";
 
 // async function Page({ searchParams }: searchParamsProps) {
 //   const sParams = await searchParams;
@@ -76,27 +77,30 @@ async function Page({ searchParams }: searchParamsProps) {
   );
 
   return (
-    <main className="mx-auto max-w-7xl py-2 max-md:px-3 md:py-6">
-      <div className="hidden gap-4 md:flex">
-        <aside className="w-72">
-          <div className="sticky top-36 space-y-6">
-            <SidebarFilter />
+    <>
+      <main className="mx-auto max-w-7xl py-2 max-md:px-3 md:py-6">
+        <div className="hidden gap-4 md:flex">
+          <aside className="w-72">
+            <div className="sticky top-36 space-y-6">
+              <SidebarFilter />
+            </div>
+          </aside>
+          <div className="flex-1">
+            <AllProducts
+              products={filteredProducts}
+              title={sParams.search || ""}
+            />
           </div>
-        </aside>
-        <div className="flex-1">
-          <AllProducts
+        </div>
+        <div className="mb-4 md:hidden">
+          <AllProductsSm
             products={filteredProducts}
             title={sParams.search || ""}
           />
         </div>
-      </div>
-      <div className="mb-4 md:hidden">
-        <AllProductsSm
-          products={filteredProducts}
-          title={sParams.search || ""}
-        />
-      </div>
-    </main>
+      </main>
+      <Footer />
+    </>
   );
 }
 
