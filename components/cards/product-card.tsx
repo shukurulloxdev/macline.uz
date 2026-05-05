@@ -587,9 +587,21 @@ export default function ProductCard({ product, view, white = true }: Props) {
               </>
             )}
           </div>
-          <button className="flex w-full items-center justify-center gap-2 rounded-sm bg-pink-600 py-1 font-inter text-sm text-white md:hidden">
-            <ShoppingBag className="size-4" />
-            <span>Savatga</span>
+          <button
+            onClick={() => dispatch(toggleBasket(product._id))}
+            className={cn(
+              "flex w-full items-center justify-center gap-2 rounded-sm py-1 font-inter text-sm text-white transition-all duration-300 md:hidden",
+              isBasket ? "bg-emerald-600" : "bg-pink-600",
+            )}
+          >
+            {isBasket ? (
+              <Check className="size-4" />
+            ) : (
+              <ShoppingBag className="size-4" />
+            )}
+            {isBasket ? <span>Savatda</span> : <span>Savatga </span>}
+            {/* <ShoppingBag className="" />
+            <span>Savatga</span> */}
           </button>
         </div>
       </div>

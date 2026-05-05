@@ -64,7 +64,7 @@ function Location() {
   }
 
   return (
-    <section className="mx-auto max-w-7xl pb-8 pt-14">
+    <section className="mx-auto max-w-7xl pb-10 pt-14">
       <Tabs defaultValue="toshkent" className="w-full">
         <div className="mb-6 flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
           <div className="space-y-2">

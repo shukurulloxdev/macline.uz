@@ -15,6 +15,8 @@ import All16Products from "./_components/all-16products";
 import NewsProducts from "./_components/news-products";
 import NavbarBottom from "../_components/navbar-bottom";
 import Footer from "../_components/footer";
+import Location from "./_components/location";
+import LocationMobile from "./_components/location-mobile";
 
 // actionClient ham javobni to'gridan to'gri qaytaramaydi o'zini obyectini qaytaradi
 async function Page() {
@@ -41,8 +43,15 @@ async function Page() {
       />
       {/* <Profession /> */}
       {/* <LocationSection /> */}
-      {/* <Location /> */}
       <MaclineServices />
+      <div className="max-md:hidden">
+        <Location />
+      </div>
+
+      <div className="md:hidden">
+        <LocationMobile />
+      </div>
+
       <NavbarBottom />
       <Footer />
     </div>

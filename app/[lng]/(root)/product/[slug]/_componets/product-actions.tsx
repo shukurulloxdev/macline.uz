@@ -15,7 +15,6 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
-  DrawerDescription,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
@@ -34,6 +33,7 @@ import {
 import { toggelFavorite } from "@/redux/reducers/favoriteState";
 import Link from "next/link";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 interface Props {
   product: IProduct;
@@ -50,6 +50,7 @@ export default function ProductActions({ product }: Props) {
   const basketProduct = basketProducts.find((pro) => pro.id === product._id);
   const favoriteProduct = favoriteIds.find((id) => id === product._id);
   console.log(product);
+  const router = useRouter();
   return (
     <aside className="flex w-full flex-col gap-4 px-1 font-sans">
       <div className="flex items-center gap-2">
@@ -155,7 +156,13 @@ export default function ProductActions({ product }: Props) {
         </div>
         <div className="flex flex-col gap-3">
           <div className="flex gap-2">
-            <Button className="h-14 flex-[4.5] rounded-xl border border-pink-200 bg-neutral-50 text-sm font-bold uppercase text-black backdrop-blur-md transition-all duration-300 hover:border-gray-300 hover:bg-white hover:shadow-[0_10px_20px_rgba(0,0,0,0.04)] active:scale-95">
+            <Button
+              onClick={() => {
+                dispatch(toggleBasket(product._id));
+                router.push("/shopping/cart");
+              }}
+              className="h-14 flex-[4.5] rounded-xl border border-pink-200 bg-neutral-50 text-sm font-bold uppercase text-black backdrop-blur-md transition-all duration-300 hover:border-gray-300 hover:bg-white hover:shadow-[0_10px_20px_rgba(0,0,0,0.04)] active:scale-95"
+            >
               Hoziroq xarid qilish
             </Button>
 
